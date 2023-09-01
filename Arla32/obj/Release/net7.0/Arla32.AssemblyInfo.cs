@@ -11,11 +11,13 @@
 using System;
 using System.Reflection;
 
-[assembly: Microsoft.AspNetCore.Mvc.ApplicationParts.ProvideApplicationPartFactoryAttribute("Microsoft.AspNetCore.Mvc.ApplicationParts.ConsolidatedAssemblyApplicationPartFact" +
-    "ory, Microsoft.AspNetCore.Mvc.Razor")]
-[assembly: Microsoft.AspNetCore.Razor.Hosting.RazorLanguageVersionAttribute("7.0")]
-[assembly: Microsoft.AspNetCore.Razor.Hosting.RazorConfigurationNameAttribute("MVC-3.0")]
-[assembly: Microsoft.AspNetCore.Razor.Hosting.RazorExtensionAssemblyNameAttribute("MVC-3.0", "Microsoft.AspNetCore.Mvc.Razor.Extensions")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("Arla32")]
+[assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
+[assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyProductAttribute("Arla32")]
+[assembly: System.Reflection.AssemblyTitleAttribute("Arla32")]
+[assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Gerado pela classe WriteCodeFragment do MSBuild.
 
