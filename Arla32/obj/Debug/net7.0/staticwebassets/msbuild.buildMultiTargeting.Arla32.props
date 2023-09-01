@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Arla32.props" />
+</Project>
