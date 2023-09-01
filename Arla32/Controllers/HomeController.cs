@@ -22,6 +22,11 @@ namespace Arla32.Controllers
         {
             return View();
         }
+        public IActionResult Anexod()
+        {
+            return View();
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
