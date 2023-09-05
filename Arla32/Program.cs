@@ -38,6 +38,7 @@ namespace Arla32
                 app.UseHsts();
             }
 
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

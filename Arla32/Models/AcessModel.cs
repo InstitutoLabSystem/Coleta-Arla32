@@ -16,5 +16,6 @@ namespace Arla32.Models
             public int ativo { get; set; }
         }
 
+       
     }
 }

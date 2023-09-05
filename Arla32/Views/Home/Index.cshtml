@@ -1,4 +1,6 @@
-﻿@{
+﻿@model List<HomeModel.BuscarOs>
+
+@{
     ViewData["Title"] = "Pagina Inicial";
 }
 
@@ -11,6 +13,67 @@
 </head>
 <body>
 
+     <h1> Coleta Arla32 </h1>
+    <form class="form-inline" asp-controller="Home" asp-action="BuscarOS" method="post">
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="form-label"> <strong> Ordem de Serviço </strong></label>
+                    <input type="text" class="form-control" id="OS" name="OS">
+                </div>
+                <div class="col-md-3">
+                    <label for="inputEmail4" class="form-label"> <strong> Orçamento </strong></label>
+                    <input type="email" class="form-control" id="orcamento" name="orcamento" readonly>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary  w-100  btn-block">Pesquisar</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="inputPassword4" class="form-label"><strong> Número Processo </strong></label>
+                <input type="password" class="form-control" id="Nprocesso" name="Nprocesso" placeholder="Número Processo" readonly>
+            </div>
+            <div class="col-12">
+                <label for="inputAddress" class="form-label"><strong> Descrição do Produto </strong></label>
+                <input type="text" class="form-control" readonly placeholder="Descrição" id="descricao" name="descricao">
+            </div>
+        </div>
+    </form>
+
+
+    @if (Model != null)
+    {
+    <table>
+            <thead>
+                <tr>
+                    <th>CodMaster</th>
+                    <th>Codigo</th>
+                    <th>Descricao</th>
+                    <th>NA</th>
+                    <th>PK</th>
+                    <th>OS</th>
+                    <th>Acreditado</th>
+                </tr>
+            </thead>
+            <tbody>
+               @for(var i = 0; i < Model.Count; i++)
+                //contagem do meu for se retornad algo do banco.
+                {
+                    //int teste = i + 1;
+                    var resultado = Model[i];
+                    <tr>
+                        <td>@resultado.CodMaster</td>
+                        <td>@resultado.codigo</td>
+                        <td>@resultado.Descricao</td>
+                        <td>@resultado.NA</td>
+                        <td>@resultado.PK</td>
+                        <td>@resultado.OS</td>
+                    </tr>
+                }
+            </tbody>
+            </table>
+
+        }
     @section Scripts {
         @if (TempData.ContainsKey("Mensagem"))
         {
