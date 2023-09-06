@@ -20,11 +20,15 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNlc3NcTG9naW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/xampp/htdocs/Coleta-Arla32/Arla32/Views/Home/Anexod.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBbmV4b2QuY3NodG1s
+[C:/Users/Molina/source/repos/InstitutoLabSystem/Coleta-Arla32/Arla32/Views/Coleta/EnsaioConcentracao.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29sZXRhXEVuc2Fpb0NvbmNlbnRyYWNhby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/xampp/htdocs/Coleta-Arla32/Arla32/Views/Home/Index.cshtml]
+[C:/Users/Molina/source/repos/InstitutoLabSystem/Coleta-Arla32/Arla32/Views/Coleta/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29sZXRhXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Molina/source/repos/InstitutoLabSystem/Coleta-Arla32/Arla32/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 

@@ -1,0 +1,161 @@
+﻿@{
+    ViewData["Title"] = "Coleta De Concentração";
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .input {
+            border: none;
+        }
+
+        .table {
+            margin: 0 auto;
+            border: 1px solid black;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        .texto-central {
+            text-align: center;
+        }
+
+        .tabela {
+            background-color: #800000;
+            color: white;
+        }
+
+        .imagem {
+            max-width: 200px;
+            height: 100px;
+            display: block;
+            margin: 0 auto;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <form method="post">
+        <table class="table table-bordered border-secondary  table-sm">
+            <tr>
+                <td rowspan="3" class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                    <img src="https://www.labsystem-nuvem.com.br/imagens_arq/imagens/img/LabSystem.png" class="imagem" />
+                </td>
+                <td colspan="3" class="texto-central" style="background-color: #800000; color:white;">COLETA DE DADOS</td>
+                <td rowspan="2" class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="background-color: #800000; color:white;"> N° da OS :</td>
+            </tr>
+            <tr class="tabela">
+                <td colspan="3" class="texto-central "> ENSAIO DE ARLA 32</td>
+            </tr>
+            <tr>
+                <td style="background-color: #800000; color:white;">Data Inicio:</td>
+                <td><input class="form-control input " /></td>
+                <td style="background-color: #800000; color:white;">Data Término:</td>
+                <td><input class="form-control input " /></td>
+            </tr>
+            <tr class="texto-central">
+                <td colspan="5">
+                    <b>Ensaio a ser realizado:</b> Índice de refração de determinação da concentração de uréia por índice de refração - Anexo C - IT.122/Q
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5">
+                    Norma:
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5"> Np:</td>
+            </tr>
+            <tr>
+                <td colspan="5">Descrição:</td>
+            </tr>
+            <tr>
+                <td colspan="4" class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="background-color: #800000; color:white;">Lote da solução padrão</td>
+                <td><input class="form-control input  " /></td>
+            </tr>
+            <tr>
+                <td style="background-color: #800000; color:white;">Código da curva:</td>
+                <td><input class="form-control input " /></td>
+                <td colspan="2" style="background-color: #800000; color:white;">Fator de avaliação:</td>
+                <td><input class="form-control input " /></td>
+            </tr>
+        </table>
+        <Br />
+        <!--  Segudna tabela.  -->
+        <table class="table table-bordered border-secondary table-sm">
+            <tr class="tabela">
+                <td class="texto-central">Execução do Ensaio</td>
+            </tr>
+            <tr>
+                <td>
+                    Índice de Refração deve estar entre 1,3814 a 1,3843 e Concentração deve estar entre 31,8 a 33,2 % em (m/m).
+                </td>
+            </tr>
+        </table>
+
+        <br />
+
+        <!--  Terceira tabela.  -->
+        <table class="table table-bordered border-secondary table-sm">
+            <tr class="tabela">
+                <td class="texto-central">Concetração de Biureto(%)</td>
+                <td class="texto-central">Indice refração da água</td>
+                <td class="texto-central">Refração Amostra 01</td>
+                <td class="texto-central">Refração Amostra 02</td>
+                <td class="texto-central">Concetração de uréia </td>
+            </tr>
+            <td><input class="form-control input " disabled /></td>
+            <td><input class="form-control input " /></td>
+            <td><input class="form-control input " /></td>
+            <td><input class="form-control input " /></td>
+            <td><input class="form-control input " disabled /></td>
+        </table>
+
+        <br />
+
+        <!--  Quarta tabela.  -->
+        <table class="table table-bordered border-secondary table-sm">
+            <tr class="tabela"><td colspan="2" class="texto-central">Código de Instrumentos Utilizados</td></tr>
+            <tr>
+                <td>DE:</td>
+                <td><input class="form-control input" /></td>
+            </tr>
+            <tr>
+                <td>EE:</td>
+                <td><input class="form-control input" /></td>
+            </tr>
+            <tr class="tabela">
+                <td colspan="2" class="texto-central">Observações:</td>
+            </tr>
+            <tr>
+                <td colspan="2"><textarea class="form-control w-100 mr-2 input" style="resize: none;"></textarea></td>
+            </tr>
+            <tr class="tabela">
+                <td class="texto-central">Executado Por:</td>
+                <td class="texto-central">Auxiliado Por:</td>
+            </tr>
+            <tr>
+                <td><input class="form-control input" /></td>
+                <td><input class="form-control input" /></td>
+            </tr>
+        </table>
+        <br />
+        <div class="d-grid gap-2 d-flex justify-content-center">
+            <button type="submit" class="btn btn-success btn btn-primary btn-md">Salvar Coleta</button>
+        </div>
+    </form>
+        @section Scripts {
+            @if (TempData.ContainsKey("Mensagem"))
+            {
+            <script>
+
+                alert('@Html.Raw(TempData["Mensagem"])');
+            </script>
+            }
+    }
+</body>
+</html>
