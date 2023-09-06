@@ -1,4 +1,4 @@
-﻿@model List<HomeModel.BuscarOs>
+﻿
 
 @{
     ViewData["Title"] = "Pagina Inicial";
@@ -21,26 +21,26 @@
                     <label class="form-label"> <strong> Ordem de Serviço </strong></label>
                     <input type="text" class="form-control" id="OS" name="OS">
                 </div>
-                <div class="col-md-3">
+               @*  <div class="col-md-3">
                     <label for="inputEmail4" class="form-label"> <strong> Orçamento </strong></label>
                     <input type="email" class="form-control" id="orcamento" name="orcamento" readonly>
-                </div>
+                </div> *@
                 <div class="col-md-3">
                     <button type="submit" class="btn btn-primary  w-100  btn-block">Pesquisar</button>
                 </div>
             </div>
-            <div class="col-md-6">
+           @*  <div class="col-md-6">
                 <label for="inputPassword4" class="form-label"><strong> Número Processo </strong></label>
                 <input type="password" class="form-control" id="Nprocesso" name="Nprocesso" placeholder="Número Processo" readonly>
             </div>
             <div class="col-12">
                 <label for="inputAddress" class="form-label"><strong> Descrição do Produto </strong></label>
                 <input type="text" class="form-control" readonly placeholder="Descrição" id="descricao" name="descricao">
-            </div>
+            </div> *@
         </div>
     </form>
 
-
+@* 
     @if (Model != null)
     {
     <table>
@@ -73,7 +73,7 @@
             </tbody>
             </table>
 
-        }
+        } *@
     @section Scripts {
         @if (TempData.ContainsKey("Mensagem"))
         {

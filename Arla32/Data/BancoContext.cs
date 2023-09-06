@@ -13,11 +13,11 @@ namespace Arla32.Data
         public DbSet<AcessModel.Usuario> usuario_copy { get; set; }
 
 
-        public DbSet<HomeModel.BuscarOs> programacao_lab_ensaios { get; set; }
+        public DbSet<HomeModel.ProgramacaoLabEnsaios> programacao_lab_ensaios { get; set; }
 
-        public DbSet<HomeModel.BuscarOs> ordemservicocotacaoitem_hc_copylab { get; set; }
+        public DbSet<HomeModel.OrdemServicoCotacao> ordemservicocotacaoitem_hc_copylab { get; set; }
 
-        public DbSet<HomeModel.BuscarOs> wmoddetprod { get; set; }
+        public DbSet<HomeModel.WModDetProd> wmoddetprod { get; set; }
        
     }
 }
