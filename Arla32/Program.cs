@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Microsoft.Identity.Client;
+using System.Security.Policy;
 
 namespace Arla32
 {
