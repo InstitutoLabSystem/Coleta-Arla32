@@ -63,14 +63,14 @@ namespace Arla32.Controllers
                       CodigoEnsaio = _context.ordemservicocotacaoitem_hc_copylab
                           .Where(o => o.orcamento == p.Orcamento)
                           .Select(o => o.CodigoEnsaio)
-                          .FirstOrDefault(),
+                          .ToList(),
                       Descricao = _context.wmoddetprod
                           .Where(w => _context.ordemservicocotacaoitem_hc_copylab
                               .Where(o => o.orcamento == p.Orcamento)
                               .Select(o => o.CodigoEnsaio)
                               .Contains(w.codmaster))
                           .Select(w => w.descricao)
-                          .FirstOrDefault(),
+                          .ToList(),
                   })
                   .ToList();
 

@@ -24,6 +24,7 @@ namespace Arla32.Models
             public int Item { get; set; }
             public string CodigoEnsaio { get; set; }
             public string orcamento { get; set; }
+            public string NormaOS { get; set; }
         }
 
 

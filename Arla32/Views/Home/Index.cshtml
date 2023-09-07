@@ -20,28 +20,55 @@
               
                 @if (Model != null)
                 {
-                    @for (var i = 0; i < Model.Count; i++)
-                    //contagem do meu for se retornad algo do banco.
-                    {
-                        var resultado = Model[i];
-                        //int teste = i + 1;
-                        <div class="col-md-4">
-                            <label class="form-label"> <strong> Ordem de Serviço </strong></label>
-                            <input type="text" class="form-control" id="OS" name="OS">
-                        </div>
-                        <div class="col-md-3">
-                            <label  class="form-label"> <strong> Orçamento </strong></label>
-                            <input type="text" class="form-control" id="orcamento" name="orcamento" value="@resultado.Orcamento"readonly>
-                        </div>
-                        <div class="col-md-3">
-                            <button type="submit" class="btn btn-primary  w-100  btn-block">Pesquisar</button>
-                        </div>
-                    }
+
+                    <label class="form-label"> <strong> Pesquisar OS </strong></label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" id="OS" name="OS">
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-primary  w-100  btn-block">Pesquisar</button>
+                    </div>
+                    <br/>
+
+                    <br />  <br /> 
+                    <table class="table table-bordered">
+                        <thead class="table-dark">
+
+                            @for (var i = 0; i < Model.Count; i++)
+                            //contagem do meu for se retornad algo do banco.
+                            {
+                                var resultado = Model[i];
+
+                                <tr class="table-active">
+                                    <th scope="col">OS: </th>
+                                    <th scope="col">@resultado.OS</th>
+                                    <th scope="col">Orçamento :</th>
+                                    <th scope="col">@resultado.Orcamento</th>
+                                </tr>
+
+                            }
+                        </thead>
+                        <tbody class="table-group-divider">
+                            @for (var j = 0; j < Model.Count; j++)
+                            {
+                                var resultado = Model[j];
+
+                                <tr>
+                                    <td colspan="4" style="text-align:center">  <strong>ANEXOS</strong></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">@resultado.Descricao</td>
+                                    <td>  <button type="submit" class="btn btn-primary  w-100  btn-block">Anexo</button> </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
                 }
                 else
                 {
-                    <div class="col-md-4">
-                        <label class="form-label"> <strong> Ordem de Serviço </strong></label>
+                    <label class="form-label"> <strong> Pesquisar OS </strong></label>
+                    <div class="col-md-9">
                         <input type="text" class="form-control" id="OS" name="OS">
                     </div>
                     <div class="col-md-3">
@@ -53,40 +80,6 @@
         </div>
     </form>
 
-@* 
-    @if (Model != null)
-    {
-    <table>
-            <thead>
-                <tr>
-                    <th>CodMaster</th>
-                    <th>Codigo</th>
-                    <th>Descricao</th>
-                    <th>NA</th>
-                    <th>PK</th>
-                    <th>OS</th>
-                    <th>Acreditado</th>
-                </tr>
-            </thead>
-            <tbody>
-               @for(var i = 0; i < Model.Count; i++)
-                //contagem do meu for se retornad algo do banco.
-                {
-                    //int teste = i + 1;
-                    var resultado = Model[i];
-                    <tr>
-                        <td>@resultado.CodMaster</td>
-                        <td>@resultado.codigo</td>
-                        <td>@resultado.Descricao</td>
-                        <td>@resultado.NA</td>
-                        <td>@resultado.PK</td>
-                        <td>@resultado.OS</td>
-                    </tr>
-                }
-            </tbody>
-            </table>
-
-        } *@
     @section Scripts {
         @if (TempData.ContainsKey("Mensagem"))
         {
