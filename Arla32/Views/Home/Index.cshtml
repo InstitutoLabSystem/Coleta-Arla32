@@ -34,28 +34,24 @@
                     <table class="table table-bordered">
                         <thead class="table-dark">
 
-                            @for (var i = 0; i < Model.Count; i++)
-                            //contagem do meu for se retornad algo do banco.
-                            {
-                                var resultado = Model[i];
-
+                          
                                 <tr class="table-active">
-                                    <th scope="col">OS: </th>
-                                    <th scope="col">@resultado.OS</th>
+                                    <th scope="col">OS: @ViewBag.OS</th>
+                                    <th scope="col">OS</th>
                                     <th scope="col">Orçamento :</th>
-                                    <th scope="col">@resultado.Orcamento</th>
+                                    <th scope="col">Orcamento</th>
                                 </tr>
-
-                            }
+                            
                         </thead>
                         <tbody class="table-group-divider">
+                       
+                                <tr>
+                                    <td colspan="4" style="text-align:center">  <strong>ANEXOS</strong></td>
+                                </tr>
                             @for (var j = 0; j < Model.Count; j++)
                             {
                                 var resultado = Model[j];
 
-                                <tr>
-                                    <td colspan="4" style="text-align:center">  <strong>ANEXOS</strong></td>
-                                </tr>
                                 <tr>
                                     <td colspan="3">@resultado.Descricao</td>
                                     <td>  <button type="submit" class="btn btn-primary  w-100  btn-block">Anexo</button> </td>

@@ -26,10 +26,12 @@ namespace Arla32.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string OS, string Orcamento)
         {
             var nomeUsuarioClaim = User.FindFirstValue(ClaimTypes.Name);
             ViewBag.NomeUsuario = nomeUsuarioClaim;
+
+            ViewBag.OS = OS;
             return View();
 
         }
@@ -48,31 +50,26 @@ namespace Arla32.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> BuscarOS(string OS)
+        public async Task<IActionResult> BuscarOS(string OS,string Orcamento)
         {
             try
             {
-                var resultado = _context.programacao_lab_ensaios
-                  .Where(p => p.OS == OS)
-                  .Select(p => new HomeModel.Resposta
-                  {
-                      OS = p.OS,
-                      NA = p.NA,
-                      Orcamento = p.Orcamento,
-                      Item = p.Item,
-                      CodigoEnsaio = _context.ordemservicocotacaoitem_hc_copylab
-                          .Where(o => o.orcamento == p.Orcamento)
-                          .Select(o => o.CodigoEnsaio)
-                          .ToList(),
-                      Descricao = _context.wmoddetprod
-                          .Where(w => _context.ordemservicocotacaoitem_hc_copylab
-                              .Where(o => o.orcamento == p.Orcamento)
-                              .Select(o => o.CodigoEnsaio)
-                              .Contains(w.codmaster))
-                          .Select(w => w.descricao)
-                          .ToList(),
-                  })
-                  .ToList();
+                var resultado = (from p in _context.programacao_lab_ensaios
+                                 where p.OS == OS
+                                 join o in _context.ordemservicocotacaoitem_hc_copylab
+                                 on p.Orcamento equals o.orcamento
+                                 join w in _context.wmoddetprod
+                                 on o.CodigoEnsaio equals w.codmaster
+                                 select new HomeModel.Resposta
+                                 {
+                                     OS = p.OS,
+                                     NA = p.NA,
+                                     Orcamento = Orcamento,
+                                     Item = p.Item,
+                                     CodigoEnsaio = o.CodigoEnsaio,
+                                     Descricao = w.descricao
+                                     
+                                 }).ToList();
 
 
 
