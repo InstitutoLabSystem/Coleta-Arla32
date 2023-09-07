@@ -47,10 +47,12 @@ namespace Arla32.Models
             public string OS { get; set; }
             public int NA { get; set; }
             public string codmaster { get; set; }
-
+            public string Orcamento { get; set; }
             public string codigo { get; set; }
+            public string Item { get; set; }
+            public string Descricao { get; set; }
 
-            public string descricao { get; set; }
+            public string CodigoEnsaio { get; set; }
 
         }
 

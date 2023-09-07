@@ -2,9 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\Arla32",
+    "\\Arla32\\Controllers",
     "\\Arla32\\Views",
     "\\Arla32\\Views\\Home"
   ],
-  "SelectedNode": "\\Arla32\\Views\\Home\\Index.cshtml",
+  "SelectedNode": "\\Arla32\\Controllers\\HomeController.cs",
   "PreviewInSolutionExplorer": false
 }

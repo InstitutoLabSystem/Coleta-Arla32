@@ -52,33 +52,35 @@ namespace Arla32.Controllers
         {
             try
             {
-                var listagem = (
-                    from pr in _context.programacao_lab_ensaios
-                    join ite in _context.ordemservicocotacaoitem_hc_copylab
-                      on new { orcamento = pr.Orcamento, item = int.Parse(pr.Item) } equals new { orcamento = ite.orcamento, item = ite.Item } into join1
-                    from x in join1.DefaultIfEmpty()
-                    join hc in _context.wmoddetprod
-                        on x.CodigoEnsaio equals hc.codmaster into join2
-                    from y in join2.DefaultIfEmpty()
-                    where pr.OS == OS
-                    orderby y.codigo
-                    select new
-                    {
-                        CodMaster = y.codmaster,
-                        codigo = y.codigo,
-                        descricao = y.descricao,
-       
-                        OS = pr.OS
-                    }
-                ).ToList();
+                var resultado = _context.programacao_lab_ensaios
+                  .Where(p => p.OS == OS)
+                  .Select(p => new HomeModel.Resposta
+                  {
+                      OS = p.OS,
+                      NA = p.NA,
+                      Orcamento = p.Orcamento,
+                      Item = p.Item,
+                      CodigoEnsaio = _context.ordemservicocotacaoitem_hc_copylab
+                          .Where(o => o.orcamento == p.Orcamento)
+                          .Select(o => o.CodigoEnsaio)
+                          .FirstOrDefault(),
+                      Descricao = _context.wmoddetprod
+                          .Where(w => _context.ordemservicocotacaoitem_hc_copylab
+                              .Where(o => o.orcamento == p.Orcamento)
+                              .Select(o => o.CodigoEnsaio)
+                              .Contains(w.codmaster))
+                          .Select(w => w.descricao)
+                          .FirstOrDefault(),
+                  })
+                  .ToList();
 
 
 
                 // Verificar se listagem não é nula e se há resultados
-                if (listagem != null && listagem.Count > 0)
+                if (resultado != null && resultado.Count > 0)
                 {
                     // Faça algo com os resultados
-                    return View("Index", listagem);
+                    return View("Index", resultado);
                 }
                 else
                 {
