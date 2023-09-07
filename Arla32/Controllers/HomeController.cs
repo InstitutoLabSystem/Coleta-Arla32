@@ -26,7 +26,7 @@ namespace Arla32.Controllers
             _context = context;
         }
 
-        public IActionResult Index(string OS, string Orcamento)
+        public IActionResult Index(string OS)
         {
             var nomeUsuarioClaim = User.FindFirstValue(ClaimTypes.Name);
             ViewBag.NomeUsuario = nomeUsuarioClaim;
@@ -50,7 +50,7 @@ namespace Arla32.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> BuscarOS(string OS,string Orcamento)
+        public async Task<IActionResult> BuscarOS(string OS)
         {
             try
             {
@@ -64,7 +64,7 @@ namespace Arla32.Controllers
                                  {
                                      OS = p.OS,
                                      NA = p.NA,
-                                     Orcamento = Orcamento,
+                                     Orcamento = p.Orcamento,
                                      Item = p.Item,
                                      CodigoEnsaio = o.CodigoEnsaio,
                                      Descricao = w.descricao

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Coleta De Concentração";
+    ViewData["Title"] = "Ensaio De Alcalinidade ";
 }
 
 <!DOCTYPE html>
@@ -27,6 +27,7 @@
         .tabela {
             background-color: #800000;
             color: white;
+            text-align:center;
         }
 
         .imagem {
@@ -49,7 +50,7 @@
                 <td rowspan="2" class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="background-color: #800000; color:white;"> N° da OS :</td>
             </tr>
             <tr class="tabela">
-                <td colspan="3" class="texto-central"> ENSAIO DE ARLA 32</td>
+                <td colspan="3" class="texto-central "> ENSAIO DE ARLA 32</td>
             </tr>
             <tr>
                 <td style="background-color: #800000; color:white;">Data Inicio:</td>
@@ -59,7 +60,7 @@
             </tr>
             <tr class="texto-central">
                 <td colspan="5">
-                    <b>Ensaio a ser realizado:</b> Índice de refração de determinação da concentração de uréia por índice de refração - Anexo C - IT.122/Q
+                    <b>Ensaio a ser realizado:</b> Determinação da Alcalinidade - Anexo D - IT.119/Q
                 </td>
             </tr>
             <tr>
@@ -73,74 +74,81 @@
             <tr>
                 <td colspan="5">Descrição:</td>
             </tr>
-            <tr>
-                <td colspan="4" class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="background-color: #800000; color:white;">Lote da solução padrão</td>
-                <td><input class="form-control input  " /></td>
+        </table>
+        <br />
+        <table class="table table-bordered border-secondary  table-sm">
+            <tr class="tabela">
+                <td colspan="3">Procedimento ensaio preliminar</td>
+                <td colspan="4">Procedimento ensaio preliminar</td>
+            </tr>
+            <tr class="tabela">
+                <td>Massa Amostra</td>
+                <td>Vol. titulado</td>
+                <td>Resultado Final</td>
+                <td>Massa Amostra</td>
+                <td>Vol. titulado</td>
+                <td>Resultado Final Limete ate 0,2%</td>
             </tr>
             <tr>
-                <td style="background-color: #800000; color:white;">Código da curva:</td>
+                <td rowspan="2"><input class="form-control input" style=" height:80px;"/></td>
+                <td rowspan="2"><input class="form-control input" style=" height:80px;" /></td>
+                <td rowspan="2"><input class="form-control input" style="height:80px;" readonly /></td>
                 <td><input class="form-control input " /></td>
-                <td colspan="2" style="background-color: #800000; color:white;">Fator de avaliação:</td>
                 <td><input class="form-control input " /></td>
+                <td rowspan="2"><input class="form-control input" style=" height:80px;" readonly /></td>
+            </tr>
+           
+            <tr>
+                <td><input class="form-control input "/></td>
+                <td><input class="form-control input "/></td>
+            </tr>
+        </table>
+        <br />
+        <table class="table table-bordered border-secondary  table-sm">
+            <tr class="tabela">
+                <td colspan="3s">Materiais Utilizados </td>
+            </tr>
+            <tr class="tabela">
+                <td>Materia-prima</td>
+                <td>Lote</td>
+               <td>Validade</td>
+            </tr>
+            <tr>
+                <td ><input class="form-control input "/></td>
+                <td ><input class="form-control input "/></td>
+                <td ><input class="form-control input "/></td>
+            </tr>
+        </table>
+        <br />
+        <table class="table table-bordered border-secondary  table-sm">
+            <tr class="tabela">
+                <td colspan="4">Equipamento e Dispositivos:</td>
+            </tr>
+            <tr>
+                <td>De:</td>
+                <td><input class="form-control input " /></td>
+                <td>EE:</td>
+                <td><input class="form-control input " /></td>
+            </tr>
+        </table>
+        <br />
+        <table class="table table-bordered border-secondary  table-sm">
+            <tr class="tabela">
+                <td colspan="4">Observações</td>
+            </tr>
+            <tr>
+                <td><textarea class="form-control input"></textarea></td>
             </tr>
         </table>
         <Br />
-        <!--  Segudna tabela.  -->
-        <table class="table table-bordered border-secondary table-sm">
+        <table class="table table-bordered border-secondary  table-sm">
             <tr class="tabela">
-                <td class="texto-central">Execução do Ensaio</td>
+                <td colspan="1">Executado Por:</td>
+                <td colspan="2">Auxiliado Por:</td>
             </tr>
             <tr>
-                <td>
-                    Índice de Refração deve estar entre 1,3814 a 1,3843 e Concentração deve estar entre 31,8 a 33,2 % em (m/m).
-                </td>
-            </tr>
-        </table>
-
-        <br />
-
-        <!--  Terceira tabela.  -->
-        <table class="table table-bordered border-secondary table-sm">
-            <tr class="tabela">
-                <td class="texto-central">Concetração de Biureto(%)</td>
-                <td class="texto-central">Indice refração da água</td>
-                <td class="texto-central">Refração Amostra 01</td>
-                <td class="texto-central">Refração Amostra 02</td>
-                <td class="texto-central">Concetração de uréia </td>
-            </tr>
-            <td><input class="form-control input " disabled /></td>
-            <td><input class="form-control input " /></td>
-            <td><input class="form-control input " /></td>
-            <td><input class="form-control input " /></td>
-            <td><input class="form-control input " disabled /></td>
-        </table>
-
-        <br />
-
-        <!--  Quarta tabela.  -->
-        <table class="table table-bordered border-secondary table-sm">
-            <tr class="tabela"><td colspan="2" class="texto-central">Código de Instrumentos Utilizados</td></tr>
-            <tr>
-                <td>DE:</td>
-                <td><input class="form-control input" /></td>
-            </tr>
-            <tr>
-                <td>EE:</td>
-                <td><input class="form-control input" /></td>
-            </tr>
-            <tr class="tabela">
-                <td colspan="2" class="texto-central">Observações:</td>
-            </tr>
-            <tr>
-                <td colspan="2"><textarea class="form-control w-100 mr-2 input" style="resize: none;"></textarea></td>
-            </tr>
-            <tr class="tabela">
-                <td class="texto-central">Executado Por:</td>
-                <td class="texto-central">Auxiliado Por:</td>
-            </tr>
-            <tr>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
+                <td><input class="form-control input " /></td>
+                <td><input class="form-control input " /></td>
             </tr>
         </table>
         <br />
@@ -148,14 +156,5 @@
             <button type="submit" class="btn btn-success btn btn-primary btn-md">Salvar Coleta</button>
         </div>
     </form>
-        @section Scripts {
-            @if (TempData.ContainsKey("Mensagem"))
-            {
-            <script>
-
-                alert('@Html.Raw(TempData["Mensagem"])');
-            </script>
-            }
-    }
 </body>
 </html>

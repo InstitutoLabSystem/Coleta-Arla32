@@ -10,5 +10,10 @@ namespace Arla32.Controllers
         {
             return View();
         }
+
+        public IActionResult EnsaioAlcalinidade()
+        {
+            return View();
+        }
     }
 }

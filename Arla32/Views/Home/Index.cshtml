@@ -34,13 +34,17 @@
                     <table class="table table-bordered">
                         <thead class="table-dark">
 
-                          
+                            @if(Model.Count > 0)
+                            {
+                                var item = Model[0];
                                 <tr class="table-active">
-                                    <th scope="col">OS: @ViewBag.OS</th>
-                                    <th scope="col">OS</th>
-                                    <th scope="col">Orçamento :</th>
-                                    <th scope="col">Orcamento</th>
+                                    <th scope="col">OS: </th>
+                                    <th scope="col">@item.OS </th>
+                                    <th scope="col">Orçamento: </th>
+                                    <th scope="col">@item.Orcamento</th>
                                 </tr>
+                            }
+                            
                             
                         </thead>
                         <tbody class="table-group-divider">
