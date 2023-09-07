@@ -64,17 +64,18 @@ namespace Arla32.Controllers
                                  {
                                      OS = p.OS,
                                      NA = p.NA,
-                                     Orcamento = Orcamento,
+                                     Orcamento = p.Orcamento,
                                      Item = p.Item,
                                      CodigoEnsaio = o.CodigoEnsaio,
-                                     Descricao = w.descricao
-                                     
-                                 }).ToList();
+                                     Descricao = w.descricao,
+                                     NormaOS = o.NormaOS
+
+                                 }).Distinct().ToList();
 
 
 
                 // Verificar se listagem não é nula e se há resultados
-                if (resultado != null && resultado.Count > 0)
+                if (resultado != null)
                 {
                     // Faça algo com os resultados
                     return View("Index", resultado);

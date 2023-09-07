@@ -52,8 +52,8 @@ namespace Arla32.Models
             public string codigo { get; set; }
             public string Item { get; set; }
             public string Descricao { get; set; }
-
             public string CodigoEnsaio { get; set; }
+            public string NormaOS { get; set; }
 
         }
 
