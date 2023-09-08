@@ -26,5 +26,9 @@ namespace Arla32.Controllers
         {
             return View();
         }
+        public IActionResult EnsaioIdentidade()
+        {
+            return View();
+        }
     }
 }
