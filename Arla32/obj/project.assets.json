@@ -11830,23 +11830,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Molina\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Victor Bruno\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Molina\\source\\repos\\InstitutoLabSystem\\Coleta-Arla32\\Arla32\\Arla32.csproj",
+      "projectUniqueName": "C:\\xampp\\htdocs\\Coleta-Arla32\\Arla32\\Arla32.csproj",
       "projectName": "Arla32",
-      "projectPath": "C:\\Users\\Molina\\source\\repos\\InstitutoLabSystem\\Coleta-Arla32\\Arla32\\Arla32.csproj",
-      "packagesPath": "C:\\Users\\Molina\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Molina\\source\\repos\\InstitutoLabSystem\\Coleta-Arla32\\Arla32\\obj\\",
+      "projectPath": "C:\\xampp\\htdocs\\Coleta-Arla32\\Arla32\\Arla32.csproj",
+      "packagesPath": "C:\\Users\\Victor Bruno\\.nuget\\packages\\",
+      "outputPath": "C:\\xampp\\htdocs\\Coleta-Arla32\\Arla32\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Molina\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Victor Bruno\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -11855,7 +11857,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

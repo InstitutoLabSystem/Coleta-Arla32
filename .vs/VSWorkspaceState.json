@@ -4,8 +4,9 @@
     "\\Arla32",
     "\\Arla32\\Controllers",
     "\\Arla32\\Views",
+    "\\Arla32\\Views\\Coleta",
     "\\Arla32\\Views\\Home"
   ],
-  "SelectedNode": "\\Arla32\\Controllers\\HomeController.cs",
+  "SelectedNode": "\\Arla32\\Views\\Coleta\\EnsaioAldeidos.cshtml",
   "PreviewInSolutionExplorer": false
 }

@@ -59,12 +59,12 @@
             </tr>
             <tr class="texto-central">
                 <td colspan="5">
-                    <b>Ensaio a ser realizado:</b> Determinação da concentração de aldeído - Anexo F - IT.128-Q
+                    <b>Ensaio a ser realizado:</b> Determinação da concentração de Fosfato pelo método fotométrico - Anexo H - IT.125-Q
                 </td>
             </tr>
             <tr>
                 <td colspan="5">
-                    Norma: ABNT NBR ISO 22241-2
+                    Norma: ABNT NBR 22241-2
                 </td>
             </tr>
             <tr>
@@ -82,32 +82,26 @@
                 <td colspan="8" class="texto-central">Medição de amostra</td>
             </tr>
             <tr>
-                <td colspan="2"> Lote da solução padrão </td>
-                <td colspan="6"><input class="form-control input " /> </td>
-            </tr>
-                 <td colspan="2"> Código de curva </td>
-            <td colspan="2"> <input class="form-control input " /></td>
-                 <td colspan="2"> Fator de calibração:</td>
-            <td colspan="2"> <input class="form-control input " /> </td>
-            <tr>
-
-            </tr>
+                <td colspan="2"> Código da curva : </td>
+                <td colspan="2"> <input class="form-control input " /> </td>
+                <td colspan="2"> Fator Calibração: </td>
+                <td colspan="2"> <input class="form-control input " /> </td>
         </table>
-
         <br />
 
         <!--  Terceira tabela.  -->
         <table class="table table-bordered border-secondary table-sm">
             <tr class="tabela">
-                <td class="texto-central" colspan="2">Massa (g)</td>
+                <td class="texto-central">Item</td>
+                <td class="texto-central">Massa (g)</td>
                 <td class="texto-central">Absorbância</td>
-                <td class="texto-central" colspan="2">Máximo permitido 5mg/Kg</td>
+                <td class="texto-central">Resultado final Máximo permitido 0,5 mg/kg</td>
             </tr>
             <tr>
-            <td>Branco</td>
-            <td><input class="form-control input " /></td>
-            <td><input class="form-control input " /></td>
-            <td rowspan="2"><input class="form-control input " style="height:100px" /></td>
+            <td>Branco Ensaio</td>
+            <td><input class="form-control input " value="---"/></td>
+            <td>Absorbância </td>
+            <td rowspan="2"><input class="form-control input" style="height:100px" /></td>
             </tr>
             <tr>
                 <td>Amostra</td>
@@ -115,23 +109,24 @@
                 <td><input class="form-control input " /></td>
             </tr>
         </table>
-
         <br />
 
         <!--  Quarta tabela.  -->
         <table class="table table-bordered border-secondary table-sm">
-            <tr class="tabela"><td colspan="4" class="texto-central">Carta controle</td></tr>
+            <tr class="tabela"><td colspan="46" class="texto-central">Carta controle</td></tr>
      
             <tr>
-                <td> Absorbância QC </td>
+                <td> Abs. Branco </td>
                 <td> <input class="form-control input " /> </td>
-                <td> Concentração QC </td>
+                <td> Abs. QC </td>
+                <td> <input class="form-control input " /> </td>
+                 <td> Concentração QC </td>
                 <td> <input class="form-control input " /> </td>
             </tr>
         </table>
         <br />
 
-        <!--Quarta Tabela-->
+        <!--Quinta Tabela-->
 
         <table class="table table-bordered border-secondary table-sm">
             <tr class="tabela">
@@ -165,7 +160,7 @@
          </table>
         <br />
 
-        <!--Quinta Tabela-->
+        <!-- Sexta Tabela-->
         <table class="table table-bordered border-secondary table-sm">
             <tr class="tabela">
                 <td colspan="8" class="texto-central">Código de instrumentos utilizados</td>
@@ -194,10 +189,26 @@
                 <td colspan="1"><input class="form-control input " /></td>
                 <td colspan="1"><input class="form-control input " /></td>
             </tr>
+            <tr>
+                <td colspan="2"><input class="form-control input " /></td>
+                <td colspan="1"><input class="form-control input " /></td>
+                <td colspan="1"><input class="form-control input " /></td>
+                <td colspan="2"><input class="form-control input " /></td>
+                <td colspan="1"><input class="form-control input " /></td>
+                <td colspan="1"><input class="form-control input " /></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input class="form-control input " /></td>
+                <td colspan="1"><input class="form-control input " /></td>
+                <td colspan="1"><input class="form-control input " /></td>
+                <td colspan="2"><input class="form-control input " /></td>
+                <td colspan="1"><input class="form-control input " /></td>
+                <td colspan="1"><input class="form-control input " /></td>
+            </tr>
         </table>
         <br />
 
-        <!--Sexta Tabela-->
+        <!--Setima Tabela-->
         <table class="table table-bordered border-secondary table-sm">
             <tr class="tabela">
                 <td colspan="8" class="texto-central">Equipamentos e Dispositivos: </td>
@@ -213,7 +224,7 @@
          </table>
         <br/>
 
-        <!--Sexta Tabela-->
+        <!--Oitava Tabela-->
         <table class="table table-bordered border-secondary table-sm">
             <tr class="tabela">
                 <td>Observações</td>
@@ -223,6 +234,20 @@
             </tr>
         </table>
         <br/>
+
+        <!--Nona Tabela-->
+
+        <table class="table table-bordered border-secondary table-sm">
+            <tr class="tabela">
+                <td colspan="2">Executado por:</td>
+                <td colspan="2">Auxiliado por:</td>
+            </tr>
+            <tr>
+                <td colspan="2"><input class="form-control input " /></td>
+                <td colspan="2"><input class="form-control input " /></td>
+            </tr>
+        </table>
+        <br />
 
         <div class="d-grid gap-2 d-flex justify-content-center">
             <button type="submit" class="btn btn-success btn btn-primary btn-md">Salvar Coleta</button>
