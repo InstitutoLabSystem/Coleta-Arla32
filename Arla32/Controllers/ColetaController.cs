@@ -6,33 +6,40 @@ namespace Arla32.Controllers
     [Authorize]
     public class ColetaController : Controller
     {
-        public IActionResult EnsaioConcentracao()
+        public IActionResult EnsaioConcentracao(string OS)
         {
+            ViewBag.OS = OS;
             return View();
         }
-        public IActionResult EnsaioAldeidos()
+        public IActionResult EnsaioAldeidos(string OS)
         {
+            ViewBag.OS = OS;
             return View();
         }
 
-        public IActionResult EnsaioAlcalinidade()
+        public IActionResult EnsaioAlcalinidade(string OS)
         {
+            ViewBag.OS = OS;
             return View();
         }
-        public IActionResult EnsaioInsoluveis()
+        public IActionResult EnsaioInsoluveis(string OS)
         {
+            ViewBag.OS = OS;
             return View();
         }
-        public IActionResult EnsaioFosfato()
+        public IActionResult EnsaioFosfato(string OS)
         {
+            ViewBag.OS = OS;
             return View();
         }
-        public IActionResult EnsaioIdentidade(){
-
-             return View();
-        }
-        public IActionResult EnsaioBiureto()
+        public IActionResult EnsaioIdentidade(string OS)
         {
+            ViewBag.OS = OS;
+            return View();
+        }
+        public IActionResult EnsaioBiureto(string OS)
+        {
+            ViewBag.OS = OS;
             return View();
         }
         public IActionResult EnsaioMetais(string OS)

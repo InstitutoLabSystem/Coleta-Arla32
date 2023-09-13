@@ -1,5 +1,6 @@
 ﻿using Arla32.Models;
 using System.ComponentModel.DataAnnotations;
+using System.Reflection.Metadata;
 
 namespace Arla32.Models
 {
@@ -78,7 +79,28 @@ namespace Arla32.Models
 
         }
 
-      
+        public class IniciarColeta {
+
+            [Key]
+            public int id { get; set; }
+            public string? os { get ; set; }
+            public int? revisao_os { get; set; }
+
+            public string? orcamento { get; set; }
+
+            public string? norma { get; set; }
+            public string? ensaio { get; set; }
+
+            public string? Qtd_Recebida { get; set; }
+            public string? setor { get; set; }
+            public string? laboratorio { get; set; }
+            public int? CodCli { get; set; }
+            public int? CodSol { get; set; }
+
+        
+        }
+
+
 
 
 

@@ -20,11 +20,14 @@ namespace Arla32.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly BancoContext _context;
+        private readonly QuimicoContext _qcontext;
 
-        public HomeController(ILogger<HomeController> logger, BancoContext context)
+        public HomeController(ILogger<HomeController> logger, BancoContext context, QuimicoContext qcontext)
         {
             _logger = logger;
             _context = context;
+            _qcontext = qcontext;
+
         }
 
         public IActionResult Index(string OS)
@@ -81,8 +84,8 @@ namespace Arla32.Controllers
                                      codigo = w.codigo,
                                  }).Distinct().ToList();
 
+             
 
-           
 
                 // Verificar se listagem não é nula e se há resultados
                 if (resultado != null)
@@ -105,12 +108,48 @@ namespace Arla32.Controllers
             }
 
 
+        }
 
+        public async Task<IActionResult> IniciarColeta(HomeModel.Resposta resultado)
+        {
+            try
+            {
+
+                if(resultado != null)
+                {
+                    var IniciarColeta = new IniciarColeta
+                    {
+                        os = resultado.OS,
+                        revisao_os = resultado.Rev,
+                        orcamento = resultado.Orcamento,
+                        ensaio = "ARLA 32",
+                        Qtd_Recebida = resultado.qtdAmostra.ToString(),
+                        laboratorio = "Quimico",
+                        CodCli = !string.IsNullOrEmpty(resultado.CodCli) ? int.Parse(resultado.CodCli) : 0,
+                        CodSol = !string.IsNullOrEmpty(resultado.CodSol) ? int.Parse(resultado.CodSol) : 0
+
+                    };
+                    _qcontext.Add(IniciarColeta);
+                    await _qcontext.SaveChangesAsync();
+                    return View("Index");
+
+                }
+                else
+                {
+                    TempData["Mensagem"] = "Não foi possível salvar os dados";
+                    return View("Index");
+                }
+
+
+            }catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error", ex.Message);
+                throw;
+            }
 
 
 
         }
-
 
 
 

@@ -19,6 +19,12 @@ namespace Arla32
                   "server=novolab.c82dqw5tullb.sa-east-1.rds.amazonaws.com;user id=sistema;password=7847awse;database=labdados",
                   Microsoft.EntityFrameworkCore.ServerVersion.Parse("13.2.0-mysql")));
 
+            builder.Services.AddDbContext<QuimicoContext>(options =>
+                options.UseMySql(
+          "server=novolab.c82dqw5tullb.sa-east-1.rds.amazonaws.com;user id=sistema;password=7847awse;database=quimico",
+          Microsoft.EntityFrameworkCore.ServerVersion.Parse("13.2.0-mysql")));
+
+
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 

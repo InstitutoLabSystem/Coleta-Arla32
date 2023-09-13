@@ -10,12 +10,94 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+     
+        .table {
+            margin: 0 auto;
+            border: 1px solid black;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        .tabela {
+            background-color: #800000;
+            color: white;
+            text-align: center;
+        }
+
+    </style>
 </head>
 <body>
 
     <h1> Coleta Arla32 </h1>
-    <form class="form-inline" asp-controller="Home" asp-action="BuscarOS" method="post">
-        <div class="container mt-4">
+
+
+        @if(Model != null)
+        {
+            <form class="form-inline" asp-controller="Home" asp-action="IniciarColeta" method="post">
+            <div class="container mt-4">
+                <div class="row">
+                    <label class="form-label"> <strong> Pesquisar OS </strong></label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" id="OS" name="OS">
+
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-primary  w-100  btn-block">Pesquisar</button>
+                    </div>
+                </div>
+            </div>
+            <br/> <br/>
+
+
+            <table class="table table-bordered border-secondary  table-sm">
+                <tr class="tabela">
+                    <td colspan="5">  Confirme as Informações : </td>
+                </tr>
+                @if (Model.Count > 0)
+                {
+                    var item = Model[0];
+                    <tr class="table-active">
+                        <th scope="col">OS: @item.OS </th>
+                    <th scope="col">Orçamento : @item.Orcamento </th>
+                    <th scope="col"> Quantidade de Amostras: @item.qtdAmostra</th>
+                </tr>
+                <tr>
+                        <th scope="col" colspan="5"> Código Ensaio: @item.CodigoEnsaio </th>
+                </tr>
+                <tr>
+                        <th scope="col" colspan="5">Norma Os: @item.NormaOS</th>
+                </tr>
+                <tr>
+                        <td colspan="5"> <button type="submit" class="btn btn-primary  w-100  btn-block">Começar Ensaio</button> </td>
+                    </tr>
+                }
+            </table>
+            </form>
+
+        }
+ 
+        else
+        {
+         <form class="form-inline" asp-controller="Home" asp-action="BuscarOS" method="post">
+            <div class="container mt-4">
+                <div class="row">
+                    <label class="form-label"> <strong> Pesquisar OS </strong></label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" id="OS" name="OS">
+
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-primary  w-100  btn-block">Pesquisar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        }
+    
+
+
+      @*   <div class="container mt-4">
             <div class="row">
 
                 @if (Model != null)
@@ -111,8 +193,8 @@
 
                 }
             </div>
-        </div>
-    </form>
+        </div> *@
+  
 
     @section Scripts {
         @if (TempData.ContainsKey("Mensagem"))
