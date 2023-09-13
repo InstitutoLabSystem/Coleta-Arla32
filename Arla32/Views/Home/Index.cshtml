@@ -58,39 +58,39 @@
 
                                 <tr>
                                     <td colspan="3">@resultado.Descricao</td>
-                                    @if (resultado.Descricao == "ANEXO C  |  ÍNDICE DE REFRAÇÃO E DETERMINAÇÃO DA CONCENTRAÇÃO DE URÉIA POR ÍNDICE DE REFRAÇÃO")
+                                    @if (resultado.codigo == "QUIARL001000001")
                                     {
                                         <td>  <a role="button" asp-controller="Coleta" asp-action="EnsaioConcentracao" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
                                     }
-                                    else if (resultado.Descricao == "ANEXO D  |  DETERMINAÇÃO DA ALCALINIDADE")
+                                    else if (resultado.codigo == "QUIARL002000001")
                                     {
                                         <td>  <a role="button" asp-controller="Coleta" asp-action="EnsaioConcentracao" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
                                     }
-                                    else if (resultado.Descricao == "ANEXO E  |  DETERMINAÇÃO DA CONCENTRAÇÃO DE BIURETO")
+                                    else if (resultado.codigo == "QUIARL003000001")
                                     {
                                         <td>  <a role="button" asp-controller="Coleta" asp-action="EnsaioBiureto" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
                                     }
-                                    else if (resultado.Descricao == "ANEXO F  |  DETERMINAÇÃO DA CONCENTRAÇÃO DE ALDEÍDO")
+                                    else if (resultado.codigo == "QUIARL004000001")
                                     {
                                         <td>  <a role="button" asp-controller="Coleta" asp-action="EnsaioAldeidos" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
                                     }
-                                    else if (resultado.Descricao == "ANEXO G  |  DETERMINAÇÃO DA CONCENTRAÇÃO DE INSOLÚVEIS PELO MÉTODO GRAVIMÉTRICO")
+                                    else if (resultado.codigo == "QUIARL005000001")
                                     {
                                         <td>  <a role="button" asp-controller="Coleta" asp-action="EnsaioInsoluveis" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
                                     }
-                                    else if (resultado.Descricao == "ANEXO H  |  DETERMINAÇÃO DE FOSFATO  PELO MÉTODO FOTOMÉTRICO ")
+                                    else if (resultado.codigo == "QUIARL006000001")
                                     {
                                         <td>  <a role="button" asp-controller="Coleta" asp-action="EnsaioFosfato" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
                                     }
-                                    else if (resultado.Descricao == "ANEXO I  |  DETERMINAÇÃO DA CONCENTRAÇÃO DE TRAÇOS DE ELEMENTOS (Cr/Mg/Fe/Ca/Al/K/Zn/Na/Cu/Nl)")
+                                    else if (resultado.codigo == "QUIARL007000001")
                                     {
                                         <td>  <a role="button" asp-controller="Coleta" asp-action="EnsaioMetais" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
                                     }
-                                    else if (resultado.Descricao == "ANEXO J  |  DETERMINAÇÃO DA IDENTIDADE PELO MÉTODO ESPECTROMÉTRICO FTIR")
+                                    else if (resultado.codigo == "QUIARL008000001")
                                     {
-                                    <td>  <a role="button" asp-controller="Coleta" asp-action="EnsaioMetais" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Não tem tela ainda</a></td>
+                                    <td>  <a role="button" asp-controller="Coleta" asp-action="EnsaioMetais" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
                                     }
-                                    else if (resultado.Descricao == "ISO 12185  |  DETERMINAÇÃO DA DENSIDADE")
+                                    else if (resultado.Descricao == "QUIARL009000001")
                                     {
                                     <td>  <a role="button" asp-controller="Coleta" asp-action="EnsaioMetais" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Não tem tela ainda</a></td>
                                     }

@@ -78,8 +78,7 @@ namespace Arla32.Controllers
                                      qtdAmostra = o.qtdAmostra, 
                                      Ano = o.Ano,
                                      Rev = o.Rev,
-
-
+                                     codigo = w.codigo,
                                  }).Distinct().ToList();
 
 
