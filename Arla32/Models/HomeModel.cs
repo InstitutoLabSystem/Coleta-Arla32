@@ -25,6 +25,11 @@ namespace Arla32.Models
             public string CodigoEnsaio { get; set; }
             public string orcamento { get; set; }
             public string NormaOS { get; set; }
+            public int Numero { get; set; }
+            public string Mes { get; set; }
+            public int Ano { get; set; }
+            public int Rev { get; set; }
+            public int qtdAmostra { get; set; }
         }
 
 
@@ -42,7 +47,18 @@ namespace Arla32.Models
 
         }
 
+        public class OrdemServico
+        {
+            [Key]
+            public string mes { get; set; }
+            public int codigo { get; set; }
+            public string ano { get; set; }
+            public string CodCli { get; set; }
+            public string CodSol { get; set; }
+            public int Rev { get; set; }
+        }
 
+                                    
         public class Resposta
         {
             public string OS { get; set; }
@@ -54,8 +70,16 @@ namespace Arla32.Models
             public string Descricao { get; set; }
             public string CodigoEnsaio { get; set; }
             public string NormaOS { get; set; }
+            public string CodCli { get; set; }
+            public string CodSol { get; set; }
+            public int qtdAmostra { get; set; }
+            public int Ano { get; set; }
+            public int Rev { get; set; }
 
         }
+
+      
+
 
 
     }
