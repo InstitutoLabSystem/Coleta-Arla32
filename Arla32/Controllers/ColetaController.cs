@@ -34,8 +34,9 @@ namespace Arla32.Controllers
         {
             return View();
         }
-        public IActionResult EnsaioMetais()
+        public IActionResult EnsaioMetais(string OS)
         {
+            ViewBag.OS = OS;
             return View();
         }
     }

@@ -13,11 +13,11 @@
 </head>
 <body>
 
-     <h1> Coleta Arla32 </h1>
+    <h1> Coleta Arla32 </h1>
     <form class="form-inline" asp-controller="Home" asp-action="BuscarOS" method="post">
         <div class="container mt-4">
             <div class="row">
-              
+
                 @if (Model != null)
                 {
 
@@ -28,13 +28,13 @@
                     <div class="col-md-3">
                         <button type="submit" class="btn btn-primary  w-100  btn-block">Pesquisar</button>
                     </div>
-                    <br/>
+                    <br />
 
-                    <br />  <br /> 
+                    <br />  <br />
                     <table class="table table-bordered">
                         <thead class="table-dark">
 
-                            @if(Model.Count > 0)
+                            @if (Model.Count > 0)
                             {
                                 var item = Model[0];
                                 <tr class="table-active">
@@ -44,26 +44,60 @@
                                     <th scope="col">@item.Orcamento</th>
                                 </tr>
                             }
-                            
-                            
+
+
                         </thead>
                         <tbody class="table-group-divider">
-                       
-                                <tr>
-                                    <td colspan="4" style="text-align:center">  <strong>ANEXOS</strong></td>
-                                </tr>
+
+                            <tr>
+                                <td colspan="4" style="text-align:center">  <strong>ANEXOS</strong></td>
+                            </tr>
                             @for (var j = 0; j < Model.Count; j++)
                             {
                                 var resultado = Model[j];
 
                                 <tr>
                                     <td colspan="3">@resultado.Descricao</td>
-                                    <td>  <button type="submit" class="btn btn-primary  w-100  btn-block">Anexo</button> </td>
+                                    @if (resultado.Descricao == "ANEXO C  |  ÍNDICE DE REFRAÇÃO E DETERMINAÇÃO DA CONCENTRAÇÃO DE URÉIA POR ÍNDICE DE REFRAÇÃO")
+                                    {
+                                        <td>  <a role="button" asp-controller="Coleta" asp-action="EnsaioConcentracao" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
+                                    }
+                                    else if (resultado.Descricao == "ANEXO D  |  DETERMINAÇÃO DA ALCALINIDADE")
+                                    {
+                                        <td>  <a role="button" asp-controller="Coleta" asp-action="EnsaioConcentracao" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
+                                    }
+                                    else if (resultado.Descricao == "ANEXO E  |  DETERMINAÇÃO DA CONCENTRAÇÃO DE BIURETO")
+                                    {
+                                        <td>  <a role="button" asp-controller="Coleta" asp-action="EnsaioBiureto" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
+                                    }
+                                    else if (resultado.Descricao == "ANEXO F  |  DETERMINAÇÃO DA CONCENTRAÇÃO DE ALDEÍDO")
+                                    {
+                                        <td>  <a role="button" asp-controller="Coleta" asp-action="EnsaioAldeidos" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
+                                    }
+                                    else if (resultado.Descricao == "ANEXO G  |  DETERMINAÇÃO DA CONCENTRAÇÃO DE INSOLÚVEIS PELO MÉTODO GRAVIMÉTRICO")
+                                    {
+                                        <td>  <a role="button" asp-controller="Coleta" asp-action="EnsaioInsoluveis" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
+                                    }
+                                    else if (resultado.Descricao == "ANEXO H  |  DETERMINAÇÃO DE FOSFATO  PELO MÉTODO FOTOMÉTRICO ")
+                                    {
+                                        <td>  <a role="button" asp-controller="Coleta" asp-action="EnsaioFosfato" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
+                                    }
+                                    else if (resultado.Descricao == "ANEXO I  |  DETERMINAÇÃO DA CONCENTRAÇÃO DE TRAÇOS DE ELEMENTOS (Cr/Mg/Fe/Ca/Al/K/Zn/Na/Cu/Nl)")
+                                    {
+                                        <td>  <a role="button" asp-controller="Coleta" asp-action="EnsaioMetais" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
+                                    }
+                                    else if (resultado.Descricao == "ANEXO J  |  DETERMINAÇÃO DA IDENTIDADE PELO MÉTODO ESPECTROMÉTRICO FTIR")
+                                    {
+                                    <td>  <a role="button" asp-controller="Coleta" asp-action="EnsaioMetais" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Não tem tela ainda</a></td>
+                                    }
+                                    else if (resultado.Descricao == "ISO 12185  |  DETERMINAÇÃO DA DENSIDADE")
+                                    {
+                                    <td>  <a role="button" asp-controller="Coleta" asp-action="EnsaioMetais" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Não tem tela ainda</a></td>
+                                    }
                                 </tr>
                             }
                         </tbody>
                     </table>
-
                 }
                 else
                 {
