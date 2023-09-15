@@ -83,21 +83,20 @@ namespace Arla32.Models
 
             [Key]
             public int id { get; set; }
-            public string? os { get ; set; }
+            public DateTime data_entrada { get; set; }
+            public string? OS { get ; set; }
             public int? revisao_os { get; set; }
-
             public string? orcamento { get; set; }
-
             public string? norma { get; set; }
             public string? ensaio { get; set; }
-
             public string? Qtd_Recebida { get; set; }
-            public string? setor { get; set; }
             public string? laboratorio { get; set; }
             public int? CodCli { get; set; }
             public int? CodSol { get; set; }
+            public string status { get; set; }
+            public string Item_orcamento { get; set; }
 
-        
+
         }
 
 

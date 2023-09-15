@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-     
+
         .table {
             margin: 0 auto;
             border: 1px solid black;
@@ -25,61 +25,182 @@
             text-align: center;
         }
 
+        .escondido {
+            display: none;
+        }
+
     </style>
 </head>
 <body>
 
-    <h1> Coleta Arla32 </h1>
+    @if (Model != null)
+    {
+        <h1 style="text-align:center"> Coleta Arla32 </h1>
+        <br />
+        <form class="form-inline" asp-controller="Home" asp-action="IniciarColeta" method="post" asp-route-os="@ViewData["OS"]">
 
+            @if (Model.Count > 0)
+            {
+                var item = Model[0];
 
-        @if(Model != null)
-        {
-            <form class="form-inline" asp-controller="Home" asp-action="IniciarColeta" method="post">
-            <div class="container mt-4">
-                <div class="row">
-                    <label class="form-label"> <strong> Pesquisar OS </strong></label>
-                    <div class="col-md-9">
-                        <input type="text" class="form-control" id="OS" name="OS">
+                <table class="table table-bordered border-secondary  table-sm">
+                    <tr class="tabela">
+                        <td colspan="6">  Confirme as Informações : </td>
+                    </tr>
+                    <tr class="table-active">
+                        <th scope="col" colspan="3"> Os : </th>
+                        <th scope="col" colspan="3"> Orçamento : </th>
 
-                    </div>
-                    <div class="col-md-3">
-                        <button type="submit" class="btn btn-primary  w-100  btn-block">Pesquisar</button>
-                    </div>
-                </div>
-            </div>
-            <br/> <br/>
+                    </tr>
+                    <tr class="table-active">
+                        <th scope="col" colspan="3"><input type="text" class="form-control" name="OS" value="@item.OS" style=" border:none;" readonly> </th>
+                        <th scope="col" colspan="3"><input type="text" class="form-control" id="orcamento" name="orcamento" value=" @item.Orcamento" style=" border:none;" readonly> </th>
+                    </tr>
+                    <tr class="table-active">
+                        <td scope="col" colspan="6"> <strong> Norma Os: </strong> </td>
+                    </tr>
+                    <tr>
+                        <th scope="col" colspan="6"> <input type="text" class="form-control" id="norma" name="norma" value="@item.NormaOS" style=" border:none;" readonly></th>
+                    </tr>
+                    <tr>
+                        @if (@ViewBag.IsOsSalva)
+                        {
+                         
+                        }
+                        else{
+                            <td colspan="5"> <button type="submit" class="btn btn-primary  w-100  btn-block" id="salvarColetaButton">Começar Ensaio</button> </td>
+                            }
+                        </tr>
+                </table>
+                @*  Campos para passar as outras informações, esses campos ficarão escondidos, é apenas para passar o valor para o insert da table do quimico *@
+                <input type="hidden" class="form-control" id="revisao_os" name="revisao_os" value="@item.Rev" style=" border:none;" readonly>
+                <input type="hidden" class="form-control" id="CodCli" name="CodCli" value="@item.CodCli" style=" border:none;" readonly>
+                <input type="hidden" class="form-control" id="CodSol" name="CodSol" value="@item.CodSol" style=" border:none;" readonly>
+                <input type="hidden" class=" form-control" id="Qtd_Recebida" name="Qtd_Recebida" value="@item.qtdAmostra" style=" border:none;" readonly>
+                <input type="hidden" class=" form-control" id="Item" name="Item" value="@item.Item" style=" border:none;" readonly>
 
+            }
 
+            <br />
             <table class="table table-bordered border-secondary  table-sm">
                 <tr class="tabela">
-                    <td colspan="5">  Confirme as Informações : </td>
+                    <td colspan="6">  Anexos : </td>
                 </tr>
-                @if (Model.Count > 0)
+                @for (var j = 0; j < Model.Count; j++)
                 {
-                    var item = Model[0];
-                    <tr class="table-active">
-                        <th scope="col">OS: @item.OS </th>
-                    <th scope="col">Orçamento : @item.Orcamento </th>
-                    <th scope="col"> Quantidade de Amostras: @item.qtdAmostra</th>
-                </tr>
-                <tr>
-                        <th scope="col" colspan="5"> Código Ensaio: @item.CodigoEnsaio </th>
-                </tr>
-                <tr>
-                        <th scope="col" colspan="5">Norma Os: @item.NormaOS</th>
-                </tr>
-                <tr>
-                        <td colspan="5"> <button type="submit" class="btn btn-primary  w-100  btn-block">Começar Ensaio</button> </td>
+                    var resultado = Model[j];
+
+                    <tr>
+                        <td colspan="3">@resultado.Descricao</td>
+                        @if (resultado.codigo == "QUIARL001000001")
+                        {
+                            @if(@ViewBag.IsOsSalva)
+                            {
+                                <td> <a role="button" id="anexoLink1" asp-controller="Coleta" asp-action="EnsaioConcentracao" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block"> Anexo</a></td>
+                            }
+                            else
+                            {
+                                <td><button type="button" class="btn btn-secondary" >Anexo </button></td>
+                            }
+
+                        }
+                        else if (resultado.codigo == "QUIARL002000001")
+                        {
+                            @if (@ViewBag.IsOsSalva)
+                            {
+                                <td>  <a role="button" id="anexoLink2" asp-controller="Coleta" asp-action="EnsaioConcentracao" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
+                            }
+                            else{
+                                <td><button type="button" class="btn btn-secondary">Anexo </button></td>
+                            }
+                        }
+                        else if (resultado.codigo == "QUIARL003000001")
+                        {
+                            @if (@ViewBag.IsOsSalva)
+                            {
+                                <td>  <a role="button" id="anexoLink3" asp-controller="Coleta" asp-action="EnsaioBiureto" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
+                            }
+                            else{
+                                <td><button type="button" class="btn btn-secondary">Anexo </button></td>
+                            }
+                        }
+                        else if (resultado.codigo == "QUIARL004000001")
+                        {
+                            @if (@ViewBag.IsOsSalva)
+                            {
+                                <td>  <a role="button" id="anexoLink4" asp-controller="Coleta" asp-action="EnsaioAldeidos" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
+                            }else{
+                                    <td><button type="button" class="btn btn-secondary">Anexo </button></td>  
+                            }
+                        }
+                        else if (resultado.codigo == "QUIARL005000001")
+                        {
+                            @if (@ViewBag.IsOsSalva)
+                            {
+                                <td>  <a role="button" id="anexoLink5" asp-controller="Coleta" asp-action="EnsaioInsoluveis" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
+                            }else
+                            {
+                                <td><button type="button" class="btn btn-secondary">Anexo </button></td>
+                            }
+                        }
+                        else if (resultado.codigo == "QUIARL006000001")
+                        {
+                            @if (@ViewBag.IsOsSalva)
+                            {
+                                <td>  <a role="button" id="anexoLink6" asp-controller="Coleta" asp-action="EnsaioFosfato" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
+                            }
+                            else
+                            {
+                                <td><button type="button" class="btn btn-secondary">Anexo </button></td>
+                            }
+                        }
+                        else if (resultado.codigo == "QUIARL007000001")
+                        {
+                            @if (@ViewBag.IsOsSalva)
+                            {
+                                <td>  <a role="button" id="anexoLink7" asp-controller="Coleta" asp-action="EnsaioMetais" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
+                            }
+                            else{
+                                <td><button type="button" class="btn btn-secondary">Anexo </button></td>
+                            }
+                        }
+                        else if (resultado.codigo == "QUIARL008000001")
+                        {
+                            @if (@ViewBag.IsOsSalva)
+                            {
+                                <td>  <a role="button" id="anexoLink8" asp-controller="Coleta" asp-action="EnsaioMetais" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
+                            }
+                            else{
+                                <td><button type="button" class="btn btn-secondary">Anexo </button></td>
+
+                            }
+                        }
+                        else if (resultado.Descricao == "QUIARL009000001")
+                        {
+                            @if (@ViewBag.IsOsSalva)
+                            {
+                                <td>  <a role="button" id="anexoLink" asp-controller="Coleta" asp-action="EnsaioMetais" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Não tem tela ainda</a></td>
+                            }
+                            else{
+                                <td><button type="button" class="btn btn-secondary">Anexo </button></td>
+
+                                }
+                        }
                     </tr>
                 }
             </table>
-            </form>
 
-        }
- 
-        else
-        {
-         <form class="form-inline" asp-controller="Home" asp-action="BuscarOS" method="post">
+
+        </form>
+
+
+
+    }
+
+    else
+    {
+        <h1> Coleta Arla32 </h1>
+        <form class="form-inline" asp-controller="Home" asp-action="BuscarOS" method="post" asp-route-os="@ViewData["OS"]">
             <div class="container mt-4">
                 <div class="row">
                     <label class="form-label"> <strong> Pesquisar OS </strong></label>
@@ -93,118 +214,26 @@
                 </div>
             </div>
         </form>
-        }
-    
+    }
 
 
-      @*   <div class="container mt-4">
-            <div class="row">
 
-                @if (Model != null)
-                {
-
-                    <label class="form-label"> <strong> Pesquisar OS </strong></label>
-                    <div class="col-md-9">
-                        <input type="text" class="form-control" id="OS" name="OS">
-                    </div>
-                    <div class="col-md-3">
-                        <button type="submit" class="btn btn-primary  w-100  btn-block">Pesquisar</button>
-                    </div>
-                    <br />
-
-                    <br />  <br />
-                    <table class="table table-bordered">
-                        <thead class="table-dark">
-
-                            @if (Model.Count > 0)
-                            {
-                                var item = Model[0];
-                                <tr class="table-active">
-                                    <th scope="col">OS: </th>
-                                    <th scope="col">@item.OS </th>
-                                    <th scope="col">Orçamento: </th>
-                                    <th scope="col">@item.Orcamento</th>
-                                </tr>
-                            }
-
-
-                        </thead>
-                        <tbody class="table-group-divider">
-
-                            <tr>
-                                <td colspan="4" style="text-align:center">  <strong>ANEXOS</strong></td>
-                            </tr>
-                            @for (var j = 0; j < Model.Count; j++)
-                            {
-                                var resultado = Model[j];
-
-                                <tr>
-                                    <td colspan="3">@resultado.Descricao</td>
-                                    @if (resultado.codigo == "QUIARL001000001")
-                                    {
-                                        <td>  <a role="button" asp-controller="Coleta" asp-action="EnsaioConcentracao" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
-                                    }
-                                    else if (resultado.codigo == "QUIARL002000001")
-                                    {
-                                        <td>  <a role="button" asp-controller="Coleta" asp-action="EnsaioConcentracao" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
-                                    }
-                                    else if (resultado.codigo == "QUIARL003000001")
-                                    {
-                                        <td>  <a role="button" asp-controller="Coleta" asp-action="EnsaioBiureto" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
-                                    }
-                                    else if (resultado.codigo == "QUIARL004000001")
-                                    {
-                                        <td>  <a role="button" asp-controller="Coleta" asp-action="EnsaioAldeidos" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
-                                    }
-                                    else if (resultado.codigo == "QUIARL005000001")
-                                    {
-                                        <td>  <a role="button" asp-controller="Coleta" asp-action="EnsaioInsoluveis" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
-                                    }
-                                    else if (resultado.codigo == "QUIARL006000001")
-                                    {
-                                        <td>  <a role="button" asp-controller="Coleta" asp-action="EnsaioFosfato" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
-                                    }
-                                    else if (resultado.codigo == "QUIARL007000001")
-                                    {
-                                        <td>  <a role="button" asp-controller="Coleta" asp-action="EnsaioMetais" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
-                                    }
-                                    else if (resultado.codigo == "QUIARL008000001")
-                                    {
-                                    <td>  <a role="button" asp-controller="Coleta" asp-action="EnsaioMetais" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
-                                    }
-                                    else if (resultado.Descricao == "QUIARL009000001")
-                                    {
-                                    <td>  <a role="button" asp-controller="Coleta" asp-action="EnsaioMetais" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Não tem tela ainda</a></td>
-                                    }
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                }
-                else
-                {
-                    <label class="form-label"> <strong> Pesquisar OS </strong></label>
-                    <div class="col-md-9">
-                        <input type="text" class="form-control" id="OS" name="OS">
-                    </div>
-                    <div class="col-md-3">
-                        <button type="submit" class="btn btn-primary  w-100  btn-block">Pesquisar</button>
-                    </div>
-
-                }
-            </div>
-        </div> *@
-  
 
     @section Scripts {
         @if (TempData.ContainsKey("Mensagem"))
         {
             <script>
-
                 alert('@Html.Raw(TempData["Mensagem"])');
             </script>
+
+
         }
+
+
+
     }
+
+
 </body>
 </html>
 

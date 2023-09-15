@@ -36,6 +36,8 @@ namespace Arla32.Controllers
             ViewBag.NomeUsuario = nomeUsuarioClaim;
 
             ViewBag.OS = OS;
+
+
             return View();
 
         }
@@ -53,11 +55,11 @@ namespace Arla32.Controllers
         }
 
 
-        [HttpPost]
         public async Task<IActionResult> BuscarOS(string OS)
         {
             try
             {
+
 
                 var resultado = (from p in _context.programacao_lab_ensaios
                                  where p.OS == OS
@@ -84,8 +86,13 @@ namespace Arla32.Controllers
                                      codigo = w.codigo,
                                  }).Distinct().ToList();
 
-             
-
+                
+                var isOsSalva = _qcontext.regtro_amostra_painel_copy.Any(ic => ic.OS == OS);
+                if(isOsSalva != null)
+                {
+                    ViewBag.IsOsSalva = isOsSalva;
+                }
+            
 
                 // Verificar se listagem não é nula e se há resultados
                 if (resultado != null)
@@ -110,41 +117,52 @@ namespace Arla32.Controllers
 
         }
 
-        public async Task<IActionResult> IniciarColeta(HomeModel.Resposta resultado)
+       
+        public async Task<IActionResult> IniciarColeta(string OS, [Bind("OS,orcamento,Qtd_Recebida,norma,revisao_os," +
+            "CodCli, CodSol, Item")] HomeModel.IniciarColeta salvar)
         {
             try
             {
+                // pegando os dados do html para salva-los
 
-                if(resultado != null)
+                    
+                    var orcamento = salvar.orcamento;
+                    var Qtd_Recebida = salvar.Qtd_Recebida;
+                    var norma = salvar.norma;
+                    var revisao_os = salvar.revisao_os;
+                    var CodCli = salvar.CodCli;
+                    var CodSol = salvar.CodSol;
+                    var Item = salvar.Item_orcamento;
+
+
+                var IniciarColeta = new IniciarColeta
                 {
-                    var IniciarColeta = new IniciarColeta
-                    {
-                        os = resultado.OS,
-                        revisao_os = resultado.Rev,
-                        orcamento = resultado.Orcamento,
+                        OS = OS,
+                        data_entrada = DateTime.Now.Date, // Obtém apenas a parte da data
+                        revisao_os = revisao_os,
+                        orcamento = orcamento,
                         ensaio = "ARLA 32",
-                        Qtd_Recebida = resultado.qtdAmostra.ToString(),
+                        Qtd_Recebida = Qtd_Recebida,
                         laboratorio = "Quimico",
-                        CodCli = !string.IsNullOrEmpty(resultado.CodCli) ? int.Parse(resultado.CodCli) : 0,
-                        CodSol = !string.IsNullOrEmpty(resultado.CodSol) ? int.Parse(resultado.CodSol) : 0
+                        CodCli = CodCli,
+                        CodSol = CodSol,
+                        status = "Coleta",
+                        norma = norma,
+                        Item_orcamento = Item,
+            
 
                     };
-                    _qcontext.Add(IniciarColeta);
-                    await _qcontext.SaveChangesAsync();
-                    return View("Index");
+                _qcontext.Add(IniciarColeta);
+                await _qcontext.SaveChangesAsync();
+                return RedirectToAction("BuscarOS", new { OS });
 
-                }
-                else
-                {
-                    TempData["Mensagem"] = "Não foi possível salvar os dados";
-                    return View("Index");
-                }
-
-
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 _logger.LogError(ex, "Error", ex.Message);
                 throw;
+
+
             }
 
 
