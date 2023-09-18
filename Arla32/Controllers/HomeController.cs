@@ -84,15 +84,14 @@ namespace Arla32.Controllers
                                      codigo = w.codigo,
                                  }).Distinct().ToList();
 
-             
-
-
                 // Verificar se listagem não é nula e se há resultados
                 if (resultado != null)
                 {
                     // Faça algo com os resultados
                     return View("Index", resultado);
+
                 }
+               
                 else
                 {
                     TempData["Mensagem"] = "Orçamento não encontrado.";
@@ -110,16 +109,17 @@ namespace Arla32.Controllers
 
         }
 
-        public async Task<IActionResult> IniciarColeta(HomeModel.Resposta resultado)
+        public async Task<IActionResult> IniciarColeta(string OS, HomeModel.Resposta resultado)
         {
             try
             {
-
+              
+                
                 if(resultado != null)
                 {
                     var IniciarColeta = new IniciarColeta
                     {
-                        os = resultado.OS,
+                        os = OS,
                         revisao_os = resultado.Rev,
                         orcamento = resultado.Orcamento,
                         ensaio = "ARLA 32",
@@ -129,8 +129,8 @@ namespace Arla32.Controllers
                         CodSol = !string.IsNullOrEmpty(resultado.CodSol) ? int.Parse(resultado.CodSol) : 0
 
                     };
-                    _qcontext.Add(IniciarColeta);
-                    await _qcontext.SaveChangesAsync();
+                    //_qcontext.Add(IniciarColeta);
+                    //await _qcontext.SaveChangesAsync();
                     return View("Index");
 
                 }
