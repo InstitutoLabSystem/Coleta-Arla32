@@ -1,4 +1,5 @@
-﻿@{
+﻿@model ColetaModel.ArlaAlcalinidade
+@{
     ViewData["Title"] = "Ensaio De Alcalinidade ";
 }
 
@@ -27,7 +28,7 @@
         .tabela {
             background-color: #800000;
             color: white;
-            text-align:center;
+            text-align: center;
         }
 
         .imagem {
@@ -40,23 +41,23 @@
     </style>
 </head>
 <body>
-    <form method="post">
+    <form method="post" asp-controller="Coleta" asp-action="SalvarAlcalinidade" asp-route-os="@ViewData["os"]" asp-route-orcamento="@ViewData["orcamento"]">
         <table class="table table-bordered border-secondary  table-sm">
             <tr>
                 <td rowspan="3" class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                     <img src="https://www.labsystem-nuvem.com.br/imagens_arq/imagens/img/LabSystem.png" class="imagem" />
                 </td>
                 <td colspan="3" class="texto-central" style="background-color: #800000; color:white;">COLETA DE DADOS</td>
-                <td rowspan="2" class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="background-color: #800000; color:white;"> N° da OS :</td>
+                <td rowspan="2" class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="background-color: #800000; color:white;"> N° da OS : @ViewBag.OS</td>
             </tr>
             <tr class="tabela">
                 <td colspan="3" class="texto-central "> ENSAIO DE ARLA 32</td>
             </tr>
             <tr>
                 <td style="background-color: #800000; color:white;">Data Inicio:</td>
-                <td><input class="form-control input " /></td>
+                <td><input type="date" class="form-control input " name="data_ini" /></td>
                 <td style="background-color: #800000; color:white;">Data Término:</td>
-                <td><input class="form-control input " /></td>
+                <td><input type="date" class="form-control input " name="data_term" /></td>
             </tr>
             <tr class="texto-central">
                 <td colspan="5">
@@ -65,7 +66,7 @@
             </tr>
             <tr>
                 <td colspan="5">
-                    Norma:
+                    <b>Norma:</b> ABNT NBR ISO 22241-2
                 </td>
             </tr>
             <tr>
@@ -90,33 +91,80 @@
                 <td>Resultado Final Limete ate 0,2%</td>
             </tr>
             <tr>
-                <td rowspan="2"><input class="form-control input" style=" height:80px;"/></td>
-                <td rowspan="2"><input class="form-control input" style=" height:80px;" /></td>
+                <td rowspan="2"><input type="text" name="pre_massa_amostra" class="form-control input" style=" height:80px;" /></td>
+                <td rowspan="2"><input type="text" name="pre_vol_titulado" class="form-control input" style=" height:80px;" /></td>
                 <td rowspan="2"><input class="form-control input" style="height:80px;" readonly /></td>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
+                <td><input type="text" name="det_massa_amostra1" class="form-control input " /></td>
+                <td><input type="text" name="det_vol_titulado1" class="form-control input " /></td>
                 <td rowspan="2"><input class="form-control input" style=" height:80px;" readonly /></td>
             </tr>
-           
+
             <tr>
-                <td><input class="form-control input "/></td>
-                <td><input class="form-control input "/></td>
+                <td><input type="text" name="det_massa_amostra2" class="form-control input " /></td>
+                <td><input type="text" name="det_vol_titulado2" class="form-control input " /></td>
             </tr>
         </table>
         <br />
         <table class="table table-bordered border-secondary  table-sm">
             <tr class="tabela">
-                <td colspan="3s">Materiais Utilizados </td>
+                <td colspan="3">Materiais Utilizados </td>
             </tr>
             <tr class="tabela">
                 <td>Materia-prima</td>
                 <td>Lote</td>
-               <td>Validade</td>
+                <td>Validade</td>
             </tr>
             <tr>
-                <td ><input class="form-control input "/></td>
-                <td ><input class="form-control input "/></td>
-                <td ><input class="form-control input "/></td>
+                <td><input type="text" name="mat_prima" class="form-control input " /></td>
+                <td><input type="text" name="mat_lote" class="form-control input " /></td>
+                <td><input type="date" name="mat_validade" class="form-control input " /></td>
+            </tr>
+        </table>
+        <br />
+
+        <table class="table table-bordered border-secondary  table-sm">
+            <tr class="tabela texto-central ">
+                <td colspan="6">Código de Instrumento Utilizados</td>
+            </tr>
+            <tr class="tabela texto-central">
+                <td>Descrição</td>
+                <td>Código</td>
+                <td>Validade</td>
+                <td>Descrição</td>
+                <td>Código</td>
+                <td>Validade</td>
+            </tr>
+            <tr>
+                <td><input type="text" name="inst_desc1" class="form-control input " /></td>
+                <td><input type="text" name="inst_cod1" class="form-control input " /></td>
+                <td><input type="date" name="inst_data1" class="form-control input " /></td>
+                <td><input type="text" name="inst_desc1_1" class="form-control input " /></td>
+                <td><input type="text" name="inst_cod1_1" class="form-control input " /></td>
+                <td><input type="date" name="inst_data1_1" class="form-control input " /></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="inst_desc2" class="form-control input " /></td>
+                <td><input type="text" name="inst_cod2" class="form-control input " /></td>
+                <td><input type="date" name="inst_data2" class="form-control input " /></td>
+                <td><input type="text" name="inst_desc2_2" class="form-control input " /></td>
+                <td><input type="text" name="inst_cod2_2" class="form-control input " /></td>
+                <td><input type="date" name="inst_data2_2" class="form-control input " /></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="inst_desc3" class="form-control input " /></td>
+                <td><input type="text" name="inst_cod3" class="form-control input " /></td>
+                <td><input type="date" name="inst_data3" class="form-control input " /></td>
+                <td><input type="text" name="inst_desc3_3" class="form-control input " /></td>
+                <td><input type="text" name="inst_cod3_3" class="form-control input " /></td>
+                <td><input type="date" name="inst_data3_3" class="form-control input " /></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="inst_desc4" class="form-control input " /></td>
+                <td><input type="text" name="inst_cod4" class="form-control input " /></td>
+                <td><input type="date" name="inst_data4" class="form-control input " /></td>
+                <td><input type="text" name="inst_desc4_4" class="form-control input " /></td>
+                <td><input type="text" name="inst_cod4_4" class="form-control input " /></td>
+                <td><input type="date" name="inst_data4_4" class="form-control input " /></td>
             </tr>
         </table>
         <br />
@@ -126,9 +174,9 @@
             </tr>
             <tr>
                 <td>De:</td>
-                <td><input class="form-control input " /></td>
+                <td><input type="text" name="equip_de" class="form-control input " /></td>
                 <td>EE:</td>
-                <td><input class="form-control input " /></td>
+                <td><input type="text" name="equip_ee" class="form-control input " /></td>
             </tr>
         </table>
         <br />
@@ -137,7 +185,7 @@
                 <td colspan="4">Observações</td>
             </tr>
             <tr>
-                <td><textarea class="form-control input"></textarea></td>
+                <td><textarea type="text" name="obs" class="form-control input"></textarea></td>
             </tr>
         </table>
         <Br />
@@ -147,14 +195,23 @@
                 <td colspan="2">Auxiliado Por:</td>
             </tr>
             <tr>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
+                <td><input type="text" name="executado_por" class="form-control input " /></td>
+                <td><input type="text" name="auxiliado_por" class="form-control input " /></td>
             </tr>
         </table>
         <br />
         <div class="d-grid gap-2 d-flex justify-content-center">
-            <button type="submit" class="btn btn-success btn btn-primary btn-md">Salvar Coleta</button>
+            <button type="submit" value="SalvarAlcalinidade" class="btn btn-success btn btn-primary btn-md">Salvar Coleta</button>
         </div>
     </form>
+    @section Scripts {
+        @if (TempData.ContainsKey("Mensagem"))
+        {
+            <script>
+
+                alert('@Html.Raw(TempData["Mensagem"])');
+            </script>
+        }
+    }
 </body>
 </html>
