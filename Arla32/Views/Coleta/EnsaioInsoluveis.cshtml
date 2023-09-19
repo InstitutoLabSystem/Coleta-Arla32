@@ -39,43 +39,53 @@
     </style>
 </head>
 <body>
-    <form method="post">
+    <form method="post" asp-controller="Coleta" asp-action="SalvarInsoluveis" asp-route-os="@ViewData["OS"]" asp-route-orcamento="@ViewData["orcamento"]">
         <table class="table table-bordered border-secondary  table-sm">
             <tr>
                 <td rowspan="3" class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                     <img src="https://www.labsystem-nuvem.com.br/imagens_arq/imagens/img/LabSystem.png" class="imagem" />
                 </td>
-                <td colspan="3" class="texto-central" style="background-color: #800000; color:white;">COLETA DE DADOS</td>
+                <td colspan="7" class="texto-central" style="background-color: #800000; color:white;">COLETA DE DADOS</td>
                 <td rowspan="2" class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="background-color: #800000; color:white;"> N° da OS :</td>
             </tr>
             <tr class="tabela">
-                <td colspan="3" class="texto-central "> ENSAIO DE ARLA 32</td>
+                <td colspan="7" class="texto-central "> ENSAIO DE ARLA 32</td>
+                @*       <td> <input class="form-control input " style="height:10px; border:none;" name="os" readonly /></td> *@
             </tr>
             <tr>
-                <td style="background-color: #800000; color:white;">Data Inicio:</td>
-                <td><input class="form-control input " /></td>
-                <td style="background-color: #800000; color:white;">Data Término:</td>
-                <td><input class="form-control input " /></td>
+                <td style="background-color: #800000; color:white;" colspan="2">Data Inicio:</td>
+                <td colspan="1"><input class="form-control input " type="date" style="height:50px; border:none;" name="data_ini" /></td>
+                <td colspan="2" style="background-color: #800000; color:white;">Data Término:</td>
+                <td colspan="2"><input class="form-control input " type="date" style="height:50px; border:none;" name="data_term" /></td>
+                <td colspan="2"> <input class="form-control input " style="height:50px; border:none;" name="os" value="@ViewBag.OS" /></td>
             </tr>
             <tr class="texto-central">
-                <td colspan="5">
-                    <b>Ensaio a ser realizado:</b> Determinação da concentração de insolúveis pelo método gravimétrico - Anexo G - IT.121/Q
+                <td colspan="9">
+                    <b>Ensaio a ser realizado:</b> Determinação da concentração de Insoluveis pelo método gravimétrico - Anexo G - IT.121-Q
                 </td>
             </tr>
             <tr>
-                <td colspan="5">
-                    Norma:  ABNT NBR ISO 22241-2
+                <td colspan="3">
+                    Norma: ABNT NBR ISO 22241-2
                 </td>
-
+                <td colspan="6">
+                    <input class="form-control input " name="norma" />
+                </td>
             </tr>
             <tr>
-                <td colspan="5"> Np:</td>
+                <td colspan="3"> Np:</td>
+                <td colspan="6">
+                    <input class="form-control input " name="np" />
+                </td>
             </tr>
             <tr>
-                <td colspan="5">Descrição:</td>
+                <td colspan="3">Descrição:</td>
+                <td colspan="6">
+                    <input class="form-control input " name="descricao" />
+                </td>
             </tr>
             <tr class="tabela">
-                <td colspan="5"></td>
+                <td colspan="9"></td>
             </tr>
         </table>
         <Br />
@@ -94,15 +104,15 @@
             <tr>
             <tr>
                 <td> Massa 01</td>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " readonly /></td>
+                <td><input class="form-control input " name="preparacao_placa1" /></td>
+                <td><input class="form-control input " name="preparacao_filtro1" /></td>
+                <td><input class="form-control input " name="preparacao_massa1" readonly /></td>
             </tr>
             <tr>
                 <td> Massa 02</td>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " readonly/></td>
+                <td><input class="form-control input " name="preparacao_placa2" /></td>
+                <td><input class="form-control input " name="preparacao_filtro2" /></td>
+                <td><input class="form-control input " name="preparacao_massa2" readonly /></td>
                
             </tr> 
         </table>
@@ -125,19 +135,19 @@
             <tr>
             <tr>
                 <td colspan="1"> Massa 01</td>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " readonly/></td>
-                <td><input class="form-control input "readonly /></td>
-                <td rowspan="2"><input class="form-control input" style="height:100px" readonly/></td>
-                <td rowspan="2"><input class="form-control input " style="height:100px" readonly/></td>
+                <td><input class="form-control input " name="pesagem_amostra1" /></td>
+                <td><input class="form-control input " name="pesagem_placa1" /></td>
+                <td><input class="form-control input " name="pesagem_filtro1" readonly /></td>
+                <td><input class="form-control input " name="pesagem_resultado1" readonly /></td>
+                <td rowspan="2"><input class="form-control input" style="height:100px" readonly name="pesagem_media" /></td>
+                <td rowspan="2"><input class="form-control input " style="height:100px" readonly name="pesagem_resultfinal" /></td>
             </tr>
             <tr>
                 <td> Massa 02</td>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " readonly/></td>
-                <td><input class="form-control input " readonly /></td>
+                <td><input class="form-control input " name="pesagem_amostra2" /></td>
+                <td><input class="form-control input " name="pesagem_placa2" /></td>
+                <td><input class="form-control input " name="pesagem_filtro2" readonly /></td>
+                <td><input class="form-control input " name="pesagem_resultado2" readonly /></td>
 
             </tr>
         </table>
@@ -155,62 +165,18 @@
                 <td colspan="1" class="texto-central">Validade</td>
             </tr>
             <tr>
-                <td colspan="3"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
+                <td colspan="3"><input class="form-control input " name="mat_prima1" /></td>
+                <td colspan="1"><input class="form-control input " name="mat_lote1" /></td>
+                <td colspan="1"><input class="form-control input " name="mat_validade1" /></td>
             </tr>
             <tr>
-                <td colspan="3"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
-            </tr>
-            <tr>
-                <td colspan="3"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
-            </tr>
-            <tr>
-                <td colspan="3"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
+                <td colspan="3"><input class="form-control input " name="mat_prima2" /></td>
+                <td colspan="1"><input class="form-control input " name="mat_lote2" /></td>
+                <td colspan="1"><input class="form-control input " name="mat_validade2" /></td>
             </tr>
         </table>
         <br />
 
-
-        <!--Quinta Tabela-->
-
-        <table class="table table-bordered border-secondary table-sm">
-            <tr class="tabela">
-                <td colspan="5" class="texto-central">Materiais Utilizados</td>
-            </tr>
-            <tr class="tabela">
-                <td colspan="3" class="texto-central">Matéria prima</td>
-                <td colspan="1" class="texto-central">Lote</td>
-                <td colspan="1" class="texto-central">Validade</td>
-            </tr>
-            <tr>
-                <td colspan="3"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
-            </tr>
-            <tr>
-                <td colspan="3"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
-            </tr>
-            <tr>
-                <td colspan="3"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
-            </tr>
-            <tr>
-                <td colspan="3"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
-            </tr>
-         </table>
-        <br />
 
         <!--Sextaa Tabela-->
         <table class="table table-bordered border-secondary table-sm">
@@ -226,44 +192,44 @@
                 <td colspan="1">Validade</td>
             </tr>
             <tr>
-                <td colspan="3"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
-                <td colspan="3"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
+                <td colspan="3"><input class="form-control input " name="inst_desc1" /></td>
+                <td colspan="1"><input class="form-control input " name="inst_cod1" /></td>
+                <td colspan="1"><input class="form-control input " name="inst_validade1" /></td>
+                <td colspan="3"><input class="form-control input " name="inst_desc1_1" /></td>
+                <td colspan="1"><input class="form-control input " name="inst_cod1_1" /></td>
+                <td colspan="1"><input class="form-control input " name="inst_validade1_1" /></td>
             </tr>
             <tr>
-                <td colspan="3"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
-                <td colspan="3"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
+                <td colspan="3"><input class="form-control input " name="inst_desc2" /></td>
+                <td colspan="1"><input class="form-control input " name="inst_cod2" /></td>
+                <td colspan="1"><input class="form-control input " name="inst_validade2" /></td>
+                <td colspan="3"><input class="form-control input " name="inst_desc2_2" /></td>
+                <td colspan="1"><input class="form-control input " name="inst_cod2_2" /></td>
+                <td colspan="1"><input class="form-control input " name="inst_validade2_2" /></td>
             </tr>
             <tr>
-                <td colspan="3"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
-                <td colspan="3"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
+                <td colspan="3"><input class="form-control input " name="inst_desc3" /></td>
+                <td colspan="1"><input class="form-control input " name="inst_cod3" /></td>
+                <td colspan="1"><input class="form-control input " name="inst_validade3" /></td>
+                <td colspan="3"><input class="form-control input " name="inst_desc3_3" /></td>
+                <td colspan="1"><input class="form-control input " name="inst_cod3_3" /></td>
+                <td colspan="1"><input class="form-control input " name="inst_validade3_3" /></td>
             </tr>
             <tr>
-                <td colspan="3"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
-                <td colspan="3"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
+                <td colspan="3"><input class="form-control input " name="inst_desc4" /></td>
+                <td colspan="1"><input class="form-control input " name="inst_cod4" /></td>
+                <td colspan="1"><input class="form-control input " name="inst_validade4" /></td>
+                <td colspan="3"><input class="form-control input " name="inst_desc4_4" /></td>
+                <td colspan="1"><input class="form-control input " name="inst_cod4_4" /></td>
+                <td colspan="1"><input class="form-control input " name="inst_validade4_4" /></td>
             </tr>
             <tr>
-                <td colspan="3"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
-                <td colspan="3"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
-                <td colspan="1"><input class="form-control input " /></td>
+                <td colspan="3"><input class="form-control input " name="inst_desc5" /></td>
+                <td colspan="1"><input class="form-control input " name="inst_cod5" /></td>
+                <td colspan="1"><input class="form-control input " name="inst_validade5" /></td>
+                <td colspan="3"><input class="form-control input " name="inst_desc5_5" /></td>
+                <td colspan="1"><input class="form-control input " name="inst_cod5_5" /></td>
+                <td colspan="1"><input class="form-control input " name="inst_validade5_5" /></td>
             </tr>
         </table>
         <br />
@@ -275,11 +241,11 @@
             </tr>
             <tr>
                 <td colspan="1">DE</td>
-                <td colspan="7"><input class="form-control input " /></td>
+                <td colspan="7"><input class="form-control input " name="equi_de" /></td>
             </tr>
             <tr>
                 <td colspan="1">EE</td>
-                <td colspan="7"><input class="form-control input " /></td>
+                <td colspan="7"><input class="form-control input " name="equi_ee" /></td>
             </tr>
          </table>
         <br/>
@@ -290,7 +256,7 @@
                 <td>Observações</td>
             </tr>
             <tr>
-                <td rowspan="2"><textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="border:none"></textarea></td>
+                <td rowspan="2"><textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="border:none" name="observacoes"></textarea></td>
             </tr>
         </table>
         <br/>
@@ -303,8 +269,8 @@
                 <td colspan="2">Auxiliado por:</td>
             </tr>
             <tr>
-                <td colspan="2"><input class="form-control input " /></td>
-                <td colspan="2"><input class="form-control input " /></td>
+                <td colspan="2"><input class="form-control input " name="executado" /></td>
+                <td colspan="2"><input class="form-control input " name="auxiliado" /></td>
             </tr>
         </table>
         <br/>
