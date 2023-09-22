@@ -19,6 +19,8 @@ namespace Arla32.Data
         public DbSet<ColetaModel.ArlaInsoluveis> arla_insoluveis { get; set; }
         public DbSet<ColetaModel.ArlaMetais> arla_metais { get;set; }
         public DbSet<ColetaModel.MetaisTratamento> arla_metais_tratamento { get; set; }
+        public DbSet<ColetaModel.ArlaFosfato> arla_fosfato { get; set; }
+        public DbSet<ColetaModel.ArlaDensidade> arla_densidade { get; set; }
         // Outros conjuntos de entidades relacionados ao banco de dados "quimico"
     }
 }

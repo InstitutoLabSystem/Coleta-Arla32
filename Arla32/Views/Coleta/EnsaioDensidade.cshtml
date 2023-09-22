@@ -1,0 +1,240 @@
+﻿@{
+    ViewData["Title"] = "Ensaio De Densidade";
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .input {
+            border: none;
+        }
+
+        .table {
+            margin: 0 auto;
+            border: 1px solid black;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        .texto-central {
+            text-align: center;
+        }
+
+        .tabela {
+            background-color: #800000;
+            color: white;
+            text-align: center;
+        }
+
+        .imagem {
+            max-width: 200px;
+            height: 100px;
+            display: block;
+            margin: 0 auto;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" asp-controller="Coleta" asp-action="SalvarDensidade" asp-route-os="@ViewData["os"]" asp-route-orcamento="@ViewData["orcamento"]">
+        <table class="table table-bordered border-secondary  table-sm">
+            <tr>
+                <td rowspan="3" class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                    <img src="https://www.labsystem-nuvem.com.br/imagens_arq/imagens/img/LabSystem.png" class="imagem" />
+                </td>
+                <td colspan="3" class="texto-central" style="background-color: #800000; color:white;">COLETA DE DADOS</td>
+                <td rowspan="2" class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="background-color: #800000; color:white;"> N° da OS : @ViewBag.OS</td>
+            </tr>
+            <tr class="tabela">
+                <td colspan="3" class="texto-central "> ENSAIO DE ARLA 32</td>
+            </tr>
+            <tr>
+                <td style="background-color: #800000; color:white;">Data Inicio:</td>
+                <td><input type="date" class="form-control input " name="data_ini" /></td>
+                <td style="background-color: #800000; color:white;">Data Término:</td>
+                <td><input type="date" class="form-control input " name="data_term" /></td>
+            </tr>
+            <tr class="texto-central">
+                <td colspan="5">
+                    <b>Ensaio a ser realizado:</b> Ensaio a ser realizado: Determinação de Densidade - IT.126/Q
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5">
+                    <b>Norma:</b> ABNT NBR ISO 22241-1 e ISO 3675
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5"> Np:</td>
+            </tr>
+            <tr>
+                <td colspan="5">Descrição:</td>
+            </tr>
+        </table>
+        <br />
+        <br />
+        <table class="table table-bordered border-secondary  table-sm">
+            <tr class="tabela">
+                <td colspan="4"> Execução de ensaio</td>
+            </tr>
+            <tr>
+                <td colspan="4" style="text-align:center;">Realizar a leitura da amostra conforme item 6.3.2 da IT.126/Q.</td>
+            </tr>
+            <tr class="tabela">
+                <td>Temperatura Inicial</td>
+                <td>Temp. ambiente: ± 2 °C com relação a amostra</td>
+                <td>Densidade encontrada: 1087,0 á 1093,0 (kg/m³)</td>
+                <td>Temperatura final ± 0,5 °C da temperatura inicial</td>
+            </tr>
+
+            <tr>
+                <td><input type="text" name="exec_temp_ini" id="exec_temp_ini" class="form-control input"</td>
+                <td><input type="text" name="tem_amostra" id="tem_amostra" class="form-control input"</td>
+                <td><input type="text" name="exec_densi_encont" id="exec_densi_encont" class="form-control input"</td>
+                <td><input type="text" name="exec_temp_final" id="exec_temp_final" class="form-control input"</td>
+            </tr>
+        </table>
+        <br />
+        <table class="table table-bordered border-secondary  table-sm">
+            <tr class="tabela">
+                <td colspan="3"> Execução de ensaio por Banho Maria</td>
+            </tr>
+            <tr class="tabela">
+                <td>Temperatura Inicial</td>
+                <td> Densidade encontrada: 1087,0 á 1093,0 (kg/m³)</td>
+                <td>Temperatura final no Banhio Maria ± 0,25 °C da temperatura inicial</td>
+            </tr>
+            <tr>
+                <td colspan="3" style="text-align:center;">Realizar a leitura da amostra conforme item 6.3.2 da IT.126/Q.</td>
+            </tr>
+            <tr>
+                <td><input type="text" name="temp_inicial" id="temp_inicial" class="form-control input"</td>
+                <td><input type="text" name="densidade_enc" id="densidade_enc" class="form-control input"</td>
+                <td><input type="text" name="temp_final" id="temp_final" class="form-control input"</td>
+            </tr>
+        </table>
+        <br />
+        <table class="table table-bordered border-secondary  table-sm">
+            <tr class="tabela">
+                <td rowspan="2">Fórmula</td>
+                <td colspan="2">Conversão - Cálculo de temperatura para 15 °C</td>
+            </tr>
+            <tr>
+                <td style="background-color: #800000; color:white; text-align:center;">Densidade Ambiente</td>
+                <td style="background-color: #800000; color:white; text-align:center;">Densidade Banho Maria</td>
+            </tr>
+            <tr>
+                <td>Imagem aqui</td>
+                <td><input type="text" name="densidade_ambiente" id="densidade_ambiente" class="form-control" readonly /></td>
+                <td><input type="text" name="densidade_banho" id="densidade_banho" class="form-control" readonly /></td>
+            </tr>
+        </table>
+        <br />
+        <table class="table table-bordered border-secondary  table-sm">
+            <tr class="tabela">
+                <td colspan="2">Conclusão do Ensaio</td>
+            </tr>
+            <tr>
+                <td> <b>Resultado:</b> Ensaio realizado conforme a norma ABNT NBR ISO 22241-1: </td>
+                <td><input type="text" name="conc_ensaio" id="conc_ensaio" class="form-control input" /></td>
+            </tr>
+        </table>
+        <br />
+        <table class="table table-bordered border-secondary  table-sm">
+            <tr class="tabela">
+                <td colspan="3">Materiais Utilizados </td>
+            </tr>
+            <tr class="tabela">
+                <td>Materia-prima</td>
+                <td>Lote</td>
+                <td>Validade</td>
+            </tr>
+            <tr>
+                <td><input type="text" name="mat_prima" class="form-control input " /></td>
+                <td><input type="text" name="mat_lote" class="form-control input " /></td>
+                <td><input type="date" name="mat_validade" class="form-control input " /></td>
+            </tr>
+        </table>
+        <br />
+        <table class="table table-bordered border-secondary  table-sm">
+            <tr class="tabela texto-central ">
+                <td colspan="6">Código de Instrumento Utilizados</td>
+            </tr>
+            <tr class="tabela texto-central">
+                <td>Descrição</td>
+                <td>Código</td>
+                <td>Validade</td>
+            </tr>
+            <tr>
+                <td><input type="text" name="inst_desc1" class="form-control input " /></td>
+                <td><input type="text" name="inst_cod1" class="form-control input " /></td>
+                <td><input type="date" name="inst_data1" class="form-control input " /></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="inst_desc2" class="form-control input " /></td>
+                <td><input type="text" name="inst_cod2" class="form-control input " /></td>
+                <td><input type="date" name="inst_data2" class="form-control input " /></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="inst_desc3" class="form-control input " /></td>
+                <td><input type="text" name="inst_cod3" class="form-control input " /></td>
+                <td><input type="date" name="inst_data3" class="form-control input " /></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="inst_desc4" class="form-control input " /></td>
+                <td><input type="text" name="inst_cod4" class="form-control input " /></td>
+                <td><input type="date" name="inst_data4" class="form-control input " /></td>
+            </tr>
+        </table>
+        <br />
+        <table class="table table-bordered border-secondary  table-sm">
+            <tr class="tabela">
+                <td colspan="4">Equipamento e Dispositivos:</td>
+            </tr>
+            <tr>
+                <td>De:</td>
+                <td><input type="text" name="equi_de" class="form-control input " /></td>
+                <td>EE:</td>
+                <td><input type="text" name="equi_ee" class="form-control input " /></td>
+            </tr>
+        </table>
+        <br />
+        <table class="table table-bordered border-secondary  table-sm">
+            <tr class="tabela">
+                <td colspan="4">Observações</td>
+            </tr>
+            <tr>
+                <td><textarea type="text" name="obs" class="form-control input"></textarea></td>
+            </tr>
+        </table>
+        <br />
+        <table class="table table-bordered border-secondary  table-sm">
+            <tr class="tabela">
+                <td colspan="1">Executado Por:</td>
+                <td colspan="2">Auxiliado Por:</td>
+            </tr>
+            <tr>
+                <td><input type="text" name="executado_por" class="form-control input " /></td>
+                <td><input type="text" name="auxiliado_por" class="form-control input " /></td>
+            </tr>
+        </table>
+        <br />
+        <div class="d-grid gap-2 d-flex justify-content-center">
+            <button type="submit" value="SalvarDensidade" class="btn btn-success btn btn-primary btn-md">Salvar Coleta</button>
+        </div>
+    </form>
+    @section Scripts {
+        @if (TempData.ContainsKey("Mensagem"))
+        {
+            <script>
+
+                alert('@Html.Raw(TempData["Mensagem"])');
+            </script>
+        }
+    }
+</body>
+</html>
