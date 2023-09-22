@@ -39,50 +39,59 @@
     </style>
 </head>
 <body>
-    <form method="post">
+    <form method="post" asp-controller="Coleta" asp-action="SalvarMetais" asp-route-os="@ViewData["OS"]" asp-route-orcamento="@ViewData["orcamento"]">
         <table class="table table-bordered border-secondary  table-sm">
             <tr>
                 <td rowspan="3" class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                     <img src="https://www.labsystem-nuvem.com.br/imagens_arq/imagens/img/LabSystem.png" class="imagem" />
                 </td>
-                <td colspan="3" class="texto-central" style="background-color: #800000; color:white;">COLETA DE DADOS</td>
-                <td rowspan="2" class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="background-color: #800000; color:white;"> N° da OS :@ViewBag.OS</td>
+                <td colspan="7" class="texto-central" style="background-color: #800000; color:white;">COLETA DE DADOS</td>
+                <td rowspan="2" class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="background-color: #800000; color:white;"> N° da OS :</td>
             </tr>
             <tr class="tabela">
-                <td colspan="3" class="texto-central "> ENSAIO DE ARLA 32</td>
+                <td colspan="7" class="texto-central "> ENSAIO DE ARLA 32</td>
+                @*       <td> <input class="form-control input " style="height:10px; border:none;" name="os" readonly /></td> *@
             </tr>
             <tr>
-                <td style="background-color: #800000; color:white; text-align:center">Data Inicio:</td>
-                <td><input class="form-control input " /></td>
-                <td style="background-color: #800000; color:white; text-align:center">Data Término:</td>
-                <td><input class="form-control input " /></td>
+                <td style="background-color: #800000; color:white;" colspan="2">Data Inicio:</td>
+                <td colspan="1"><input class="form-control input " type="date" style="height:50px; border:none;" name="data_ini" /></td>
+                <td colspan="2" style="background-color: #800000; color:white;">Data Término:</td>
+                <td colspan="2"><input class="form-control input " type="date" style="height:50px; border:none;" name="data_term" /></td>
+                <td colspan="2"> <input class="form-control input " style="height:50px; border:none;" name="os" value="@ViewBag.OS" /></td>
             </tr>
             <tr class="texto-central">
-                <td colspan="5">
+                <td colspan="9">
                     <b>Ensaio a ser realizado:</b> Determinação da conc (AlCaCr CuFe K Mg NaNi Zn) pelo método ICP-OES - Anexo I - IT.123-Q
                 </td>
             </tr>
             <tr>
-                <td colspan="5">
-                    <b>Ensaio:</b> Determinação Direta.
+                <td colspan="3">
+                    Norma: ABNT NBR ISO 22241-2
+                </td>
+                <td colspan="6">
+                    <input class="form-control input " name="norma" />
                 </td>
             </tr>
             <tr>
-                <td colspan="5">
-                    <b>Norma:</b> ABNT NBR ISO 22241-2.
+                <td colspan="3"> Np:</td>
+                <td colspan="6">
+                    <input class="form-control input " name="np" />
                 </td>
             </tr>
             <tr>
-                <td colspan="5"> <b>Np:</b></td>
-            </tr>
-            <tr>
-                <td colspan="5"><b>Descrição:</b></td>
+                <td colspan="3">Descrição:</td>
+                <td colspan="6">
+                    <input class="form-control input " name="descricao" />
+                </td>
             </tr>
             <tr class="tabela texto-central">
-                <td colspan="6"> Conversão dos Resultados</td>
+                <td colspan="9"> Conversão dos Resultados</td>
             </tr>
         </table>
-        <br />
+        <Br />
+
+
+        <!-- para salvar na tabela de tratamento-->
         <table class="table table-bordered border-secondary  table-sm">
             <tr class="tabela texto-central">
                 <td>Elemento:</td>
@@ -99,16 +108,16 @@
             </tr>
             <tr>
                 <td class="texto-central">Branco:</td>
-                <td>0,0000</td>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
+                <td><input class="form-control input" name="branco_al" /></td>
+                <td><input class="form-control input" name="branco_ca"/></td>
+                <td><input class="form-control input" name="branco_cr"/></td>
+                <td><input class="form-control input" name="branco_cu"/></td>
+                <td><input class="form-control input" name="branco_fe"/></td>
+                <td><input class="form-control input" name="branco_k"/></td>
+                <td><input class="form-control input" name="branco_mg"/></td>
+                <td><input class="form-control input" name="branco_na"/></td>
+                <td><input class="form-control input" name="branco_ni"/></td>
+                <td><input class="form-control input" name="branco_zn"/></td>
             </tr>
         </table>
         <br />
@@ -117,85 +126,88 @@
                 <td rowspan="4">Resultados obtidos pelo Icp (mg/L)</td>
             </tr>
             <tr>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
+                <td><input class="form-control input" name="resul_ob_al1"/></td>
+                <td><input class="form-control input" name="resul_ob_ca1"/></td>
+                <td><input class="form-control input" name="resul_ob_cr1"/></td>
+                <td><input class="form-control input" name="resul_ob_cu1"/></td>
+                <td><input class="form-control input" name="resul_ob_fe1"/></td>
+                <td><input class="form-control input" name="resul_ob_k1"/></td>
+                <td><input class="form-control input" name="resul_ob_mg1"/></td>
+                <td><input class="form-control input" name="resul_ob_na1"/></td>
+                <td><input class="form-control input" name="resul_ob_ni1"/></td>
+                <td><input class="form-control input" name="resul_ob_zn1"/></td>
             </tr>
             <tr>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
+                <td><input class="form-control input" name="resul_ob_al2" /></td>
+                <td><input class="form-control input" name="resul_ob_ca2"/></td>
+                <td><input class="form-control input" name="resul_ob_cr2"/></td>
+                <td><input class="form-control input" name="resul_ob_cu2"/></td>
+                <td><input class="form-control input" name="resul_ob_fe2"/></td>
+                <td><input class="form-control input" name="resul_ob_k2"/></td>
+                <td><input class="form-control input" name="resul_ob_mg2"/></td>
+                <td><input class="form-control input" name="resul_ob_na2"/></td>
+                <td><input class="form-control input" name="resul_ob_ni2"/></td>
+                <td><input class="form-control input" name="resul_ob_zn2"/></td>
             </tr>
             <tr>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
-                <td><input class="form-control input" /></td>
+                <td><input class="form-control input" name="resul_ob_al3" /></td>
+                <td><input class="form-control input" name="resul_ob_ca3" /></td>
+                <td><input class="form-control input" name="resul_ob_cr3" /></td>
+                <td><input class="form-control input" name="resul_ob_cu3" /></td>
+                <td><input class="form-control input" name="resul_ob_fe3" /></td>
+                <td><input class="form-control input" name="resul_ob_k3" /></td>
+                <td><input class="form-control input" name="resul_ob_mg3" /></td>
+                <td><input class="form-control input" name="resul_ob_na3" /></td>
+                <td><input class="form-control input" name="resul_ob_ni3" /></td>
+                <td><input class="form-control input" name="resul_ob_zn3" /></td>
             </tr>
         </table>
         <br />
+
         <table class="table table-bordered border-secondary  table-sm">
             <tr class="tabela">
                 <td rowspan="4">Resultados Conevrtidos (mg/kg)</td>
             </tr>
             <tr>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
+                <td><input class="form-control input" name="resul_con_al1" readonly /></td>
+                <td><input class="form-control input" name="resul_con_ca1" readonly /></td>
+                <td><input class="form-control input" name="resul_con_cr1" readonly /></td>
+                <td><input class="form-control input" name="resul_con_cu1" readonly /></td>
+                <td><input class="form-control input" name="resul_con_fe1" readonly /></td>
+                <td><input class="form-control input" name="resul_con_k1" readonly /></td>
+                <td><input class="form-control input" name="resul_con_mg1" readonly /></td>
+                <td><input class="form-control input" name="resul_con_na1" readonly /></td>
+                <td><input class="form-control input" name="resul_con_ni1" readonly /></td>
+                <td><input class="form-control input" name="resul_con_zn1" readonly /></td>
             </tr>
             <tr>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
+                <td><input class="form-control input" name="resul_con_al2" readonly /></td>
+                <td><input class="form-control input" name="resul_con_ca2" readonly /></td>
+                <td><input class="form-control input" name="resul_con_cr2" readonly /></td>
+                <td><input class="form-control input" name="resul_con_cu2" readonly /></td>
+                <td><input class="form-control input" name="resul_con_fe2" readonly /></td>
+                <td><input class="form-control input" name="resul_con_k2" readonly /></td>
+                <td><input class="form-control input" name="resul_con_mg2" readonly /></td>
+                <td><input class="form-control input" name="resul_con_na2" readonly /></td>
+                <td><input class="form-control input" name="resul_con_ni2" readonly /></td>
+                <td><input class="form-control input" name="resul_con_zn2" readonly /></td>
             </tr>
             <tr>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
+                <td><input class="form-control input" name="resul_con_al3" readonly /></td>
+                <td><input class="form-control input" name="resul_con_ca3" readonly /></td>
+                <td><input class="form-control input" name="resul_con_cr3" readonly /></td>
+                <td><input class="form-control input" name="resul_con_cu3" readonly /></td>
+                <td><input class="form-control input" name="resul_con_fe3" readonly /></td>
+                <td><input class="form-control input" name="resul_con_k3" readonly /></td>
+                <td><input class="form-control input" name="resul_con_mg3" readonly /></td>
+                <td><input class="form-control input" name="resul_con_na3" readonly /></td>
+                <td><input class="form-control input" name="resul_con_ni3" readonly /></td>
+                <td><input class="form-control input" name="resul_con_zn3" readonly /></td>
             </tr>
         </table>
         <br />
+        <!-- FIM -->
+
         <table class="table table-bordered border-secondary  table-sm">
             <tr class="tabela texto-central ">
                 <td colspan="11">Exoressão Resultados (mg/kg)</td>
@@ -215,100 +227,106 @@
             </tr>
             <tr>
                 <td style="background-color: #800000; color:white; text-align:center"><b>LQ:</b></td>
-                <td>0,03</td>
-                <td>0,02</td>
-                <td>0,0009</td>
-                <td>0,01</td>
-                <td>0,02</td>
-                <td>0,01</td>
-                <td>0,008</td>
-                <td>0,03</td>
-                <td>0,008</td>
-                <td>0,009</td>
+                <td> <input class="form-control input" value="0,03" name="ex_lq_al" readonly /> </td>
+                <td><input class="form-control input" value="0,02" name="ex_lq_ca" readonly /></td>
+                <td> <input class="form-control input" value="0,0009" name="ex_lq_cr" readonly /></td>
+                <td> <input class="form-control input" value="0,01" name="ex_lq_cu" readonly /></td>
+                <td> <input class="form-control input" value="0,02" name="ex_lq_fe" readonly /></td>
+                <td> <input class="form-control input" value="0,01" name="ex_lq_k" readonly /> </td>
+                <td> <input class="form-control input" value="0,008" name="ex_lq_mg" readonly /></td>
+                <td> <input class="form-control input" value="0,03" name="ex_lq_na" readonly /> </td>
+                <td> <input class="form-control input" value="0,008" name="ex_lq_ni" readonly /></td>
+                <td> <input class="form-control input" value="0,009" name="ex_lq_zn" readonly /></td>
             </tr>
             <tr>
                 <td style="background-color: #800000; color:white; text-align:center"><b>Limite:</b></td>
-                <td>0,5</td>
-                <td>0,5</td>
-                <td>0,2</td>
-                <td>0,2</td>
-                <td>0,5</td>
-                <td>0,5</td>
-                <td>0,5</td>
-                <td>0,5</td>
-                <td>0,2</td>
-                <td>0,2</td>
+                <td> <input class="form-control input" value="0,5" name="ex_lim_al" readonly /> </td>
+                <td><input class="form-control input" value="0,5" name="ex_lim_ca" readonly /></td>
+                <td> <input class="form-control input" value="0,2" name="ex_lim_cr" readonly /></td>
+                <td> <input class="form-control input" value="0,2" name="ex_lim_cu" readonly /></td>
+                <td> <input class="form-control input" value="0,5" name="ex_lim_fe" readonly /></td>
+                <td> <input class="form-control input" value="0,5" name="ex_lim_k" readonly /> </td>
+                <td> <input class="form-control input" value="0,5" name="ex_lim_mg" readonly /></td>
+                <td> <input class="form-control input" value="0,5" name="ex_lim_na" readonly /> </td>
+                <td> <input class="form-control input" value="0,2" name="ex_lim_ni" readonly /></td>
+                <td> <input class="form-control input" value="0,2" name="ex_lim_zn" readonly /></td>
             </tr>
             <tr>
                 <td rowspan="3" style="background-color: #800000; color:white; text-align:center"><b>Quantificação:</b></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
+                <td> <input class="form-control input"  name="ex_quant_al1" readonly /> </td>
+                <td><input class="form-control input"  name="ex_quant_ca1" readonly /></td>
+                <td> <input class="form-control input" name="ex_quant_cr1" readonly /></td>
+                <td> <input class="form-control input"  name="ex_quant_cu1" readonly /></td>
+                <td> <input class="form-control input"  name="ex_quant_fe1" readonly /></td>
+                <td> <input class="form-control input"  name="ex_quant_k1" readonly /> </td>
+                <td> <input class="form-control input"  name="ex_quant_mg1" readonly /></td>
+                <td> <input class="form-control input"  name="ex_quant_na1" readonly /> </td>
+                <td> <input class="form-control input"  name="ex_quant_ni1" readonly /></td>
+                <td> <input class="form-control input" name="ex_quant_zn1" readonly /></td>
             </tr>
             <tr>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
+                <td> <input class="form-control input" name="ex_quant_al2" readonly /> </td>
+                <td><input class="form-control input" name="ex_quant_ca2" readonly /></td>
+                <td> <input class="form-control input" name="ex_quant_cr2" readonly /></td>
+                <td> <input class="form-control input" name="ex_quant_cu2" readonly /></td>
+                <td> <input class="form-control input" name="ex_quant_fe2" readonly /></td>
+                <td> <input class="form-control input" name="ex_quant_k2" readonly /> </td>
+                <td> <input class="form-control input" name="ex_quant_mg2" readonly /></td>
+                <td> <input class="form-control input" name="ex_quant_na2" readonly /> </td>
+                <td> <input class="form-control input" name="ex_quant_ni2" readonly /></td>
+                <td> <input class="form-control input" name="ex_quant_zn2" readonly /></td>
             </tr>
             <tr>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
+                <td> <input class="form-control input" name="ex_quant_al3" readonly /> </td>
+                <td><input class="form-control input" name="ex_quant_ca3" readonly /></td>
+                <td> <input class="form-control input" name="ex_quant_cr3" readonly /></td>
+                <td> <input class="form-control input" name="ex_quant_cu3" readonly /></td>
+                <td> <input class="form-control input" name="ex_quant_fe3" readonly /></td>
+                <td> <input class="form-control input" name="ex_quant_k3" readonly /> </td>
+                <td> <input class="form-control input" name="ex_quant_mg3" readonly /></td>
+                <td> <input class="form-control input" name="ex_quant_na3" readonly /> </td>
+                <td> <input class="form-control input" name="ex_quant_ni3" readonly /></td>
+                <td> <input class="form-control input" name="ex_quant_zn3" readonly /></td>
             </tr>
             <tr>
                 <td style="background-color: #800000; color:white; text-align:center"><b>Media:</b></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
+                <td> <input class="form-control input" name="media_al" readonly /> </td>
+                <td><input class="form-control input" name="media_ca" readonly /></td>
+                <td> <input class="form-control input" name="media_cr" readonly /></td>
+                <td> <input class="form-control input" name="media_cu" readonly /></td>
+                <td> <input class="form-control input" name="media_fe" readonly /></td>
+                <td> <input class="form-control input" name="media_k" readonly /> </td>
+                <td> <input class="form-control input" name="media_mg" readonly /></td>
+                <td> <input class="form-control input" name="media_na" readonly /> </td>
+                <td> <input class="form-control input" name="media_ni" readonly /></td>
+                <td> <input class="form-control input" name="media_zn" readonly /></td>
             </tr>
         </table>
         <br />
+
+
+
         <table class="table table-bordered border-secondary  table-sm">
             <tr>
                 <td style="background-color: #800000; color:white; text-align:center">Resultado Final (mg/kg)</td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
-                <td><input class="form-control input" readonly /></td>
+                <td> <input class="form-control input" name="result_al" readonly /> </td>
+                <td><input class="form-control input" name="result_ca" readonly /></td>
+                <td> <input class="form-control input" name="result_cr" readonly /></td>
+                <td> <input class="form-control input" name="result_cu" readonly /></td>
+                <td> <input class="form-control input" name="result_fe" readonly /></td>
+                <td> <input class="form-control input" name="result_k" readonly /> </td>
+                <td> <input class="form-control input" name="result_mg" readonly /></td>
+                <td> <input class="form-control input" name="result_na" readonly /> </td>
+                <td> <input class="form-control input" name="result_ni" readonly /></td>
+                <td> <input class="form-control input" name="result_zn" readonly /></td>
             </tr>
             <tr>
                 <td colspan="11"> Legenda: LQ - Limite de Quantificação.</td>
             </tr>
         </table>
+
+
+
         <br />
         <table class="table table-bordered border-secondary  table-sm">
             <tr class="tabela texto-central">
@@ -320,57 +338,75 @@
                 <td>Validade</td>
             </tr>
             <tr>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
+                <td><input class="form-control input " name="mat_prima1" /></td>
+                <td><input class="form-control input " name="mat_lote1"/></td>
+                <td><input class="form-control input " name="mat_val1"/></td>
             </tr>
             <tr>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
+                <td><input class="form-control input " name="mat_prima2" /></td>
+                <td><input class="form-control input " name="mat_lote2" /></td>
+                <td><input class="form-control input " name="mat_val2" /></td>
             </tr>
             <tr>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
+                <td><input class="form-control input " name="mat_prima3" /></td>
+                <td><input class="form-control input " name="mat_lote3" /></td>
+                <td><input class="form-control input " name="mat_val3" /></td>
             </tr>
             <tr>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
+                <td><input class="form-control input " name="mat_prima4" /></td>
+                <td><input class="form-control input " name="mat_lote4" /></td>
+                <td><input class="form-control input " name="mat_val4" /></td>
             </tr>
             <tr>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
+                <td><input class="form-control input " name="mat_prima5" /></td>
+                <td><input class="form-control input " name="mat_lote5" /></td>
+                <td><input class="form-control input " name="mat_val5" /></td>
             </tr>
             <tr>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
+                <td><input class="form-control input " name="mat_prima6" /></td>
+                <td><input class="form-control input " name="mat_lote6" /></td>
+                <td><input class="form-control input " name="mat_val6" /></td>
             </tr>
             <tr>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
+                <td><input class="form-control input " name="mat_prima7" /></td>
+                <td><input class="form-control input " name="mat_lote7" /></td>
+                <td><input class="form-control input " name="mat_val7" /></td>
             </tr>
             <tr>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
+                <td><input class="form-control input " name="mat_prima8" /></td>
+                <td><input class="form-control input " name="mat_lote8" /></td>
+                <td><input class="form-control input " name="mat_val8" /></td>
             </tr>
             <tr>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
+                <td><input class="form-control input " name="mat_prima9" /></td>
+                <td><input class="form-control input " name="mat_lote9" /></td>
+                <td><input class="form-control input " name="mat_val9" /></td>
             </tr>
             <tr>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
+                <td><input class="form-control input " name="mat_prima10" /></td>
+                <td><input class="form-control input " name="mat_lote10" /></td>
+                <td><input class="form-control input " name="mat_val10" /></td>
+            </tr>
+            <tr>
+                <td><input class="form-control input " name="mat_prima11" /></td>
+                <td><input class="form-control input " name="mat_lote11" /></td>
+                <td><input class="form-control input " name="mat_val11" /></td>
+            </tr>
+            <tr>
+                <td><input class="form-control input " name="mat_prima12" /></td>
+                <td><input class="form-control input " name="mat_lote12" /></td>
+                <td><input class="form-control input " name="mat_val12" /></td>
+            </tr>
+            <tr>
+                <td><input class="form-control input " name="mat_prima13" /></td>
+                <td><input class="form-control input " name="mat_lote13" /></td>
+                <td><input class="form-control input " name="mat_val13" /></td>
             </tr>
         </table>
         <br />
+
+
+
         <table class="table table-bordered border-secondary  table-sm">
             <tr class="tabela texto-central">
                 <td colspan="3">Código de insturmentos utilizados </td>
@@ -381,68 +417,91 @@
                 <td>Validade</td>
             </tr>
             <tr>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
+            <tr>
+                <td><input class="form-control input " name="inst_desc1" /></td>
+                <td><input class="form-control input " name="inst_cod1" /></td>
+                <td><input class="form-control input " name="inst_val1" /></td>
             </tr>
             <tr>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
+                <td><input class="form-control input " name="inst_desc2" /></td>
+                <td><input class="form-control input " name="inst_cod2" /></td>
+                <td><input class="form-control input " name="inst_val2" /></td>
             </tr>
             <tr>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
+                <td><input class="form-control input " name="inst_desc3" /></td>
+                <td><input class="form-control input " name="inst_cod3" /></td>
+                <td><input class="form-control input " name="inst_val3" /></td>
             </tr>
             <tr>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
+                <td><input class="form-control input " name="inst_desc4" /></td>
+                <td><input class="form-control input " name="inst_cod4" /></td>
+                <td><input class="form-control input " name="inst_val4" /></td>
             </tr>
             <tr>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
+                <td><input class="form-control input " name="inst_desc5" /></td>
+                <td><input class="form-control input " name="inst_cod5" /></td>
+                <td><input class="form-control input " name="inst_val5" /></td>
             </tr>
             <tr>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
+                <td><input class="form-control input " name="inst_desc6" /></td>
+                <td><input class="form-control input " name="inst_cod6" /></td>
+                <td><input class="form-control input " name="inst_val6" /></td>
             </tr>
             <tr>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
+                <td><input class="form-control input " name="inst_desc7" /></td>
+                <td><input class="form-control input " name="inst_cod7" /></td>
+                <td><input class="form-control input " name="inst_val7" /></td>
             </tr>
             <tr>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
+                <td><input class="form-control input " name="inst_desc8" /></td>
+                <td><input class="form-control input " name="inst_cod8" /></td>
+                <td><input class="form-control input " name="inst_val8" /></td>
             </tr>
             <tr>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
+                <td><input class="form-control input " name="inst_desc9" /></td>
+                <td><input class="form-control input " name="inst_cod9" /></td>
+                <td><input class="form-control input " name="inst_val9" /></td>
             </tr>
             <tr>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
+                <td><input class="form-control input " name="inst_desc10" /></td>
+                <td><input class="form-control input " name="inst_cod10" /></td>
+                <td><input class="form-control input " name="inst_val10" /></td>
+            </tr>
+            <tr>
+                <td><input class="form-control input " name="inst_desc11" /></td>
+                <td><input class="form-control input " name="inst_cod11" /></td>
+                <td><input class="form-control input " name="inst_val11" /></td>
+            </tr>
+            <tr>
+                <td><input class="form-control input " name="inst_desc12" /></td>
+                <td><input class="form-control input " name="inst_cod12" /></td>
+                <td><input class="form-control input " name="inst_val12" /></td>
+            </tr>
+            <tr>
+                <td><input class="form-control input " name="inst_desc13" /></td>
+                <td><input class="form-control input " name="inst_cod13" /></td>
+                <td><input class="form-control input " name="inst_val13" /></td>
+            </tr>
+            <tr>
+                <td><input class="form-control input " name="inst_desc14" /></td>
+                <td><input class="form-control input " name="inst_cod14" /></td>
+                <td><input class="form-control input " name="inst_val14" /></td>
             </tr>
         </table>
         <br />
+
+
         <table class="table table-bordered border-secondary  table-sm">
             <tr class="tabela  texto-central">
                 <td colspan="4">Equipamento e Dispositivos:</td>
             </tr>
             <tr>
                 <td class="texto-central">DE:</td>
-                <td><input class="form-control input " /></td>
+                <td><input class="form-control input " name="equi_de"/></td>
             </tr>
             <tr>
                 <td class="texto-central">EE:</td>
-                <td><input class="form-control input " /></td>
+                <td><input class="form-control input " name="equi_ee"/></td>
             </tr>
         </table>
         <br />
@@ -451,7 +510,7 @@
                 <td colspan="4">Observações</td>
             </tr>
             <tr>
-                <td><textarea class="form-control input"></textarea></td>
+                <td><textarea class="form-control input" name="observacoes"></textarea></td>
             </tr>
         </table>
         <br />
@@ -461,8 +520,8 @@
                 <td colspan="2">Auxiliado Por:</td>
             </tr>
             <tr>
-                <td><input class="form-control input " /></td>
-                <td><input class="form-control input " /></td>
+                <td><input class="form-control input " name="executado"/></td>
+                <td><input class="form-control input " name="auxiliado"/></td>
             </tr>
         </table>
         <br />

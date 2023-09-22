@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.SqlServer.Server;
 using NuGet.Versioning;
+using System.Data.Entity;
 using System.Security.Cryptography.Xml;
 using static Arla32.Models.ColetaModel;
 
@@ -219,6 +220,21 @@ namespace Arla32.Controllers
                 string executado_por = salvarDados.executado_por;
                 string auxiliado_por = salvarDados.auxiliado_por;
 
+                // conta do Resultado Final - Tabela Procedimento Ensaio preliminar
+
+                double pre_vol = double.Parse(pre_vol_titulado);
+                double pre_massa = double.Parse(pre_massa_amostra);
+                var pre_resultado_final = ((pre_vol * 0.017) / pre_massa);
+                double pre_resultado_arredondado = Math.Round(pre_resultado_final, 2);
+
+                // conta do Resultado Final - Tabela Procedimento Ensaio determinação
+
+                double det_massa = double.Parse(det_massa_amostra2);
+                double de_vol = double.Parse(det_vol_titulado2);
+                var det_res_final = ((de_vol * 0.017) / det_massa);
+                double det_res_arredondado = Math.Round(det_res_final, 2);
+
+
                 // salvando no banco de dados.
                 var guardarDadosTabela = new ArlaAlcalinidade
                 {
@@ -226,12 +242,14 @@ namespace Arla32.Controllers
                     orcamento = orcamento,
                     data_ini = data_ini,
                     data_term = data_term,
-                    pre_massa_amostra = pre_massa_amostra,
-                    pre_vol_titulado = pre_vol_titulado,
-                    det_massa_amostra1 = det_massa_amostra1,
-                    det_massa_amostra2 = det_massa_amostra2,
-                    det_vol_titulado1 = det_vol_titulado1,
+                    pre_massa_amostra = pre_massa_amostra+" g",
+                    pre_vol_titulado = pre_vol_titulado+" mL",
+                    pre_resultado_final = pre_resultado_arredondado.ToString()+" %",
+                    det_massa_amostra1 = det_massa_amostra1+" g",
+                    det_massa_amostra2 = det_massa_amostra2+" g",
+                    det_vol_titulado1 = det_vol_titulado1 + " mL",
                     det_vol_titulado2 = det_vol_titulado2,
+                    det_res_final = det_res_arredondado.ToString("")+" %",
                     mat_prima = mat_prima,
                     mat_lote = mat_lote,
                     mat_validade = mat_validade,
@@ -266,8 +284,8 @@ namespace Arla32.Controllers
                     auxiliado_por = auxiliado_por,
                 };
 
-                //_qcontext.Add(guardarDadosTabela);
-                //await _qcontext.SaveChangesAsync();
+                _qcontext.Add(guardarDadosTabela);
+                await _qcontext.SaveChangesAsync();
                 TempData["Mensagem"] = "salvo com Sucesso.";
                 return RedirectToAction(nameof(EnsaioAlcalinidade), new { OS, orcamento });
             }
@@ -342,13 +360,23 @@ namespace Arla32.Controllers
                     string auxiliado_por = salvarDados.auxiliado_por;
                     string executado_por = salvarDados.executado_por;
 
-                    if (string.IsNullOrEmpty(data_ini.ToString()) || string.IsNullOrEmpty(data_term.ToString()) || string.IsNullOrEmpty(codigo_curva) || fator_calibracao == 0 || fator_dia == 0 || amostra1 == 0 || amostra2 == 0 || absorbancia_1 == 0 || absorbancia_2 == 0 || absorbancia_3 == 0 || string.IsNullOrEmpty(mat_prima_1) || string.IsNullOrEmpty(mat_lote_1) || string.IsNullOrEmpty(mat_validade_1.ToString()) || string.IsNullOrEmpty(mat_prima_2) || string.IsNullOrEmpty(mat_lote_2) || string.IsNullOrEmpty(mat_validade_2.ToString()) || string.IsNullOrEmpty(mat_prima_3) || string.IsNullOrEmpty(mat_prima_3) || string.IsNullOrEmpty(mat_lote_3) || string.IsNullOrEmpty(mat_validade_3.ToString()) ||
-                        string.IsNullOrEmpty(mat_prima_4) || string.IsNullOrEmpty(mat_lote_4) || string.IsNullOrEmpty(mat_validade_4.ToString()) || string.IsNullOrEmpty(mat_prima_5) || string.IsNullOrEmpty(mat_lote_5) || string.IsNullOrEmpty(mat_validade_5.ToString()) || string.IsNullOrEmpty(inst_desc1) || string.IsNullOrEmpty(inst_codigo1) || string.IsNullOrEmpty(inst_data1.ToString()) || string.IsNullOrEmpty(inst_desc1_1) || string.IsNullOrEmpty(inst_codigo1_1) || string.IsNullOrEmpty(inst_data1_1.ToString()) || string.IsNullOrEmpty(insta_desc2) || string.IsNullOrEmpty(inst_codigo2) || string.IsNullOrEmpty(inst_data2.ToString()) || string.IsNullOrEmpty(inst_desc2_2) || string.IsNullOrEmpty(inst_codigo2_2) || string.IsNullOrEmpty(inst_data2_2.ToString()) ||
-                        string.IsNullOrEmpty(inst_desc3) || string.IsNullOrEmpty(inst_codigo3) || string.IsNullOrEmpty(inst_data3.ToString()) || string.IsNullOrEmpty(inst_desc3_3) || string.IsNullOrEmpty(inst_codigo3_3) || string.IsNullOrEmpty(inst_data3_3.ToString()) || string.IsNullOrEmpty(inst_desc4) || string.IsNullOrEmpty(inst_codigo4) || string.IsNullOrEmpty(inst_data4.ToString()) || string.IsNullOrEmpty(inst_desc4_4) || string.IsNullOrEmpty(inst_codigo4_4) || string.IsNullOrEmpty(inst_data4_4.ToString()))
-                    {
-                        TempData["Mensagem"] = "Preencha Todos Os Campos.";
-                        return RedirectToAction(nameof(EnsaioBiureto), new { OS, orcamento });
-                    }
+                    //if (string.IsNullOrEmpty(data_ini.ToString()) || string.IsNullOrEmpty(data_term.ToString()) || string.IsNullOrEmpty(codigo_curva) || fator_calibracao == 0 || fator_dia == 0 || amostra1 == 0 || amostra2 == 0 || absorbancia_1 == 0 || absorbancia_2 == 0 || absorbancia_3 == 0 || string.IsNullOrEmpty(mat_prima_1) || string.IsNullOrEmpty(mat_lote_1) || string.IsNullOrEmpty(mat_validade_1.ToString()) || string.IsNullOrEmpty(mat_prima_2) || string.IsNullOrEmpty(mat_lote_2) || string.IsNullOrEmpty(mat_validade_2.ToString()) || string.IsNullOrEmpty(mat_prima_3) || string.IsNullOrEmpty(mat_prima_3) || string.IsNullOrEmpty(mat_lote_3) || string.IsNullOrEmpty(mat_validade_3.ToString()) ||
+                    //    string.IsNullOrEmpty(mat_prima_4) || string.IsNullOrEmpty(mat_lote_4) || string.IsNullOrEmpty(mat_validade_4.ToString()) || string.IsNullOrEmpty(mat_prima_5) || string.IsNullOrEmpty(mat_lote_5) || string.IsNullOrEmpty(mat_validade_5.ToString()) || string.IsNullOrEmpty(inst_desc1) || string.IsNullOrEmpty(inst_codigo1) || string.IsNullOrEmpty(inst_data1.ToString()) || string.IsNullOrEmpty(inst_desc1_1) || string.IsNullOrEmpty(inst_codigo1_1) || string.IsNullOrEmpty(inst_data1_1.ToString()) || string.IsNullOrEmpty(insta_desc2) || string.IsNullOrEmpty(inst_codigo2) || string.IsNullOrEmpty(inst_data2.ToString()) || string.IsNullOrEmpty(inst_desc2_2) || string.IsNullOrEmpty(inst_codigo2_2) || string.IsNullOrEmpty(inst_data2_2.ToString()) ||
+                    //    string.IsNullOrEmpty(inst_desc3) || string.IsNullOrEmpty(inst_codigo3) || string.IsNullOrEmpty(inst_data3.ToString()) || string.IsNullOrEmpty(inst_desc3_3) || string.IsNullOrEmpty(inst_codigo3_3) || string.IsNullOrEmpty(inst_data3_3.ToString()) || string.IsNullOrEmpty(inst_desc4) || string.IsNullOrEmpty(inst_codigo4) || string.IsNullOrEmpty(inst_data4.ToString()) || string.IsNullOrEmpty(inst_desc4_4) || string.IsNullOrEmpty(inst_codigo4_4) || string.IsNullOrEmpty(inst_data4_4.ToString()))
+                    //{
+                    //    TempData["Mensagem"] = "Preencha Todos Os Campos.";
+                    //    return RedirectToAction(nameof(EnsaioBiureto), new { OS, orcamento });
+                    //}
+
+              
+
+                    var result_ind_1 = ((((absorbancia_2 - absorbancia_1) * fator_dia * 250) / (amostra1 * 10 * 1000)) * 100);
+                    var result_ind_2 = ((((absorbancia_3 - absorbancia_1) * fator_dia * 250) / (amostra2 * 10 * 1000)) * 100);
+                    var result_media = ((result_ind_1+result_ind_2)/2);
+
+                    double result_ind_1_arredondado = Math.Round(result_ind_1, 2);
+                    double result_ind_2_arredondado = Math.Round(result_ind_2, 2);
+                    double result_media_2_arredondado = Math.Round(result_media, 2);
 
                     //passando os valores salvos nas variaveis para a tabela..
                     var salvarDadosTabela = new ColetaModel.ArlaBiureto
@@ -365,6 +393,9 @@ namespace Arla32.Controllers
                         absorbancia_1 = absorbancia_1,
                         absorbancia_2 = absorbancia_2,
                         absorbancia_3 = absorbancia_3,
+                        result_ind_1 = result_ind_1_arredondado.ToString()+" %",
+                        result_ind_2 = result_ind_2_arredondado.ToString() + " %",
+                        result_media = result_media_2_arredondado.ToString() + " %",
                         mat_prima_1 = mat_prima_1,
                         mat_lote_1 = mat_lote_1,
                         mat_validade_1 = mat_validade_1,
@@ -453,7 +484,6 @@ namespace Arla32.Controllers
                 float absorbancia_branco = aldeidos.absorbancia_branco;
                 float massa_amostra = aldeidos.massa_amostra;
                 float absorbancia_amostra = aldeidos.absorbancia_amostra;
-                string maximo_permitido = aldeidos.maximo_permitido;
                 float carta_absorbancia = aldeidos.carta_absorbancia;
                 float carta_concentracao = aldeidos.carta_concentracao;
                 string mat_prima1 = aldeidos.mat_prima1;
@@ -541,6 +571,12 @@ namespace Arla32.Controllers
                 else
                 {
 
+                    //CONTA MÁXIMO PERMITIDO
+                    double calibracao = double.Parse(fator_calibracao);
+                    var conta_max = (((absorbancia_amostra - absorbancia_branco) * calibracao) / massa_amostra);
+                    double conta_max_arre = Math.Round(conta_max, 1);
+
+
                     var salvardados = new ColetaModel.ArlaAldeidos
                     {
                         os = OS,
@@ -558,7 +594,7 @@ namespace Arla32.Controllers
                         absorbancia_branco = absorbancia_branco,
                         massa_amostra = massa_amostra,
                         absorbancia_amostra = absorbancia_amostra,
-                        maximo_permitido = maximo_permitido,
+                        maximo_permitido = conta_max_arre.ToString()+" mg/kg",
                         carta_absorbancia = carta_absorbancia,
                         carta_concentracao = carta_concentracao,
                         mat_prima1 = mat_prima1,
@@ -611,7 +647,7 @@ namespace Arla32.Controllers
             }
         }
 
-        public async Task<IActionResult> SalvarInsoluveis (string OS, string orcamento, [Bind("data_ini, data_term, norma, np, descricao, preparacao_placa1,preparacao_filtro1,preparacao_massa1," +
+        public async Task<IActionResult> SalvarInsoluveis(string OS, string orcamento, [Bind("data_ini, data_term, norma, np, descricao, preparacao_placa1,preparacao_filtro1,preparacao_massa1," +
             "preparacao_placa2,preparacao_filtro2, preparacao_massa2, pesagem_amostra1, pesagem_placa1,pesagem_filtro1, pesagem_resultado1," +
             "pesagem_amostra2,pesagem_placa2,pesagem_filtro2, pesagem_resultado2, pesagem_media,pesagem_resultfinal," +
             "mat_prima1,mat_lote1,mat_validade1,mat_prima2,mat_lote2,mat_validade2,inst_desc1,inst_cod1,inst_validade1," +
@@ -626,13 +662,12 @@ namespace Arla32.Controllers
                 //pegando dados do html
                 DateTime data_ini = insoluveis.data_ini; DateTime data_term = insoluveis.data_term; string norma = insoluveis.norma;
                 string np = insoluveis.np; string descricao = insoluveis.descricao; float preparacao_placa1 = insoluveis.preparacao_placa1;
-                float preparacao_filtro1 = insoluveis.preparacao_filtro1; float preparacao_massa1 = insoluveis.preparacao_massa1;
+                float preparacao_filtro1 = insoluveis.preparacao_filtro1; 
                 float preparacao_placa2 = insoluveis.preparacao_placa2; float preparacao_filtro2 = insoluveis.preparacao_filtro2;
-                float preparacao_massa2 = insoluveis.preparacao_massa2; float pesagem_amostra1 = insoluveis.pesagem_amostra1;
-                float pesagem_placa1 = insoluveis.pesagem_placa1; float pesagem_filtro1 = insoluveis.pesagem_filtro1;
+                float pesagem_amostra1 = insoluveis.pesagem_amostra1;
+                float pesagem_placa1 = insoluveis.pesagem_placa1; 
                 float pesagem_resultado1 = insoluveis.pesagem_resultado1; float pesagem_amostra2 = insoluveis.pesagem_amostra2;
-                float pesagem_placa2 = insoluveis.pesagem_placa2; float pesagem_filtro2 = insoluveis.pesagem_filtro2; float pesagem_resultado2 = insoluveis.pesagem_resultado2;
-                float pesagem_media = insoluveis.pesagem_media; float pesagem_resultfinal = insoluveis.pesagem_resultfinal;
+                float pesagem_placa2 = insoluveis.pesagem_placa2; float pesagem_resultado2 = insoluveis.pesagem_resultado2;
                 string mat_prima1 = insoluveis.mat_prima1; string mat_lote1 = insoluveis.mat_lote1; string mat_validade1 = insoluveis.mat_validade1;
                 string mat_prima2 = insoluveis.mat_prima2; string mat_lote2 = insoluveis.mat_lote2; string mat_validade2 = insoluveis.mat_validade2;
                 string inst_desc1 = insoluveis.inst_desc1; string inst_cod1 = insoluveis.inst_cod1; string inst_validade1 = insoluveis.inst_validade1;
@@ -648,73 +683,103 @@ namespace Arla32.Controllers
                 string equi_ee = insoluveis.equi_ee; string equi_de = insoluveis.equi_de; string observacoes = insoluveis.observacoes; string executado = insoluveis.executado;
                 string auxiliado = insoluveis.auxiliado;
 
+
+                //CONTAS
+                // Tabela preparação do filtro, conta do massa do filtro seco:
+
+                var preparacao_massa1 = (preparacao_placa1 - preparacao_filtro1) * -1 ; // (multiplicamos por -1 pq o resultado das contas estava vindo como negativo
+                var preparacao_massa2 = (preparacao_placa2 - preparacao_filtro2) * -1;
+
+
+                // Tabela procedimento de pesagem, conta do filtro seco:
+                var pesagem_filtro1 = pesagem_placa1 - preparacao_placa1;
+                var pesagem_filtro2 = pesagem_placa2 - preparacao_placa2;
+
+                // Tabela procedimento de pesagem, conta do resultado individual:
+                pesagem_resultado1 = (((pesagem_filtro1 - preparacao_massa1) / pesagem_amostra1)) * 1000;
+                pesagem_resultado2 = (((pesagem_filtro2 - preparacao_massa2) / pesagem_amostra2)) * 1000;
+
+                // Tabela procedimento de pesagem, conta do média %:
+                float valorAbsoluto = Math.Abs(pesagem_resultado1 - pesagem_resultado2);
+                float maiorValor = Math.Max(pesagem_resultado1, pesagem_resultado2);
+                float resultadoPercentual = (float)Math.Round((valorAbsoluto * 100 / maiorValor), 0);
+
+                float pesagem_media = resultadoPercentual;  // Atribui o resultado ao float
+                //resultado final
+                float media = (pesagem_resultado1 + pesagem_resultado2) / 2;  // Calcula a média
+
+                // Tabela procedimento de pesagem, conta do resultado final:
+                float pesagem_resultfinal = media <= 10 ? (float)Math.Round(media, 1) : (float)Math.Round(media);
+
+
+
                 var salvardados = new ColetaModel.ArlaInsoluveis
                 {
-                os = OS,
-                orcamento = orcamento,
-                data_ini = data_ini,
-                data_term = data_term,
-                norma = norma,
-                np = np,
-                descricao = descricao,
-                preparacao_placa1 = preparacao_placa1,
-                preparacao_filtro1 = preparacao_filtro1,
-                preparacao_massa1 = preparacao_massa1,
-                preparacao_placa2 = preparacao_placa2,
-                preparacao_filtro2 = preparacao_filtro2,
-                preparacao_massa2 = preparacao_massa2,
-                pesagem_amostra1 = pesagem_amostra1,
-                pesagem_placa1 = pesagem_placa1,
-                pesagem_filtro1 = pesagem_filtro1,
-                pesagem_resultado1 = pesagem_resultado1,
-                pesagem_amostra2 = pesagem_amostra2,
-                pesagem_placa2 = pesagem_placa2,
-                pesagem_filtro2 = pesagem_filtro2,
-                pesagem_resultado2 = pesagem_resultado2,
-                pesagem_media = pesagem_media,
-                pesagem_resultfinal = pesagem_resultfinal,
-                mat_prima1 = mat_prima1,
-                mat_lote1 = mat_lote1,
-                mat_validade1 = mat_validade1,
-                mat_prima2 = mat_prima2,
-                mat_lote2 = mat_lote2,
-                mat_validade2 = mat_validade2,
-                inst_desc1 = inst_desc1,
-                inst_cod1 = inst_cod1,
-                inst_validade1 = inst_validade1,
-                inst_desc2 = inst_desc2,
-                inst_cod2 = inst_cod2,
-                inst_validade2 = inst_validade2,
-                inst_desc3 = inst_desc3,
-                inst_cod3 = inst_cod3,
-                inst_validade3 = inst_validade3,
-                inst_desc4 = inst_desc4,
-                inst_cod4  = inst_cod4,
-                inst_validade4 = inst_validade4,
-                inst_desc5 = inst_desc5,
-                inst_cod5 = inst_cod5,
-                inst_validade5 = inst_validade5,
-                inst_desc1_1 = inst_desc1_1,
-                inst_cod1_1 = inst_cod1_1,
-                inst_validade1_1 = inst_validade1_1,
-                inst_desc2_2 = inst_desc2_2,
-                inst_cod2_2 = inst_cod2_2,
-                inst_validade2_2 = inst_validade2_2,
-                inst_desc3_3 = inst_desc3_3,
-                inst_cod3_3 = inst_cod3_3,
-                inst_validade3_3 = inst_validade3_3,
-                inst_desc4_4 = inst_desc4_4,
-                inst_cod4_4 = inst_cod4_4,
-                inst_validade4_4 = inst_validade4_4,
-                inst_desc5_5 = inst_desc5_5,
-                inst_cod5_5 = inst_cod5_5,
-                inst_validade5_5 = inst_validade5_5,
-                equi_ee = equi_ee,
-                equi_de = equi_de,
-                observacoes = observacoes,
-                executado = executado,
-                auxiliado = auxiliado,
-          };
+                    os = OS,
+                    orcamento = orcamento,
+                    data_ini = data_ini,
+                    data_term = data_term,
+                    norma = norma,
+                    np = np,
+                    descricao = descricao,
+                    preparacao_placa1 = preparacao_placa1,
+                    preparacao_filtro1 = preparacao_filtro1,
+                    preparacao_massa1 = preparacao_massa1,
+                    preparacao_placa2 = preparacao_placa2,
+                    preparacao_filtro2 = preparacao_filtro2,
+                    preparacao_massa2 = preparacao_massa2,
+                    pesagem_amostra1 = pesagem_amostra1,
+                    pesagem_placa1 = pesagem_placa1,
+                    pesagem_filtro1 = pesagem_filtro1,
+                    pesagem_resultado1 = pesagem_resultado1,
+                    pesagem_amostra2 = pesagem_amostra2,
+                    pesagem_placa2 = pesagem_placa2,
+                    pesagem_filtro2 = pesagem_filtro2,
+                    pesagem_resultado2 = pesagem_resultado2,
+                    pesagem_media = pesagem_media.ToString()+" %",
+                    pesagem_resultfinal = pesagem_resultfinal.ToString()+" mg/kg",
+                    mat_prima1 = mat_prima1,
+                    mat_lote1 = mat_lote1,
+                    mat_validade1 = mat_validade1,
+                    mat_prima2 = mat_prima2,
+                    mat_lote2 = mat_lote2,
+                    mat_validade2 = mat_validade2,
+                    inst_desc1 = inst_desc1,
+                    inst_cod1 = inst_cod1,
+                    inst_validade1 = inst_validade1,
+                    inst_desc2 = inst_desc2,
+                    inst_cod2 = inst_cod2,
+                    inst_validade2 = inst_validade2,
+                    inst_desc3 = inst_desc3,
+                    inst_cod3 = inst_cod3,
+                    inst_validade3 = inst_validade3,
+                    inst_desc4 = inst_desc4,
+                    inst_cod4 = inst_cod4,
+                    inst_validade4 = inst_validade4,
+                    inst_desc5 = inst_desc5,
+                    inst_cod5 = inst_cod5,
+                    inst_validade5 = inst_validade5,
+                    inst_desc1_1 = inst_desc1_1,
+                    inst_cod1_1 = inst_cod1_1,
+                    inst_validade1_1 = inst_validade1_1,
+                    inst_desc2_2 = inst_desc2_2,
+                    inst_cod2_2 = inst_cod2_2,
+                    inst_validade2_2 = inst_validade2_2,
+                    inst_desc3_3 = inst_desc3_3,
+                    inst_cod3_3 = inst_cod3_3,
+                    inst_validade3_3 = inst_validade3_3,
+                    inst_desc4_4 = inst_desc4_4,
+                    inst_cod4_4 = inst_cod4_4,
+                    inst_validade4_4 = inst_validade4_4,
+                    inst_desc5_5 = inst_desc5_5,
+                    inst_cod5_5 = inst_cod5_5,
+                    inst_validade5_5 = inst_validade5_5,
+                    equi_ee = equi_ee,
+                    equi_de = equi_de,
+                    observacoes = observacoes,
+                    executado = executado,
+                    auxiliado = auxiliado,
+                };
                 //salvando no banco.
                 _qcontext.Add(salvardados);
                 await _qcontext.SaveChangesAsync();
@@ -727,6 +792,501 @@ namespace Arla32.Controllers
                 _logger.LogError(ex, "Error", ex.Message);
                 throw;
             }
+        }
+
+
+        public async Task<IActionResult> SalvarMetais(string OS, string orcamento, [Bind("data_ini,data_term,norma,np,descricao,ex_lq_al,ex_lq_ca,ex_lq_cr,ex_lq_cu,ex_lq_fe,ex_lq_k,ex_lq_mg,ex_lq_na,ex_lq_ni,ex_lq_zn,ex_lim_al,ex_lim_ca,ex_lim_cr,ex_lim_cu,ex_lim_fe,ex_lim_k,ex_lim_mg," +
+                "ex_lim_na,ex_lim_ni,ex_lim_zn,ex_quant_al1,ex_quant_ca1,ex_quant_cr1,ex_quant_cu1, ex_quant_fe1,ex_quant_k1,ex_quant_mg1,ex_quant_na1,ex_quant_ni1,ex_quant_zn1,ex_quant_al2,ex_quant_ca2,ex_quant_cr2,ex_quant_cu2,ex_quant_fe2,ex_quant_k2,ex_quant_mg2,ex_quant_na2,ex_quant_ni2,ex_quant_zn2,ex_quant_al3," +
+                "ex_quant_ca3,ex_quant_cr3,ex_quant_cu3,ex_quant_fe3,ex_quant_k3,ex_quant_mg3,ex_quant_na3,ex_quant_ni3,ex_quant_zn3,result_al,result_ca,result_cr,result_cu,result_fe,result_k,result_mg,result_na,result_ni,result_zn,mat_prima1,mat_lote1,mat_val1,mat_prima2,matt_lote2,mat_val2,mat_prima3,mat_lote3,mat_val3," +
+                "mat_prima4,mat_lote4,mat_val4,mat_prima5,mat_lote5,mat_val5,mat_prima6,mat_lote6,mat_val6,mat_prima7,mat_lote7,mat_val7,mat_prima8,mat_lote8,mat_val8,mat_prima9,mat_lote9,mat_val9,mat_prima10,mat_lote10,mat_val10,mat_prima11,mat_lote11,mat_val11,mat_prima12,mat_lote12,mat_val12,mat_prima13,mat_lote13,mat_val13," +
+                "inst_desc1,inst_cod1,inst_val1,inst_desc2,inst_cod2,inst_val2,inst_desc3,inst_cod3,inst_val3,inst_desc4,inst_cod4,inst_val4,inst_desc5,inst_cod5,inst_val5,inst_desc6,inst_cod6,inst_val6,inst_desc7,inst_cod7,inst_val7,inst_desc8,inst_cod8,inst_val8,inst_desc9,inst_cod9,inst_val9,inst_desc10,inst_cod10,inst_val10," +
+                "inst_desc11,inst_cod11,inst_val11,inst_dec12,inst_cod12,inst_val12,inst_desc14,inst_cod14,inst_val14,equi_ee,equi_de,observacoes,executado,auxiliado,media_al,media_ca,media_cr,media_cu,media_fe,media_k,media_mg,media_na,media_ni,media_zn")] ColetaModel.ArlaMetais metais,
+          [Bind("branco_al,branco_ca,branco_cr,branco_cu,branco_fe,branco_k,branco_mg,branco_na,branco_ni,branco_zn,resul_ob_al1,resul_ob_ca1,resul_ob_cr1,resul_ob_cu1," +
+            "resul_ob_fe1,resul_ob_k1,resul_ob_mg1,resul_ob_na1,resul_ob_ni1,resul_ob_zn1,resul_ob_al2,resul_ob_ca2,resul_ob_cr2,resul_ob_cu2,resul_ob_fe2,resul_ob_k2,resul_ob_mg2,resul_ob_na2,resul_ob_ni2,resul_ob_zn2,resul_ob_al3," +
+            "resul_ob_ca3,resul_ob_cr3,resul_ob_cu3,resul_ob_fe3,resul_ob_k3,resul_ob_mg3,resul_ob_na3,resul_ob_ni3,resul_ob_zn3,resul_con_al1,resul_con_ca1,resul_con_cr1,resul_con_cu1,resul_con_fe1,resul_con_k1,resul_con_mg1," +
+            "resul_con_na1,resul_con_ni1,resul_con_zn1,resul_con_al2,resul_con_ca2,resul_con_cr2,resul_con_cu2,resul_con_fe2,resul_con_k2,resul_con_mg2,resul_con_na2,resul_con_ni2,resul_con_zn2")] ColetaModel.MetaisTratamento tratamento)
+        {
+
+            try
+            {
+                //pegando do html Arla Metais
+
+                DateTime data_ini = metais.data_ini;
+                DateTime data_term = metais.data_term;
+                string norma = metais.norma;
+                string np = metais.np;
+                string descricao = metais.descricao;
+                float ex_lq_al = metais.ex_lq_al;
+                float ex_lq_ca = metais.ex_lq_ca;
+                float ex_lq_cr = metais.ex_lq_cr;
+                float ex_lq_cu = metais.ex_lq_cu;
+                float ex_lq_fe = metais.ex_lq_fe;
+                float ex_lq_k = metais.ex_lq_k;
+                float ex_lq_mg = metais.ex_lq_mg;
+                float ex_lq_na = metais.ex_lq_na;
+                float ex_lq_ni = metais.ex_lq_ni;
+                float ex_lq_zn = metais.ex_lq_zn;
+                float ex_lim_al = metais.ex_lim_al;
+                float ex_lim_ca = metais.ex_lim_ca;
+                float ex_lim_cr = metais.ex_lim_cr;
+                float ex_lim_cu = metais.ex_lim_cu;
+                float ex_lim_fe = metais.ex_lim_fe;
+                float ex_lim_k = metais.ex_lim_k;
+                float ex_lim_mg = metais.ex_lim_mg;
+                float ex_lim_na = metais.ex_lim_na;
+                float ex_lim_ni = metais.ex_lim_ni;
+                float ex_lim_zn = metais.ex_lim_zn;
+                string ex_quant_al1 = metais.ex_quant_al1;
+                string ex_quant_ca1 = metais.ex_quant_ca1;
+                string ex_quant_cr1 = metais.ex_quant_cr1;
+                string ex_quant_cu1 = metais.ex_quant_cu1;
+                string ex_quant_fe1 = metais.ex_quant_fe1;
+                string ex_quant_k1 = metais.ex_quant_k1;
+                string ex_quant_mg1 = metais.ex_quant_mg1;
+                string ex_quant_na1 = metais.ex_quant_na1;
+                string ex_quant_ni1 = metais.ex_quant_ni1;
+                string ex_quant_zn1 = metais.ex_quant_zn1;
+                string ex_quant_al2 = metais.ex_quant_al2;
+                string ex_quant_ca2 = metais.ex_quant_ca2;
+                string ex_quant_cr2 = metais.ex_quant_cr2;
+                string ex_quant_cu2 = metais.ex_quant_cu2;
+                string ex_quant_fe2 = metais.ex_quant_fe2;
+                string ex_quant_k2 = metais.ex_quant_k2;
+                string ex_quant_mg2 = metais.ex_quant_mg2;
+                string ex_quant_na2 = metais.ex_quant_na2;
+                string ex_quant_ni2 = metais.ex_quant_ni2;
+                string ex_quant_zn2 = metais.ex_quant_zn2;
+                string ex_quant_al3 = metais.ex_quant_al3;
+                string ex_quant_ca3 = metais.ex_quant_ca3;
+                string ex_quant_cr3 = metais.ex_quant_cr3;
+                string ex_quant_cu3 = metais.ex_quant_cu3;
+                string ex_quant_fe3 = metais.ex_quant_fe3;
+                string ex_quant_k3 = metais.ex_quant_k3;
+                string ex_quant_mg3 = metais.ex_quant_mg3;
+                string ex_quant_na3 = metais.ex_quant_na3;
+                string ex_quant_ni3 = metais.ex_quant_ni3;
+                string ex_quant_zn3 = metais.ex_quant_zn3;
+                string result_al = metais.result_al;
+                string result_ca = metais.result_ca;
+                string result_cr = metais.result_cr;
+                string result_cu = metais.result_cu;
+                string result_fe = metais.result_fe;
+                string result_k = metais.result_k;
+                string result_mg = metais.result_mg;
+                string result_na = metais.result_na;
+                string result_ni = metais.result_ni;
+                string result_zn = metais.result_zn;
+                string mat_prima1 = metais.mat_prima1;
+                string mat_lote1 = metais.mat_lote1;
+                string mat_val1 = metais.mat_val1;
+                string mat_prima2 = metais.mat_prima2;
+                string matt_lote2 = metais.matt_lote2;
+                string mat_val2 = metais.mat_val2;
+                string mat_prima3 = metais.mat_prima3;
+                string mat_lote3 = metais.mat_lote3;
+                string mat_val3 = metais.mat_val3;
+                string mat_prima4 = metais.mat_prima4;
+                string mat_lote4 = metais.mat_lote4;
+                string mat_val4 = metais.mat_val4;
+                string mat_prima5 = metais.mat_prima5;
+                string mat_lote5 = metais.mat_lote5;
+                string mat_val5 = metais.mat_val5;
+                string mat_prima6 = metais.mat_prima6;
+                string mat_lote6 = metais.mat_lote6;
+                string mat_val6 = metais.mat_val6;
+                string mat_prima7 = metais.mat_prima7;
+                string mat_lote7 = metais.mat_lote7;
+                string mat_val7 = metais.mat_val7;
+                string mat_prima8 = metais.mat_prima8;
+                string mat_lote8 = metais.mat_lote8;
+                string mat_val8 = metais.mat_val8;
+                string mat_prima9 = metais.mat_prima9;
+                string mat_lote9 = metais.mat_lote9;
+                string mat_val9 = metais.mat_val9;
+                string mat_prima10 = metais.mat_prima10;
+                string mat_lote10 = metais.mat_lote10;
+                string mat_val10 = metais.mat_val10;
+                string mat_prima11 = metais.mat_prima11;
+                string mat_lote11 = metais.mat_lote11;
+                string mat_val11 = metais.mat_val11;
+                string mat_prima12 = metais.mat_prima12;
+                string mat_lote12 = metais.mat_lote12;
+                string mat_val12 = metais.mat_val12;
+                string mat_prima13 = metais.mat_prima13;
+                string mat_lote13 = metais.mat_lote13;
+                string mat_val13 = metais.mat_val13;
+                string inst_desc1 = metais.inst_desc1;
+                string inst_cod1 = metais.inst_cod1;
+                string inst_val1 = metais.inst_val1;
+                string inst_desc2 = metais.inst_desc2;
+                string inst_cod2 = metais.inst_cod2;
+                string inst_val2 = metais.inst_val2;
+                string inst_desc3 = metais.inst_desc3;
+                string inst_cod3 = metais.inst_cod3;
+                string inst_val3 = metais.inst_val3;
+                string inst_desc4 = metais.inst_desc4;
+                string inst_cod4 = metais.inst_cod4;
+                string inst_val4 = metais.inst_val4;
+                string inst_desc5 = metais.inst_desc5;
+                string inst_cod5 = metais.inst_cod5;
+                string inst_val5 = metais.inst_val5;
+                string inst_desc6 = metais.inst_desc6;
+                string inst_cod6 = metais.inst_cod6;
+                string inst_val6 = metais.inst_val6;
+                string inst_desc7 = metais.inst_desc7;
+                string inst_cod7 = metais.inst_cod7;
+                string inst_val7 = metais.inst_val7;
+                string inst_desc8 = metais.inst_desc8;
+                string inst_cod8 = metais.inst_cod8;
+                string inst_val8 = metais.inst_val8;
+                string inst_desc9 = metais.inst_desc9;
+                string inst_cod9 = metais.inst_cod9;
+                string inst_val9 = metais.inst_val9;
+                string inst_desc10 = metais.inst_desc10;
+                string inst_cod10 = metais.inst_cod10;
+                string inst_val10 = metais.inst_val10;
+                string inst_desc11 = metais.inst_desc11;
+                string inst_cod11 = metais.inst_cod11;
+                string inst_val11 = metais.inst_val11;
+                string inst_dec12 = metais.inst_dec12;
+                string inst_cod12 = metais.inst_cod12;
+                string inst_val12 = metais.inst_val12;
+                string inst_desc14 = metais.inst_desc14;
+                string inst_cod14 = metais.inst_cod14;
+                string inst_val14 = metais.inst_val14;
+                string equi_ee = metais.equi_ee;
+                string equi_de = metais.equi_de;
+                string observacoes = metais.observacoes;
+                string executado = metais.executado;
+                string auxiliado = metais.auxiliado;
+                string media_al = metais.media_al;
+                string media_ca = metais.media_ca;
+                string media_cr = metais.media_cr;
+                string media_cu = metais.media_cu;
+                string media_fe = metais.media_fe;
+                string media_k = metais.media_k;
+                string media_mg = metais.media_mg;
+                string media_na = metais.media_na;
+                string media_ni = metais.media_ni;
+                string media_zn = metais.media_zn;
+
+
+                var salvardados = new ColetaModel.ArlaMetais
+                {
+
+                    os = OS,
+                    orcamento = orcamento,
+                    ex_lq_al = ex_lq_al,
+                    ex_lq_ca = ex_lq_ca,
+                    ex_lq_cr = ex_lq_cr,
+                    ex_lq_cu = ex_lq_cu,
+                    ex_lq_fe = ex_lq_fe,
+                    ex_lq_k = ex_lq_k,
+                    ex_lq_mg = ex_lq_mg,
+                    ex_lq_na = ex_lq_na,
+                    ex_lq_ni = ex_lq_ni,
+                    ex_lq_zn = ex_lq_zn,
+                    ex_lim_al = ex_lim_al,
+                    ex_lim_ca = ex_lim_ca,
+                    ex_lim_cr = ex_lim_cr,
+                    ex_lim_cu = ex_lim_cu,
+                    ex_lim_fe = ex_lim_fe,
+                    ex_lim_k = ex_lim_k,
+                    ex_lim_mg = ex_lim_mg,
+                    ex_lim_na = ex_lim_na,
+                    ex_lim_ni = ex_lim_ni,
+                    ex_lim_zn = ex_lim_zn,
+                    ex_quant_al1 = ex_quant_al1,
+                    ex_quant_ca1 = ex_quant_ca1,
+                    ex_quant_cr1 = ex_quant_cr1,
+                    ex_quant_cu1 = ex_quant_cu1,
+                    ex_quant_fe1 = ex_quant_fe1,
+                    ex_quant_k1 = ex_quant_k1,
+                    ex_quant_mg1 = ex_quant_mg1,
+                    ex_quant_na1 = ex_quant_na1,
+                    ex_quant_ni1 = ex_quant_ni1,
+                    ex_quant_zn1 = ex_quant_zn1,
+                    ex_quant_al2 = ex_quant_al2,
+                    ex_quant_ca2 = ex_quant_ca2,
+                    ex_quant_cr2 = ex_quant_cr2,
+                    ex_quant_cu2 = ex_quant_cu2,
+                    ex_quant_fe2 = ex_quant_fe2,
+                    ex_quant_k2 = ex_quant_k2,
+                    ex_quant_mg2 = ex_quant_mg2,
+                    ex_quant_na2 = ex_quant_na2,
+                    ex_quant_ni2 = ex_quant_ni2,
+                    ex_quant_zn2 = ex_quant_zn2,
+                    ex_quant_al3 = ex_quant_al3,
+                    ex_quant_ca3 = ex_quant_ca3,
+                    ex_quant_cr3 = ex_quant_cr3,
+                    ex_quant_cu3 = ex_quant_cu3,
+                    ex_quant_fe3 = ex_quant_fe3,
+                    ex_quant_k3 = ex_quant_k3,
+                    ex_quant_mg3 = ex_quant_mg3,
+                    ex_quant_na3 = ex_quant_na3,
+                    ex_quant_ni3 = ex_quant_ni3,
+                    ex_quant_zn3 = ex_quant_zn3,
+                    result_al = result_al,
+                    result_ca = result_ca,
+                    result_cr = result_cr,
+                    result_cu = result_cu,
+                    result_fe = result_fe,
+                    result_k = result_k,
+                    result_mg = result_mg,
+                    result_na = result_na,
+                    result_ni = result_ni,
+                    result_zn = result_zn,
+                    mat_prima1 = mat_prima1,
+                    mat_lote1 = mat_lote1,
+                    mat_val1 = mat_val1,
+                    mat_prima2 = mat_prima2,
+                    matt_lote2 = matt_lote2,
+                    mat_val2 = mat_val2,
+                    mat_prima3 = mat_prima3,
+                    mat_lote3 = mat_lote3,
+                    mat_val3 = mat_val3,
+                    mat_prima4 = mat_prima4,
+                    mat_lote4 = mat_lote4,
+                    mat_val4 = mat_val4,
+                    mat_prima5 = mat_prima5,
+                    mat_lote5 = mat_lote5,
+                    mat_val5 = mat_val5,
+                    mat_prima6 = mat_prima6,
+                    mat_lote6 = mat_lote6,
+                    mat_val6 = mat_val6,
+                    mat_prima7 = mat_prima7,
+                    mat_lote7 = mat_lote7,
+                    mat_val7 = mat_val7,
+                    mat_prima8 = mat_prima8,
+                    mat_lote8 = mat_lote8,
+                    mat_val8 = mat_val8,
+                    mat_prima9 = mat_prima9,
+                    mat_lote9 = mat_lote9,
+                    mat_val9 = mat_val9,
+                    mat_prima10 = mat_prima10,
+                    mat_lote10 = mat_lote10,
+                    mat_val10 = mat_val10,
+                    mat_prima11 = mat_prima11,
+                    mat_lote11 = mat_lote11,
+                    mat_val11 = mat_val11,
+                    mat_prima12 = mat_prima12,
+                    mat_lote12 = mat_lote12,
+                    mat_val12 = mat_val12,
+                    mat_prima13 = mat_prima13,
+                    mat_lote13 = mat_lote13,
+                    mat_val13 = mat_val13,
+                    inst_desc1 = inst_desc1,
+                    inst_cod1 = inst_cod1,
+                    inst_val1 = inst_val1,
+                    inst_desc2 = inst_desc2,
+                    inst_cod2 = inst_cod2,
+                    inst_val2 = inst_val2,
+                    inst_desc3 = inst_desc3,
+                    inst_cod3 = inst_cod3,
+                    inst_val3 = inst_val3,
+                    inst_desc4 = inst_desc4,
+                    inst_cod4 = inst_cod4,
+                    inst_val4 = inst_val4,
+                    inst_desc5 = inst_desc5,
+                    inst_cod5 = inst_cod5,
+                    inst_val5 = inst_val5,
+                    inst_desc6 = inst_desc6,
+                    inst_cod6 = inst_cod6,
+                    inst_val6 = inst_val6,
+                    inst_desc7 = inst_desc7,
+                    inst_cod7 = inst_cod7,
+                    inst_val7 = inst_val7,
+                    inst_desc8 = inst_desc8,
+                    inst_cod8 = inst_cod8,
+                    inst_val8 = inst_val8,
+                    inst_desc9 = inst_desc9,
+                    inst_cod9 = inst_cod9,
+                    inst_val9 = inst_val9,
+                    inst_desc10 = inst_desc10,
+                    inst_cod10 = inst_cod10,
+                    inst_val10 = inst_val10,
+                    inst_desc11 = inst_desc11,
+                    inst_cod11 = inst_cod11,
+                    inst_val11 = inst_val11,
+                    inst_dec12 = inst_dec12,
+                    inst_cod12 = inst_cod12,
+                    inst_val12 = inst_val12,
+                    inst_desc14 = inst_desc14,
+                    inst_cod14 = inst_cod14,
+                    inst_val14 = inst_val14,
+                    equi_ee = equi_ee,
+                    equi_de = equi_de,
+                    observacoes = observacoes,
+                    executado = executado,
+                    auxiliado = auxiliado,
+                    media_al = media_al,
+                    media_ca = media_ca,
+                    media_cr = media_cr,
+                    media_cu = media_cu,
+                    media_fe = media_fe,
+                    media_k = media_k,
+                    media_mg = media_mg,
+                    media_na = media_na,
+                    media_ni = media_ni,
+                    media_zn = media_zn,
+                    //salvando no banco.
+                };
+                _qcontext.Add(salvardados);
+                await _qcontext.SaveChangesAsync();
+
+
+                //pegando do html Arla Tratamento
+                float branco_al = tratamento.branco_al;
+                float branco_ca = tratamento.branco_ca;
+                float branco_cr = tratamento.branco_cr;
+                float branco_cu = tratamento.branco_cu;
+                float branco_fe = tratamento.branco_fe;
+                float branco_k = tratamento.branco_k;
+                float branco_mg = tratamento.branco_mg;
+                float branco_na = tratamento.branco_na;
+                float branco_ni = tratamento.branco_ni;
+                float branco_zn = tratamento.branco_zn;
+                float resul_ob_al1 = tratamento.resul_ob_al1;
+                float resul_ob_ca1 = tratamento.resul_ob_ca1;
+                float resul_ob_cr1 = tratamento.resul_ob_cr1;
+                float resul_ob_cu1 = tratamento.resul_ob_cu1;
+                float resul_ob_fe1 = tratamento.resul_ob_fe1;
+                float resul_ob_k1 = tratamento.resul_ob_k1;
+                float resul_ob_mg1 = tratamento.resul_ob_mg1;
+                float resul_ob_na1 = tratamento.resul_ob_na1;
+                float resul_ob_ni1 = tratamento.resul_ob_ni1;
+                float resul_ob_zn1 = tratamento.resul_ob_zn1;
+                float resul_ob_al2 = tratamento.resul_con_al2;
+                float resul_ob_ca2 = tratamento.resul_ob_ca2;
+                float resul_ob_cr2 = tratamento.resul_ob_cr2;
+                float resul_ob_cu2 = tratamento.resul_ob_cu2;
+                float resul_ob_fe2 = tratamento.resul_ob_fe2;
+                float resul_ob_k2 = tratamento.resul_ob_k2;
+                float resul_ob_mg2 = tratamento.resul_ob_mg2;
+                float resul_ob_na2 = tratamento.resul_ob_na2;
+                float resul_ob_ni2 = tratamento.resul_ob_ni2;
+                float resul_ob_zn2 = tratamento.resul_ob_zn2;
+                float resul_ob_al3 = tratamento.resul_ob_al3;
+                float resul_ob_ca3 = tratamento.resul_ob_ca3;
+                float resul_ob_cr3 = tratamento.resul_ob_cr3;
+                float resul_ob_cu3 = tratamento.resul_ob_cu3;
+                float resul_ob_fe3 = tratamento.resul_ob_fe3;
+                float resul_ob_k3 = tratamento.resul_ob_k3;
+                float resul_ob_mg3 = tratamento.resul_ob_mg3;
+                float resul_ob_na3 = tratamento.resul_ob_na3;
+                float resul_ob_ni3 = tratamento.resul_ob_ni3;
+                float resul_ob_zn3 = tratamento.resul_ob_zn3;
+                float resul_con_al1 = tratamento.resul_con_al1;
+                float resul_con_ca1 = tratamento.resul_con_ca1;
+                float resul_con_cr1 = tratamento.resul_con_cr1;
+                float resul_con_cu1 = tratamento.resul_con_cu1;
+                float resul_con_fe1 = tratamento.resul_con_fe1;
+                float resul_con_k1 = tratamento.resul_con_k1;
+                float resul_con_mg1 = tratamento.resul_con_mg1;
+                float resul_con_na1 = tratamento.resul_con_na1;
+                float resul_con_ni1 = tratamento.resul_con_ni1;
+                float resul_con_zn1 = tratamento.resul_con_zn1;
+                float resul_con_al2 = tratamento.resul_con_al2;
+                float resul_con_ca2 = tratamento.resul_con_ca2;
+                float resul_con_cr2 = tratamento.resul_con_cr2;
+                float resul_con_cu2 = tratamento.resul_con_cu2;
+                float resul_con_fe2 = tratamento.resul_con_fe2;
+                float resul_con_k2 = tratamento.resul_con_k2;
+                float resul_con_mg2 = tratamento.resul_con_mg2;
+                float resul_con_na2 = tratamento.resul_con_na2;
+                float resul_con_ni2 = tratamento.resul_con_ni2;
+                float resul_con_zn2 = tratamento.resul_con_zn2;
+               
+
+                var salvardadostrat = new ColetaModel.MetaisTratamento
+                {
+                    os = OS,
+                    orcamento = orcamento,
+                    branco_al = branco_al,
+                    branco_ca = branco_ca,
+                    branco_cr = branco_cr,
+                    branco_cu = branco_cu,
+                    branco_fe = branco_fe,
+                    branco_k = branco_k,
+                    branco_mg = branco_mg,
+                    branco_na = branco_na,
+                    branco_ni = branco_ni,
+                    branco_zn = branco_zn,
+                    resul_ob_al1 = resul_ob_al1,
+                    resul_ob_ca1 = resul_ob_ca1,
+                    resul_ob_cr1 = resul_ob_cr1,
+                    resul_ob_cu1 = resul_ob_cu1,
+                    resul_ob_fe1 = resul_ob_fe1,
+                    resul_ob_k1 = resul_ob_k1,
+                    resul_ob_mg1 = resul_ob_mg1,
+                    resul_ob_na1 = resul_ob_na1,
+                    resul_ob_ni1 = resul_ob_ni1,
+                    resul_ob_zn1 = resul_ob_zn1,
+                    resul_ob_al2 = resul_ob_al2,
+                    resul_ob_ca2 = resul_ob_ca2,
+                    resul_ob_cr2 = resul_ob_cr2,
+                    resul_ob_cu2 = resul_ob_cu2,
+                    resul_ob_fe2 = resul_ob_fe2,
+                    resul_ob_k2 = resul_ob_k2,
+                    resul_ob_mg2 = resul_ob_mg2,
+                    resul_ob_na2 = resul_ob_na2,
+                    resul_ob_ni2 = resul_ob_ni2,
+                    resul_ob_zn2 = resul_ob_zn2,
+                    resul_ob_al3 = resul_ob_al3,
+                    resul_ob_ca3 = resul_ob_ca3,
+                    resul_ob_cr3 = resul_ob_cr3,
+                    resul_ob_cu3 = resul_ob_cu3,
+                    resul_ob_fe3 = resul_ob_fe3,
+                    resul_ob_k3 = resul_ob_k3,
+                    resul_ob_mg3 = resul_ob_mg3,
+                    resul_ob_na3 = resul_ob_na3,
+                    resul_ob_ni3 = resul_ob_ni3,
+                    resul_ob_zn3 = resul_ob_zn3,
+                    resul_con_al1 = resul_con_al1,
+                    resul_con_ca1 = resul_con_ca1,
+                    resul_con_cr1 = resul_con_cr1,
+                    resul_con_cu1 = resul_con_cu1,
+                    resul_con_fe1 = resul_con_fe1,
+                    resul_con_k1 = resul_con_k1,
+                    resul_con_mg1 = resul_con_mg1,
+                    resul_con_na1 = resul_con_na1,
+                    resul_con_ni1 = resul_con_ni1,
+                    resul_con_zn1 = resul_con_zn1,
+                    resul_con_al2 = resul_con_al2,
+                    resul_con_ca2 = resul_con_ca2,
+                    resul_con_cr2 = resul_con_cr2,
+                    resul_con_cu2 = resul_con_cu2,
+                    resul_con_fe2 = resul_con_fe2,
+                    resul_con_k2 = resul_con_k2,
+                    resul_con_mg2 = resul_con_mg2,
+                    resul_con_na2 = resul_con_na2,
+                    resul_con_ni2 = resul_con_ni2,
+                    resul_con_zn2 = resul_con_zn2,
+                    observacoes = observacoes,
+                    auxiliado = auxiliado,
+                    executado = executado,
+
+                };
+
+
+                _qcontext.Add(salvardadostrat);
+                await _qcontext.SaveChangesAsync();
+                TempData["Mensagem"] = "Salvo Com Sucesso";
+                return RedirectToAction(nameof(EnsaioMetais), new
+                {
+                    OS,
+                    orcamento
+                });
+
+
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error", ex.Message);
+                throw;
+
+            }
 
 
 
@@ -738,5 +1298,6 @@ namespace Arla32.Controllers
 
 
     }
-    }
+}
+    
 
