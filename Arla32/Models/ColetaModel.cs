@@ -210,7 +210,7 @@ namespace Arla32.Models
             public string inst_validade2_2 { get; set; }
             public string equi_de { get; set; }
             public string equi_ee { get; set; }
-            public string observacoes { get ; set; }
+            public string observacoes { get; set; }
             public string executado { get; set; }
             public string auxiliado { get; set; }
 
@@ -228,7 +228,7 @@ namespace Arla32.Models
             public string norma { get; set; }
             public string np { get; set; }
             public string descricao { get; set; }
-            public float preparacao_placa1 { get;set; }
+            public float preparacao_placa1 { get; set; }
             public float preparacao_filtro1 { get; set; }
             public float preparacao_massa1 { get; set; }
             public float preparacao_placa2 { get; set; }
@@ -242,7 +242,7 @@ namespace Arla32.Models
             public float pesagem_placa2 { get; set; }
             public float pesagem_filtro2 { get; set; }
             public float pesagem_resultado2 { get; set; }
-            public string pesagem_media { get ; set; }
+            public string pesagem_media { get; set; }
             public string pesagem_resultfinal { get; set; }
             public string mat_prima1 { get; set; }
             public string mat_lote1 { get; set; }
@@ -302,8 +302,8 @@ namespace Arla32.Models
             public string norma { get; set; }
             public string np { get; set; }
             public string descricao { get; set; }
-            public float ex_lq_al      { get; set; }
-            public float ex_lq_ca  { get; set; }
+            public float ex_lq_al { get; set; }
+            public float ex_lq_ca { get; set; }
             public float ex_lq_cr { get; set; }
             public float ex_lq_cu { get; set; }
             public float ex_lq_fe { get; set; }
@@ -327,8 +327,8 @@ namespace Arla32.Models
             public string ex_quant_cr1 { get; set; }
             public string ex_quant_cu1 { get; set; }
             public string ex_quant_fe1 { get; set; }
-            public string ex_quant_k1 { get; set; } 
-            public string ex_quant_mg1 { get; set; } 
+            public string ex_quant_k1 { get; set; }
+            public string ex_quant_mg1 { get; set; }
             public string ex_quant_na1 { get; set; }
             public string ex_quant_ni1 { get; set; }
             public string ex_quant_zn1 { get; set; }
@@ -473,7 +473,7 @@ namespace Arla32.Models
             public float branco_fe { get; set; }
             public float branco_k { get; set; }
             public float branco_mg { get; set; }
-            public float branco_na { get; set; } 
+            public float branco_na { get; set; }
             public float branco_ni { get; set; }
             public float branco_zn { get; set; }
             public float resul_ob_al1 { get; set; }
@@ -529,7 +529,7 @@ namespace Arla32.Models
             public string observacoes { get; set; }
             public string executado { get; set; }
             public string auxiliado { get; set; }
-    }
+        }
 
         public class ArlaFosfato
         {
@@ -646,3 +646,4 @@ namespace Arla32.Models
             public string exec_temp_final { get; set; }
         }
     }
+}
