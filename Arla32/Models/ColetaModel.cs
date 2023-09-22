@@ -150,5 +150,120 @@ namespace Arla32.Models
             public string executado_por { get; set; }
             public string auxiliado_por { get; set; }
         }
+
+        public class ArlaFosfato
+        {
+            [Key]
+            public int Id { get; set; }
+            public string os { get; set; }
+            public string? rev { get; set; }
+            public string orcamento { get; set; }
+            public DateTime data_ini { get; set; }
+            public DateTime data_term { get; set; }
+            public string cod_curva { get; set; }
+            public float fator_calibracao { get; set; }
+            public float massa { get; set; }
+            public float absorvancia1 { get; set; }
+            public float absorvancia2 { get; set; }
+            public string result_final { get; set; }
+            public float abs_branco { get; set; }
+            public float abs_qc { get; set; }
+            public string concentracao_qc { get; set; }
+            public string mat_prima_1 { get; set; }
+            public string mat_lote_1 { get; set; }
+            public DateTime mat_validade_1 { get; set; }
+            public string mat_prima_2 { get; set; }
+            public string mat_lote_2 { get; set; }
+            public DateTime mat_validade_2 { get; set; }
+            public string mat_prima_3 { get; set; }
+            public string mat_lote_3 { get; set; }
+            public DateTime mat_validade_3 { get; set; }
+            public string mat_prima_4 { get; set; }
+            public string mat_lote_4 { get; set; }
+            public DateTime mat_validade_4 { get; set; }
+            public string mat_prima_5 { get; set; }
+            public string mat_lote_5 { get; set; }
+            public DateTime mat_validade_5 { get; set; }
+            public string mat_prima_6 { get; set; }
+            public string mat_lote_6 { get; set; }
+            public DateTime mat_validade_6 { get; set; }
+            public string mat_prima_7 { get; set; }
+            public string mat_lote_7 { get; set; }
+            public DateTime mat_validade_7 { get; set; }
+            public string mat_prima_8 { get; set; }
+            public string mat_lote_8 { get; set; }
+            public DateTime mat_validade_8 { get; set; }
+            public string inst_desc1 { get; set; }
+            public string inst_cod1 { get; set; }
+            public DateTime inst_data1 { get; set; }
+            public string inst_desc1_1 { get; set; }
+            public string inst_cod1_1 { get; set; }
+            public DateTime inst_data1_1 { get; set; }
+            public string inst_desc2 { get; set; }
+            public string inst_cod2 { get; set; }
+            public DateTime inst_data2 { get; set; }
+            public string inst_desc2_2 { get; set; }
+            public string inst_cod2_2 { get; set; }
+            public DateTime inst_data2_2 { get; set; }
+            public string inst_desc3 { get; set; }
+            public string inst_cod3 { get; set; }
+            public DateTime inst_data3 { get; set; }
+            public string inst_desc3_3 { get; set; }
+            public string inst_cod3_3 { get; set; }
+            public DateTime inst_data3_3 { get; set; }
+            public string inst_desc4 { get; set; }
+            public string inst_cod4 { get; set; }
+            public DateTime inst_data4 { get; set; }
+            public string inst_desc4_4 { get; set; }
+            public string inst_cod4_4 { get; set; }
+            public DateTime inst_data4_4 { get; set; }
+            public string equi_ee { get; set; }
+            public string equi_de { get; set; }
+            public string obs { get; set; }
+            public string executado_por { get; set; }
+            public string auxiliado_por { get; set; }
+        }
+
+        public class ArlaDensidade
+        {
+            [key]
+            public int Id { get; set; }
+            [Key]
+            public string os { get; set; }
+            public string? rev { get; set; }
+            public string orcamento { get; set; }
+            public DateTime data_ini { get; set; }
+            public DateTime data_term { get; set; }
+            public string temp_inicial { get; set; }
+            public string densidade_enc {  get; set; }
+            public string temp_final { get; set; }
+            public string densidade_ambiente { get; set; }
+            public string densidade_banho { get; set; }
+            public string conc_ensaio { get; set; }
+            public string mat_prima { get; set; }
+            public string mat_lote { get; set; }
+            public DateTime mat_validade { get; set; }
+            public string inst_desc1 { get; set; }
+            public string inst_cod1 { get; set; }
+            public DateTime inst_data1 { get; set; }
+            public string inst_desc2 { get; set; }
+            public string inst_cod2 { get; set; }
+            public DateTime inst_data2 { get; set; }
+            public string inst_desc3 { get; set; }
+            public string inst_cod3 { get; set; }
+            public DateTime inst_data3 { get; set; }
+            public string inst_desc4 { get; set; }
+            public string inst_cod4 { get; set; }
+            public DateTime inst_data4 { get; set; }
+            public string equi_de { get; set; }
+            public string equi_ee { get; set; }
+            public string obs { get; set; }
+            public string executado_por { get; set; }
+            public string auxiliado_por { get; set; }
+            public string exec_temp_ini { get; set; }
+            public string tem_amostra { get; set; }
+            public string exec_densi_encont { get; set; }
+            public string exec_temp_final { get; set; }
+        }
     }
 }

@@ -147,7 +147,7 @@
                         {
                             @if (@ViewBag.IsOsSalva)
                             {
-                                <td>  <a role="button" id="anexoLink6" asp-controller="Coleta" asp-action="EnsaioFosfato" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
+                                <td>  <a role="button" id="anexoLink6" asp-controller="Coleta" asp-action="EnsaioFosfato" asp-route-os="@($"{resultado.OS}")" asp-route-orcamento="@($"{resultado.Orcamento}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
                             }
                             else
                             {
@@ -175,15 +175,14 @@
 
                             }
                         }
-                        else if (resultado.Descricao == "QUIARL009000001")
+                        else if (resultado.codigo == "QUIARL009000001")
                         {
                             @if (@ViewBag.IsOsSalva)
                             {
-                                <td>  <a role="button" id="anexoLink" asp-controller="Coleta" asp-action="EnsaioMetais" asp-route-os="@($"{resultado.OS}")" class="btn btn-primary  w-100  btn-block">Não tem tela ainda</a></td>
+                                <td>  <a role="button" id="anexoLink" asp-controller="Coleta" asp-action="EnsaioDensidade" asp-route-os="@($"{resultado.OS}")" asp-route-orcamento="@($"{resultado.Orcamento}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
                             }
                             else{
                                 <td><button type="button" class="btn btn-secondary">Anexo </button></td>
-
                                 }
                         }
                     </tr>
