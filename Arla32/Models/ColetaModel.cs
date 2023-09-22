@@ -529,9 +529,7 @@ namespace Arla32.Models
             public string observacoes { get; set; }
             public string executado { get; set; }
             public string auxiliado { get; set; }
-
-
-
+    }
 
         public class ArlaFosfato
         {
@@ -617,7 +615,7 @@ namespace Arla32.Models
             public DateTime data_ini { get; set; }
             public DateTime data_term { get; set; }
             public string temp_inicial { get; set; }
-            public string densidade_enc {  get; set; }
+            public string densidade_enc { get; set; }
             public string temp_final { get; set; }
             public string densidade_ambiente { get; set; }
             public string densidade_banho { get; set; }
@@ -648,4 +646,3 @@ namespace Arla32.Models
             public string exec_temp_final { get; set; }
         }
     }
-}

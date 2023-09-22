@@ -63,21 +63,10 @@ namespace Arla32.Controllers
         }
         public IActionResult EnsaioInsoluveis(string OS, string orcamento)
         {
-            var dados = _qcontext.arla_insoluveis.Where(x => x.os == OS).FirstOrDefault();
-            if (dados == null)
-            {
-                ViewBag.OS = OS;
-                ViewBag.orcamento = orcamento;
+            ViewBag.OS = OS;
+            ViewBag.orcamento = orcamento;
 
-
-                return View();
-            }
-            else
-            {
-                ViewBag.OS = OS;
-                ViewBag.orcamento = orcamento;
-                return View(dados);
-            }
+            return View();
         }
         public IActionResult EnsaioFosfato(string OS, string orcamento)
         {
@@ -116,6 +105,7 @@ namespace Arla32.Controllers
 
             return View();
         }
+
 
 
         [HttpPost]
@@ -248,14 +238,14 @@ namespace Arla32.Controllers
                     orcamento = orcamento,
                     data_ini = data_ini,
                     data_term = data_term,
-                    pre_massa_amostra = pre_massa_amostra+" g",
-                    pre_vol_titulado = pre_vol_titulado+" mL",
-                    pre_resultado_final = pre_resultado_arredondado.ToString()+" %",
-                    det_massa_amostra1 = det_massa_amostra1+" g",
-                    det_massa_amostra2 = det_massa_amostra2+" g",
+                    pre_massa_amostra = pre_massa_amostra + " g",
+                    pre_vol_titulado = pre_vol_titulado + " mL",
+                    pre_resultado_final = pre_resultado_arredondado.ToString() + " %",
+                    det_massa_amostra1 = det_massa_amostra1 + " g",
+                    det_massa_amostra2 = det_massa_amostra2 + " g",
                     det_vol_titulado1 = det_vol_titulado1 + " mL",
                     det_vol_titulado2 = det_vol_titulado2,
-                    det_res_final = det_res_arredondado.ToString("")+" %",
+                    det_res_final = det_res_arredondado.ToString("") + " %",
                     mat_prima = mat_prima,
                     mat_lote = mat_lote,
                     mat_validade = mat_validade,
@@ -374,11 +364,11 @@ namespace Arla32.Controllers
                     //    return RedirectToAction(nameof(EnsaioBiureto), new { OS, orcamento });
                     //}
 
-              
+
 
                     var result_ind_1 = ((((absorbancia_2 - absorbancia_1) * fator_dia * 250) / (amostra1 * 10 * 1000)) * 100);
                     var result_ind_2 = ((((absorbancia_3 - absorbancia_1) * fator_dia * 250) / (amostra2 * 10 * 1000)) * 100);
-                    var result_media = ((result_ind_1+result_ind_2)/2);
+                    var result_media = ((result_ind_1 + result_ind_2) / 2);
 
                     double result_ind_1_arredondado = Math.Round(result_ind_1, 2);
                     double result_ind_2_arredondado = Math.Round(result_ind_2, 2);
@@ -399,7 +389,7 @@ namespace Arla32.Controllers
                         absorbancia_1 = absorbancia_1,
                         absorbancia_2 = absorbancia_2,
                         absorbancia_3 = absorbancia_3,
-                        result_ind_1 = result_ind_1_arredondado.ToString()+" %",
+                        result_ind_1 = result_ind_1_arredondado.ToString() + " %",
                         result_ind_2 = result_ind_2_arredondado.ToString() + " %",
                         result_media = result_media_2_arredondado.ToString() + " %",
                         mat_prima_1 = mat_prima_1,
@@ -468,9 +458,7 @@ namespace Arla32.Controllers
             }
         }
 
-
         [HttpPost]
-
         public async Task<IActionResult> SalvarAldeidos(string OS, string orcamento, [Bind("data_ini,data_term,os, norma, np, descricao,col_norma,col_np,col_desc,lote_sol," +
             "codigo_curva,fator_calibracao,massa_branco,absorbancia_branco,maximo_permitido,massa_amostra,absorbancia_amostra\"" +
             " carta_absorbancia,carta_concentracao,mat_prima1,mat_lote1,mat_validade1,mat_prima2, mat_lote2,mat_validade2,mat_prima3,mat_lote3,mat_validade3,mat_prima4,mat_lote4,mat_validade4," +
@@ -584,89 +572,6 @@ namespace Arla32.Controllers
 
 
                     var salvardados = new ColetaModel.ArlaAldeidos
-        [HttpPost]
-        public async Task<IActionResult> SalvarFosfato(string OS, string orcamento, [Bind("data_ini,data_term,cod_curva,fator_calibracao,massa,absorvancia1,absorvancia2,abs_branco,abs_qc,mat_prima_1,mat_lote_1,mat_validade_1,mat_prima_2,mat_lote_2,mat_validade_2,mat_prima_3,mat_lote_3,mat_validade_3,mat_prima_4,mat_lote_4,mat_validade_4,mat_prima_5,mat_lote_5,mat_validade_5,mat_prima_6,mat_lote_6,mat_validade_6,mat_prima_7,mat_lote_7,mat_validade_7,mat_prima_8,mat_lote_8,mat_validade_8,inst_desc1,inst_cod1,inst_data1,inst_desc1_1,inst_cod1_1,inst_data1_1,inst_desc2,inst_cod2,inst_data2,inst_desc2_2,inst_cod2_2,inst_data2_2,inst_desc3,inst_cod3,inst_data3,inst_desc3_3,inst_cod3_3,inst_data3_3,inst_desc4,inst_cod4,inst_data4,inst_desc4_4,inst_cod4_4,inst_data4_4,equi_ee,equi_de,obs,executado_por,auxiliado_por")] ColetaModel.ArlaFosfato salvarDados)
-        {
-            try
-            {
-                if (OS != null && OS != "0" && orcamento != "0")
-                {
-                    //pegando valores na web.
-                    DateTime data_ini = salvarDados.data_ini;
-                    DateTime data_term = salvarDados.data_term;
-                    string cod_curva = salvarDados.cod_curva;
-                    float fator_calibracao = salvarDados.fator_calibracao;
-                    float massa = salvarDados.massa;
-                    float absorvancia1 = salvarDados.absorvancia1;
-                    float absorvancia2 = salvarDados.absorvancia2;
-                    float abs_branco = salvarDados.abs_branco;
-                    float abs_qc = salvarDados.abs_qc;
-                    string mat_prima_1 = salvarDados.mat_prima_1;
-                    string mat_lote_1 = salvarDados.mat_lote_1;
-                    DateTime mat_validade_1 = salvarDados.mat_validade_1;
-                    string mat_prima_2 = salvarDados.mat_prima_2;
-                    string mat_lote_2 = salvarDados.mat_lote_2;
-                    DateTime mat_validade_2 = salvarDados.mat_validade_2;
-                    string mat_prima_3 = salvarDados.mat_prima_3;
-                    string mat_lote_3 = salvarDados.mat_lote_3;
-                    DateTime mat_validade_3 = salvarDados.mat_validade_3;
-                    string mat_prima_4 = salvarDados.mat_prima_4;
-                    string mat_lote_4 = salvarDados.mat_lote_4;
-                    DateTime mat_validade_4 = salvarDados.mat_validade_4;
-                    string mat_prima_5 = salvarDados.mat_prima_5;
-                    string mat_lote_5 = salvarDados.mat_lote_5;
-                    DateTime mat_validade_5 = salvarDados.mat_validade_5;
-                    string mat_prima_6 = salvarDados.mat_prima_6;
-                    string mat_lote_6 = salvarDados.mat_lote_6;
-                    DateTime mat_validade_6 = salvarDados.mat_validade_6;
-                    string mat_prima_7 = salvarDados.mat_prima_7;
-                    string mat_lote_7 = salvarDados.mat_lote_7;
-                    DateTime mat_validade_7 = salvarDados.mat_validade_7;
-                    string mat_prima_8 = salvarDados.mat_prima_8;
-                    string mat_lote_8 = salvarDados.mat_lote_8;
-                    DateTime mat_validade_8 = salvarDados.mat_validade_8;
-                    string inst_desc1 = salvarDados.inst_desc1;
-                    string inst_cod1 = salvarDados.inst_cod1;
-                    DateTime inst_data1 = salvarDados.inst_data1;
-                    string inst_desc1_1 = salvarDados.inst_desc1_1;
-                    string inst_cod1_1 = salvarDados.inst_cod1_1;
-                    DateTime inst_data1_1 = salvarDados.inst_data1_1;
-                    string inst_desc2 = salvarDados.inst_desc2;
-                    string inst_cod2 = salvarDados.inst_cod2;
-                    DateTime inst_data2 = salvarDados.inst_data2;
-                    string inst_desc2_2 = salvarDados.inst_desc2_2;
-                    string inst_cod2_2 = salvarDados.inst_cod2_2;
-                    DateTime inst_data2_2 = salvarDados.inst_data2_2;
-                    string inst_desc3 = salvarDados.inst_desc3;
-                    string inst_cod3 = salvarDados.inst_cod3;
-                    DateTime inst_data3 = salvarDados.inst_data3;
-                    string inst_desc3_3 = salvarDados.inst_desc3_3;
-                    string inst_cod3_3 = salvarDados.inst_cod3_3;
-                    DateTime inst_data3_3 = salvarDados.inst_data3_3;
-                    string inst_desc4 = salvarDados.inst_desc4;
-                    string inst_cod4 = salvarDados.inst_cod4;
-                    DateTime inst_data4 = salvarDados.inst_data4;
-                    string inst_desc4_4 = salvarDados.inst_desc4_4;
-                    string inst_cod4_4 = salvarDados.inst_cod4_4;
-                    DateTime inst_data4_4 = salvarDados.inst_data4_4;
-                    string equi_ee = salvarDados.equi_ee;
-                    string equi_de = salvarDados.equi_de;
-                    string obs = salvarDados.obs;
-                    string executado_por = salvarDados.executado_por;
-                    string auxiliado_por = salvarDados.auxiliado_por;
-
-                    //conta do resulto final...
-                    float result_final = (((absorvancia1 - absorvancia2) * fator_calibracao * 100 * 1000) / (50 * 1000 * massa) * -1);
-                    string conv_result_final = result_final.ToString("N1");
-
-                    //calculando cocentração Qc..
-                    float concentracao_qc = (((abs_branco- abs_qc) * fator_calibracao * 100 * 1000) /(50 * 1000 * massa) * -1);
-                    string conv_concentracao_qc = concentracao_qc.ToString("N3");
-
-                    //massa ,fator_calibracao, abs_branco ,abs_qc
-
-                    //salvar dados no banco.
-                    var salvarDadosTabela = new ColetaModel.ArlaFosfato
                     {
                         os = OS,
                         orcamento = orcamento,
@@ -683,7 +588,7 @@ namespace Arla32.Controllers
                         absorbancia_branco = absorbancia_branco,
                         massa_amostra = massa_amostra,
                         absorbancia_amostra = absorbancia_amostra,
-                        maximo_permitido = conta_max_arre.ToString()+" mg/kg",
+                        maximo_permitido = conta_max_arre.ToString() + " mg/kg",
                         carta_absorbancia = carta_absorbancia,
                         carta_concentracao = carta_concentracao,
                         mat_prima1 = mat_prima1,
@@ -722,7 +627,6 @@ namespace Arla32.Controllers
                     };
 
                     //salvando no banco.
-                    //oi
                     _qcontext.Add(salvardados);
                     await _qcontext.SaveChangesAsync();
                     TempData["Mensagem"] = "Salvo Com Sucesso";
@@ -737,6 +641,7 @@ namespace Arla32.Controllers
             }
         }
 
+        [HttpPost]
         public async Task<IActionResult> SalvarInsoluveis(string OS, string orcamento, [Bind("data_ini, data_term, norma, np, descricao, preparacao_placa1,preparacao_filtro1,preparacao_massa1," +
             "preparacao_placa2,preparacao_filtro2, preparacao_massa2, pesagem_amostra1, pesagem_placa1,pesagem_filtro1, pesagem_resultado1," +
             "pesagem_amostra2,pesagem_placa2,pesagem_filtro2, pesagem_resultado2, pesagem_media,pesagem_resultfinal," +
@@ -752,10 +657,10 @@ namespace Arla32.Controllers
                 //pegando dados do html
                 DateTime data_ini = insoluveis.data_ini; DateTime data_term = insoluveis.data_term; string norma = insoluveis.norma;
                 string np = insoluveis.np; string descricao = insoluveis.descricao; float preparacao_placa1 = insoluveis.preparacao_placa1;
-                float preparacao_filtro1 = insoluveis.preparacao_filtro1; 
+                float preparacao_filtro1 = insoluveis.preparacao_filtro1;
                 float preparacao_placa2 = insoluveis.preparacao_placa2; float preparacao_filtro2 = insoluveis.preparacao_filtro2;
                 float pesagem_amostra1 = insoluveis.pesagem_amostra1;
-                float pesagem_placa1 = insoluveis.pesagem_placa1; 
+                float pesagem_placa1 = insoluveis.pesagem_placa1;
                 float pesagem_resultado1 = insoluveis.pesagem_resultado1; float pesagem_amostra2 = insoluveis.pesagem_amostra2;
                 float pesagem_placa2 = insoluveis.pesagem_placa2; float pesagem_resultado2 = insoluveis.pesagem_resultado2;
                 string mat_prima1 = insoluveis.mat_prima1; string mat_lote1 = insoluveis.mat_lote1; string mat_validade1 = insoluveis.mat_validade1;
@@ -777,7 +682,7 @@ namespace Arla32.Controllers
                 //CONTAS
                 // Tabela preparação do filtro, conta do massa do filtro seco:
 
-                var preparacao_massa1 = (preparacao_placa1 - preparacao_filtro1) * -1 ; // (multiplicamos por -1 pq o resultado das contas estava vindo como negativo
+                var preparacao_massa1 = (preparacao_placa1 - preparacao_filtro1) * -1; // (multiplicamos por -1 pq o resultado das contas estava vindo como negativo
                 var preparacao_massa2 = (preparacao_placa2 - preparacao_filtro2) * -1;
 
 
@@ -826,8 +731,8 @@ namespace Arla32.Controllers
                     pesagem_placa2 = pesagem_placa2,
                     pesagem_filtro2 = pesagem_filtro2,
                     pesagem_resultado2 = pesagem_resultado2,
-                    pesagem_media = pesagem_media.ToString()+" %",
-                    pesagem_resultfinal = pesagem_resultfinal.ToString()+" mg/kg",
+                    pesagem_media = pesagem_media.ToString() + " %",
+                    pesagem_resultfinal = pesagem_resultfinal.ToString() + " mg/kg",
                     mat_prima1 = mat_prima1,
                     mat_lote1 = mat_lote1,
                     mat_validade1 = mat_validade1,
@@ -885,6 +790,7 @@ namespace Arla32.Controllers
         }
 
 
+        [HttpPost]
         public async Task<IActionResult> SalvarMetais(string OS, string orcamento, [Bind("data_ini,data_term,norma,np,descricao,ex_lq_al,ex_lq_ca,ex_lq_cr,ex_lq_cu,ex_lq_fe,ex_lq_k,ex_lq_mg,ex_lq_na,ex_lq_ni,ex_lq_zn,ex_lim_al,ex_lim_ca,ex_lim_cr,ex_lim_cu,ex_lim_fe,ex_lim_k,ex_lim_mg," +
                 "ex_lim_na,ex_lim_ni,ex_lim_zn,ex_quant_al1,ex_quant_ca1,ex_quant_cr1,ex_quant_cu1, ex_quant_fe1,ex_quant_k1,ex_quant_mg1,ex_quant_na1,ex_quant_ni1,ex_quant_zn1,ex_quant_al2,ex_quant_ca2,ex_quant_cr2,ex_quant_cu2,ex_quant_fe2,ex_quant_k2,ex_quant_mg2,ex_quant_na2,ex_quant_ni2,ex_quant_zn2,ex_quant_al3," +
                 "ex_quant_ca3,ex_quant_cr3,ex_quant_cu3,ex_quant_fe3,ex_quant_k3,ex_quant_mg3,ex_quant_na3,ex_quant_ni3,ex_quant_zn3,result_al,result_ca,result_cr,result_cu,result_fe,result_k,result_mg,result_na,result_ni,result_zn,mat_prima1,mat_lote1,mat_val1,mat_prima2,matt_lote2,mat_val2,mat_prima3,mat_lote3,mat_val3," +
@@ -1286,7 +1192,7 @@ namespace Arla32.Controllers
                 float resul_con_na2 = tratamento.resul_con_na2;
                 float resul_con_ni2 = tratamento.resul_con_ni2;
                 float resul_con_zn2 = tratamento.resul_con_zn2;
-               
+
 
                 var salvardadostrat = new ColetaModel.MetaisTratamento
                 {
@@ -1358,7 +1264,6 @@ namespace Arla32.Controllers
 
                 };
 
-
                 _qcontext.Add(salvardadostrat);
                 await _qcontext.SaveChangesAsync();
                 TempData["Mensagem"] = "Salvo Com Sucesso";
@@ -1367,9 +1272,185 @@ namespace Arla32.Controllers
                     OS,
                     orcamento
                 });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error", ex.Message);
+                throw;
 
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> SalvarFosfato(string OS, string orcamento, [Bind("data_ini,data_term,cod_curva,fator_calibracao,massa,absorvancia1,absorvancia2,abs_branco,abs_qc,mat_prima_1,mat_lote_1,mat_validade_1,mat_prima_2,mat_lote_2,mat_validade_2,mat_prima_3,mat_lote_3,mat_validade_3,mat_prima_4,mat_lote_4,mat_validade_4,mat_prima_5,mat_lote_5,mat_validade_5,mat_prima_6,mat_lote_6,mat_validade_6,mat_prima_7,mat_lote_7,mat_validade_7,mat_prima_8,mat_lote_8,mat_validade_8,inst_desc1,inst_cod1,inst_data1,inst_desc1_1,inst_cod1_1,inst_data1_1,inst_desc2,inst_cod2,inst_data2,inst_desc2_2,inst_cod2_2,inst_data2_2,inst_desc3,inst_cod3,inst_data3,inst_desc3_3,inst_cod3_3,inst_data3_3,inst_desc4,inst_cod4,inst_data4,inst_desc4_4,inst_cod4_4,inst_data4_4,equi_ee,equi_de,obs,executado_por,auxiliado_por")] ColetaModel.ArlaFosfato salvarDados)
+        {
+            try
+            {
+                if (OS != null && OS != "0" && orcamento != "0")
+                {
+                    //pegando valores na web.
+                    DateTime data_ini = salvarDados.data_ini;
+                    DateTime data_term = salvarDados.data_term;
+                    string cod_curva = salvarDados.cod_curva;
+                    float fator_calibracao = salvarDados.fator_calibracao;
+                    float massa = salvarDados.massa;
+                    float absorvancia1 = salvarDados.absorvancia1;
+                    float absorvancia2 = salvarDados.absorvancia2;
+                    float abs_branco = salvarDados.abs_branco;
+                    float abs_qc = salvarDados.abs_qc;
+                    string mat_prima_1 = salvarDados.mat_prima_1;
+                    string mat_lote_1 = salvarDados.mat_lote_1;
+                    DateTime mat_validade_1 = salvarDados.mat_validade_1;
+                    string mat_prima_2 = salvarDados.mat_prima_2;
+                    string mat_lote_2 = salvarDados.mat_lote_2;
+                    DateTime mat_validade_2 = salvarDados.mat_validade_2;
+                    string mat_prima_3 = salvarDados.mat_prima_3;
+                    string mat_lote_3 = salvarDados.mat_lote_3;
+                    DateTime mat_validade_3 = salvarDados.mat_validade_3;
+                    string mat_prima_4 = salvarDados.mat_prima_4;
+                    string mat_lote_4 = salvarDados.mat_lote_4;
+                    DateTime mat_validade_4 = salvarDados.mat_validade_4;
+                    string mat_prima_5 = salvarDados.mat_prima_5;
+                    string mat_lote_5 = salvarDados.mat_lote_5;
+                    DateTime mat_validade_5 = salvarDados.mat_validade_5;
+                    string mat_prima_6 = salvarDados.mat_prima_6;
+                    string mat_lote_6 = salvarDados.mat_lote_6;
+                    DateTime mat_validade_6 = salvarDados.mat_validade_6;
+                    string mat_prima_7 = salvarDados.mat_prima_7;
+                    string mat_lote_7 = salvarDados.mat_lote_7;
+                    DateTime mat_validade_7 = salvarDados.mat_validade_7;
+                    string mat_prima_8 = salvarDados.mat_prima_8;
+                    string mat_lote_8 = salvarDados.mat_lote_8;
+                    DateTime mat_validade_8 = salvarDados.mat_validade_8;
+                    string inst_desc1 = salvarDados.inst_desc1;
+                    string inst_cod1 = salvarDados.inst_cod1;
+                    DateTime inst_data1 = salvarDados.inst_data1;
+                    string inst_desc1_1 = salvarDados.inst_desc1_1;
+                    string inst_cod1_1 = salvarDados.inst_cod1_1;
+                    DateTime inst_data1_1 = salvarDados.inst_data1_1;
+                    string inst_desc2 = salvarDados.inst_desc2;
+                    string inst_cod2 = salvarDados.inst_cod2;
+                    DateTime inst_data2 = salvarDados.inst_data2;
+                    string inst_desc2_2 = salvarDados.inst_desc2_2;
+                    string inst_cod2_2 = salvarDados.inst_cod2_2;
+                    DateTime inst_data2_2 = salvarDados.inst_data2_2;
+                    string inst_desc3 = salvarDados.inst_desc3;
+                    string inst_cod3 = salvarDados.inst_cod3;
+                    DateTime inst_data3 = salvarDados.inst_data3;
+                    string inst_desc3_3 = salvarDados.inst_desc3_3;
+                    string inst_cod3_3 = salvarDados.inst_cod3_3;
+                    DateTime inst_data3_3 = salvarDados.inst_data3_3;
+                    string inst_desc4 = salvarDados.inst_desc4;
+                    string inst_cod4 = salvarDados.inst_cod4;
+                    DateTime inst_data4 = salvarDados.inst_data4;
+                    string inst_desc4_4 = salvarDados.inst_desc4_4;
+                    string inst_cod4_4 = salvarDados.inst_cod4_4;
+                    DateTime inst_data4_4 = salvarDados.inst_data4_4;
+                    string equi_ee = salvarDados.equi_ee;
+                    string equi_de = salvarDados.equi_de;
+                    string obs = salvarDados.obs;
+                    string executado_por = salvarDados.executado_por;
+                    string auxiliado_por = salvarDados.auxiliado_por;
 
+                    //conta do resulto final...
+                    float result_final = (((absorvancia1 - absorvancia2) * fator_calibracao * 100 * 1000) / (50 * 1000 * massa) * -1);
+                    string conv_result_final = result_final.ToString("N1");
 
+                    //calculando cocentração Qc..
+                    float concentracao_qc = (((abs_branco - abs_qc) * fator_calibracao * 100 * 1000) / (50 * 1000 * massa) * -1);
+                    string conv_concentracao_qc = concentracao_qc.ToString("N3");
+
+                    //massa ,fator_calibracao, abs_branco ,abs_qc
+
+                    //salvar dados no banco.
+                    var salvarDadosTabela = new ColetaModel.ArlaFosfato
+                    {
+                        os = OS,
+                        orcamento = orcamento,
+                        data_ini = data_ini,
+                        data_term = data_term,
+                        cod_curva = cod_curva,
+                        fator_calibracao = fator_calibracao,
+                        massa = massa,
+                        absorvancia1 = absorvancia1,
+                        absorvancia2 = absorvancia2,
+                        result_final = conv_result_final,
+                        abs_branco = abs_branco,
+                        abs_qc = abs_qc,
+                        concentracao_qc = conv_concentracao_qc,
+                        mat_prima_1 = mat_prima_1,
+                        mat_lote_1 = mat_lote_1,
+                        mat_validade_1 = mat_validade_1,
+                        mat_prima_2 = mat_prima_2,
+                        mat_lote_2 = mat_lote_2,
+                        mat_validade_2 = mat_validade_2,
+                        mat_prima_3 = mat_prima_3,
+                        mat_lote_3 = mat_lote_3,
+                        mat_validade_3 = mat_validade_3,
+                        mat_prima_4 = mat_prima_4,
+                        mat_lote_4 = mat_lote_4,
+                        mat_validade_4 = mat_validade_4,
+                        mat_prima_5 = mat_prima_5,
+                        mat_lote_5 = mat_lote_5,
+                        mat_validade_5 = mat_validade_5,
+                        mat_prima_6 = mat_prima_6,
+                        mat_lote_6 = mat_lote_6,
+                        mat_validade_6 = mat_validade_6,
+                        mat_prima_7 = mat_prima_7,
+                        mat_lote_7 = mat_lote_7,
+                        mat_validade_7 = mat_validade_7,
+                        mat_prima_8 = mat_prima_8,
+                        mat_lote_8 = mat_lote_8,
+                        mat_validade_8 = mat_validade_8,
+                        inst_desc1 = inst_desc1,
+                        inst_cod1 = inst_cod1,
+                        inst_data1 = inst_data1,
+                        inst_desc1_1 = inst_desc1_1,
+                        inst_cod1_1 = inst_cod1_1,
+                        inst_data1_1 = inst_data1_1,
+                        inst_desc2 = inst_desc2,
+                        inst_cod2 = inst_cod2,
+                        inst_data2 = inst_data2,
+                        inst_desc2_2 = inst_desc2_2,
+                        inst_cod2_2 = inst_cod2_2,
+                        inst_data2_2 = inst_data2_2,
+                        inst_desc3 = inst_desc3,
+                        inst_cod3 = inst_cod3,
+                        inst_data3 = inst_data3,
+                        inst_desc3_3 = inst_desc3_3,
+                        inst_cod3_3 = inst_cod3_3,
+                        inst_data3_3 = inst_data3_3,
+                        inst_desc4 = inst_desc4,
+                        inst_cod4 = inst_cod4,
+                        inst_data4 = inst_data4,
+                        inst_desc4_4 = inst_desc4_4,
+                        inst_cod4_4 = inst_cod4_4,
+                        inst_data4_4 = inst_data4_4,
+                        equi_ee = equi_ee,
+                        equi_de = equi_de,
+                        obs = obs,
+                        executado_por = executado_por,
+                        auxiliado_por = auxiliado_por,
+                    };
+
+                    //salvando....
+                    _qcontext.Add(salvarDadosTabela);
+                    await _qcontext.SaveChangesAsync();
+
+                    TempData["Mensagem"] = "Dados Salvos Com Sucesso.";
+                    return RedirectToAction(nameof(EnsaioFosfato), new { OS, orcamento });
+                }
+                else
+                {
+                    TempData["Mensagem"] = "Desculpe, verifique a os e orcamento estão corretas.";
+                    return RedirectToAction(nameof(EnsaioFosfato), new { OS, orcamento });
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error", ex.Message);
+                throw;
+            }
+        }
         [HttpPost]
         public async Task<IActionResult> SalvarDensidade(string OS, string orcamento, [Bind("data_ini,data_term,temp_inicial,densidade_enc,temp_final,conc_ensaio,,mat_prima,mat_lote,mat_validade,inst_desc1,inst_cod1,inst_data1,inst_desc2,inst_cod2,inst_data2,,inst_desc3,inst_cod3,inst_data3,,inst_desc4,inst_cod4,inst_data4,equi_de,equi_ee,obs,executado_por,auxiliado_por,exec_temp_ini,tem_amostra,exec_densi_encont,exec_temp_final")] ColetaModel.ArlaDensidade salvarDados)
         {
@@ -1388,8 +1469,8 @@ namespace Arla32.Controllers
                     string mat_prima = salvarDados.mat_prima;
                     string mat_lote = salvarDados.mat_lote;
                     DateTime mat_validade = salvarDados.mat_validade;
-                    string inst_desc1 = salvarDados.inst_desc1; 
-                    string inst_cod1 = salvarDados.inst_cod1; 
+                    string inst_desc1 = salvarDados.inst_desc1;
+                    string inst_cod1 = salvarDados.inst_cod1;
                     DateTime inst_data1 = salvarDados.inst_data1;
                     string inst_desc2 = salvarDados.inst_desc2;
                     string inst_cod2 = salvarDados.inst_cod2;
@@ -1412,12 +1493,12 @@ namespace Arla32.Controllers
 
                     //realizando a conta e conversão da densidade ambiente.
                     float convertendo_densidade_enc = float.Parse(exec_densi_encont);
-                    var  result_conversao_encontrada = convertendo_densidade_enc / ((1 - 23 * Math.Pow(10, -6) * (20 - 15) - 23 * Math.Pow(10, -8) * Math.Pow((20 - 15), 2)));
+                    var result_conversao_encontrada = convertendo_densidade_enc / ((1 - 23 * Math.Pow(10, -6) * (20 - 15) - 23 * Math.Pow(10, -8) * Math.Pow((20 - 15), 2)));
                     result_conversao_encontrada = Math.Round(result_conversao_encontrada, 2);
                     string salvar_valor_result_conversao_encontrada = result_conversao_encontrada.ToString() + " kg / m³";
 
                     //realizando a conta e conversao da densidade banho maria.
-                    if(densidade_enc == "NA")
+                    if (densidade_enc == "NA")
                     {
                         densidade_banho = "NA";
                     }
@@ -1460,7 +1541,7 @@ namespace Arla32.Controllers
                         inst_cod4 = inst_cod4,
                         inst_data4 = inst_data4,
                         equi_de = equi_de,
-                        equi_ee =equi_ee,
+                        equi_ee = equi_ee,
                         obs = obs,
                         executado_por = executado_por,
                         auxiliado_por = auxiliado_por,
@@ -1487,21 +1568,10 @@ namespace Arla32.Controllers
             {
                 _logger.LogError(ex, "Error", ex.Message);
                 throw;
-
-            }
-
-
-
-
-
-
-        }
-
-
-
             }
         }
     }
 }
-    
+
+
 
