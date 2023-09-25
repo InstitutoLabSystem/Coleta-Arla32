@@ -1122,3 +1122,8 @@ C:\xampp\htdocs\Coleta-Arla32\Arla32\obj\Debug\net7.0\refint\Arla32.dll
 C:\xampp\htdocs\Coleta-Arla32\Arla32\obj\Debug\net7.0\Arla32.pdb
 C:\xampp\htdocs\Coleta-Arla32\Arla32\obj\Debug\net7.0\Arla32.genruntimeconfig.cache
 C:\xampp\htdocs\Coleta-Arla32\Arla32\obj\Debug\net7.0\ref\Arla32.dll
+C:\xampp\htdocs\Coleta-Arla32\Arla32\bin\Debug\net7.0\Google.Apis.dll
+C:\xampp\htdocs\Coleta-Arla32\Arla32\bin\Debug\net7.0\Google.Apis.Auth.PlatformServices.dll
+C:\xampp\htdocs\Coleta-Arla32\Arla32\bin\Debug\net7.0\Google.Apis.Auth.dll
+C:\xampp\htdocs\Coleta-Arla32\Arla32\bin\Debug\net7.0\Google.Apis.Core.dll
+C:\xampp\htdocs\Coleta-Arla32\Arla32\bin\Debug\net7.0\Google.Apis.Drive.v3.dll

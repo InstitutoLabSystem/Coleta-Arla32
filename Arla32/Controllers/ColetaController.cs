@@ -2,6 +2,8 @@
 using Arla32.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.WebEncoders.Testing;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.SqlServer.Server;
 using NuGet.Versioning;
@@ -17,10 +19,12 @@ namespace Arla32.Controllers
         private readonly ILogger<ColetaController> _logger;
         private readonly QuimicoContext _qcontext;
 
+
         public ColetaController(ILogger<ColetaController> logger, QuimicoContext qcontext)
         {
             _logger = logger;
             _qcontext = qcontext;
+   
         }
         public IActionResult EnsaioConcentracao(string OS, string orcamento)
         {
@@ -108,20 +112,20 @@ namespace Arla32.Controllers
 
 
 
-        [HttpPost]
-        public async Task<IActionResult> SalvarConcentracao(string OS, string orcamento, [Bind("data_ini,data_term,lote_solucao,codigo_curva,fator_avaliacao,indice_agua,refracao_amostra1,refracao_amostra2,conc_biureto,conc_ureia,desc1_instrumento,codigo1_instrumento,validade1_instrumento,desc2_instrumento,codigo2_instrumento,validade2_instrumento,ee_equipamento,de_equipamento,obs,executado_por,auxiliado_por")] ColetaModel.ArlaConcentracao salvarDados)
+    
+
+    [HttpPost]
+        public async Task<IActionResult> SalvarConcentracao(string OS, string orcamento, string osConcentracao, [Bind("data_ini,data_term,lote_solucao,codigo_curva,fator_avaliacao,indice_agua,refracao_amostra1,refracao_amostra2,conc_ureia,desc1_instrumento,codigo1_instrumento,validade1_instrumento,desc2_instrumento,codigo2_instrumento,validade2_instrumento,ee_equipamento,de_equipamento,obs,executado_por,auxiliado_por")] ColetaModel.ArlaConcentracao salvarDados)
         {
             //pegando os valores dos inputs no html.
             DateTime data_ini = salvarDados.data_ini;
             DateTime data_term = salvarDados.data_term;
             string lote_solucao = salvarDados.lote_solucao;
             string codigo_curva = salvarDados.codigo_curva;
-            string fator_avaliacao = salvarDados.fator_avaliacao;
+            float fator_avaliacao = salvarDados.fator_avaliacao;
             float indice_agua = salvarDados.indice_agua;
             float refracao_amostra1 = salvarDados.refracao_amostra1;
             float refracao_amostra2 = salvarDados.refracao_amostra2;
-            float conc_biureto = salvarDados.conc_biureto;
-            float conc_ureia = salvarDados.conc_ureia;
             string desc1_instrumento = salvarDados.desc1_instrumento;
             string codigo1_instrumento = salvarDados.codigo1_instrumento;
             DateTime validade1_instrumento = salvarDados.validade1_instrumento;
@@ -133,6 +137,25 @@ namespace Arla32.Controllers
             string obs = salvarDados.obs;
             string executado_por = salvarDados.executado_por;
             string auxiliado_por = salvarDados.auxiliado_por;
+
+            //Contas
+            //pegar o concentracao de Birueto do anexo E
+
+            osConcentracao = OS;
+            var pegarValores = _qcontext.arla_biureto
+                    .Where(os => os.os == osConcentracao)
+                     .Select(os => new
+                     {
+                         os.result_media
+
+                     })
+                     .FirstOrDefault();
+
+            //connta do concentracao de ureia 
+            var valor= pegarValores.result_media.TrimEnd('%').Trim();
+            float concentracao_biureto = float.Parse(valor);
+            float concentracao_ureia = (((((refracao_amostra1+refracao_amostra2)/2)-indice_agua)*fator_avaliacao)-concentracao_biureto);
+            double concentracao_ureia_arredendodado = Math.Round(concentracao_ureia, 1);
 
             //salvando no banco de dados.
             var guardarDadosTabela = new ColetaModel.ArlaConcentracao
@@ -147,7 +170,8 @@ namespace Arla32.Controllers
                 indice_agua = indice_agua,
                 refracao_amostra1 = refracao_amostra1,
                 refracao_amostra2 = refracao_amostra2,
-                conc_biureto = conc_biureto,
+                conc_biureto = pegarValores.result_media,
+                conc_ureia = concentracao_ureia.ToString()+" %",
                 desc1_instrumento = desc1_instrumento,
                 codigo1_instrumento = codigo1_instrumento,
                 validade1_instrumento = validade1_instrumento,
@@ -460,8 +484,7 @@ namespace Arla32.Controllers
 
         [HttpPost]
         public async Task<IActionResult> SalvarAldeidos(string OS, string orcamento, [Bind("data_ini,data_term,os, norma, np, descricao,col_norma,col_np,col_desc,lote_sol," +
-            "codigo_curva,fator_calibracao,massa_branco,absorbancia_branco,maximo_permitido,massa_amostra,absorbancia_amostra\"" +
-            " carta_absorbancia,carta_concentracao,mat_prima1,mat_lote1,mat_validade1,mat_prima2, mat_lote2,mat_validade2,mat_prima3,mat_lote3,mat_validade3,mat_prima4,mat_lote4,mat_validade4," +
+            "codigo_curva,fator_calibracao,massa_branco,absorbancia_branco,maximo_permitido,massa_amostra, absorbancia_amostra, carta_absorbancia ,carta_concentracao,mat_prima1,mat_lote1,mat_validade1,mat_prima2, mat_lote2,mat_validade2,mat_prima3,mat_lote3,mat_validade3,mat_prima4,mat_lote4,mat_validade4," +
             "mat_prima5, mat_lote5,mat_validade5, inst_desc1,inst_validade1,inst_cod1, inst_desc2,inst_cod2,inst_validade2,inst_desc1_1,inst_cod1_1,inst_validade1_1,inst_desc2_2,inst_cod2_2,inst_validade2_2, equi_de, equi_ee, observacoes, executado, auxiliado "
               )] ColetaModel.ArlaAldeidos aldeidos)
         {
@@ -473,13 +496,12 @@ namespace Arla32.Controllers
                 string rev = aldeidos.rev;
                 string lote_sol = aldeidos.lote_sol;
                 string codigo_curva = aldeidos.codigo_curva;
-                string fator_calibracao = aldeidos.fator_calibracao;
+                float fator_calibracao = aldeidos.fator_calibracao;
                 float massa_branco = aldeidos.massa_branco;
                 float absorbancia_branco = aldeidos.absorbancia_branco;
                 float massa_amostra = aldeidos.massa_amostra;
                 float absorbancia_amostra = aldeidos.absorbancia_amostra;
-                float carta_absorbancia = aldeidos.carta_absorbancia;
-                float carta_concentracao = aldeidos.carta_concentracao;
+                float carta_absorbancia = aldeidos.carta_absorbancia; 
                 string mat_prima1 = aldeidos.mat_prima1;
                 string mat_lote1 = aldeidos.mat_lote1;
                 string mat_validade1 = aldeidos.mat_validade1;
@@ -521,7 +543,7 @@ namespace Arla32.Controllers
                     /* string.IsNullOrEmpty(data_term.ToString()) |*/
                     //string.IsNullOrEmpty(codigo_curva) ||
                     //string.IsNullOrEmpty(lote_sol) ||
-                    string.IsNullOrEmpty(fator_calibracao) ||
+                    //fator_calibracao == 0 ||
                     //massa_branco == 0 ||
                     //absorbancia_branco == 0 ||
                     //massa_amostra == 0 ||
@@ -566,9 +588,12 @@ namespace Arla32.Controllers
                 {
 
                     //CONTA MÁXIMO PERMITIDO
-                    double calibracao = double.Parse(fator_calibracao);
-                    var conta_max = (((absorbancia_amostra - absorbancia_branco) * calibracao) / massa_amostra);
-                    double conta_max_arre = Math.Round(conta_max, 1);
+                    var conta_max = (((absorbancia_amostra - absorbancia_branco) * fator_calibracao) / massa_amostra);
+                    double conta_max_arre = Math.Round(conta_max);
+
+                    //CONTA CONCENTRACAO QC
+
+                    float carta_concentracao = (((carta_absorbancia - absorbancia_branco) * fator_calibracao) / massa_amostra);
 
 
                     var salvardados = new ColetaModel.ArlaAldeidos
@@ -627,8 +652,8 @@ namespace Arla32.Controllers
                     };
 
                     //salvando no banco.
-                    _qcontext.Add(salvardados);
-                    await _qcontext.SaveChangesAsync();
+                    //_qcontext.Add(salvardados);
+                    //await _qcontext.SaveChangesAsync();
                     TempData["Mensagem"] = "Salvo Com Sucesso";
                     return RedirectToAction(nameof(EnsaioAldeidos), new { OS, orcamento });
 
@@ -965,6 +990,8 @@ namespace Arla32.Controllers
                 string media_na = metais.media_na;
                 string media_ni = metais.media_ni;
                 string media_zn = metais.media_zn;
+
+
 
 
                 var salvardados = new ColetaModel.ArlaMetais

@@ -20,12 +20,12 @@ namespace Arla32.Models
             public DateTime data_term { get; set; }
             public string lote_solucao { get; set; }
             public string codigo_curva { get; set; }
-            public string fator_avaliacao { get; set; }
+            public float fator_avaliacao { get; set; }
             public float indice_agua { get; set; }
             public float refracao_amostra1 { get; set; }
             public float refracao_amostra2 { get; set; }
-            public float conc_biureto { get; set; }
-            public float conc_ureia { get; set; }
+            public string conc_biureto { get; set; }
+            public string conc_ureia { get; set; }
             public string desc1_instrumento { get; set; }
             public string codigo1_instrumento { get; set; }
             public DateTime validade1_instrumento { get; set; }
@@ -171,7 +171,7 @@ namespace Arla32.Models
             public DateTime data_term { get; set; }
             public string lote_sol { get; set; }
             public string codigo_curva { get; set; }
-            public string fator_calibracao { get; set; }
+            public float fator_calibracao { get; set; }
             public float massa_branco { get; set; }
 
             public float absorbancia_branco { get; set; }
