@@ -1127,3 +1127,8 @@ C:\xampp\htdocs\Coleta-Arla32\Arla32\bin\Debug\net7.0\Google.Apis.Auth.PlatformS
 C:\xampp\htdocs\Coleta-Arla32\Arla32\bin\Debug\net7.0\Google.Apis.Auth.dll
 C:\xampp\htdocs\Coleta-Arla32\Arla32\bin\Debug\net7.0\Google.Apis.Core.dll
 C:\xampp\htdocs\Coleta-Arla32\Arla32\bin\Debug\net7.0\Google.Apis.Drive.v3.dll
+C:\Users\Molina\source\repos\InstitutoLabSystem\Coleta-Arla32\Arla32\bin\Debug\net7.0\Google.Apis.dll
+C:\Users\Molina\source\repos\InstitutoLabSystem\Coleta-Arla32\Arla32\bin\Debug\net7.0\Google.Apis.Auth.PlatformServices.dll
+C:\Users\Molina\source\repos\InstitutoLabSystem\Coleta-Arla32\Arla32\bin\Debug\net7.0\Google.Apis.Auth.dll
+C:\Users\Molina\source\repos\InstitutoLabSystem\Coleta-Arla32\Arla32\bin\Debug\net7.0\Google.Apis.Core.dll
+C:\Users\Molina\source\repos\InstitutoLabSystem\Coleta-Arla32\Arla32\bin\Debug\net7.0\Google.Apis.Drive.v3.dll

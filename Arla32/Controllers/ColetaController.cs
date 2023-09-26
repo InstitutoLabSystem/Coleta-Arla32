@@ -24,7 +24,7 @@ namespace Arla32.Controllers
         {
             _logger = logger;
             _qcontext = qcontext;
-   
+
         }
         public IActionResult EnsaioConcentracao(string OS, string orcamento)
         {
@@ -53,10 +53,21 @@ namespace Arla32.Controllers
         }
         public IActionResult EnsaioDensidade(string OS, string orcamento)
         {
-            ViewBag.OS = OS;
-            ViewBag.orcamento = orcamento;
+            var dados = _qcontext.arla_densidade.Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
+            if (dados == null)
+            {
+                ViewBag.OS = OS;
+                ViewBag.orcamento = orcamento;
 
-            return View();
+                return View();
+            }
+            else
+            {
+                ViewBag.OS = OS;
+                ViewBag.orcamento = orcamento;
+                return View(dados);
+            }
+            
         }
         public IActionResult EnsaioAlcalinidade(string OS, string orcamento)
         {
@@ -110,11 +121,7 @@ namespace Arla32.Controllers
             return View();
         }
 
-
-
-    
-
-    [HttpPost]
+        [HttpPost]
         public async Task<IActionResult> SalvarConcentracao(string OS, string orcamento, string osConcentracao, [Bind("data_ini,data_term,lote_solucao,codigo_curva,fator_avaliacao,indice_agua,refracao_amostra1,refracao_amostra2,conc_ureia,desc1_instrumento,codigo1_instrumento,validade1_instrumento,desc2_instrumento,codigo2_instrumento,validade2_instrumento,ee_equipamento,de_equipamento,obs,executado_por,auxiliado_por")] ColetaModel.ArlaConcentracao salvarDados)
         {
             //pegando os valores dos inputs no html.
@@ -152,9 +159,9 @@ namespace Arla32.Controllers
                      .FirstOrDefault();
 
             //connta do concentracao de ureia 
-            var valor= pegarValores.result_media.TrimEnd('%').Trim();
+            var valor = pegarValores.result_media.TrimEnd('%').Trim();
             float concentracao_biureto = float.Parse(valor);
-            float concentracao_ureia = (((((refracao_amostra1+refracao_amostra2)/2)-indice_agua)*fator_avaliacao)-concentracao_biureto);
+            float concentracao_ureia = (((((refracao_amostra1 + refracao_amostra2) / 2) - indice_agua) * fator_avaliacao) - concentracao_biureto);
             double concentracao_ureia_arredendodado = Math.Round(concentracao_ureia, 1);
 
             //salvando no banco de dados.
@@ -171,7 +178,7 @@ namespace Arla32.Controllers
                 refracao_amostra1 = refracao_amostra1,
                 refracao_amostra2 = refracao_amostra2,
                 conc_biureto = pegarValores.result_media,
-                conc_ureia = concentracao_ureia.ToString()+" %",
+                conc_ureia = concentracao_ureia.ToString() + " %",
                 desc1_instrumento = desc1_instrumento,
                 codigo1_instrumento = codigo1_instrumento,
                 validade1_instrumento = validade1_instrumento,
@@ -501,7 +508,7 @@ namespace Arla32.Controllers
                 float absorbancia_branco = aldeidos.absorbancia_branco;
                 float massa_amostra = aldeidos.massa_amostra;
                 float absorbancia_amostra = aldeidos.absorbancia_amostra;
-                float carta_absorbancia = aldeidos.carta_absorbancia; 
+                float carta_absorbancia = aldeidos.carta_absorbancia;
                 string mat_prima1 = aldeidos.mat_prima1;
                 string mat_lote1 = aldeidos.mat_lote1;
                 string mat_validade1 = aldeidos.mat_validade1;
@@ -995,7 +1002,7 @@ namespace Arla32.Controllers
                     //await _qcontext.SaveChangesAsync();
 
                     //pegando do html Arla Metais
-                   
+
                     float ex_lq_al = metais.ex_lq_al;
                     float ex_lq_ca = metais.ex_lq_ca;
                     float ex_lq_cr = metais.ex_lq_cr;
@@ -1870,112 +1877,188 @@ namespace Arla32.Controllers
         {
             try
             {
-                if (OS != null && OS != "0" && orcamento != "0")
+                //verificando se existe dados com essa os.
+                var editarDados = _qcontext.arla_densidade.Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
+
+                if (editarDados == null)
                 {
-                    //pegando valores dos dados inseridos na pagina.
-                    DateTime data_ini = salvarDados.data_ini;
-                    DateTime data_term = salvarDados.data_term;
-                    string temp_inicial = salvarDados.temp_inicial;
-                    string densidade_enc = salvarDados.densidade_enc.ToUpper();
-                    string temp_final = salvarDados.temp_final;
-                    string densidade_banho;
-                    string conc_ensaio = salvarDados.conc_ensaio;
-                    string mat_prima = salvarDados.mat_prima;
-                    string mat_lote = salvarDados.mat_lote;
-                    DateTime mat_validade = salvarDados.mat_validade;
-                    string inst_desc1 = salvarDados.inst_desc1;
-                    string inst_cod1 = salvarDados.inst_cod1;
-                    DateTime inst_data1 = salvarDados.inst_data1;
-                    string inst_desc2 = salvarDados.inst_desc2;
-                    string inst_cod2 = salvarDados.inst_cod2;
-                    DateTime inst_data2 = salvarDados.inst_data2;
-                    string inst_desc3 = salvarDados.inst_desc3;
-                    string inst_cod3 = salvarDados.inst_cod3;
-                    DateTime inst_data3 = salvarDados.inst_data3;
-                    string inst_desc4 = salvarDados.inst_desc4;
-                    string inst_cod4 = salvarDados.inst_cod4;
-                    DateTime inst_data4 = salvarDados.inst_data4;
-                    string equi_de = salvarDados.equi_de;
-                    string equi_ee = salvarDados.equi_ee;
-                    string obs = salvarDados.obs;
-                    string executado_por = salvarDados.executado_por;
-                    string auxiliado_por = salvarDados.auxiliado_por;
-                    string exec_temp_ini = salvarDados.exec_temp_ini;
-                    string tem_amostra = salvarDados.tem_amostra;
-                    string exec_densi_encont = salvarDados.exec_densi_encont;
-                    string exec_temp_final = salvarDados.exec_temp_final;
-
-                    //realizando a conta e conversão da densidade ambiente.
-                    float convertendo_densidade_enc = float.Parse(exec_densi_encont);
-                    var result_conversao_encontrada = convertendo_densidade_enc / ((1 - 23 * Math.Pow(10, -6) * (20 - 15) - 23 * Math.Pow(10, -8) * Math.Pow((20 - 15), 2)));
-                    result_conversao_encontrada = Math.Round(result_conversao_encontrada, 2);
-                    string salvar_valor_result_conversao_encontrada = result_conversao_encontrada.ToString() + " kg / m³";
-
-                    //realizando a conta e conversao da densidade banho maria.
-                    if (densidade_enc == "NA")
+                    if (OS != null && OS != "0" && orcamento != "0")
                     {
-                        densidade_banho = "NA";
+                        //pegando valores dos dados inseridos na pagina.
+                        DateTime data_ini = salvarDados.data_ini;
+                        DateTime data_term = salvarDados.data_term;
+                        string temp_inicial = salvarDados.temp_inicial;
+                        string densidade_enc = salvarDados.densidade_enc.ToUpper();
+                        string temp_final = salvarDados.temp_final;
+                        string densidade_banho;
+                        string conc_ensaio = salvarDados.conc_ensaio;
+                        string mat_prima = salvarDados.mat_prima;
+                        string mat_lote = salvarDados.mat_lote;
+                        DateTime mat_validade = salvarDados.mat_validade;
+                        string inst_desc1 = salvarDados.inst_desc1;
+                        string inst_cod1 = salvarDados.inst_cod1;
+                        DateTime inst_data1 = salvarDados.inst_data1;
+                        string inst_desc2 = salvarDados.inst_desc2;
+                        string inst_cod2 = salvarDados.inst_cod2;
+                        DateTime inst_data2 = salvarDados.inst_data2;
+                        string inst_desc3 = salvarDados.inst_desc3;
+                        string inst_cod3 = salvarDados.inst_cod3;
+                        DateTime inst_data3 = salvarDados.inst_data3;
+                        string inst_desc4 = salvarDados.inst_desc4;
+                        string inst_cod4 = salvarDados.inst_cod4;
+                        DateTime inst_data4 = salvarDados.inst_data4;
+                        string equi_de = salvarDados.equi_de;
+                        string equi_ee = salvarDados.equi_ee;
+                        string obs = salvarDados.obs;
+                        string executado_por = salvarDados.executado_por;
+                        string auxiliado_por = salvarDados.auxiliado_por;
+                        string exec_temp_ini = salvarDados.exec_temp_ini;
+                        string tem_amostra = salvarDados.tem_amostra;
+                        string exec_densi_encont = salvarDados.exec_densi_encont;
+                        string exec_temp_final = salvarDados.exec_temp_final;
+
+                        //realizando a conta e conversão da densidade ambiente.
+                        float convertendo_densidade_enc = float.Parse(exec_densi_encont);
+                        var result_conversao_encontrada = convertendo_densidade_enc / ((1 - 23 * Math.Pow(10, -6) * (20 - 15) - 23 * Math.Pow(10, -8) * Math.Pow((20 - 15), 2)));
+                        result_conversao_encontrada = Math.Round(result_conversao_encontrada, 2);
+                        string salvar_valor_result_conversao_encontrada = result_conversao_encontrada.ToString() + " kg / m³";
+
+                        //realizando a conta e conversao da densidade banho maria.
+                        if (densidade_enc == "NA")
+                        {
+                            densidade_banho = "NA";
+                        }
+                        else
+                        {
+                            float convertendo_dens_banho_maria = float.Parse(densidade_enc);
+                            var result_conv_banho_maria = convertendo_dens_banho_maria / ((1 - 23 * Math.Pow(10, -6) * (20 - 15) - 23 * Math.Pow(10, -8) * Math.Pow((20 - 15), 2)));
+                            result_conv_banho_maria = Math.Round(result_conv_banho_maria, 2);
+                            string salvar_valor_banho_maria = result_conv_banho_maria.ToString() + " kg / m³";
+
+                            densidade_banho = salvar_valor_banho_maria;
+                        }
+
+                        //passando os valores para a tabela.
+                        var salvarDadosTabela = new ColetaModel.ArlaDensidade
+                        {
+                            os = OS,
+                            orcamento = orcamento,
+                            data_ini = data_ini,
+                            data_term = data_term,
+                            temp_inicial = temp_inicial,
+                            densidade_enc = densidade_enc,
+                            temp_final = temp_final,
+                            densidade_ambiente = salvar_valor_result_conversao_encontrada,
+                            densidade_banho = densidade_banho,
+                            conc_ensaio = conc_ensaio,
+                            mat_prima = mat_prima,
+                            mat_lote = mat_lote,
+                            mat_validade = mat_validade,
+                            inst_desc1 = inst_desc1,
+                            inst_cod1 = inst_cod1,
+                            inst_data1 = inst_data1,
+                            inst_desc2 = inst_desc2,
+                            inst_cod2 = inst_cod2,
+                            inst_data2 = inst_data2,
+                            inst_desc3 = inst_desc3,
+                            inst_cod3 = inst_cod3,
+                            inst_data3 = inst_data3,
+                            inst_desc4 = inst_desc4,
+                            inst_cod4 = inst_cod4,
+                            inst_data4 = inst_data4,
+                            equi_de = equi_de,
+                            equi_ee = equi_ee,
+                            obs = obs,
+                            executado_por = executado_por,
+                            auxiliado_por = auxiliado_por,
+                            exec_temp_ini = exec_temp_ini,
+                            tem_amostra = tem_amostra,
+                            exec_densi_encont = exec_densi_encont,
+                            exec_temp_final = exec_temp_final,
+                        };
+
+                        //salvando no banco.
+                        _qcontext.Add(salvarDadosTabela);
+                        await _qcontext.SaveChangesAsync();
+
+                        TempData["Mensagem"] = "Dados Salvos Com Sucesso.";
+                        return RedirectToAction(nameof(EnsaioDensidade), new { OS, orcamento });
                     }
                     else
                     {
-                        float convertendo_dens_banho_maria = float.Parse(densidade_enc);
-                        var result_conv_banho_maria = convertendo_dens_banho_maria / ((1 - 23 * Math.Pow(10, -6) * (20 - 15) - 23 * Math.Pow(10, -8) * Math.Pow((20 - 15), 2)));
-                        result_conv_banho_maria = Math.Round(result_conv_banho_maria, 2);
-                        string salvar_valor_banho_maria = result_conv_banho_maria.ToString() + " kg / m³";
-
-                        densidade_banho = salvar_valor_banho_maria;
+                        TempData["Mensagem"] = "Desculpe, verifique a os e orcamento estão corretas.";
+                        return RedirectToAction(nameof(EnsaioDensidade), new { OS, orcamento });
                     }
-
-                    //passando os valores para a tabela.
-                    var salvarDadosTabela = new ColetaModel.ArlaDensidade
-                    {
-                        os = OS,
-                        orcamento = orcamento,
-                        data_ini = data_ini,
-                        data_term = data_term,
-                        temp_inicial = temp_inicial,
-                        densidade_enc = densidade_enc,
-                        temp_final = temp_final,
-                        densidade_ambiente = salvar_valor_result_conversao_encontrada,
-                        densidade_banho = densidade_banho,
-                        conc_ensaio = conc_ensaio,
-                        mat_prima = mat_prima,
-                        mat_lote = mat_lote,
-                        mat_validade = mat_validade,
-                        inst_desc1 = inst_desc1,
-                        inst_cod1 = inst_cod1,
-                        inst_data1 = inst_data1,
-                        inst_desc2 = inst_desc2,
-                        inst_cod2 = inst_cod2,
-                        inst_data2 = inst_data2,
-                        inst_desc3 = inst_desc3,
-                        inst_cod3 = inst_cod3,
-                        inst_data3 = inst_data3,
-                        inst_desc4 = inst_desc4,
-                        inst_cod4 = inst_cod4,
-                        inst_data4 = inst_data4,
-                        equi_de = equi_de,
-                        equi_ee = equi_ee,
-                        obs = obs,
-                        executado_por = executado_por,
-                        auxiliado_por = auxiliado_por,
-                        exec_temp_ini = exec_temp_ini,
-                        tem_amostra = tem_amostra,
-                        exec_densi_encont = exec_densi_encont,
-                        exec_temp_final = exec_temp_final,
-                    };
-
-                    //salvando no banco.
-                    //_qcontext.Add(salvarDadosTabela);
-                    //await _qcontext.SaveChangesAsync();
-
-                    TempData["Mensagem"] = "Dados Salvos Com Sucesso.";
-                    return RedirectToAction(nameof(EnsaioDensidade), new { OS, orcamento });
                 }
                 else
                 {
-                    TempData["Mensagem"] = "Desculpe, verifique a os e orcamento estão corretas.";
-                    return RedirectToAction(nameof(EnsaioDensidade), new { OS, orcamento });
+                    if(OS != null && OS != "0" && orcamento != "0")
+                    {
+                        //pegando valores dos dados inseridos na pagina.
+                        editarDados.data_ini = salvarDados.data_ini;
+                        editarDados.data_term = salvarDados.data_term;
+                        editarDados.temp_inicial = salvarDados.temp_inicial;
+                        string densidade_enc = salvarDados.densidade_enc.ToUpper();
+                        editarDados.temp_final = salvarDados.temp_final;
+                        string densidade_banho;
+                        editarDados.conc_ensaio = salvarDados.conc_ensaio;
+                        editarDados.mat_prima = salvarDados.mat_prima;
+                        editarDados.mat_lote = salvarDados.mat_lote;
+                        editarDados.mat_validade = salvarDados.mat_validade;
+                        editarDados.inst_desc1 = salvarDados.inst_desc1;
+                        editarDados.inst_cod1 = salvarDados.inst_cod1;
+                        editarDados.inst_data1 = salvarDados.inst_data1;
+                        editarDados.inst_desc2 = salvarDados.inst_desc2;
+                        editarDados.inst_cod2 = salvarDados.inst_cod2;
+                        editarDados.inst_data2 = salvarDados.inst_data2;
+                        editarDados.inst_desc3 = salvarDados.inst_desc3;
+                        editarDados.inst_cod3 = salvarDados.inst_cod3;
+                        editarDados.inst_data3 = salvarDados.inst_data3;
+                        editarDados.inst_desc4 = salvarDados.inst_desc4;
+                        editarDados.inst_cod4 = salvarDados.inst_cod4;
+                        editarDados.inst_data4 = salvarDados.inst_data4;
+                        editarDados.equi_de = salvarDados.equi_de;
+                        editarDados.equi_ee = salvarDados.equi_ee;
+                        editarDados.obs = salvarDados.obs;
+                        editarDados.executado_por = salvarDados.executado_por;
+                        editarDados.auxiliado_por = salvarDados.auxiliado_por;
+                        editarDados.exec_temp_ini = salvarDados.exec_temp_ini;
+                        editarDados.tem_amostra = salvarDados.tem_amostra;
+                        string exec_densi_encont = salvarDados.exec_densi_encont;
+                        editarDados.exec_temp_final = salvarDados.exec_temp_final;
+
+                        //realizando a conta e conversão da densidade ambiente.
+                        float convertendo_densidade_enc = float.Parse(exec_densi_encont);
+                        var result_conversao_encontrada = convertendo_densidade_enc / ((1 - 23 * Math.Pow(10, -6) * (20 - 15) - 23 * Math.Pow(10, -8) * Math.Pow((20 - 15), 2)));
+                        result_conversao_encontrada = Math.Round(result_conversao_encontrada, 2);
+                        string salvar_valor_result_conversao_encontrada = result_conversao_encontrada.ToString() + " kg / m³";
+
+                        //realizando a conta e conversao da densidade banho maria.
+                        if (densidade_enc == "NA")
+                        {
+                            densidade_banho = "NA";
+                        }
+                        else
+                        {
+                            float convertendo_dens_banho_maria = float.Parse(densidade_enc);
+                            var result_conv_banho_maria = convertendo_dens_banho_maria / ((1 - 23 * Math.Pow(10, -6) * (20 - 15) - 23 * Math.Pow(10, -8) * Math.Pow((20 - 15), 2)));
+                            result_conv_banho_maria = Math.Round(result_conv_banho_maria, 2);
+                            string salvar_valor_banho_maria = result_conv_banho_maria.ToString() + " kg / m³";
+
+                            densidade_banho = salvar_valor_banho_maria;
+                        }
+
+                        //EDITANDO NO BANCO.
+                        await _qcontext.SaveChangesAsync();
+
+                        TempData["Mensagem"] = "Dados Editado com Sucesso.";
+                        return RedirectToAction(nameof(EnsaioDensidade), new { OS, orcamento });
+                    }
+                    else
+                    {
+                        TempData["Mensagem"] = "Desculpe, verifique a os e orcamento estão corretas.";
+                        return RedirectToAction(nameof(EnsaioDensidade), new { OS, orcamento });
+                    }
                 }
             }
             catch (Exception ex)
