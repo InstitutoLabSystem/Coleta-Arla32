@@ -792,486 +792,875 @@ namespace Arla32.Controllers
 
         [HttpPost]
         public async Task<IActionResult> SalvarMetais(string OS, string orcamento, [Bind("data_ini,data_term,norma,np,descricao,ex_lq_al,ex_lq_ca,ex_lq_cr,ex_lq_cu,ex_lq_fe,ex_lq_k,ex_lq_mg,ex_lq_na,ex_lq_ni,ex_lq_zn,ex_lim_al,ex_lim_ca,ex_lim_cr,ex_lim_cu,ex_lim_fe,ex_lim_k,ex_lim_mg," +
-                "ex_lim_na,ex_lim_ni,ex_lim_zn,ex_quant_al1,ex_quant_ca1,ex_quant_cr1,ex_quant_cu1, ex_quant_fe1,ex_quant_k1,ex_quant_mg1,ex_quant_na1,ex_quant_ni1,ex_quant_zn1,ex_quant_al2,ex_quant_ca2,ex_quant_cr2,ex_quant_cu2,ex_quant_fe2,ex_quant_k2,ex_quant_mg2,ex_quant_na2,ex_quant_ni2,ex_quant_zn2,ex_quant_al3," +
-                "ex_quant_ca3,ex_quant_cr3,ex_quant_cu3,ex_quant_fe3,ex_quant_k3,ex_quant_mg3,ex_quant_na3,ex_quant_ni3,ex_quant_zn3,result_al,result_ca,result_cr,result_cu,result_fe,result_k,result_mg,result_na,result_ni,result_zn,mat_prima1,mat_lote1,mat_val1,mat_prima2,matt_lote2,mat_val2,mat_prima3,mat_lote3,mat_val3," +
+                "ex_lim_na,ex_lim_ni,ex_lim_zn, result_al,result_ca,result_cr,result_cu,result_fe,result_k,result_mg,result_na,result_ni,result_zn,mat_prima1,mat_lote1,mat_val1,mat_prima2,matt_lote2,mat_val2,mat_prima3,mat_lote3,mat_val3," +
                 "mat_prima4,mat_lote4,mat_val4,mat_prima5,mat_lote5,mat_val5,mat_prima6,mat_lote6,mat_val6,mat_prima7,mat_lote7,mat_val7,mat_prima8,mat_lote8,mat_val8,mat_prima9,mat_lote9,mat_val9,mat_prima10,mat_lote10,mat_val10,mat_prima11,mat_lote11,mat_val11,mat_prima12,mat_lote12,mat_val12,mat_prima13,mat_lote13,mat_val13," +
                 "inst_desc1,inst_cod1,inst_val1,inst_desc2,inst_cod2,inst_val2,inst_desc3,inst_cod3,inst_val3,inst_desc4,inst_cod4,inst_val4,inst_desc5,inst_cod5,inst_val5,inst_desc6,inst_cod6,inst_val6,inst_desc7,inst_cod7,inst_val7,inst_desc8,inst_cod8,inst_val8,inst_desc9,inst_cod9,inst_val9,inst_desc10,inst_cod10,inst_val10," +
                 "inst_desc11,inst_cod11,inst_val11,inst_dec12,inst_cod12,inst_val12,inst_desc14,inst_cod14,inst_val14,equi_ee,equi_de,observacoes,executado,auxiliado,media_al,media_ca,media_cr,media_cu,media_fe,media_k,media_mg,media_na,media_ni,media_zn")] ColetaModel.ArlaMetais metais,
           [Bind("branco_al,branco_ca,branco_cr,branco_cu,branco_fe,branco_k,branco_mg,branco_na,branco_ni,branco_zn,resul_ob_al1,resul_ob_ca1,resul_ob_cr1,resul_ob_cu1," +
             "resul_ob_fe1,resul_ob_k1,resul_ob_mg1,resul_ob_na1,resul_ob_ni1,resul_ob_zn1,resul_ob_al2,resul_ob_ca2,resul_ob_cr2,resul_ob_cu2,resul_ob_fe2,resul_ob_k2,resul_ob_mg2,resul_ob_na2,resul_ob_ni2,resul_ob_zn2,resul_ob_al3," +
-            "resul_ob_ca3,resul_ob_cr3,resul_ob_cu3,resul_ob_fe3,resul_ob_k3,resul_ob_mg3,resul_ob_na3,resul_ob_ni3,resul_ob_zn3,resul_con_al1,resul_con_ca1,resul_con_cr1,resul_con_cu1,resul_con_fe1,resul_con_k1,resul_con_mg1," +
-            "resul_con_na1,resul_con_ni1,resul_con_zn1,resul_con_al2,resul_con_ca2,resul_con_cr2,resul_con_cu2,resul_con_fe2,resul_con_k2,resul_con_mg2,resul_con_na2,resul_con_ni2,resul_con_zn2")] ColetaModel.MetaisTratamento tratamento)
+            "resul_ob_ca3,resul_ob_cr3,resul_ob_cu3,resul_ob_fe3,resul_ob_k3,resul_ob_mg3,resul_ob_na3,resul_ob_ni3,resul_ob_zn3")] ColetaModel.MetaisTratamento tratamento)
         {
-
             try
             {
-                //pegando do html Arla Metais
-
-                DateTime data_ini = metais.data_ini;
-                DateTime data_term = metais.data_term;
-                string norma = metais.norma;
-                string np = metais.np;
-                string descricao = metais.descricao;
-                float ex_lq_al = metais.ex_lq_al;
-                float ex_lq_ca = metais.ex_lq_ca;
-                float ex_lq_cr = metais.ex_lq_cr;
-                float ex_lq_cu = metais.ex_lq_cu;
-                float ex_lq_fe = metais.ex_lq_fe;
-                float ex_lq_k = metais.ex_lq_k;
-                float ex_lq_mg = metais.ex_lq_mg;
-                float ex_lq_na = metais.ex_lq_na;
-                float ex_lq_ni = metais.ex_lq_ni;
-                float ex_lq_zn = metais.ex_lq_zn;
-                float ex_lim_al = metais.ex_lim_al;
-                float ex_lim_ca = metais.ex_lim_ca;
-                float ex_lim_cr = metais.ex_lim_cr;
-                float ex_lim_cu = metais.ex_lim_cu;
-                float ex_lim_fe = metais.ex_lim_fe;
-                float ex_lim_k = metais.ex_lim_k;
-                float ex_lim_mg = metais.ex_lim_mg;
-                float ex_lim_na = metais.ex_lim_na;
-                float ex_lim_ni = metais.ex_lim_ni;
-                float ex_lim_zn = metais.ex_lim_zn;
-                string ex_quant_al1 = metais.ex_quant_al1;
-                string ex_quant_ca1 = metais.ex_quant_ca1;
-                string ex_quant_cr1 = metais.ex_quant_cr1;
-                string ex_quant_cu1 = metais.ex_quant_cu1;
-                string ex_quant_fe1 = metais.ex_quant_fe1;
-                string ex_quant_k1 = metais.ex_quant_k1;
-                string ex_quant_mg1 = metais.ex_quant_mg1;
-                string ex_quant_na1 = metais.ex_quant_na1;
-                string ex_quant_ni1 = metais.ex_quant_ni1;
-                string ex_quant_zn1 = metais.ex_quant_zn1;
-                string ex_quant_al2 = metais.ex_quant_al2;
-                string ex_quant_ca2 = metais.ex_quant_ca2;
-                string ex_quant_cr2 = metais.ex_quant_cr2;
-                string ex_quant_cu2 = metais.ex_quant_cu2;
-                string ex_quant_fe2 = metais.ex_quant_fe2;
-                string ex_quant_k2 = metais.ex_quant_k2;
-                string ex_quant_mg2 = metais.ex_quant_mg2;
-                string ex_quant_na2 = metais.ex_quant_na2;
-                string ex_quant_ni2 = metais.ex_quant_ni2;
-                string ex_quant_zn2 = metais.ex_quant_zn2;
-                string ex_quant_al3 = metais.ex_quant_al3;
-                string ex_quant_ca3 = metais.ex_quant_ca3;
-                string ex_quant_cr3 = metais.ex_quant_cr3;
-                string ex_quant_cu3 = metais.ex_quant_cu3;
-                string ex_quant_fe3 = metais.ex_quant_fe3;
-                string ex_quant_k3 = metais.ex_quant_k3;
-                string ex_quant_mg3 = metais.ex_quant_mg3;
-                string ex_quant_na3 = metais.ex_quant_na3;
-                string ex_quant_ni3 = metais.ex_quant_ni3;
-                string ex_quant_zn3 = metais.ex_quant_zn3;
-                string result_al = metais.result_al;
-                string result_ca = metais.result_ca;
-                string result_cr = metais.result_cr;
-                string result_cu = metais.result_cu;
-                string result_fe = metais.result_fe;
-                string result_k = metais.result_k;
-                string result_mg = metais.result_mg;
-                string result_na = metais.result_na;
-                string result_ni = metais.result_ni;
-                string result_zn = metais.result_zn;
-                string mat_prima1 = metais.mat_prima1;
-                string mat_lote1 = metais.mat_lote1;
-                string mat_val1 = metais.mat_val1;
-                string mat_prima2 = metais.mat_prima2;
-                string matt_lote2 = metais.matt_lote2;
-                string mat_val2 = metais.mat_val2;
-                string mat_prima3 = metais.mat_prima3;
-                string mat_lote3 = metais.mat_lote3;
-                string mat_val3 = metais.mat_val3;
-                string mat_prima4 = metais.mat_prima4;
-                string mat_lote4 = metais.mat_lote4;
-                string mat_val4 = metais.mat_val4;
-                string mat_prima5 = metais.mat_prima5;
-                string mat_lote5 = metais.mat_lote5;
-                string mat_val5 = metais.mat_val5;
-                string mat_prima6 = metais.mat_prima6;
-                string mat_lote6 = metais.mat_lote6;
-                string mat_val6 = metais.mat_val6;
-                string mat_prima7 = metais.mat_prima7;
-                string mat_lote7 = metais.mat_lote7;
-                string mat_val7 = metais.mat_val7;
-                string mat_prima8 = metais.mat_prima8;
-                string mat_lote8 = metais.mat_lote8;
-                string mat_val8 = metais.mat_val8;
-                string mat_prima9 = metais.mat_prima9;
-                string mat_lote9 = metais.mat_lote9;
-                string mat_val9 = metais.mat_val9;
-                string mat_prima10 = metais.mat_prima10;
-                string mat_lote10 = metais.mat_lote10;
-                string mat_val10 = metais.mat_val10;
-                string mat_prima11 = metais.mat_prima11;
-                string mat_lote11 = metais.mat_lote11;
-                string mat_val11 = metais.mat_val11;
-                string mat_prima12 = metais.mat_prima12;
-                string mat_lote12 = metais.mat_lote12;
-                string mat_val12 = metais.mat_val12;
-                string mat_prima13 = metais.mat_prima13;
-                string mat_lote13 = metais.mat_lote13;
-                string mat_val13 = metais.mat_val13;
-                string inst_desc1 = metais.inst_desc1;
-                string inst_cod1 = metais.inst_cod1;
-                string inst_val1 = metais.inst_val1;
-                string inst_desc2 = metais.inst_desc2;
-                string inst_cod2 = metais.inst_cod2;
-                string inst_val2 = metais.inst_val2;
-                string inst_desc3 = metais.inst_desc3;
-                string inst_cod3 = metais.inst_cod3;
-                string inst_val3 = metais.inst_val3;
-                string inst_desc4 = metais.inst_desc4;
-                string inst_cod4 = metais.inst_cod4;
-                string inst_val4 = metais.inst_val4;
-                string inst_desc5 = metais.inst_desc5;
-                string inst_cod5 = metais.inst_cod5;
-                string inst_val5 = metais.inst_val5;
-                string inst_desc6 = metais.inst_desc6;
-                string inst_cod6 = metais.inst_cod6;
-                string inst_val6 = metais.inst_val6;
-                string inst_desc7 = metais.inst_desc7;
-                string inst_cod7 = metais.inst_cod7;
-                string inst_val7 = metais.inst_val7;
-                string inst_desc8 = metais.inst_desc8;
-                string inst_cod8 = metais.inst_cod8;
-                string inst_val8 = metais.inst_val8;
-                string inst_desc9 = metais.inst_desc9;
-                string inst_cod9 = metais.inst_cod9;
-                string inst_val9 = metais.inst_val9;
-                string inst_desc10 = metais.inst_desc10;
-                string inst_cod10 = metais.inst_cod10;
-                string inst_val10 = metais.inst_val10;
-                string inst_desc11 = metais.inst_desc11;
-                string inst_cod11 = metais.inst_cod11;
-                string inst_val11 = metais.inst_val11;
-                string inst_dec12 = metais.inst_dec12;
-                string inst_cod12 = metais.inst_cod12;
-                string inst_val12 = metais.inst_val12;
-                string inst_desc14 = metais.inst_desc14;
-                string inst_cod14 = metais.inst_cod14;
-                string inst_val14 = metais.inst_val14;
-                string equi_ee = metais.equi_ee;
-                string equi_de = metais.equi_de;
-                string observacoes = metais.observacoes;
-                string executado = metais.executado;
-                string auxiliado = metais.auxiliado;
-                string media_al = metais.media_al;
-                string media_ca = metais.media_ca;
-                string media_cr = metais.media_cr;
-                string media_cu = metais.media_cu;
-                string media_fe = metais.media_fe;
-                string media_k = metais.media_k;
-                string media_mg = metais.media_mg;
-                string media_na = metais.media_na;
-                string media_ni = metais.media_ni;
-                string media_zn = metais.media_zn;
-
-
-                var salvardados = new ColetaModel.ArlaMetais
+                if (OS != null && OS != "0" && orcamento != "0")
                 {
+                    //pegando do html Arla Tratamento
+                    DateTime data_ini = metais.data_ini;
+                    DateTime data_term = metais.data_term;
+                    string norma = metais.norma;
+                    string np = metais.np;
+                    string descricao = metais.descricao;
+                    string observacoes = metais.observacoes;
+                    string executado = metais.executado;
+                    string auxiliado = metais.auxiliado;
+                    float branco_al = tratamento.branco_al;
+                    float branco_ca = tratamento.branco_ca;
+                    float branco_cr = tratamento.branco_cr;
+                    float branco_cu = tratamento.branco_cu;
+                    float branco_fe = tratamento.branco_fe;
+                    float branco_k = tratamento.branco_k;
+                    float branco_mg = tratamento.branco_mg;
+                    float branco_na = tratamento.branco_na;
+                    float branco_ni = tratamento.branco_ni;
+                    float branco_zn = tratamento.branco_zn;
+                    float resul_ob_al1 = tratamento.resul_ob_al1;
+                    float resul_ob_ca1 = tratamento.resul_ob_ca1;
+                    float resul_ob_cr1 = tratamento.resul_ob_cr1;
+                    float resul_ob_cu1 = tratamento.resul_ob_cu1;
+                    float resul_ob_fe1 = tratamento.resul_ob_fe1;
+                    float resul_ob_k1 = tratamento.resul_ob_k1;
+                    float resul_ob_mg1 = tratamento.resul_ob_mg1;
+                    float resul_ob_na1 = tratamento.resul_ob_na1;
+                    float resul_ob_ni1 = tratamento.resul_ob_ni1;
+                    float resul_ob_zn1 = tratamento.resul_ob_zn1;
+                    float resul_ob_al2 = tratamento.resul_ob_al2;
+                    float resul_ob_ca2 = tratamento.resul_ob_ca2;
+                    float resul_ob_cr2 = tratamento.resul_ob_cr2;
+                    float resul_ob_cu2 = tratamento.resul_ob_cu2;
+                    float resul_ob_fe2 = tratamento.resul_ob_fe2;
+                    float resul_ob_k2 = tratamento.resul_ob_k2;
+                    float resul_ob_mg2 = tratamento.resul_ob_mg2;
+                    float resul_ob_na2 = tratamento.resul_ob_na2;
+                    float resul_ob_ni2 = tratamento.resul_ob_ni2;
+                    float resul_ob_zn2 = tratamento.resul_ob_zn2;
+                    float resul_ob_al3 = tratamento.resul_ob_al3;
+                    float resul_ob_ca3 = tratamento.resul_ob_ca3;
+                    float resul_ob_cr3 = tratamento.resul_ob_cr3;
+                    float resul_ob_cu3 = tratamento.resul_ob_cu3;
+                    float resul_ob_fe3 = tratamento.resul_ob_fe3;
+                    float resul_ob_k3 = tratamento.resul_ob_k3;
+                    float resul_ob_mg3 = tratamento.resul_ob_mg3;
+                    float resul_ob_na3 = tratamento.resul_ob_na3;
+                    float resul_ob_ni3 = tratamento.resul_ob_ni3;
+                    float resul_ob_zn3 = tratamento.resul_ob_zn3;
 
-                    os = OS,
-                    orcamento = orcamento,
-                    ex_lq_al = ex_lq_al,
-                    ex_lq_ca = ex_lq_ca,
-                    ex_lq_cr = ex_lq_cr,
-                    ex_lq_cu = ex_lq_cu,
-                    ex_lq_fe = ex_lq_fe,
-                    ex_lq_k = ex_lq_k,
-                    ex_lq_mg = ex_lq_mg,
-                    ex_lq_na = ex_lq_na,
-                    ex_lq_ni = ex_lq_ni,
-                    ex_lq_zn = ex_lq_zn,
-                    ex_lim_al = ex_lim_al,
-                    ex_lim_ca = ex_lim_ca,
-                    ex_lim_cr = ex_lim_cr,
-                    ex_lim_cu = ex_lim_cu,
-                    ex_lim_fe = ex_lim_fe,
-                    ex_lim_k = ex_lim_k,
-                    ex_lim_mg = ex_lim_mg,
-                    ex_lim_na = ex_lim_na,
-                    ex_lim_ni = ex_lim_ni,
-                    ex_lim_zn = ex_lim_zn,
-                    ex_quant_al1 = ex_quant_al1,
-                    ex_quant_ca1 = ex_quant_ca1,
-                    ex_quant_cr1 = ex_quant_cr1,
-                    ex_quant_cu1 = ex_quant_cu1,
-                    ex_quant_fe1 = ex_quant_fe1,
-                    ex_quant_k1 = ex_quant_k1,
-                    ex_quant_mg1 = ex_quant_mg1,
-                    ex_quant_na1 = ex_quant_na1,
-                    ex_quant_ni1 = ex_quant_ni1,
-                    ex_quant_zn1 = ex_quant_zn1,
-                    ex_quant_al2 = ex_quant_al2,
-                    ex_quant_ca2 = ex_quant_ca2,
-                    ex_quant_cr2 = ex_quant_cr2,
-                    ex_quant_cu2 = ex_quant_cu2,
-                    ex_quant_fe2 = ex_quant_fe2,
-                    ex_quant_k2 = ex_quant_k2,
-                    ex_quant_mg2 = ex_quant_mg2,
-                    ex_quant_na2 = ex_quant_na2,
-                    ex_quant_ni2 = ex_quant_ni2,
-                    ex_quant_zn2 = ex_quant_zn2,
-                    ex_quant_al3 = ex_quant_al3,
-                    ex_quant_ca3 = ex_quant_ca3,
-                    ex_quant_cr3 = ex_quant_cr3,
-                    ex_quant_cu3 = ex_quant_cu3,
-                    ex_quant_fe3 = ex_quant_fe3,
-                    ex_quant_k3 = ex_quant_k3,
-                    ex_quant_mg3 = ex_quant_mg3,
-                    ex_quant_na3 = ex_quant_na3,
-                    ex_quant_ni3 = ex_quant_ni3,
-                    ex_quant_zn3 = ex_quant_zn3,
-                    result_al = result_al,
-                    result_ca = result_ca,
-                    result_cr = result_cr,
-                    result_cu = result_cu,
-                    result_fe = result_fe,
-                    result_k = result_k,
-                    result_mg = result_mg,
-                    result_na = result_na,
-                    result_ni = result_ni,
-                    result_zn = result_zn,
-                    mat_prima1 = mat_prima1,
-                    mat_lote1 = mat_lote1,
-                    mat_val1 = mat_val1,
-                    mat_prima2 = mat_prima2,
-                    matt_lote2 = matt_lote2,
-                    mat_val2 = mat_val2,
-                    mat_prima3 = mat_prima3,
-                    mat_lote3 = mat_lote3,
-                    mat_val3 = mat_val3,
-                    mat_prima4 = mat_prima4,
-                    mat_lote4 = mat_lote4,
-                    mat_val4 = mat_val4,
-                    mat_prima5 = mat_prima5,
-                    mat_lote5 = mat_lote5,
-                    mat_val5 = mat_val5,
-                    mat_prima6 = mat_prima6,
-                    mat_lote6 = mat_lote6,
-                    mat_val6 = mat_val6,
-                    mat_prima7 = mat_prima7,
-                    mat_lote7 = mat_lote7,
-                    mat_val7 = mat_val7,
-                    mat_prima8 = mat_prima8,
-                    mat_lote8 = mat_lote8,
-                    mat_val8 = mat_val8,
-                    mat_prima9 = mat_prima9,
-                    mat_lote9 = mat_lote9,
-                    mat_val9 = mat_val9,
-                    mat_prima10 = mat_prima10,
-                    mat_lote10 = mat_lote10,
-                    mat_val10 = mat_val10,
-                    mat_prima11 = mat_prima11,
-                    mat_lote11 = mat_lote11,
-                    mat_val11 = mat_val11,
-                    mat_prima12 = mat_prima12,
-                    mat_lote12 = mat_lote12,
-                    mat_val12 = mat_val12,
-                    mat_prima13 = mat_prima13,
-                    mat_lote13 = mat_lote13,
-                    mat_val13 = mat_val13,
-                    inst_desc1 = inst_desc1,
-                    inst_cod1 = inst_cod1,
-                    inst_val1 = inst_val1,
-                    inst_desc2 = inst_desc2,
-                    inst_cod2 = inst_cod2,
-                    inst_val2 = inst_val2,
-                    inst_desc3 = inst_desc3,
-                    inst_cod3 = inst_cod3,
-                    inst_val3 = inst_val3,
-                    inst_desc4 = inst_desc4,
-                    inst_cod4 = inst_cod4,
-                    inst_val4 = inst_val4,
-                    inst_desc5 = inst_desc5,
-                    inst_cod5 = inst_cod5,
-                    inst_val5 = inst_val5,
-                    inst_desc6 = inst_desc6,
-                    inst_cod6 = inst_cod6,
-                    inst_val6 = inst_val6,
-                    inst_desc7 = inst_desc7,
-                    inst_cod7 = inst_cod7,
-                    inst_val7 = inst_val7,
-                    inst_desc8 = inst_desc8,
-                    inst_cod8 = inst_cod8,
-                    inst_val8 = inst_val8,
-                    inst_desc9 = inst_desc9,
-                    inst_cod9 = inst_cod9,
-                    inst_val9 = inst_val9,
-                    inst_desc10 = inst_desc10,
-                    inst_cod10 = inst_cod10,
-                    inst_val10 = inst_val10,
-                    inst_desc11 = inst_desc11,
-                    inst_cod11 = inst_cod11,
-                    inst_val11 = inst_val11,
-                    inst_dec12 = inst_dec12,
-                    inst_cod12 = inst_cod12,
-                    inst_val12 = inst_val12,
-                    inst_desc14 = inst_desc14,
-                    inst_cod14 = inst_cod14,
-                    inst_val14 = inst_val14,
-                    equi_ee = equi_ee,
-                    equi_de = equi_de,
-                    observacoes = observacoes,
-                    executado = executado,
-                    auxiliado = auxiliado,
-                    media_al = media_al,
-                    media_ca = media_ca,
-                    media_cr = media_cr,
-                    media_cu = media_cu,
-                    media_fe = media_fe,
-                    media_k = media_k,
-                    media_mg = media_mg,
-                    media_na = media_na,
-                    media_ni = media_ni,
-                    media_zn = media_zn,
+                    //realizando a conta obtidos do resultados e ja convertendo para 5 casas decimais.
+                    float resul_con_al1 = (float)Math.Round((((resul_ob_al1 - branco_al) * 0.01f) / 0.02f), 5);
+                    float resul_con_ca1 = (float)Math.Round((((resul_ob_ca1 - branco_ca) * 0.01f) / 0.02f), 5);
+                    float resul_con_cr1 = (float)Math.Round((((resul_ob_cr1 - branco_cr) * 0.01f) / 0.02f), 5);
+                    float resul_con_cu1 = (float)Math.Round((((resul_ob_cu1 - branco_cu) * 0.01f) / 0.02f), 5);
+                    float resul_con_fe1 = (float)Math.Round((((resul_ob_fe1 - branco_fe) * 0.01f) / 0.02f), 5);
+                    float resul_con_k1 = (float)Math.Round((((resul_ob_k1 - branco_k) * 0.01f) / 0.02f), 5);
+                    float resul_con_mg1 = (float)Math.Round((((resul_ob_mg1 - branco_mg) * 0.01f) / 0.02f), 5);
+                    float resul_con_na1 = (float)Math.Round((((resul_ob_na1 - branco_na) * 0.01f) / 0.02f), 5);
+                    float resul_con_ni1 = (float)Math.Round((((resul_ob_ni1 - branco_ni) * 0.01f) / 0.02f), 5);
+                    float resul_con_zn1 = (float)Math.Round((((resul_ob_zn1 - branco_zn) * 0.01f) / 0.02f), 5);
+                    float resul_con_al2 = (float)Math.Round((((resul_ob_al2 - branco_al) * 0.01f) / 0.02f), 5);
+                    float resul_con_ca2 = (float)Math.Round((((resul_ob_ca2 - branco_ca) * 0.01f) / 0.02f), 5);
+                    float resul_con_cr2 = (float)Math.Round((((resul_ob_cr2 - branco_cr) * 0.01f) / 0.02f), 5);
+                    float resul_con_cu2 = (float)Math.Round((((resul_ob_cu2 - branco_cr) * 0.01f) / 0.02f), 5);
+                    float resul_con_fe2 = (float)Math.Round((((resul_ob_fe2 - branco_fe) * 0.01f) / 0.02f), 5);
+                    float resul_con_k2 = (float)Math.Round((((resul_ob_k2 - branco_k) * 0.01f) / 0.02f), 5);
+                    float resul_con_mg2 = (float)Math.Round((((resul_ob_mg2 - branco_mg) * 0.01f) / 0.02f), 5);
+                    float resul_con_na2 = (float)Math.Round((((resul_ob_na2 - branco_na) * 0.01f) / 0.02f), 5);
+                    float resul_con_ni2 = (float)Math.Round((((resul_ob_ni2 - branco_ni) * 0.01f) / 0.02f), 5);
+                    float resul_con_zn2 = (float)Math.Round((((resul_ob_zn2 - branco_zn) * 0.01f) / 0.02f), 5);
+                    float resul_con_al3 = (float)Math.Round((((resul_ob_al3 - branco_al) * 0.01f) / 0.02f), 5);
+                    float resul_con_ca3 = (float)Math.Round((((resul_ob_ca3 - branco_ca) * 0.01f) / 0.02f), 5);
+                    float resul_con_cr3 = (float)Math.Round((((resul_ob_cr3 - branco_cr) * 0.01f) / 0.02f), 5);
+                    float resul_con_cu3 = (float)Math.Round((((resul_ob_cu3 - branco_cu) * 0.01f) / 0.02f), 5);
+                    float resul_con_fe3 = (float)Math.Round((((resul_ob_fe3 - branco_fe) * 0.01f) / 0.02f), 5);
+                    float resul_con_k3 = (float)Math.Round((((resul_ob_k3 - branco_k) * 0.01f) / 0.02f), 5);
+                    float resul_con_mg3 = (float)Math.Round((((resul_ob_mg3 - branco_mg) * 0.01f) / 0.02f), 5);
+                    float resul_con_na3 = (float)Math.Round((((resul_ob_na3 - branco_na) * 0.01f) / 0.02f), 5);
+                    float resul_con_ni3 = (float)Math.Round((((resul_ob_ni3 - branco_ni) * 0.01f) / 0.02f), 5);
+                    float resul_con_zn3 = (float)Math.Round((((resul_ob_zn3 - branco_zn) * 0.01f) / 0.02f), 5);
+
+                    //salvar dados no banco.
+                    var salvardadostrat = new ColetaModel.MetaisTratamento
+                    {
+                        os = OS,
+                        orcamento = orcamento,
+                        branco_al = branco_al,
+                        branco_ca = branco_ca,
+                        branco_cr = branco_cr,
+                        branco_cu = branco_cu,
+                        branco_fe = branco_fe,
+                        branco_k = branco_k,
+                        branco_mg = branco_mg,
+                        branco_na = branco_na,
+                        branco_ni = branco_ni,
+                        branco_zn = branco_zn,
+                        resul_ob_al1 = resul_ob_al1,
+                        resul_ob_ca1 = resul_ob_ca1,
+                        resul_ob_cr1 = resul_ob_cr1,
+                        resul_ob_cu1 = resul_ob_cu1,
+                        resul_ob_fe1 = resul_ob_fe1,
+                        resul_ob_k1 = resul_ob_k1,
+                        resul_ob_mg1 = resul_ob_mg1,
+                        resul_ob_na1 = resul_ob_na1,
+                        resul_ob_ni1 = resul_ob_ni1,
+                        resul_ob_zn1 = resul_ob_zn1,
+                        resul_ob_al2 = resul_ob_al2,
+                        resul_ob_ca2 = resul_ob_ca2,
+                        resul_ob_cr2 = resul_ob_cr2,
+                        resul_ob_cu2 = resul_ob_cu2,
+                        resul_ob_fe2 = resul_ob_fe2,
+                        resul_ob_k2 = resul_ob_k2,
+                        resul_ob_mg2 = resul_ob_mg2,
+                        resul_ob_na2 = resul_ob_na2,
+                        resul_ob_ni2 = resul_ob_ni2,
+                        resul_ob_zn2 = resul_ob_zn2,
+                        resul_ob_al3 = resul_ob_al3,
+                        resul_ob_ca3 = resul_ob_ca3,
+                        resul_ob_cr3 = resul_ob_cr3,
+                        resul_ob_cu3 = resul_ob_cu3,
+                        resul_ob_fe3 = resul_ob_fe3,
+                        resul_ob_k3 = resul_ob_k3,
+                        resul_ob_mg3 = resul_ob_mg3,
+                        resul_ob_na3 = resul_ob_na3,
+                        resul_ob_ni3 = resul_ob_ni3,
+                        resul_ob_zn3 = resul_ob_zn3,
+                        resul_con_al1 = resul_con_al1,
+                        resul_con_ca1 = resul_con_ca1,
+                        resul_con_cr1 = resul_con_cr1,
+                        resul_con_cu1 = resul_con_cu1,
+                        resul_con_fe1 = resul_con_fe1,
+                        resul_con_k1 = resul_con_k1,
+                        resul_con_mg1 = resul_con_mg1,
+                        resul_con_na1 = resul_con_na1,
+                        resul_con_ni1 = resul_con_ni1,
+                        resul_con_zn1 = resul_con_zn1,
+                        resul_con_al2 = resul_con_al2,
+                        resul_con_ca2 = resul_con_ca2,
+                        resul_con_cr2 = resul_con_cr2,
+                        resul_con_cu2 = resul_con_cu2,
+                        resul_con_fe2 = resul_con_fe2,
+                        resul_con_k2 = resul_con_k2,
+                        resul_con_mg2 = resul_con_mg2,
+                        resul_con_na2 = resul_con_na2,
+                        resul_con_ni2 = resul_con_ni2,
+                        resul_con_zn2 = resul_con_zn2,
+                        resul_con_al3 = resul_con_al3,
+                        resul_con_ca3 = resul_con_ca3,
+                        resul_con_cr3 = resul_con_cr3,
+                        resul_con_cu3 = resul_con_cu3,
+                        resul_con_fe3 = resul_con_fe3,
+                        resul_con_k3 = resul_con_k3,
+                        resul_con_mg3 = resul_con_mg3,
+                        resul_con_na3 = resul_con_na3,
+                        resul_con_ni3 = resul_con_ni3,
+                        resul_con_zn3 = resul_con_zn3,
+                        observacoes = observacoes,
+                        auxiliado = auxiliado,
+                        executado = executado,
+                    };
                     //salvando no banco.
-                };
-                _qcontext.Add(salvardados);
-                await _qcontext.SaveChangesAsync();
+                    //_qcontext.Add(salvardadostrat);
+                    //await _qcontext.SaveChangesAsync();
+
+                    //pegando do html Arla Metais
+                   
+                    float ex_lq_al = metais.ex_lq_al;
+                    float ex_lq_ca = metais.ex_lq_ca;
+                    float ex_lq_cr = metais.ex_lq_cr;
+                    float ex_lq_cu = metais.ex_lq_cu;
+                    float ex_lq_fe = metais.ex_lq_fe;
+                    float ex_lq_k = metais.ex_lq_k;
+                    float ex_lq_mg = metais.ex_lq_mg;
+                    float ex_lq_na = metais.ex_lq_na;
+                    float ex_lq_ni = metais.ex_lq_ni;
+                    float ex_lq_zn = metais.ex_lq_zn;
+                    float ex_lim_al = metais.ex_lim_al;
+                    float ex_lim_ca = metais.ex_lim_ca;
+                    float ex_lim_cr = metais.ex_lim_cr;
+                    float ex_lim_cu = metais.ex_lim_cu;
+                    float ex_lim_fe = metais.ex_lim_fe;
+                    float ex_lim_k = metais.ex_lim_k;
+                    float ex_lim_mg = metais.ex_lim_mg;
+                    float ex_lim_na = metais.ex_lim_na;
+                    float ex_lim_ni = metais.ex_lim_ni;
+                    float ex_lim_zn = metais.ex_lim_zn;
+                    string mat_prima1 = metais.mat_prima1;
+                    string mat_lote1 = metais.mat_lote1;
+                    DateTime mat_val1 = metais.mat_val1;
+                    string mat_prima2 = metais.mat_prima2;
+                    string matt_lote2 = metais.matt_lote2;
+                    DateTime mat_val2 = metais.mat_val2;
+                    string mat_prima3 = metais.mat_prima3;
+                    string mat_lote3 = metais.mat_lote3;
+                    DateTime mat_val3 = metais.mat_val3;
+                    string mat_prima4 = metais.mat_prima4;
+                    string mat_lote4 = metais.mat_lote4;
+                    DateTime mat_val4 = metais.mat_val4;
+                    string mat_prima5 = metais.mat_prima5;
+                    string mat_lote5 = metais.mat_lote5;
+                    DateTime mat_val5 = metais.mat_val5;
+                    string mat_prima6 = metais.mat_prima6;
+                    string mat_lote6 = metais.mat_lote6;
+                    DateTime mat_val6 = metais.mat_val6;
+                    string mat_prima7 = metais.mat_prima7;
+                    string mat_lote7 = metais.mat_lote7;
+                    DateTime mat_val7 = metais.mat_val7;
+                    string mat_prima8 = metais.mat_prima8;
+                    string mat_lote8 = metais.mat_lote8;
+                    DateTime mat_val8 = metais.mat_val8;
+                    string mat_prima9 = metais.mat_prima9;
+                    string mat_lote9 = metais.mat_lote9;
+                    DateTime mat_val9 = metais.mat_val9;
+                    string mat_prima10 = metais.mat_prima10;
+                    string mat_lote10 = metais.mat_lote10;
+                    DateTime mat_val10 = metais.mat_val10;
+                    string mat_prima11 = metais.mat_prima11;
+                    string mat_lote11 = metais.mat_lote11;
+                    DateTime mat_val11 = metais.mat_val11;
+                    string mat_prima12 = metais.mat_prima12;
+                    string mat_lote12 = metais.mat_lote12;
+                    DateTime mat_val12 = metais.mat_val12;
+                    string mat_prima13 = metais.mat_prima13;
+                    string mat_lote13 = metais.mat_lote13;
+                    DateTime mat_val13 = metais.mat_val13;
+                    string inst_desc1 = metais.inst_desc1;
+                    string inst_cod1 = metais.inst_cod1;
+                    DateTime inst_val1 = metais.inst_val1;
+                    string inst_desc2 = metais.inst_desc2;
+                    string inst_cod2 = metais.inst_cod2;
+                    DateTime inst_val2 = metais.inst_val2;
+                    string inst_desc3 = metais.inst_desc3;
+                    string inst_cod3 = metais.inst_cod3;
+                    DateTime inst_val3 = metais.inst_val3;
+                    string inst_desc4 = metais.inst_desc4;
+                    string inst_cod4 = metais.inst_cod4;
+                    DateTime inst_val4 = metais.inst_val4;
+                    string inst_desc5 = metais.inst_desc5;
+                    string inst_cod5 = metais.inst_cod5;
+                    DateTime inst_val5 = metais.inst_val5;
+                    string inst_desc6 = metais.inst_desc6;
+                    string inst_cod6 = metais.inst_cod6;
+                    DateTime inst_val6 = metais.inst_val6;
+                    string inst_desc7 = metais.inst_desc7;
+                    string inst_cod7 = metais.inst_cod7;
+                    DateTime inst_val7 = metais.inst_val7;
+                    string inst_desc8 = metais.inst_desc8;
+                    string inst_cod8 = metais.inst_cod8;
+                    DateTime inst_val8 = metais.inst_val8;
+                    string inst_desc9 = metais.inst_desc9;
+                    string inst_cod9 = metais.inst_cod9;
+                    DateTime inst_val9 = metais.inst_val9;
+                    string inst_desc10 = metais.inst_desc10;
+                    string inst_cod10 = metais.inst_cod10;
+                    DateTime inst_val10 = metais.inst_val10;
+                    string inst_desc11 = metais.inst_desc11;
+                    string inst_cod11 = metais.inst_cod11;
+                    DateTime inst_val11 = metais.inst_val11;
+                    string inst_dec12 = metais.inst_dec12;
+                    string inst_cod12 = metais.inst_cod12;
+                    DateTime inst_val12 = metais.inst_val12;
+                    string inst_desc14 = metais.inst_desc14;
+                    string inst_cod14 = metais.inst_cod14;
+                    DateTime inst_val14 = metais.inst_val14;
+                    string equi_ee = metais.equi_ee;
+                    string equi_de = metais.equi_de;
+
+                    //criando as variaveis vazias para depois guardar os valores da quantificação.
+                    string ex_quant_al1 = "";
+                    string ex_quant_ca1 = "";
+                    string ex_quant_cr1 = "";
+                    string ex_quant_cu1 = "";
+                    string ex_quant_fe1 = "";
+                    string ex_quant_k1 = "";
+                    string ex_quant_mg1 = "";
+                    string ex_quant_na1 = "";
+                    string ex_quant_ni1 = "";
+                    string ex_quant_zn1 = "";
+                    string ex_quant_al2 = "";
+                    string ex_quant_ca2 = "";
+                    string ex_quant_cr2 = "";
+                    string ex_quant_cu2 = "";
+                    string ex_quant_fe2 = "";
+                    string ex_quant_k2 = "";
+                    string ex_quant_mg2 = "";
+                    string ex_quant_na2 = "";
+                    string ex_quant_ni2 = "";
+                    string ex_quant_zn2 = "";
+                    string ex_quant_al3 = "";
+                    string ex_quant_ca3 = "";
+                    string ex_quant_cr3 = "";
+                    string ex_quant_cu3 = "";
+                    string ex_quant_fe3 = "";
+                    string ex_quant_k3 = "";
+                    string ex_quant_mg3 = "";
+                    string ex_quant_na3 = "";
+                    string ex_quant_ni3 = "";
+                    string ex_quant_zn3 = "";
 
 
-                //pegando do html Arla Tratamento
-                float branco_al = tratamento.branco_al;
-                float branco_ca = tratamento.branco_ca;
-                float branco_cr = tratamento.branco_cr;
-                float branco_cu = tratamento.branco_cu;
-                float branco_fe = tratamento.branco_fe;
-                float branco_k = tratamento.branco_k;
-                float branco_mg = tratamento.branco_mg;
-                float branco_na = tratamento.branco_na;
-                float branco_ni = tratamento.branco_ni;
-                float branco_zn = tratamento.branco_zn;
-                float resul_ob_al1 = tratamento.resul_ob_al1;
-                float resul_ob_ca1 = tratamento.resul_ob_ca1;
-                float resul_ob_cr1 = tratamento.resul_ob_cr1;
-                float resul_ob_cu1 = tratamento.resul_ob_cu1;
-                float resul_ob_fe1 = tratamento.resul_ob_fe1;
-                float resul_ob_k1 = tratamento.resul_ob_k1;
-                float resul_ob_mg1 = tratamento.resul_ob_mg1;
-                float resul_ob_na1 = tratamento.resul_ob_na1;
-                float resul_ob_ni1 = tratamento.resul_ob_ni1;
-                float resul_ob_zn1 = tratamento.resul_ob_zn1;
-                float resul_ob_al2 = tratamento.resul_con_al2;
-                float resul_ob_ca2 = tratamento.resul_ob_ca2;
-                float resul_ob_cr2 = tratamento.resul_ob_cr2;
-                float resul_ob_cu2 = tratamento.resul_ob_cu2;
-                float resul_ob_fe2 = tratamento.resul_ob_fe2;
-                float resul_ob_k2 = tratamento.resul_ob_k2;
-                float resul_ob_mg2 = tratamento.resul_ob_mg2;
-                float resul_ob_na2 = tratamento.resul_ob_na2;
-                float resul_ob_ni2 = tratamento.resul_ob_ni2;
-                float resul_ob_zn2 = tratamento.resul_ob_zn2;
-                float resul_ob_al3 = tratamento.resul_ob_al3;
-                float resul_ob_ca3 = tratamento.resul_ob_ca3;
-                float resul_ob_cr3 = tratamento.resul_ob_cr3;
-                float resul_ob_cu3 = tratamento.resul_ob_cu3;
-                float resul_ob_fe3 = tratamento.resul_ob_fe3;
-                float resul_ob_k3 = tratamento.resul_ob_k3;
-                float resul_ob_mg3 = tratamento.resul_ob_mg3;
-                float resul_ob_na3 = tratamento.resul_ob_na3;
-                float resul_ob_ni3 = tratamento.resul_ob_ni3;
-                float resul_ob_zn3 = tratamento.resul_ob_zn3;
-                float resul_con_al1 = tratamento.resul_con_al1;
-                float resul_con_ca1 = tratamento.resul_con_ca1;
-                float resul_con_cr1 = tratamento.resul_con_cr1;
-                float resul_con_cu1 = tratamento.resul_con_cu1;
-                float resul_con_fe1 = tratamento.resul_con_fe1;
-                float resul_con_k1 = tratamento.resul_con_k1;
-                float resul_con_mg1 = tratamento.resul_con_mg1;
-                float resul_con_na1 = tratamento.resul_con_na1;
-                float resul_con_ni1 = tratamento.resul_con_ni1;
-                float resul_con_zn1 = tratamento.resul_con_zn1;
-                float resul_con_al2 = tratamento.resul_con_al2;
-                float resul_con_ca2 = tratamento.resul_con_ca2;
-                float resul_con_cr2 = tratamento.resul_con_cr2;
-                float resul_con_cu2 = tratamento.resul_con_cu2;
-                float resul_con_fe2 = tratamento.resul_con_fe2;
-                float resul_con_k2 = tratamento.resul_con_k2;
-                float resul_con_mg2 = tratamento.resul_con_mg2;
-                float resul_con_na2 = tratamento.resul_con_na2;
-                float resul_con_ni2 = tratamento.resul_con_ni2;
-                float resul_con_zn2 = tratamento.resul_con_zn2;
+                    //verificnado a primeira fileira de quantificação do anexo i
+                    if (resul_con_al1 < ex_lq_al)
+                    {
+                        ex_quant_al1 = "<LQ";
+                    }
+                    else
+                    {
+                        ex_quant_al1 = resul_con_al1.ToString();
+                    }
 
+                    if (resul_con_ca1 < ex_lq_ca)
+                    {
+                        ex_quant_ca1 = "<LQ";
+                    }
+                    else
+                    {
+                        ex_quant_ca1 = resul_con_ca1.ToString();
+                    }
 
-                var salvardadostrat = new ColetaModel.MetaisTratamento
+                    if (resul_con_cr1 < ex_lq_cr)
+                    {
+                        ex_quant_cr1 = "<LQ";
+                    }
+                    else
+                    {
+                        ex_quant_cr1 = resul_con_cr1.ToString();
+                    }
+
+                    if (resul_con_cu1 < ex_lq_cu)
+                    {
+                        ex_quant_cu1 = "<LQ";
+                    }
+                    else
+                    {
+                        ex_quant_cu1 = resul_con_cu1.ToString();
+                    }
+
+                    if (resul_con_fe1 < ex_lq_fe)
+                    {
+                        ex_quant_fe1 = "<LQ";
+                    }
+                    else
+                    {
+                        ex_quant_fe1 = resul_con_fe1.ToString();
+                    }
+
+                    if (resul_con_k1 < ex_lq_k)
+                    {
+                        ex_quant_k1 = "<LQ";
+                    }
+                    else
+                    {
+                        ex_quant_k1 = resul_con_k1.ToString();
+                    }
+
+                    if (resul_con_mg1 < ex_lq_mg)
+                    {
+                        ex_quant_mg1 = "<LQ";
+                    }
+                    else
+                    {
+                        ex_quant_mg1 = resul_con_mg1.ToString();
+                    }
+
+                    if (resul_con_na1 < ex_lq_na)
+                    {
+                        ex_quant_na1 = "<LQ";
+                    }
+                    else
+                    {
+                        ex_quant_na1 = resul_con_na1.ToString();
+                    }
+
+                    if (resul_con_ni1 < ex_lq_ni)
+                    {
+                        ex_quant_ni1 = "<LQ";
+                    }
+                    else
+                    {
+                        ex_quant_ni1 = resul_con_ni1.ToString();
+                    }
+
+                    if (resul_con_zn1 < ex_lq_zn)
+                    {
+                        ex_quant_zn1 = "<LQ";
+                    }
+                    else
+                    {
+                        ex_quant_zn1 = resul_con_zn1.ToString();
+                    }
+
+                    //verificando segunda fileira da quantificação anexo i.
+                    if (resul_con_al2 < ex_lq_al)
+                    {
+                        ex_quant_al2 = "<LQ";
+                    }
+                    else
+                    {
+                        ex_quant_al2 = resul_con_al2.ToString();
+                    }
+
+                    if (resul_con_ca2 < ex_lq_ca)
+                    {
+                        ex_quant_ca2 = "<LQ";
+                    }
+                    else
+                    {
+                        ex_quant_ca2 = resul_con_ca2.ToString();
+                    }
+
+                    if (resul_con_cr2 < ex_lq_cr)
+                    {
+                        ex_quant_cr2 = "LQ";
+                    }
+                    else
+                    {
+                        ex_quant_cr2 = resul_con_cr2.ToString();
+                    }
+
+                    if (resul_con_cu2 < ex_lq_cu)
+                    {
+                        ex_quant_cu2 = "<LQ";
+                    }
+                    else
+                    {
+                        ex_quant_cu2 = resul_con_cu2.ToString();
+                    }
+
+                    if (resul_con_fe2 < ex_lq_fe)
+                    {
+                        ex_quant_fe2 = "<LQ";
+                    }
+                    else
+                    {
+                        ex_quant_fe2 = resul_con_fe2.ToString();
+                    }
+
+                    if (resul_con_k2 < ex_lq_k)
+                    {
+                        ex_quant_k2 = "<LQ";
+                    }
+                    else
+                    {
+                        ex_quant_k2 = resul_con_k2.ToString();
+                    }
+
+                    if (resul_con_mg2 < ex_lq_mg)
+                    {
+                        ex_quant_mg2 = "<LQ";
+                    }
+                    else
+                    {
+                        ex_quant_mg2 = resul_con_mg2.ToString();
+                    }
+
+                    if (resul_con_na2 < ex_lq_na)
+                    {
+                        ex_quant_na2 = "<LQ";
+                    }
+                    else
+                    {
+                        ex_quant_na2 = resul_con_na2.ToString();
+                    }
+
+                    if (resul_con_ni2 < ex_lq_ni)
+                    {
+                        ex_quant_ni2 = "<LQ";
+                    }
+                    else
+                    {
+                        ex_quant_ni2 = resul_con_ni2.ToString();
+                    }
+
+                    if (resul_con_zn2 < ex_lq_zn)
+                    {
+                        ex_quant_zn2 = "<LQ";
+                    }
+                    else
+                    {
+                        ex_quant_zn2 = resul_con_zn2.ToString();
+                    }
+
+                    //verificando  terceira da quantificação anexo i.
+                    if (resul_con_al3 < ex_lq_al)
+                    {
+                        ex_quant_al3 = "<LQ";
+                    }
+                    else
+                    {
+                        ex_quant_al3 = resul_con_al3.ToString();
+                    }
+
+                    if (resul_con_ca3 < ex_lq_ca)
+                    {
+                        ex_quant_ca3 = "<LQ";
+                    }
+                    else
+                    {
+                        ex_quant_ca3 = resul_con_ca3.ToString();
+                    }
+
+                    if (resul_con_cr3 < ex_lq_cr)
+                    {
+                        ex_quant_cr3 = "LQ";
+                    }
+                    else
+                    {
+                        ex_quant_cr3 = resul_con_cr3.ToString();
+                    }
+
+                    if (resul_con_cu3 < ex_lq_cu)
+                    {
+                        ex_quant_cu3 = "<LQ";
+                    }
+                    else
+                    {
+                        ex_quant_cu3 = resul_con_cu3.ToString();
+                    }
+
+                    if (resul_con_fe3 < ex_lq_fe)
+                    {
+                        ex_quant_fe3 = "<LQ";
+                    }
+                    else
+                    {
+                        ex_quant_fe3 = resul_con_fe3.ToString();
+                    }
+
+                    if (resul_con_k3 < ex_lq_k)
+                    {
+                        ex_quant_k3 = "<LQ";
+                    }
+                    else
+                    {
+                        ex_quant_k3 = resul_con_k3.ToString();
+                    }
+
+                    if (resul_con_mg3 < ex_lq_mg)
+                    {
+                        ex_quant_mg3 = "<LQ";
+                    }
+                    else
+                    {
+                        ex_quant_mg3 = resul_con_mg3.ToString();
+                    }
+
+                    if (resul_con_na3 < ex_lq_na)
+                    {
+                        ex_quant_na3 = "<LQ";
+                    }
+                    else
+                    {
+                        ex_quant_na3 = resul_con_na3.ToString();
+                    }
+
+                    if (resul_con_ni3 < ex_lq_ni)
+                    {
+                        ex_quant_ni3 = "<LQ";
+                    }
+                    else
+                    {
+                        ex_quant_ni3 = resul_con_ni2.ToString();
+                    }
+
+                    if (resul_con_zn3 < ex_lq_zn)
+                    {
+                        ex_quant_zn3 = "<LQ";
+                    }
+                    else
+                    {
+                        ex_quant_zn3 = resul_con_zn3.ToString();
+                    }
+
+                    //pegando valor final dos resultados e realizando as verificações para cada resultado..
+                    string result_al = "";
+                    string result_ca = "";
+                    string result_cr = "";
+                    string result_cu = "";
+                    string result_fe = "";
+                    string result_k = "";
+                    string result_mg = "";
+                    string result_na = "";
+                    string result_ni = "";
+                    string result_zn = "";
+
+                    if (ex_quant_al1 == "<LQ" || ex_quant_al2 == "<LQ" || ex_quant_al3 == "<LQ")
+                    {
+                        result_al = "<LQ";
+                    }
+                    else
+                    {
+                        float pegando_result_al = ((float.Parse(ex_quant_al1) + float.Parse(ex_quant_al2) + float.Parse(ex_quant_al3)) / 2);
+                        string convert_result_al = pegando_result_al.ToString();
+                        result_al = convert_result_al;
+                    }
+
+                    if (ex_quant_ca1 == "<LQ" || ex_quant_ca2 == "<LQ" || ex_quant_ca3 == "<LQ")
+                    {
+                        result_ca = "<LQ";
+                    }
+                    else
+                    {
+                        float pegando_result_ca = ((float.Parse(ex_quant_ca1) + float.Parse(ex_quant_ca2) + float.Parse(ex_quant_ca3)) / 2);
+                        string convert_result_ca = pegando_result_ca.ToString();
+                        result_ca = convert_result_ca;
+                    }
+
+                    if (ex_quant_cr1 == "<LQ" || ex_quant_cr2 == "<LQ" || ex_quant_cr3 == "<LQ")
+                    {
+                        result_cr = "<LQ";
+                    }
+                    else
+                    {
+                        float pegando_result_cr = ((float.Parse(ex_quant_cr1) + float.Parse(ex_quant_cr2) + float.Parse(ex_quant_cr3)) / 2);
+                        string convert_result_cr = pegando_result_cr.ToString();
+                        result_cr = convert_result_cr;
+                    }
+
+                    if (ex_quant_cu1 == "<LQ" || ex_quant_cu2 == "<LQ" || ex_quant_cu3 == "<LQ")
+                    {
+                        result_cu = "<LQ";
+                    }
+                    else
+                    {
+                        float pegando_result_cu = ((float.Parse(ex_quant_cu1) + float.Parse(ex_quant_cu2) + float.Parse(ex_quant_cu3)) / 2);
+                        string convert_result_cu = pegando_result_cu.ToString();
+                        result_cu = convert_result_cu;
+                    }
+
+                    if (ex_quant_fe1 == "<LQ" || ex_quant_fe2 == "<LQ" || ex_quant_fe3 == "<LQ")
+                    {
+                        result_fe = "<LQ";
+                    }
+                    else
+                    {
+                        float pegando_result_fe = ((float.Parse(ex_quant_fe1) + float.Parse(ex_quant_fe2) + float.Parse(ex_quant_fe3)) / 2);
+                        string convert_result_fe = pegando_result_fe.ToString();
+                        result_fe = convert_result_fe;
+                    }
+
+                    if (ex_quant_k1 == "<LQ" || ex_quant_k2 == "<LQ" || ex_quant_k3 == "<LQ")
+                    {
+                        result_k = "<LQ";
+                    }
+                    else
+                    {
+                        float pegando_result_k = ((float.Parse(ex_quant_k1) + float.Parse(ex_quant_k2) + float.Parse(ex_quant_k3)) / 2);
+                        string convert_result_k = pegando_result_k.ToString();
+                        result_k = convert_result_k;
+                    }
+
+                    if (ex_quant_mg1 == "<LQ" || ex_quant_mg2 == "<LQ" || ex_quant_mg3 == "<LQ")
+                    {
+                        result_mg = "<LQ";
+                    }
+                    else
+                    {
+                        float pegando_result_mg = ((float.Parse(ex_quant_mg1) + float.Parse(ex_quant_mg2) + float.Parse(ex_quant_mg3)) / 2);
+                        string convert_result_mg = pegando_result_mg.ToString();
+                        result_mg = convert_result_mg;
+                    }
+
+                    if (ex_quant_na1 == "<LQ" || ex_quant_na2 == "<LQ" || ex_quant_na3 == "<LQ")
+                    {
+                        result_na = "<LQ";
+                    }
+                    else
+                    {
+                        float pegando_result_na = ((float.Parse(ex_quant_na1) + float.Parse(ex_quant_na2) + float.Parse(ex_quant_na3)) / 2);
+                        string convert_result_na = pegando_result_na.ToString();
+                        result_na = convert_result_na;
+                    }
+
+                    if (ex_quant_ni1 == "<LQ" || ex_quant_ni2 == "<LQ" || ex_quant_ni3 == "<LQ")
+                    {
+                        result_ni = "<LQ";
+                    }
+                    else
+                    {
+                        float pegando_result_ni = ((float.Parse(ex_quant_ni1) + float.Parse(ex_quant_ni2) + float.Parse(ex_quant_ni3)) / 2);
+                        string convert_result_ni = pegando_result_ni.ToString();
+                        result_ni = convert_result_ni;
+                    }
+
+                    if (ex_quant_zn1 == "<LQ" || ex_quant_zn2 == "<LQ" || ex_quant_zn3 == "<LQ")
+                    {
+                        result_zn = "<LQ";
+                    }
+                    else
+                    {
+                        float pegando_result_zn = ((float.Parse(ex_quant_zn1) + float.Parse(ex_quant_zn2) + float.Parse(ex_quant_zn3)) / 2);
+                        string convert_result_zn = pegando_result_zn.ToString();
+                        result_zn = convert_result_zn;
+                    }
+
+                    var salvardados = new ColetaModel.ArlaMetais
+                    {
+                        os = OS,
+                        orcamento = orcamento,
+                        ex_lq_al = ex_lq_al,
+                        ex_lq_ca = ex_lq_ca,
+                        ex_lq_cr = ex_lq_cr,
+                        ex_lq_cu = ex_lq_cu,
+                        ex_lq_fe = ex_lq_fe,
+                        ex_lq_k = ex_lq_k,
+                        ex_lq_mg = ex_lq_mg,
+                        ex_lq_na = ex_lq_na,
+                        ex_lq_ni = ex_lq_ni,
+                        ex_lq_zn = ex_lq_zn,
+                        ex_lim_al = ex_lim_al,
+                        ex_lim_ca = ex_lim_ca,
+                        ex_lim_cr = ex_lim_cr,
+                        ex_lim_cu = ex_lim_cu,
+                        ex_lim_fe = ex_lim_fe,
+                        ex_lim_k = ex_lim_k,
+                        ex_lim_mg = ex_lim_mg,
+                        ex_lim_na = ex_lim_na,
+                        ex_lim_ni = ex_lim_ni,
+                        ex_lim_zn = ex_lim_zn,
+                        ex_quant_al1 = ex_quant_al1,
+                        ex_quant_ca1 = ex_quant_ca1,
+                        ex_quant_cr1 = ex_quant_cr1,
+                        ex_quant_cu1 = ex_quant_cu1,
+                        ex_quant_fe1 = ex_quant_fe1,
+                        ex_quant_k1 = ex_quant_k1,
+                        ex_quant_mg1 = ex_quant_mg1,
+                        ex_quant_na1 = ex_quant_na1,
+                        ex_quant_ni1 = ex_quant_ni1,
+                        ex_quant_zn1 = ex_quant_zn1,
+                        ex_quant_al2 = ex_quant_al2,
+                        ex_quant_ca2 = ex_quant_ca2,
+                        ex_quant_cr2 = ex_quant_cr2,
+                        ex_quant_cu2 = ex_quant_cu2,
+                        ex_quant_fe2 = ex_quant_fe2,
+                        ex_quant_k2 = ex_quant_k2,
+                        ex_quant_mg2 = ex_quant_mg2,
+                        ex_quant_na2 = ex_quant_na2,
+                        ex_quant_ni2 = ex_quant_ni2,
+                        ex_quant_zn2 = ex_quant_zn2,
+                        ex_quant_al3 = ex_quant_al3,
+                        ex_quant_ca3 = ex_quant_ca3,
+                        ex_quant_cr3 = ex_quant_cr3,
+                        ex_quant_cu3 = ex_quant_cu3,
+                        ex_quant_fe3 = ex_quant_fe3,
+                        ex_quant_k3 = ex_quant_k3,
+                        ex_quant_mg3 = ex_quant_mg3,
+                        ex_quant_na3 = ex_quant_na3,
+                        ex_quant_ni3 = ex_quant_ni3,
+                        ex_quant_zn3 = ex_quant_zn3,
+                        result_al = result_al,
+                        result_ca = result_ca,
+                        result_cr = result_cr,
+                        result_cu = result_cu,
+                        result_fe = result_fe,
+                        result_k = result_k,
+                        result_mg = result_mg,
+                        result_na = result_na,
+                        result_ni = result_ni,
+                        result_zn = result_zn,
+                        mat_prima1 = mat_prima1,
+                        mat_lote1 = mat_lote1,
+                        mat_val1 = mat_val1,
+                        mat_prima2 = mat_prima2,
+                        matt_lote2 = matt_lote2,
+                        mat_val2 = mat_val2,
+                        mat_prima3 = mat_prima3,
+                        mat_lote3 = mat_lote3,
+                        mat_val3 = mat_val3,
+                        mat_prima4 = mat_prima4,
+                        mat_lote4 = mat_lote4,
+                        mat_val4 = mat_val4,
+                        mat_prima5 = mat_prima5,
+                        mat_lote5 = mat_lote5,
+                        mat_val5 = mat_val5,
+                        mat_prima6 = mat_prima6,
+                        mat_lote6 = mat_lote6,
+                        mat_val6 = mat_val6,
+                        mat_prima7 = mat_prima7,
+                        mat_lote7 = mat_lote7,
+                        mat_val7 = mat_val7,
+                        mat_prima8 = mat_prima8,
+                        mat_lote8 = mat_lote8,
+                        mat_val8 = mat_val8,
+                        mat_prima9 = mat_prima9,
+                        mat_lote9 = mat_lote9,
+                        mat_val9 = mat_val9,
+                        mat_prima10 = mat_prima10,
+                        mat_lote10 = mat_lote10,
+                        mat_val10 = mat_val10,
+                        mat_prima11 = mat_prima11,
+                        mat_lote11 = mat_lote11,
+                        mat_val11 = mat_val11,
+                        mat_prima12 = mat_prima12,
+                        mat_lote12 = mat_lote12,
+                        mat_val12 = mat_val12,
+                        mat_prima13 = mat_prima13,
+                        mat_lote13 = mat_lote13,
+                        mat_val13 = mat_val13,
+                        inst_desc1 = inst_desc1,
+                        inst_cod1 = inst_cod1,
+                        inst_val1 = inst_val1,
+                        inst_desc2 = inst_desc2,
+                        inst_cod2 = inst_cod2,
+                        inst_val2 = inst_val2,
+                        inst_desc3 = inst_desc3,
+                        inst_cod3 = inst_cod3,
+                        inst_val3 = inst_val3,
+                        inst_desc4 = inst_desc4,
+                        inst_cod4 = inst_cod4,
+                        inst_val4 = inst_val4,
+                        inst_desc5 = inst_desc5,
+                        inst_cod5 = inst_cod5,
+                        inst_val5 = inst_val5,
+                        inst_desc6 = inst_desc6,
+                        inst_cod6 = inst_cod6,
+                        inst_val6 = inst_val6,
+                        inst_desc7 = inst_desc7,
+                        inst_cod7 = inst_cod7,
+                        inst_val7 = inst_val7,
+                        inst_desc8 = inst_desc8,
+                        inst_cod8 = inst_cod8,
+                        inst_val8 = inst_val8,
+                        inst_desc9 = inst_desc9,
+                        inst_cod9 = inst_cod9,
+                        inst_val9 = inst_val9,
+                        inst_desc10 = inst_desc10,
+                        inst_cod10 = inst_cod10,
+                        inst_val10 = inst_val10,
+                        inst_desc11 = inst_desc11,
+                        inst_cod11 = inst_cod11,
+                        inst_val11 = inst_val11,
+                        inst_dec12 = inst_dec12,
+                        inst_cod12 = inst_cod12,
+                        inst_val12 = inst_val12,
+                        inst_desc14 = inst_desc14,
+                        inst_cod14 = inst_cod14,
+                        inst_val14 = inst_val14,
+                        equi_ee = equi_ee,
+                        equi_de = equi_de,
+                        observacoes = observacoes,
+                        executado = executado,
+                        auxiliado = auxiliado,
+                    };
+                    //salvando no banco.
+                    //_qcontext.Add(salvardados);
+                    //await _qcontext.SaveChangesAsync();
+
+                    TempData["Mensagem"] = "Salvo Com Sucesso";
+                    return RedirectToAction(nameof(EnsaioMetais), new { OS, orcamento });
+                }
+                else
                 {
-                    os = OS,
-                    orcamento = orcamento,
-                    branco_al = branco_al,
-                    branco_ca = branco_ca,
-                    branco_cr = branco_cr,
-                    branco_cu = branco_cu,
-                    branco_fe = branco_fe,
-                    branco_k = branco_k,
-                    branco_mg = branco_mg,
-                    branco_na = branco_na,
-                    branco_ni = branco_ni,
-                    branco_zn = branco_zn,
-                    resul_ob_al1 = resul_ob_al1,
-                    resul_ob_ca1 = resul_ob_ca1,
-                    resul_ob_cr1 = resul_ob_cr1,
-                    resul_ob_cu1 = resul_ob_cu1,
-                    resul_ob_fe1 = resul_ob_fe1,
-                    resul_ob_k1 = resul_ob_k1,
-                    resul_ob_mg1 = resul_ob_mg1,
-                    resul_ob_na1 = resul_ob_na1,
-                    resul_ob_ni1 = resul_ob_ni1,
-                    resul_ob_zn1 = resul_ob_zn1,
-                    resul_ob_al2 = resul_ob_al2,
-                    resul_ob_ca2 = resul_ob_ca2,
-                    resul_ob_cr2 = resul_ob_cr2,
-                    resul_ob_cu2 = resul_ob_cu2,
-                    resul_ob_fe2 = resul_ob_fe2,
-                    resul_ob_k2 = resul_ob_k2,
-                    resul_ob_mg2 = resul_ob_mg2,
-                    resul_ob_na2 = resul_ob_na2,
-                    resul_ob_ni2 = resul_ob_ni2,
-                    resul_ob_zn2 = resul_ob_zn2,
-                    resul_ob_al3 = resul_ob_al3,
-                    resul_ob_ca3 = resul_ob_ca3,
-                    resul_ob_cr3 = resul_ob_cr3,
-                    resul_ob_cu3 = resul_ob_cu3,
-                    resul_ob_fe3 = resul_ob_fe3,
-                    resul_ob_k3 = resul_ob_k3,
-                    resul_ob_mg3 = resul_ob_mg3,
-                    resul_ob_na3 = resul_ob_na3,
-                    resul_ob_ni3 = resul_ob_ni3,
-                    resul_ob_zn3 = resul_ob_zn3,
-                    resul_con_al1 = resul_con_al1,
-                    resul_con_ca1 = resul_con_ca1,
-                    resul_con_cr1 = resul_con_cr1,
-                    resul_con_cu1 = resul_con_cu1,
-                    resul_con_fe1 = resul_con_fe1,
-                    resul_con_k1 = resul_con_k1,
-                    resul_con_mg1 = resul_con_mg1,
-                    resul_con_na1 = resul_con_na1,
-                    resul_con_ni1 = resul_con_ni1,
-                    resul_con_zn1 = resul_con_zn1,
-                    resul_con_al2 = resul_con_al2,
-                    resul_con_ca2 = resul_con_ca2,
-                    resul_con_cr2 = resul_con_cr2,
-                    resul_con_cu2 = resul_con_cu2,
-                    resul_con_fe2 = resul_con_fe2,
-                    resul_con_k2 = resul_con_k2,
-                    resul_con_mg2 = resul_con_mg2,
-                    resul_con_na2 = resul_con_na2,
-                    resul_con_ni2 = resul_con_ni2,
-                    resul_con_zn2 = resul_con_zn2,
-                    observacoes = observacoes,
-                    auxiliado = auxiliado,
-                    executado = executado,
+                    TempData["Mensagem"] = "Erro ao gravar";
+                    return RedirectToAction(nameof(EnsaioMetais), new { OS, orcamento });
+                }
 
-                };
-
-                _qcontext.Add(salvardadostrat);
-                await _qcontext.SaveChangesAsync();
-                TempData["Mensagem"] = "Salvo Com Sucesso";
-                return RedirectToAction(nameof(EnsaioMetais), new
-                {
-                    OS,
-                    orcamento
-                });
             }
             catch (Exception ex)
             {

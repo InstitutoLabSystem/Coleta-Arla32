@@ -364,83 +364,83 @@ namespace Arla32.Models
             public string result_zn { get; set; }
             public string mat_prima1 { get; set; }
             public string mat_lote1 { get; set; }
-            public string mat_val1 { get; set; }
+            public DateTime mat_val1 { get; set; }
             public string mat_prima2 { get; set; }
             public string matt_lote2 { get; set; }
-            public string mat_val2 { get; set; }
+            public DateTime mat_val2 { get; set; }
             public string mat_prima3 { get; set; }
             public string mat_lote3 { get; set; }
-            public string mat_val3 { get; set; }
+            public DateTime mat_val3 { get; set; }
             public string mat_prima4 { get; set; }
             public string mat_lote4 { get; set; }
-            public string mat_val4 { get; set; }
+            public DateTime mat_val4 { get; set; }
             public string mat_prima5 { get; set; }
             public string mat_lote5 { get; set; }
-            public string mat_val5 { get; set; }
+            public DateTime mat_val5 { get; set; }
             public string mat_prima6 { get; set; }
             public string mat_lote6 { get; set; }
-            public string mat_val6 { get; set; }
+            public DateTime mat_val6 { get; set; }
             public string mat_prima7 { get; set; }
             public string mat_lote7 { get; set; }
-            public string mat_val7 { get; set; }
+            public DateTime mat_val7 { get; set; }
             public string mat_prima8 { get; set; }
             public string mat_lote8 { get; set; }
-            public string mat_val8 { get; set; }
+            public DateTime mat_val8 { get; set; }
             public string mat_prima9 { get; set; }
             public string mat_lote9 { get; set; }
-            public string mat_val9 { get; set; }
+            public DateTime mat_val9 { get; set; }
             public string mat_prima10 { get; set; }
             public string mat_lote10 { get; set; }
-            public string mat_val10 { get; set; }
+            public DateTime mat_val10 { get; set; }
             public string mat_prima11 { get; set; }
             public string mat_lote11 { get; set; }
-            public string mat_val11 { get; set; }
+            public DateTime mat_val11 { get; set; }
             public string mat_prima12 { get; set; }
             public string mat_lote12 { get; set; }
-            public string mat_val12 { get; set; }
+            public DateTime mat_val12 { get; set; }
             public string mat_prima13 { get; set; }
 
             public string mat_lote13 { get; set; }
-            public string mat_val13 { get; set; }
+            public DateTime mat_val13 { get; set; }
             public string inst_desc1 { get; set; }
             public string inst_cod1 { get; set; }
-            public string inst_val1 { get; set; }
+            public DateTime inst_val1 { get; set; }
             public string inst_desc2 { get; set; }
             public string inst_cod2 { get; set; }
-            public string inst_val2 { get; set; }
+            public DateTime inst_val2 { get; set; }
             public string inst_desc3 { get; set; }
             public string inst_cod3 { get; set; }
-            public string inst_val3 { get; set; }
+            public DateTime inst_val3 { get; set; }
             public string inst_desc4 { get; set; }
             public string inst_cod4 { get; set; }
-            public string inst_val4 { get; set; }
+            public DateTime inst_val4 { get; set; }
             public string inst_desc5 { get; set; }
             public string inst_cod5 { get; set; }
-            public string inst_val5 { get; set; }
+            public DateTime inst_val5 { get; set; }
             public string inst_desc6 { get; set; }
             public string inst_cod6 { get; set; }
-            public string inst_val6 { get; set; }
+            public DateTime inst_val6 { get; set; }
             public string inst_desc7 { get; set; }
             public string inst_cod7 { get; set; }
-            public string inst_val7 { get; set; }
+            public DateTime inst_val7 { get; set; }
             public string inst_desc8 { get; set; }
             public string inst_cod8 { get; set; }
-            public string inst_val8 { get; set; }
+            public DateTime inst_val8 { get; set; }
             public string inst_desc9 { get; set; }
             public string inst_cod9 { get; set; }
-            public string inst_val9 { get; set; }
+            public DateTime inst_val9 { get; set; }
             public string inst_desc10 { get; set; }
             public string inst_cod10 { get; set; }
-            public string inst_val10 { get; set; }
+            public DateTime inst_val10 { get; set; }
             public string inst_desc11 { get; set; }
             public string inst_cod11 { get; set; }
-            public string inst_val11 { get; set; }
+            public DateTime inst_val11 { get; set; }
             public string inst_dec12 { get; set; }
             public string inst_cod12 { get; set; }
-            public string inst_val12 { get; set; }
+            public DateTime inst_val12 { get; set; }
             public string inst_desc14 { get; set; }
             public string inst_cod14 { get; set; }
-            public string inst_val14 { get; set; }
+            public DateTime inst_val14 { get; set; }
             public string equi_ee { get; set; }
             public string equi_de { get; set; }
             public string observacoes { get; set; }
@@ -526,6 +526,16 @@ namespace Arla32.Models
             public float resul_con_na2 { get; set; }
             public float resul_con_ni2 { get; set; }
             public float resul_con_zn2 { get; set; }
+            public float resul_con_al3 { get; set; }
+            public float resul_con_ca3 { get; set; }
+            public float resul_con_cr3 { get; set; }
+            public float resul_con_cu3 { get; set; }
+            public float resul_con_fe3 { get; set; }
+            public float resul_con_k3 { get; set; }
+            public float resul_con_mg3 { get; set; }
+            public float resul_con_na3 { get; set; }
+            public float resul_con_ni3 { get; set; }
+            public float resul_con_zn3 { get; set; }
             public string observacoes { get; set; }
             public string executado { get; set; }
             public string auxiliado { get; set; }
