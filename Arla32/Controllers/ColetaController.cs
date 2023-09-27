@@ -26,11 +26,8 @@ namespace Arla32.Controllers
         {
             _logger = logger;
             _qcontext = qcontext;
-<<<<<<< Updated upstream
-
-=======
             _googleDriveService = googleDriveService;
->>>>>>> Stashed changes
+
         }
         public IActionResult EnsaioConcentracao(string OS, string orcamento)
         {
@@ -134,9 +131,6 @@ namespace Arla32.Controllers
             return View();
         }
 
-<<<<<<< Updated upstream
-=======
-        //IFormFile file
         [HttpPost("upload-image")]
         public async Task<IActionResult> UploadImage(IFormFile file)
         {
@@ -166,8 +160,6 @@ namespace Arla32.Controllers
         }
 
 
-
->>>>>>> Stashed changes
         [HttpPost]
         public async Task<IActionResult> SalvarConcentracao(string OS, string orcamento, string osConcentracao, [Bind("data_ini,data_term,lote_solucao,codigo_curva,fator_avaliacao,indice_agua,refracao_amostra1,refracao_amostra2,conc_ureia,desc1_instrumento,codigo1_instrumento,validade1_instrumento,desc2_instrumento,codigo2_instrumento,validade2_instrumento,ee_equipamento,de_equipamento,obs,executado_por,auxiliado_por")] ColetaModel.ArlaConcentracao salvarDados)
         {
