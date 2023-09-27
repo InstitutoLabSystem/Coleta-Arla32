@@ -1,5 +1,6 @@
 ﻿using Arla32.Data;
 using Arla32.Models;
+using Arla32.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using System.Data.Entity;
 using System.Security.Cryptography.Xml;
 using static Arla32.Models.ColetaModel;
 
+
 namespace Arla32.Controllers
 {
     [Authorize]
@@ -18,13 +20,17 @@ namespace Arla32.Controllers
     {
         private readonly ILogger<ColetaController> _logger;
         private readonly QuimicoContext _qcontext;
+        private readonly GoogleDriveService _googleDriveService;
 
-
-        public ColetaController(ILogger<ColetaController> logger, QuimicoContext qcontext)
+        public ColetaController(ILogger<ColetaController> logger, QuimicoContext qcontext, GoogleDriveService googleDriveService)
         {
             _logger = logger;
             _qcontext = qcontext;
+<<<<<<< Updated upstream
 
+=======
+            _googleDriveService = googleDriveService;
+>>>>>>> Stashed changes
         }
         public IActionResult EnsaioConcentracao(string OS, string orcamento)
         {
@@ -43,6 +49,13 @@ namespace Arla32.Controllers
                 ViewBag.orcamento = orcamento;
                 return View(dados);
             }
+        }
+        public IActionResult EnsaioIdentidadeFotos(string OS, string orcamento)
+        {
+            ViewBag.OS = OS;
+            ViewBag.orcamento = orcamento;
+
+            return View();
         }
         public IActionResult EnsaioAldeidos(string OS, string orcamento)
         {
@@ -121,6 +134,40 @@ namespace Arla32.Controllers
             return View();
         }
 
+<<<<<<< Updated upstream
+=======
+        //IFormFile file
+        [HttpPost("upload-image")]
+        public async Task<IActionResult> UploadImage(IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+            {
+                //return BadRequest("Arquivo inválido ou ausente.");
+                return RedirectToAction(nameof(EnsaioIdentidadeFotos));
+            }
+                
+            // Salve a imagem em algum lugar (neste exemplo, estamos salvando na pasta temporária)
+            var filePath = Path.GetTempFileName();
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            try
+            {
+                // Chame a função do serviço GoogleDrive para fazer o upload da imagem
+                var fileId = await _googleDriveService.UploadImageToFolderAsync(filePath);
+                return Ok(fileId);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro ao fazer upload da imagem: {ex.Message}");
+            }
+        }
+
+
+
+>>>>>>> Stashed changes
         [HttpPost]
         public async Task<IActionResult> SalvarConcentracao(string OS, string orcamento, string osConcentracao, [Bind("data_ini,data_term,lote_solucao,codigo_curva,fator_avaliacao,indice_agua,refracao_amostra1,refracao_amostra2,conc_ureia,desc1_instrumento,codigo1_instrumento,validade1_instrumento,desc2_instrumento,codigo2_instrumento,validade2_instrumento,ee_equipamento,de_equipamento,obs,executado_por,auxiliado_por")] ColetaModel.ArlaConcentracao salvarDados)
         {

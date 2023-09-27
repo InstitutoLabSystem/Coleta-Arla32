@@ -103,11 +103,15 @@
             </tr>
             <tr>
                 <td>
+                   
+
                     <div style="height:500px; width:100%; border:solid 1px;border-radius:0px 20px 0px 20px; position:center">
-                        <input type="file" id="fileInput" name="file" accept="image/*" />
-                        <button type="submit">Enviar</button>
-                        <div id="imagePreview"></div>
+
+                        <input type="file" id="fileInput" accept="image/*" required>
+                        <button onclick="uploadImage();">Enviar Imagem</button>
+
                     </div>
+ 
                     <br/>
                     <div class="quadrado-vermelho"></div> <p>Perfil espectral analisado na manutenção (amostra)</p>
                     <div class="quadrado-azul"></div> <p>Perfil espectral analisado na avaliação inicial com Uréia 32.5%</p>
@@ -210,6 +214,34 @@
             </script>
 
             }
+            <script>
+            function uploadImage() {
+                const fileInput = document.getElementById('fileInput');
+                const file = fileInput.files[0];
+
+                if (file) {
+                    const formData = new FormData();
+                    formData.append('file', file);
+
+                    $.ajax({
+                        url: '/Coleta/UploadImage',  // Endpoint for your backend
+                        type: 'POST',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        success: function (response) {
+                            console.log('Imagem enviada com sucesso:', response);
+                        },
+                        error: function (error) {
+                            console.error('Erro ao enviar a imagem:', error);
+                        }
+                    });
+                } else {
+                    alert('Selecione uma imagem para fazer upload.');
+                }
+            }
+
+            </script>
 
           
     }

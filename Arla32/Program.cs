@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Microsoft.Identity.Client;
 using System.Security.Policy;
+using Arla32.Services;
 
 namespace Arla32
 {
@@ -13,6 +14,8 @@ namespace Arla32
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            var googleDriveService = new GoogleDriveService();
+
 
             builder.Services.AddDbContext<BancoContext>
               (options => options.UseMySql(
@@ -34,6 +37,8 @@ namespace Arla32
                     option.LoginPath = "/Acess/Login";
                     option.ExpireTimeSpan = TimeSpan.FromMinutes(20);
                 });
+            builder.Services.AddScoped<GoogleDriveService>();
+
 
             var app = builder.Build();
 
@@ -50,7 +55,6 @@ namespace Arla32
             app.UseStaticFiles();
 
             app.UseRouting();
-
             app.UseAuthentication();
             app.UseAuthorization();
 
