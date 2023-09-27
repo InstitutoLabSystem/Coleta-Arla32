@@ -1,4 +1,5 @@
-﻿@{
+﻿@model ColetaModel.ArlaFosfato
+@{
     ViewData["Title"] = "Coleta De Concentração";
 }
 
@@ -40,241 +41,482 @@
 </head>
 <body>
     <form method="post" asp-controller="Coleta" asp-action="SalvarFosfato" asp-route-os="@ViewData["os"]" asp-route-orcamento="@ViewData["orcamento"]">
-        <table class="table table-bordered border-secondary  table-sm">
-            <tr>
-                <td rowspan="3" class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                    <img src="https://www.labsystem-nuvem.com.br/imagens_arq/imagens/img/LabSystem.png" class="imagem" />
-                </td>
-                <td colspan="3" class="texto-central" style="background-color: #800000; color:white;">COLETA DE DADOS</td>
-                <td rowspan="2" class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="background-color: #800000; color:white;"> N° da OS :</td>
-            </tr>
-            <tr class="tabela">
-                <td colspan="3" class="texto-central "> ENSAIO DE ARLA 32</td>
-            </tr>
-            <tr>
-                <td style="background-color: #800000; color:white;">Data Inicio:</td>
-                <td><input type="date" name="data_ini" id="data_ini" class="form-control input " /></td>
-                <td style="background-color: #800000; color:white;">Data Término:</td>
-                <td><input type="date" name="data_term" id="data_term" class="form-control input " /></td>
-            </tr>
-            <tr class="texto-central">
-                <td colspan="5">
-                    <b>Ensaio a ser realizado:</b> Determinação da concentração de Fosfato pelo método fotométrico - Anexo H - IT.125-Q
-                </td>
-            </tr>
-            <tr>
-                <td colspan="5">
-                    Norma: ABNT NBR ISO 22241-2
-                </td>
-            </tr>
-            <tr>
-                <td colspan="5"> Np:</td>
-            </tr>
-            <tr>
-                <td colspan="5">Descrição:</td>
-            </tr>
-            <tr class="tabela">
-                <td colspan="5"></td>
-            </tr>
-        </table>
-        <Br />
+        @if (Model == null)
+        {
+            <table class="table table-bordered border-secondary  table-sm">
+                <tr>
+                    <td rowspan="3" class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <img src="https://www.labsystem-nuvem.com.br/imagens_arq/imagens/img/LabSystem.png" class="imagem" />
+                    </td>
+                    <td colspan="3" class="texto-central" style="background-color: #800000; color:white;">COLETA DE DADOS</td>
+                    <td rowspan="2" class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="background-color: #800000; color:white;"> N° da OS :</td>
+                </tr>
+                <tr class="tabela">
+                    <td colspan="3" class="texto-central "> ENSAIO DE ARLA 32</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #800000; color:white;">Data Inicio:</td>
+                    <td><input type="date" name="data_ini" id="data_ini" class="form-control input " /></td>
+                    <td style="background-color: #800000; color:white;">Data Término:</td>
+                    <td><input type="date" name="data_term" id="data_term" class="form-control input " /></td>
+                </tr>
+                <tr class="texto-central">
+                    <td colspan="5">
+                        <b>Ensaio a ser realizado:</b> Determinação da concentração de Fosfato pelo método fotométrico - Anexo H - IT.125-Q
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        Norma: ABNT NBR ISO 22241-2
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5"> Np:</td>
+                </tr>
+                <tr>
+                    <td colspan="5">Descrição:</td>
+                </tr>
+                <tr class="tabela">
+                    <td colspan="5"></td>
+                </tr>
+            </table>
+            <Br />
 
-        <!--  Segudna tabela.  -->
-        <table class="table table-bordered border-secondary table-sm">
-            <tr class="tabela">
-                <td colspan="8" class="texto-central">Medição de amostra</td>
-            </tr>
-            <tr>
-                <td colspan="2"> Código da curva : </td>
-                <td colspan="2"> <input type="text" name="cod_curva" id="cod_curva" class="form-control input " /> </td>
-                <td colspan="2"> Fator Calibração: </td>
-                <td colspan="2"> <input type="text" name="fator_calibracao" id="fator_calibracao" class="form-control input " /> </td>
-        </table>
-        <br />
+            <!--  Segudna tabela.  -->
+            <table class="table table-bordered border-secondary table-sm">
+                <tr class="tabela">
+                    <td colspan="8" class="texto-central">Medição de amostra</td>
+                </tr>
+                <tr>
+                    <td colspan="2"> Código da curva : </td>
+                    <td colspan="2"> <input type="text" name="cod_curva" id="cod_curva" class="form-control input " /> </td>
+                    <td colspan="2"> Fator Calibração: </td>
+                    <td colspan="2"> <input type="text" name="fator_calibracao" id="fator_calibracao" class="form-control input " /> </td>
+            </table>
+            <br />
 
-        <!--  Terceira tabela.  -->
-        <table class="table table-bordered border-secondary table-sm">
-            <tr class="tabela">
-                <td class="texto-central">Item</td>
-                <td class="texto-central">Massa (g)</td>
-                <td class="texto-central">Absorbância</td>
-                <td class="texto-central">Resultado final Máximo permitido 0,5 mg/kg</td>
-            </tr>
-            <tr>
-            <td>Branco Ensaio</td>
-                <td><input class="form-control input" value="---" readonly style="height:50px; text-align:center" /></td>
-                <td><input type="text" class="form-control input " name="absorvancia1" id="absorvancia1" style="height:50px"  /> </td>
-            <td rowspan="2"><input class="form-control input" style="height:100px" readonly/></td>
-            </tr>
-            <tr>
-                <td>Amostra</td>
-                <td><input type="text" name="massa" id="massa" class="form-control input " /></td>
-                <td><input type="text" name="absorvancia2" id="absorvancia2" class="form-control input " /></td>
-            </tr>
-        </table>
-        <br />
+            <!--  Terceira tabela.  -->
+            <table class="table table-bordered border-secondary table-sm">
+                <tr class="tabela">
+                    <td class="texto-central">Item</td>
+                    <td class="texto-central">Massa (g)</td>
+                    <td class="texto-central">Absorbância</td>
+                    <td class="texto-central">Resultado final Máximo permitido 0,5 mg/kg</td>
+                </tr>
+                <tr>
+                    <td>Branco Ensaio</td>
+                    <td><input class="form-control input" value="---" readonly style="height:50px; text-align:center" /></td>
+                    <td><input type="text" class="form-control input " name="absorvancia1" id="absorvancia1" style="height:50px"  /> </td>
+                    <td rowspan="2"><input class="form-control input" style="height:100px" readonly/></td>
+                </tr>
+                <tr>
+                    <td>Amostra</td>
+                    <td><input type="text" name="massa" id="massa" class="form-control input " /></td>
+                    <td><input type="text" name="absorvancia2" id="absorvancia2" class="form-control input " /></td>
+                </tr>
+            </table>
+            <br />
 
-        <!--  Quarta tabela.  -->
-        <table class="table table-bordered border-secondary table-sm">
-            <tr class="tabela"><td colspan="46" class="texto-central">Carta controle</td></tr>
-     
-            <tr>
-                <td> Abs. Branco </td>
-                <td> <input type="text" name="abs_branco" id="abs_branco" class="form-control input " /> </td>
-                <td> Abs. QC </td>
-                <td> <input type="text" name="abs_qc" id="abs_qc" class="form-control input " /> </td>
-                 <td> Concentração QC </td>
-                <td> <input type="text" class="form-control input " readonly /> </td>
-            </tr>
-        </table>
-        <br />
+            <!--  Quarta tabela.  -->
+            <table class="table table-bordered border-secondary table-sm">
+                <tr class="tabela"><td colspan="46" class="texto-central">Carta controle</td></tr>
 
-        <!--Quinta Tabela-->
+                <tr>
+                    <td> Abs. Branco </td>
+                    <td> <input type="text" name="abs_branco" id="abs_branco" class="form-control input " /> </td>
+                    <td> Abs. QC </td>
+                    <td> <input type="text" name="abs_qc" id="abs_qc" class="form-control input " /> </td>
+                    <td> Concentração QC </td>
+                    <td> <input type="text" class="form-control input " readonly /> </td>
+                </tr>
+            </table>
+            <br />
 
-        <table class="table table-bordered border-secondary table-sm">
-            <tr class="tabela">
-                <td colspan="5" class="texto-central">Materiais Utilizados</td>
-            </tr>
-            <tr class="tabela">
-                <td colspan="3" class="texto-central">Matéria prima</td>
-                <td colspan="1" class="texto-central">Lote</td>
-                <td colspan="1" class="texto-central">Validade</td>
-            </tr>
-            <tr>
-                <td colspan="3"><input type="text" name="mat_prima_1" id="mat_prima_1" class="form-control input" /></td>
-                <td colspan="1"><input type="text" name="mat_lote_1" id="mat_lote_1" class="form-control input" /></td>
-                <td colspan="1"><input type="date" name="mat_validade_1" id="mat_validade_1" class="form-control input" /></td>
-            </tr>
-            <tr>
-                <td colspan="3"><input type="text" name="mat_prima_2" id="mat_prima_2" class="form-control input" /></td>
-                <td colspan="1"><input type="text" name="mat_lote_2" id="mat_lote_2" class="form-control input" /></td>
-                <td colspan="1"><input type="date" name="mat_validade_2" id="mat_validade_2" class="form-control input" /></td>
-            </tr>
-            <tr>
-                <td colspan="3"><input type="text" name="mat_prima_3" id="mat_prima_3" class="form-control input" /></td>
-                <td colspan="1"><input type="text" name="mat_lote_3" id="mat_lote_3" class="form-control input" /></td>
-                <td colspan="1"><input type="date" name="mat_validade_3" id="mat_validade_3" class="form-control input" /></td>
-            </tr>
-            <tr>
-                <td colspan="3"><input type="text" name="mat_prima_4" id="mat_prima_5" class="form-control input" /></td>
-                <td colspan="1"><input type="text" name="mat_lote_4" id="mat_lote_5" class="form-control input" /></td>
-                <td colspan="1"><input type="date" name="mat_validade_4" id="mat_validade_5" class="form-control input" /></td>
-            </tr>
-            <tr>
-                <td colspan="3"><input type="text" name="mat_prima_5" id="mat_prima_5" class="form-control input" /></td>
-                <td colspan="1"><input type="text" name="mat_lote_5" id="mat_lote_5" class="form-control input" /></td>
-                <td colspan="1"><input type="date" name="mat_validade_5" id="mat_validade_5" class="form-control input" /></td>
-            </tr>
-            <tr>
-                <td colspan="3"><input type="text" name="mat_prima_6" id="mat_prima_6" class="form-control input" /></td>
-                <td colspan="1"><input type="text" name="mat_lote_6" id="mat_lote_6" class="form-control input" /></td>
-                <td colspan="1"><input type="date" name="mat_validade_6" id="mat_validade_6" class="form-control input" /></td>
-            </tr>
-            <tr>
-                <td colspan="3"><input type="text" name="mat_prima_7" id="mat_prima_7" class="form-control input" /></td>
-                <td colspan="1"><input type="text" name="mat_lote_7" id="mat_lote_7" class="form-control input" /></td>
-                <td colspan="1"><input type="date" name="mat_validade_7" id="mat_validade_7" class="form-control input" /></td>
-            </tr>
-            <tr>
-                <td colspan="3"><input type="text" name="mat_prima_8" id="mat_prima_8" class="form-control input" /></td>
-                <td colspan="1"><input type="text" name="mat_lote_8" id="mat_lote_8" class="form-control input" /></td>
-                <td colspan="1"><input type="date" name="mat_validade_8" id="mat_validade_8" class="form-control input" /></td>
-            </tr>
-         </table>
-        <br />
+            <!--Quinta Tabela-->
 
-        <!-- Sexta Tabela-->
-        <table class="table table-bordered border-secondary table-sm">
-            <tr class="tabela">
-                <td colspan="8" class="texto-central">Código de instrumentos utilizados</td>
-            </tr>
-            <tr class="tabela">
-                <td colspan="2">Descrição</td>
-                <td colspan="1"> Código </td>
-                <td colspan="1">Validade</td>
-                <td colspan="2"> Descrição </td>
-                <td colspan="1">Código</td>
-                <td colspan="1">Validade</td>
-            </tr>
-            <tr>
-                <td colspan="2"><input type="text" name="inst_desc1" id="inst_desc1" class="form-control input " /></td>
-                <td colspan="1"><input type="text" name="inst_cod1" id="inst_cod1" class="form-control input " /></td>
-                <td colspan="1"><input type="date" name="inst_data1" id="inst_data1" class="form-control input " /></td>
-                <td colspan="2"><input type="text" name="inst_desc1_1" id="inst_desc1_1" class="form-control input " /></td>
-                <td colspan="1"><input type="text" name="inst_cod1_1" id="inst_cod1_1" class="form-control input " /></td>
-                <td colspan="1"><input type="date" name="inst_data1_1" id="inst_data1_1" class="form-control input " /></td>
-            </tr>
-            <tr>
-                <td colspan="2"><input type="text" name="inst_desc2" id="inst_desc1" class="form-control input " /></td>
-                <td colspan="1"><input type="text" name="inst_cod2" id="inst_cod1" class="form-control input " /></td>
-                <td colspan="1"><input type="date" name="inst_data2" id="inst_data1" class="form-control input " /></td>
-                <td colspan="2"><input type="text" name="inst_desc2_2" id="inst_desc1_1" class="form-control input " /></td>
-                <td colspan="1"><input type="text" name="inst_cod2_2" id="inst_cod1_1" class="form-control input " /></td>
-                <td colspan="1"><input type="date" name="inst_data2_2" id="inst_data1_1" class="form-control input " /></td>
-            </tr>
-            <tr>
-                <td colspan="2"><input type="text" name="inst_desc3" id="inst_desc1" class="form-control input " /></td>
-                <td colspan="1"><input type="text" name="inst_cod3" id="inst_cod1" class="form-control input " /></td>
-                <td colspan="1"><input type="date" name="inst_data3" id="inst_data1" class="form-control input " /></td>
-                <td colspan="2"><input type="text" name="inst_desc3_3" id="inst_desc1_1" class="form-control input " /></td>
-                <td colspan="1"><input type="text" name="inst_cod3_3" id="inst_cod1_1" class="form-control input " /></td>
-                <td colspan="1"><input type="date" name="inst_data3_3" id="inst_data1_1" class="form-control input " /></td>
-            </tr>
-            <tr>
-                <td colspan="2"><input type="text" name="inst_desc4" id="inst_desc1" class="form-control input " /></td>
-                <td colspan="1"><input type="text" name="inst_cod4" id="inst_cod1" class="form-control input " /></td>
-                <td colspan="1"><input type="date" name="inst_data4" id="inst_data1" class="form-control input " /></td>
-                <td colspan="2"><input type="text" name="inst_desc4_4" id="inst_desc1_1" class="form-control input " /></td>
-                <td colspan="1"><input type="text" name="inst_cod4_4" id="inst_cod1_1" class="form-control input " /></td>
-                <td colspan="1"><input type="date" name="inst_data4_4" id="inst_data1_1" class="form-control input " /></td>
-            </tr>
-        </table>
-        <br />
+            <table class="table table-bordered border-secondary table-sm">
+                <tr class="tabela">
+                    <td colspan="5" class="texto-central">Materiais Utilizados</td>
+                </tr>
+                <tr class="tabela">
+                    <td colspan="3" class="texto-central">Matéria prima</td>
+                    <td colspan="1" class="texto-central">Lote</td>
+                    <td colspan="1" class="texto-central">Validade</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><input type="text" name="mat_prima_1" id="mat_prima_1" class="form-control input" /></td>
+                    <td colspan="1"><input type="text" name="mat_lote_1" id="mat_lote_1" class="form-control input" /></td>
+                    <td colspan="1"><input type="date" name="mat_validade_1" id="mat_validade_1" class="form-control input" /></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><input type="text" name="mat_prima_2" id="mat_prima_2" class="form-control input" /></td>
+                    <td colspan="1"><input type="text" name="mat_lote_2" id="mat_lote_2" class="form-control input" /></td>
+                    <td colspan="1"><input type="date" name="mat_validade_2" id="mat_validade_2" class="form-control input" /></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><input type="text" name="mat_prima_3" id="mat_prima_3" class="form-control input" /></td>
+                    <td colspan="1"><input type="text" name="mat_lote_3" id="mat_lote_3" class="form-control input" /></td>
+                    <td colspan="1"><input type="date" name="mat_validade_3" id="mat_validade_3" class="form-control input" /></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><input type="text" name="mat_prima_4" id="mat_prima_5" class="form-control input" /></td>
+                    <td colspan="1"><input type="text" name="mat_lote_4" id="mat_lote_5" class="form-control input" /></td>
+                    <td colspan="1"><input type="date" name="mat_validade_4" id="mat_validade_5" class="form-control input" /></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><input type="text" name="mat_prima_5" id="mat_prima_5" class="form-control input" /></td>
+                    <td colspan="1"><input type="text" name="mat_lote_5" id="mat_lote_5" class="form-control input" /></td>
+                    <td colspan="1"><input type="date" name="mat_validade_5" id="mat_validade_5" class="form-control input" /></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><input type="text" name="mat_prima_6" id="mat_prima_6" class="form-control input" /></td>
+                    <td colspan="1"><input type="text" name="mat_lote_6" id="mat_lote_6" class="form-control input" /></td>
+                    <td colspan="1"><input type="date" name="mat_validade_6" id="mat_validade_6" class="form-control input" /></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><input type="text" name="mat_prima_7" id="mat_prima_7" class="form-control input" /></td>
+                    <td colspan="1"><input type="text" name="mat_lote_7" id="mat_lote_7" class="form-control input" /></td>
+                    <td colspan="1"><input type="date" name="mat_validade_7" id="mat_validade_7" class="form-control input" /></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><input type="text" name="mat_prima_8" id="mat_prima_8" class="form-control input" /></td>
+                    <td colspan="1"><input type="text" name="mat_lote_8" id="mat_lote_8" class="form-control input" /></td>
+                    <td colspan="1"><input type="date" name="mat_validade_8" id="mat_validade_8" class="form-control input" /></td>
+                </tr>
+            </table>
+            <br />
 
-        <!--Setima Tabela-->
-        <table class="table table-bordered border-secondary table-sm">
-            <tr class="tabela">
-                <td colspan="8" class="texto-central">Equipamentos e Dispositivos: </td>
-            </tr>
-            <tr>
-                <td colspan="1">DE</td>
-                <td colspan="7"><input type="text" name="equi_ee" id="equi_ee" class="form-control input " /></td>
-            </tr>
-            <tr>
-                <td colspan="1">EE</td>
-                <td colspan="7"><input type="text" name="equi_de" id="equi_de" class="form-control input " /></td>
-            </tr>
-         </table>
-        <br/>
+            <!-- Sexta Tabela-->
+            <table class="table table-bordered border-secondary table-sm">
+                <tr class="tabela">
+                    <td colspan="8" class="texto-central">Código de instrumentos utilizados</td>
+                </tr>
+                <tr class="tabela">
+                    <td colspan="2">Descrição</td>
+                    <td colspan="1"> Código </td>
+                    <td colspan="1">Validade</td>
+                    <td colspan="2"> Descrição </td>
+                    <td colspan="1">Código</td>
+                    <td colspan="1">Validade</td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="text" name="inst_desc1" id="inst_desc1" class="form-control input " /></td>
+                    <td colspan="1"><input type="text" name="inst_cod1" id="inst_cod1" class="form-control input " /></td>
+                    <td colspan="1"><input type="date" name="inst_data1" id="inst_data1" class="form-control input " /></td>
+                    <td colspan="2"><input type="text" name="inst_desc1_1" id="inst_desc1_1" class="form-control input " /></td>
+                    <td colspan="1"><input type="text" name="inst_cod1_1" id="inst_cod1_1" class="form-control input " /></td>
+                    <td colspan="1"><input type="date" name="inst_data1_1" id="inst_data1_1" class="form-control input " /></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="text" name="inst_desc2" id="inst_desc1" class="form-control input " /></td>
+                    <td colspan="1"><input type="text" name="inst_cod2" id="inst_cod1" class="form-control input " /></td>
+                    <td colspan="1"><input type="date" name="inst_data2" id="inst_data1" class="form-control input " /></td>
+                    <td colspan="2"><input type="text" name="inst_desc2_2" id="inst_desc1_1" class="form-control input " /></td>
+                    <td colspan="1"><input type="text" name="inst_cod2_2" id="inst_cod1_1" class="form-control input " /></td>
+                    <td colspan="1"><input type="date" name="inst_data2_2" id="inst_data1_1" class="form-control input " /></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="text" name="inst_desc3" id="inst_desc1" class="form-control input " /></td>
+                    <td colspan="1"><input type="text" name="inst_cod3" id="inst_cod1" class="form-control input " /></td>
+                    <td colspan="1"><input type="date" name="inst_data3" id="inst_data1" class="form-control input " /></td>
+                    <td colspan="2"><input type="text" name="inst_desc3_3" id="inst_desc1_1" class="form-control input " /></td>
+                    <td colspan="1"><input type="text" name="inst_cod3_3" id="inst_cod1_1" class="form-control input " /></td>
+                    <td colspan="1"><input type="date" name="inst_data3_3" id="inst_data1_1" class="form-control input " /></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="text" name="inst_desc4" id="inst_desc1" class="form-control input " /></td>
+                    <td colspan="1"><input type="text" name="inst_cod4" id="inst_cod1" class="form-control input " /></td>
+                    <td colspan="1"><input type="date" name="inst_data4" id="inst_data1" class="form-control input " /></td>
+                    <td colspan="2"><input type="text" name="inst_desc4_4" id="inst_desc1_1" class="form-control input " /></td>
+                    <td colspan="1"><input type="text" name="inst_cod4_4" id="inst_cod1_1" class="form-control input " /></td>
+                    <td colspan="1"><input type="date" name="inst_data4_4" id="inst_data1_1" class="form-control input " /></td>
+                </tr>
+            </table>
+            <br />
 
-        <!--Oitava Tabela-->
-        <table class="table table-bordered border-secondary table-sm">
-            <tr class="tabela">
-                <td>Observações</td>
-            </tr>
-            <tr>
-                <td rowspan="2"><textarea name="obs" id="obs" class="form-control" rows="3" style="border:none"></textarea></td>
-            </tr>
-        </table>
-        <br/>
+            <!--Setima Tabela-->
+            <table class="table table-bordered border-secondary table-sm">
+                <tr class="tabela">
+                    <td colspan="8" class="texto-central">Equipamentos e Dispositivos: </td>
+                </tr>
+                <tr>
+                    <td colspan="1">DE</td>
+                    <td colspan="7"><input type="text" name="equi_ee" id="equi_ee" class="form-control input " /></td>
+                </tr>
+                <tr>
+                    <td colspan="1">EE</td>
+                    <td colspan="7"><input type="text" name="equi_de" id="equi_de" class="form-control input " /></td>
+                </tr>
+            </table>
+            <br/>
 
-        <!--Nona Tabela-->
+            <!--Oitava Tabela-->
+            <table class="table table-bordered border-secondary table-sm">
+                <tr class="tabela">
+                    <td>Observações</td>
+                </tr>
+                <tr>
+                    <td rowspan="2"><textarea name="obs" id="obs" class="form-control" rows="3" style="border:none"></textarea></td>
+                </tr>
+            </table>
+            <br/>
 
-        <table class="table table-bordered border-secondary table-sm">
-            <tr class="tabela">
-                <td colspan="2">Executado por:</td>
-                <td colspan="2">Auxiliado por:</td>
-            </tr>
-            <tr>
-                <td colspan="2"><input type="text" name="executado_por" id="executado_por" class="form-control input " /></td>
-                <td colspan="2"><input type="text" name="auxiliado_por" id="auxiliado_por" class="form-control input " /></td>
-            </tr>
-        </table>
-        <br />
+            <!--Nona Tabela-->
 
-        <div class="d-grid gap-2 d-flex justify-content-center">
-            <button type="submit" value="SalvarFosfato" class="btn btn-success btn btn-primary btn-md">Salvar Coleta</button>
-        </div>
+            <table class="table table-bordered border-secondary table-sm">
+                <tr class="tabela">
+                    <td colspan="2">Executado por:</td>
+                    <td colspan="2">Auxiliado por:</td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="text" name="executado_por" id="executado_por" class="form-control input " /></td>
+                    <td colspan="2"><input type="text" name="auxiliado_por" id="auxiliado_por" class="form-control input " /></td>
+                </tr>
+            </table>
+            <br />
+
+            <div class="d-grid gap-2 d-flex justify-content-center">
+                <button type="submit" value="SalvarFosfato" class="btn btn-success btn btn-primary btn-md">Salvar Coleta</button>
+            </div>
+        }
+        else
+        {
+            <table class="table table-bordered border-secondary  table-sm">
+                <tr>
+                    <td rowspan="3" class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <img src="https://www.labsystem-nuvem.com.br/imagens_arq/imagens/img/LabSystem.png" class="imagem" />
+                    </td>
+                    <td colspan="3" class="texto-central" style="background-color: #800000; color:white;">COLETA DE DADOS</td>
+                    <td rowspan="2" class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="background-color: #800000; color:white;"> N° da OS :</td>
+                </tr>
+                <tr class="tabela">
+                    <td colspan="3" class="texto-central "> ENSAIO DE ARLA 32</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #800000; color:white;">Data Inicio:</td>
+                    <td><input type="text" name="data_ini" id="data_ini" class="form-control input " value="@Model.data_ini.ToString("dd/MM/yyyy")" /></td>
+                    <td style="background-color: #800000; color:white;">Data Término:</td>
+                    <td><input type="text" name="data_term" id="data_term" class="form-control input " value="@Model.data_term.ToString("dd/MM/yyyy")" /></td>
+                </tr>
+                <tr class="texto-central">
+                    <td colspan="5">
+                        <b>Ensaio a ser realizado:</b> Determinação da concentração de Fosfato pelo método fotométrico - Anexo H - IT.125-Q
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        Norma: ABNT NBR ISO 22241-2
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5"> Np:</td>
+                </tr>
+                <tr>
+                    <td colspan="5">Descrição:</td>
+                </tr>
+                <tr class="tabela">
+                    <td colspan="5"></td>
+                </tr>
+            </table>
+            <Br />
+
+            <!--  Segudna tabela.  -->
+            <table class="table table-bordered border-secondary table-sm">
+                <tr class="tabela">
+                    <td colspan="8" class="texto-central">Medição de amostra</td>
+                </tr>
+                <tr>
+                    <td colspan="2"> Código da curva : </td>
+                    <td colspan="2"> <input type="text" name="cod_curva" id="cod_curva" class="form-control input " value="@Model.cod_curva" /> </td>
+                    <td colspan="2"> Fator Calibração: </td>
+                    <td colspan="2"> <input type="text" name="fator_calibracao" id="fator_calibracao" class="form-control input " value="@Model.fator_calibracao" /> </td>
+            </table>
+            <br />
+
+            <!--  Terceira tabela.  -->
+            <table class="table table-bordered border-secondary table-sm">
+                <tr class="tabela">
+                    <td class="texto-central">Item</td>
+                    <td class="texto-central">Massa (g)</td>
+                    <td class="texto-central">Absorbância</td>
+                    <td class="texto-central">Resultado final Máximo permitido 0,5 mg/kg</td>
+                </tr>
+                <tr>
+                    <td>Branco Ensaio</td>
+                    <td><input class="form-control input" value="---" readonly style="height:50px; text-align:center" /></td>
+                    <td><input type="text" class="form-control input " name="absorvancia1" id="absorvancia1" style="height:50px" value="@Model.absorvancia1" /> </td>
+                    <td rowspan="2"><input class="form-control input" style="height:100px" readonly  value="@Model.result_final"/></td>
+                </tr>
+                <tr>
+                    <td>Amostra</td>
+                    <td><input type="text" name="massa" id="massa" class="form-control input " value="@Model.massa" /></td>
+                    <td><input type="text" name="absorvancia2" id="absorvancia2" class="form-control input " value="@Model.absorvancia2" /></td>
+                </tr>
+            </table>
+            <br />
+
+            <!--  Quarta tabela.  -->
+            <table class="table table-bordered border-secondary table-sm">
+                <tr class="tabela"><td colspan="46" class="texto-central">Carta controle</td></tr>
+
+                <tr>
+                    <td> Abs. Branco </td>
+                    <td> <input type="text" name="abs_branco" id="abs_branco" class="form-control input " value="@Model.abs_branco" /> </td>
+                    <td> Abs. QC </td>
+                    <td> <input type="text" name="abs_qc" id="abs_qc" class="form-control input " value="@Model.abs_qc" /> </td>
+                    <td> Concentração QC </td>
+                    <td> <input type="text" class="form-control input " readonly  value="@Model.concentracao_qc"/> </td>
+                </tr>
+            </table>
+            <br />
+
+            <!--Quinta Tabela-->
+
+            <table class="table table-bordered border-secondary table-sm">
+                <tr class="tabela">
+                    <td colspan="5" class="texto-central">Materiais Utilizados</td>
+                </tr>
+                <tr class="tabela">
+                    <td colspan="3" class="texto-central">Matéria prima</td>
+                    <td colspan="1" class="texto-central">Lote</td>
+                    <td colspan="1" class="texto-central">Validade</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><input type="text" name="mat_prima_1" id="mat_prima_1" class="form-control input" value="@Model.mat_prima_1" /></td>
+                    <td colspan="1"><input type="text" name="mat_lote_1" id="mat_lote_1" class="form-control input" value="@Model.mat_lote_1" /></td>
+                    <td colspan="1"><input type="text" name="mat_validade_1" id="mat_validade_1" class="form-control input" value="@Model.mat_validade_1.ToString("dd/MM/yyyy")" /></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><input type="text" name="mat_prima_2" id="mat_prima_2" class="form-control input" value="@Model.mat_prima_2" /></td>
+                    <td colspan="1"><input type="text" name="mat_lote_2" id="mat_lote_2" class="form-control input" value="@Model.mat_lote_2" /></td>
+                    <td colspan="1"><input type="text" name="mat_validade_2" id="mat_validade_2" class="form-control input" value="@Model.mat_validade_2.ToString("dd/MM/yyyy")" /></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><input type="text" name="mat_prima_3" id="mat_prima_3" class="form-control input" value="@Model.mat_prima_3" /></td>
+                    <td colspan="1"><input type="text" name="mat_lote_3" id="mat_lote_3" class="form-control input" value="@Model.mat_lote_3" /></td>
+                    <td colspan="1"><input type="text" name="mat_validade_3" id="mat_validade_3" class="form-control input" value="@Model.mat_validade_3.ToString("dd/MM/yyyy")" /></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><input type="text" name="mat_prima_4" id="mat_prima_5" class="form-control input" value="@Model.mat_prima_4" /></td>
+                    <td colspan="1"><input type="text" name="mat_lote_4" id="mat_lote_5" class="form-control input" value="@Model.mat_lote_4" /></td>
+                    <td colspan="1"><input type="text" name="mat_validade_4" id="mat_validade_5" class="form-control input" value="@Model.mat_validade_4.ToString("dd/MM/yyyy")" /></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><input type="text" name="mat_prima_5" id="mat_prima_5" class="form-control input" value="@Model.mat_prima_5" /></td>
+                    <td colspan="1"><input type="text" name="mat_lote_5" id="mat_lote_5" class="form-control input" value="@Model.mat_lote_5" /></td>
+                    <td colspan="1"><input type="text" name="mat_validade_5" id="mat_validade_5" class="form-control input" value="@Model.mat_validade_5.ToString("dd/MM/yyyy")" /></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><input type="text" name="mat_prima_6" id="mat_prima_6" class="form-control input" value="@Model.mat_prima_6" /></td>
+                    <td colspan="1"><input type="text" name="mat_lote_6" id="mat_lote_6" class="form-control input" value="@Model.mat_lote_6" /></td>
+                    <td colspan="1"><input type="text" name="mat_validade_6" id="mat_validade_6" class="form-control input" value="@Model.mat_validade_6.ToString("dd/MM/yyyy")" /></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><input type="text" name="mat_prima_7" id="mat_prima_7" class="form-control input" value="@Model.mat_prima_7" /></td>
+                    <td colspan="1"><input type="text" name="mat_lote_7" id="mat_lote_7" class="form-control input" value="@Model.mat_lote_7" /></td>
+                    <td colspan="1"><input type="text" name="mat_validade_7" id="mat_validade_7" class="form-control input" value="@Model.mat_validade_7.ToString("dd/MM/yyyy")" /></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><input type="text" name="mat_prima_8" id="mat_prima_8" class="form-control input" value="@Model.mat_prima_8" /></td>
+                    <td colspan="1"><input type="text" name="mat_lote_8" id="mat_lote_8" class="form-control input" value="@Model.mat_lote_8" /></td>
+                    <td colspan="1"><input type="text" name="mat_validade_8" id="mat_validade_8" class="form-control input" value="@Model.mat_validade_8.ToString("dd/MM/yyyy")" /></td>
+                </tr>
+            </table>
+            <br />
+
+            <!-- Sexta Tabela-->
+            <table class="table table-bordered border-secondary table-sm">
+                <tr class="tabela">
+                    <td colspan="8" class="texto-central">Código de instrumentos utilizados</td>
+                </tr>
+                <tr class="tabela">
+                    <td colspan="2">Descrição</td>
+                    <td colspan="1"> Código </td>
+                    <td colspan="1">Validade</td>
+                    <td colspan="2"> Descrição </td>
+                    <td colspan="1">Código</td>
+                    <td colspan="1">Validade</td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="text" name="inst_desc1" id="inst_desc1" class="form-control input " value="@Model.inst_desc1" /></td>
+                    <td colspan="1"><input type="text" name="inst_cod1" id="inst_cod1" class="form-control input " value="@Model.inst_cod1" /></td>
+                    <td colspan="1"><input type="text" name="inst_data1" id="inst_data1" class="form-control input " value="@Model.inst_data1.ToString("dd/MM/yyyy")"   /></td>
+                    <td colspan="2"><input type="text" name="inst_desc1_1" id="inst_desc1_1" class="form-control input " value="@Model.inst_desc1_1" /></td>
+                    <td colspan="1"><input type="text" name="inst_cod1_1" id="inst_cod1_1" class="form-control input " value="@Model.inst_cod1_1" /></td>
+                    <td colspan="1"><input type="text" name="inst_data1_1" id="inst_data1_1" class="form-control input " value="@Model.inst_data1_1.ToString("dd/MM/yyyy")"   /></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="text" name="inst_desc2" id="inst_desc2" class="form-control input " value="@Model.inst_desc2" /></td>
+                    <td colspan="1"><input type="text" name="inst_cod2" id="inst_cod2" class="form-control input " value="@Model.inst_cod2" /></td>
+                    <td colspan="1"><input type="text" name="inst_data2" id="inst_data2" class="form-control input " value="@Model.inst_data2.ToString("dd/MM/yyyy")" /></td>
+                    <td colspan="2"><input type="text" name="inst_desc2_2" id="inst_desc1_1" class="form-control input " value="@Model.inst_desc2_2" /></td>
+                    <td colspan="1"><input type="text" name="inst_cod2_2" id="inst_desc2_2" class="form-control input " value="@Model.inst_cod2_2" /></td>
+                    <td colspan="1"><input type="text" name="inst_data2_2" id="inst_data2_2" class="form-control input " value="@Model.inst_data2_2.ToString("dd/MM/yyyy")" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="text" name="inst_desc3" id="inst_desc3" class="form-control input " value="@Model.inst_desc3" /></td>
+                    <td colspan="1"><input type="text" name="inst_cod3" id="inst_cod3" class="form-control input " value="@Model.inst_cod3" /></td>
+                    <td colspan="1"><input type="text" name="inst_data3" id="inst_data3" class="form-control input " value="@Model.inst_data3.ToString("dd/MM/yyyy")" /></td>
+                    <td colspan="2"><input type="text" name="inst_desc3_3" id="inst_desc3_3" class="form-control input " value="@Model.inst_desc3_3" /></td>
+                    <td colspan="1"><input type="text" name="inst_cod3_3" id="inst_cod3_3" class="form-control input " value="@Model.inst_cod3_3" /></td>
+                    <td colspan="1"><input type="text" name="inst_data3_3" id="inst_data3_3" class="form-control input " value="@Model.inst_data3_3.ToString("dd/MM/yyyy")" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="text" name="inst_desc4" id="inst_desc4" class="form-control input " value="@Model.inst_desc4" /></td>
+                    <td colspan="1"><input type="text" name="inst_cod4" id="inst_cod4" class="form-control input " value="@Model.inst_cod4" /></td>
+                    <td colspan="1"><input type="text" name="inst_data4" id="inst_data4" class="form-control input " value="@Model.inst_data4.ToString("dd/MM/yyyy")" /></td>
+                    <td colspan="2"><input type="text" name="inst_desc4_4" id="inst_desc4_4" class="form-control input " value="@Model.inst_desc4_4" /></td>
+                    <td colspan="1"><input type="text" name="inst_cod4_4" id="inst_cod4_4" class="form-control input " value="@Model.inst_cod4_4" /></td>
+                    <td colspan="1"><input type="text" name="inst_data4_4" id="inst_data4_4" class="form-control input " value="@Model.inst_data4_4.ToString("dd/MM/yyyy")" /></td>
+                </tr>
+            </table>
+            <br />
+
+            <!--Setima Tabela-->
+            <table class="table table-bordered border-secondary table-sm">
+                <tr class="tabela">
+                    <td colspan="8" class="texto-central">Equipamentos e Dispositivos: </td>
+                </tr>
+                <tr>
+                    <td colspan="1">DE</td>
+                    <td colspan="7"><input type="text" name="equi_ee" id="equi_ee" class="form-control input " value="@Model.equi_ee" /></td>
+                </tr>
+                <tr>
+                    <td colspan="1">EE</td>
+                    <td colspan="7"><input type="text" name="equi_de" id="equi_de" class="form-control input " value="@Model.equi_de" /></td>
+                </tr>
+            </table>
+            <br />
+
+            <!--Oitava Tabela-->
+            <table class="table table-bordered border-secondary table-sm">
+                <tr class="tabela">
+                    <td>Observações</td>
+                </tr>
+                <tr>
+                    <td rowspan="2"><textarea name="obs" id="obs" class="form-control" rows="3" style="border:none">@Model.obs</textarea></td>
+                </tr>
+            </table>
+            <br />
+
+            <!--Nona Tabela-->
+
+            <table class="table table-bordered border-secondary table-sm">
+                <tr class="tabela">
+                    <td colspan="2">Executado por:</td>
+                    <td colspan="2">Auxiliado por:</td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="text" name="executado_por" id="executado_por" class="form-control input " value="@Model.executado_por" /></td>
+                    <td colspan="2"><input type="text" name="auxiliado_por" id="auxiliado_por" class="form-control input " value="@Model.auxiliado_por" /></td>
+                </tr>
+            </table>
+            <br />
+
+            <div class="d-grid gap-2 d-flex justify-content-center">
+                <button type="submit" value="SalvarFosfato" class="btn btn-success btn btn-primary btn-md">Editar Coleta.</button>
+            </div>
+        }
     </form>
 
         @section Scripts {

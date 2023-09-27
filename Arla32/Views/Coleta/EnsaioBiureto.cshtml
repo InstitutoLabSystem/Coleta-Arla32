@@ -41,204 +41,408 @@
 </head>
 <body>
     <form method="post" asp-controller="Coleta" asp-action="SalvarBirueto" asp-route-os="@ViewData["os"]" asp-route-orcamento="@ViewData["orcamento"]">
-        <table class="table table-bordered border-secondary  table-sm">
-            <tr>
-                <td rowspan="3" class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                    <img src="https://www.labsystem-nuvem.com.br/imagens_arq/imagens/img/LabSystem.png" class="imagem" />
-                </td>
-                <td colspan="3" class="texto-central" style="background-color: #800000; color:white;">COLETA DE DADOS</td>
-                <td rowspan="2" class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="background-color: #800000; color:white;"> N° da OS :</td>
-            </tr>
-            <tr class="tabela">
-                <td colspan="3" class="texto-central "> ENSAIO DE ARLA 32</td>
-            </tr>
-            <tr>
-                <td style="background-color: #800000; color:white;">Data Inicio:</td>
-                <td><input type="date" name="data_ini" id="data_ini" class="form-control input " /></td>
-                <td style="background-color: #800000; color:white;">Data Término:</td>
-                <td><input type="date" name="data_ini" id="data_ini" class="form-control input " /></td>
+        @if (Model == null)
+        {
+            <table class="table table-bordered border-secondary  table-sm">
+                <tr>
+                    <td rowspan="3" class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <img src="https://www.labsystem-nuvem.com.br/imagens_arq/imagens/img/LabSystem.png" class="imagem" />
+                    </td>
+                    <td colspan="3" class="texto-central" style="background-color: #800000; color:white;">COLETA DE DADOS</td>
+                    <td rowspan="2" class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="background-color: #800000; color:white;"> N° da OS :</td>
+                </tr>
+                <tr class="tabela">
+                    <td colspan="3" class="texto-central "> ENSAIO DE ARLA 32</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #800000; color:white;">Data Inicio:</td>
+                    <td><input type="date" name="data_ini" id="data_ini" class="form-control input " /></td>
+                    <td style="background-color: #800000; color:white;">Data Término:</td>
+                    <td><input type="date" name="data_term" id="data_term" class="form-control input " /></td>
+                </tr>
+                <tr class="texto-central">
+                    <td colspan="5">
+                        <b>Ensaio a ser realizado:</b> Determinação da concentração de biureto - Anexo E - IT.120/Q
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <b>Norma:</b> ABNT NBR ISO 22241-2.
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5"> <b>Np:</b></td>
+                </tr>
+                <tr>
+                    <td colspan="5"><b>Descrição:</b></td>
+                </tr>
+            </table>
+            <br />
+            <table class="table table-bordered border-secondary  table-sm">
+                <tr class="tabela texto-central"><td colspan="6">Procedimento</td></tr>
+                <tr>
+                    <td>Código da curva:</td>
+                    <td><input type="text" name="codigo_curva" id="codigo_curva" class="form-control input" /></td>
+                    <td>Fator de calibração:</td>
+                    <td><input type="text" name="fator_calibracao" id="fator_calibracao" class="form-control input" /></td>
+                    <td>Fator-dia:</td>
+                    <td><input type="text" name="fator_dia" id="fator_dia" class="form-control input" /></td>
+                </tr>
+            </table>
+            <br />
+            <table class="table table-bordered border-secondary  table-sm">
+                <tr class="tabela texto-central">
+                    <td colspan="2">Amostra (g)</td>
+                    <td>Absorbância</td>
+                    <td rowspan="2">Resultado Individual</td>
+                    <td>
+                        Resultado Final Máx. permitido 0,3 % (m/m)
+                    </td>
+                </tr>
+                <tr>
+                    <td>Branco</td>
+                    <td style="text-align:center;">---</td>
+                    <td><input class="form-control input" style="height:50px;" type="text" name="absorbancia_1" id="absorbancia_1" /></td>
+                    <td style="background-color: #800000; color:white; text-align:center;">Média</td>
+
+                </tr>
+                <tr>
+                    <td>Amostra 1</td>
+                    <td><input class="form-control input" style="height:50px;" name="amostra1" id="amostra1" type="text" /></td>
+                    <td><input class="form-control input" style="height:50px;" name="absorbancia_2" id="absorbancia_2" type="text" /></td>
+                    <td><input class="form-control input" style="height:50px;" class="form-control input" name="result_ind_1" readonly /></td>
+                    <td rowspan="2"><input style="height:105px;" class="form-control input" name="result_media" readonly /></td>
+
+                </tr>
+                <tr>
+                    <td>Amostra 2</td>
+                    <td><input style="height:50px;" name="amostra2" id="amostra2" type="text" class="form-control input" /></td>
+                    <td><input class="form-control input" style="height:50px;" type="text" name="absorbancia_3" id="absorbancia_3" /></td>
+                    <td><input class="form-control input" style="height:50px;" class="form-control input" readonly /></td>
+                </tr>
+            </table>
+            <Br />
+            <table class="table table-bordered border-secondary  table-sm">
+                <tr class="tabela texto-central">
+                    <td colspan="3">Materiais Utilizados </td>
+                </tr>
+                <tr class="tabela texto-central">
+                    <td>Materia-prima</td>
+                    <td>Lote</td>
+                    <td>Validade</td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="mat_prima_1" id="mat_prima_1" class="form-control input" /></td>
+                    <td><input type="text" name="mat_lote_1" id="mat_lote_1" class="form-control input " /></td>
+                    <td><input type="date" name="mat_validade_1" id="mat_validade_1" class="form-control input " /></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="mat_prima_2" id="mat_prima_2" class="form-control input" /></td>
+                    <td><input type="text" name="mat_lote_2" id="mat_lote_2" class="form-control input " /></td>
+                    <td><input type="date" name="mat_validade_2" id="mat_validade_2" class="form-control input " /></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="mat_prima_3" id="mat_prima_3" class="form-control input" /></td>
+                    <td><input type="text" name="mat_lote_3" id="mat_lote_3" class="form-control input " /></td>
+                    <td><input type="date" name="mat_validade_3" id="mat_validade_3" class="form-control input " /></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="mat_prima_4" id="mat_prima_4" class="form-control input" /></td>
+                    <td><input type="text" name="mat_lote_4" id="mat_lote_4" class="form-control input " /></td>
+                    <td><input type="date" name="mat_validade_4" id="mat_validade_4" class="form-control input " /></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="mat_prima_5" id="mat_prima_5" class="form-control input" /></td>
+                    <td><input type="text" name="mat_lote_5" id="mat_lote_5" class="form-control input " /></td>
+                    <td><input type="date" name="mat_validade_5" id="mat_validade_5" class="form-control input " /></td>
+                </tr>
+            </table>
+            <br />
+            <table class="table table-bordered border-secondary  table-sm">
+                <tr class="tabela texto-central ">
+                    <td colspan="6">Código de Instrumento Utilizados</td>
+                </tr>
+                <tr class="tabela texto-central">
+                    <td>Descrição</td>
+                    <td>Código</td>
+                    <td>Validade</td>
+                    <td>Descrição</td>
+                    <td>Código</td>
+                    <td>Validade</td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="inst_desc1" class="form-control input " /></td>
+                    <td><input type="text" name="inst_codigo1" class="form-control input " /></td>
+                    <td><input type="date" name="inst_data1" class="form-control input " /></td>
+                    <td><input type="text" name="inst_desc1_1" class="form-control input " /></td>
+                    <td><input type="text" name="inst_codigo1_1" class="form-control input " /></td>
+                    <td><input type="date" name="inst_data1_1" class="form-control input " /></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="insta_desc2" class="form-control input " /></td>
+                    <td><input type="text" name="inst_codigo2" class="form-control input " /></td>
+                    <td><input type="date" name="inst_data2" class="form-control input " /></td>
+                    <td><input type="text" name="inst_desc2_2" class="form-control input " /></td>
+                    <td><input type="text" name="inst_codigo2_2" class="form-control input " /></td>
+                    <td><input type="date" name="inst_data2_2" class="form-control input " /></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="inst_desc3" class="form-control input " /></td>
+                    <td><input type="text" name="inst_codigo3" class="form-control input " /></td>
+                    <td><input type="date" name="inst_data3" class="form-control input " /></td>
+                    <td><input type="text" name="inst_desc3_3" class="form-control input " /></td>
+                    <td><input type="text" name="inst_codigo3_3" class="form-control input " /></td>
+                    <td><input type="date" name="inst_data3_3" class="form-control input " /></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="inst_desc4" class="form-control input " /></td>
+                    <td><input type="text" name="inst_codigo4" class="form-control input " /></td>
+                    <td><input type="date" name="inst_data4" class="form-control input " /></td>
+                    <td><input type="text" name="inst_desc4_4" class="form-control input " /></td>
+                    <td><input type="text" name="inst_codigo4_4" class="form-control input " /></td>
+                    <td><input type="date" name="inst_data4_4" class="form-control input " /></td>
+                </tr>
+            </table>
+            <br />
+            <table class="table table-bordered border-secondary  table-sm">
+                <tr class="tabela  texto-central">
+                    <td colspan="4">Equipamento e Dispositivos:</td>
+                </tr>
+                <tr>
+                    <td>DE:</td>
+                    <td><input type="text" name="equip_de" id="equip_de" class="form-control input " /></td>
+                </tr>
+                <tr>
+                    <td>EE:</td>
+                    <td><input type="text" name="equip_ee" id="equip_ee" class="form-control input " /></td>
+                </tr>
+            </table>
+            <br />
+            <table class="table table-bordered border-secondary  table-sm">
+                <tr class="tabela">
+                    <td colspan="4">Observações</td>
+                </tr>
+                <tr>
+                    <td><textarea name="obs" id="obs" class="form-control input"></textarea></td>
+                </tr>
+            </table>
+            <Br />
+            <table class="table table-bordered border-secondary  table-sm">
+                <tr class="tabela">
+                    <td colspan="1">Executado Por:</td>
+                    <td colspan="2">Auxiliado Por:</td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="executado_por" id="executado_por" class="form-control input " /></td>
+                    <td><input type="text" name="auxiliado_por" id="auxiliado_por" class="form-control input " /></td>
+                </tr>
+            </table>
+            <br />
+            <div class="d-grid gap-2 d-flex justify-content-center">
+                <button type="submit" value="SalvarBirueto" class="btn btn-success btn btn-primary btn-md">Salvar Coleta</button>
+            </div>
+        }
+        else
+        {
+            <table class="table table-bordered border-secondary  table-sm">
+                <tr>
+                    <td rowspan="3" class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <img src="https://www.labsystem-nuvem.com.br/imagens_arq/imagens/img/LabSystem.png" class="imagem" />
+                    </td>
+                    <td colspan="3" class="texto-central" style="background-color: #800000; color:white;">COLETA DE DADOS</td>
+                    <td rowspan="2" class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="background-color: #800000; color:white;"> N° da OS :</td>
+                </tr>
+                <tr class="tabela">
+                    <td colspan="3" class="texto-central "> ENSAIO DE ARLA 32</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #800000; color:white;">Data Inicio:</td>
+                    <td><input type="text" name="data_ini" id="data_ini" class="form-control input " value="@Model.data_ini.ToString("dd/MM/yyyy")" /></td>
+                    <td style="background-color: #800000; color:white;">Data Término:</td>
+                    <td><input type="text" name="data_term" id="data_term" class="form-control input " value="@Model.data_term.ToString("dd/MM/yyyy")" /></td>
             </tr>
             <tr class="texto-central">
-                <td colspan="5">
-                    <b>Ensaio a ser realizado:</b> Determinação da concentração de biureto - Anexo E - IT.120/Q
-                </td>
-            </tr>
-            <tr>
-                <td colspan="5">
-                    <b>Norma:</b> ABNT NBR ISO 22241-2.
-                </td>
-            </tr>
-            <tr>
-                <td colspan="5"> <b>Np:</b></td>
-            </tr>
-            <tr>
-                <td colspan="5"><b>Descrição:</b></td>
-            </tr>
-        </table>
-        <br />
-        <table class="table table-bordered border-secondary  table-sm">
-            <tr class="tabela texto-central"><td colspan="6">Procedimento</td></tr>
-            <tr>
-                <td>Código da curva:</td>
-                <td><input type="text" name="codigo_curva" id="codigo_curva" class="form-control input" /></td>
-                <td>Fator de calibração:</td>
-                <td><input type="text" name="fator_calibracao" id="fator_calibracao" class="form-control input" /></td>
-                <td>Fator-dia:</td>
-                <td><input type="text" name="fator_dia" id="fator_dia" class="form-control input" /></td>
-            </tr>
-        </table>
-        <br />
-        <table class="table table-bordered border-secondary  table-sm">
-            <tr class="tabela texto-central">
-                <td colspan="2">Amostra (g)</td>
-                <td>Absorbância</td>
-                <td rowspan="2">Resultado Individual</td>
-                <td>
-                    Resultado Final Máx. permitido 0,3 % (m/m)
-                </td>
-            </tr>
-            <tr>
-                <td>Branco</td>
-                <td style="text-align:center;">---</td>
-                <td><input class="form-control input" style="height:50px;" type="text" name="absorbancia_1" id="absorbancia_1" /></td>
-                <td style="background-color: #800000; color:white; text-align:center;">Média</td>
+                    <td colspan="5">
+                        <b>Ensaio a ser realizado:</b> Determinação da concentração de biureto - Anexo E - IT.120/Q
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <b>Norma:</b> ABNT NBR ISO 22241-2.
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5"> <b>Np:</b></td>
+                </tr>
+                <tr>
+                    <td colspan="5"><b>Descrição:</b></td>
+                </tr>
+            </table>
+            <br />
+            <table class="table table-bordered border-secondary  table-sm">
+                <tr class="tabela texto-central"><td colspan="6">Procedimento</td></tr>
+                <tr>
+                    <td>Código da curva:</td>
+                    <td><input type="text" name="codigo_curva" id="codigo_curva" class="form-control input" value="@Model.codigo_curva" /></td>
+                    <td>Fator de calibração:</td>
+                    <td><input type="text" name="fator_calibracao" id="fator_calibracao" class="form-control input" value="@Model.fator_calibracao" /></td>
+                    <td>Fator-dia:</td>
+                    <td><input type="text" name="fator_dia" id="fator_dia" class="form-control input" value="@Model.fator_dia" /></td>
+                </tr>
+            </table>
+            <br />
+            <table class="table table-bordered border-secondary  table-sm">
+                <tr class="tabela texto-central">
+                    <td colspan="2">Amostra (g)</td>
+                    <td>Absorbância</td>
+                    <td rowspan="2">Resultado Individual</td>
+                    <td>
+                        Resultado Final Máx. permitido 0,3 % (m/m)
+                    </td>
+                </tr>
+                <tr>
+                    <td>Branco</td>
+                    <td style="text-align:center;">---</td>
+                    <td><input class="form-control input" style="height:50px;" type="text" name="absorbancia_1" id="absorbancia_1" value="@Model.absorbancia_1" /></td>
+                    <td style="background-color: #800000; color:white; text-align:center;">Média</td>
 
-            </tr>
-            <tr>
-                <td>Amostra 1</td>
-                <td><input class="form-control input" style="height:50px;" name="amostra1" id="amostra1" type="text" /></td>
-                <td><input class="form-control input" style="height:50px;" name="absorbancia_2" id="absorbancia_2" type="text" /></td>
-                <td><input class="form-control input" style="height:50px;" class="form-control input" name="result_ind_1" readonly /></td>
-                <td rowspan="2"><input style="height:105px;" class="form-control input" name="result_media" readonly /></td>
+                </tr>
+                <tr>
+                    <td>Amostra 1</td>
+                    <td><input class="form-control input" style="height:50px;" name="amostra1" id="amostra1" type="text" value="@Model.amostra1" /></td>
+                    <td><input class="form-control input" style="height:50px;" name="absorbancia_2" id="absorbancia_2" type="text" value="@Model.absorbancia_2" /></td>
+                    <td><input class="form-control input" style="height:50px;" class="form-control input" name="result_ind_1" readonly value="@Model.result_ind_1" /></td>
+                    <td rowspan="2"><input style="height:105px;" class="form-control input" name="result_media" readonly value="@Model.result_media" /></td>
 
-            </tr>
-            <tr>
-                <td>Amostra 2</td>
-                <td><input style="height:50px;" name="amostra2" id="amostra2" type="text" class="form-control input" /></td>
-                <td><input class="form-control input" style="height:50px;" type="text" name="absorbancia_3" id="absorbancia_3" /></td>
-                <td><input class="form-control input" style="height:50px;" class="form-control input" readonly /></td>
-            </tr>
-        </table>
-        <Br />
-        <table class="table table-bordered border-secondary  table-sm">
-            <tr class="tabela texto-central">
-                <td colspan="3">Materiais Utilizados </td>
-            </tr>
-            <tr class="tabela texto-central">
-                <td>Materia-prima</td>
-                <td>Lote</td>
-                <td>Validade</td>
-            </tr>
-            <tr>
-                <td><input type="text" name="mat_prima_1" id="mat_prima_1" class="form-control input" /></td>
-                <td><input type="text" name="mat_lote_1" id="mat_lote_1" class="form-control input " /></td>
-                <td><input type="date" name="mat_validade_1" id="mat_validade_1" class="form-control input " /></td>
-            </tr>
-            <tr>
-                <td><input type="text" name="mat_prima_2" id="mat_prima_2" class="form-control input" /></td>
-                <td><input type="text" name="mat_lote_2" id="mat_lote_2" class="form-control input " /></td>
-                <td><input type="date" name="mat_validade_2" id="mat_validade_2" class="form-control input " /></td>
-            </tr>
-            <tr>
-                <td><input type="text" name="mat_prima_3" id="mat_prima_3" class="form-control input" /></td>
-                <td><input type="text" name="mat_lote_3" id="mat_lote_3" class="form-control input " /></td>
-                <td><input type="date" name="mat_validade_3" id="mat_validade_3" class="form-control input " /></td>
-            </tr>
-            <tr>
-                <td><input type="text" name="mat_prima_4" id="mat_prima_4" class="form-control input" /></td>
-                <td><input type="text" name="mat_lote_4" id="mat_lote_4" class="form-control input " /></td>
-                <td><input type="date" name="mat_validade_4" id="mat_validade_4" class="form-control input " /></td>
-            </tr>
-            <tr>
-                <td><input type="text" name="mat_prima_5" id="mat_prima_5" class="form-control input" /></td>
-                <td><input type="text" name="mat_lote_5" id="mat_lote_5" class="form-control input " /></td>
-                <td><input type="date" name="mat_validade_5" id="mat_validade_5" class="form-control input " /></td>
-            </tr>
-        </table>
-        <br />
-        <table class="table table-bordered border-secondary  table-sm">
-            <tr class="tabela texto-central ">
-                <td colspan="6">Código de Instrumento Utilizados</td>
-            </tr>
-            <tr class="tabela texto-central">
-                <td>Descrição</td>
-                <td>Código</td>
-                <td>Validade</td>
-                <td>Descrição</td>
-                <td>Código</td>
-                <td>Validade</td>
-            </tr>
-            <tr>
-                <td><input type="text" name="inst_desc1" class="form-control input " /></td>
-                <td><input type="text" name="inst_codigo1" class="form-control input " /></td>
-                <td><input type="date" name="inst_data1" class="form-control input " /></td>
-                <td><input type="text" name="inst_desc1_1" class="form-control input " /></td>
-                <td><input type="text" name="inst_codigo1_1" class="form-control input " /></td>
-                <td><input type="date" name="inst_data1_1" class="form-control input " /></td>
-            </tr>
-            <tr>
-                <td><input type="text" name="insta_desc2" class="form-control input " /></td>
-                <td><input type="text" name="inst_codigo2" class="form-control input " /></td>
-                <td><input type="date" name="inst_data2" class="form-control input " /></td>
-                <td><input type="text" name="inst_desc2_2" class="form-control input " /></td>
-                <td><input type="text" name="inst_codigo2_2" class="form-control input " /></td>
-                <td><input type="date" name="inst_data2_2" class="form-control input " /></td>
-            </tr>
-            <tr>
-                <td><input type="text" name="inst_desc3" class="form-control input " /></td>
-                <td><input type="text" name="inst_codigo3" class="form-control input " /></td>
-                <td><input type="date" name="inst_data3" class="form-control input " /></td>
-                <td><input type="text" name="inst_desc3_3" class="form-control input " /></td>
-                <td><input type="text" name="inst_codigo3_3" class="form-control input " /></td>
-                <td><input type="date" name="inst_data3_3" class="form-control input " /></td>
-            </tr>
-            <tr>
-                <td><input type="text" name="inst_desc4" class="form-control input " /></td>
-                <td><input type="text" name="inst_codigo4" class="form-control input " /></td>
-                <td><input type="date" name="inst_data4" class="form-control input " /></td>
-                <td><input type="text" name="inst_desc4_4" class="form-control input " /></td>
-                <td><input type="text" name="inst_codigo4_4" class="form-control input " /></td>
-                <td><input type="date" name="inst_data4_4" class="form-control input " /></td>
-            </tr>
-        </table>
-        <br />
-        <table class="table table-bordered border-secondary  table-sm">
-            <tr class="tabela  texto-central">
-                <td colspan="4">Equipamento e Dispositivos:</td>
-            </tr>
-            <tr>
-                <td>DE:</td>
-                <td><input type="text" name="equip_de" id="equip_de" class="form-control input " /></td>
-            </tr>
-            <tr>
-                <td>EE:</td>
-                <td><input type="text" name="equip_ee" id="equip_ee" class="form-control input " /></td>
-            </tr>
-        </table>
-        <br />
-        <table class="table table-bordered border-secondary  table-sm">
-            <tr class="tabela">
-                <td colspan="4">Observações</td>
-            </tr>
-            <tr>
-                <td><textarea name="obs" id="obs" class="form-control input"></textarea></td>
-            </tr>
-        </table>
-        <Br />
-        <table class="table table-bordered border-secondary  table-sm">
-            <tr class="tabela">
-                <td colspan="1">Executado Por:</td>
-                <td colspan="2">Auxiliado Por:</td>
-            </tr>
-            <tr>
-                <td><input type="text" name="executado_por" id="executado_por" class="form-control input " /></td>
-                <td><input type="text" name="auxiliado_por" id="auxiliado_por" class="form-control input " /></td>
-            </tr>
-        </table>
-        <br />
-        <div class="d-grid gap-2 d-flex justify-content-center">
-            <button type="submit" value="SalvarBirueto" class="btn btn-success btn btn-primary btn-md">Salvar Coleta</button>
-        </div>
+                </tr>
+                <tr>
+                    <td>Amostra 2</td>
+                    <td><input style="height:50px;" name="amostra2" id="amostra2" type="text" class="form-control input" value="@Model.amostra2" /></td>
+                    <td><input class="form-control input" style="height:50px;" type="text" name="absorbancia_3" id="absorbancia_3" value="@Model.absorbancia_3" /></td>
+                    <td><input class="form-control input" style="height:50px;" class="form-control input" readonly value="@Model.result_ind_2" /></td>
+                </tr>
+            </table>
+            <Br />
+            <table class="table table-bordered border-secondary  table-sm">
+                <tr class="tabela texto-central">
+                    <td colspan="3">Materiais Utilizados </td>
+                </tr>
+                <tr class="tabela texto-central">
+                    <td>Materia-prima</td>
+                    <td>Lote</td>
+                    <td>Validade</td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="mat_prima_1" id="mat_prima_1" class="form-control input" value="@Model.mat_prima_1" /></td>
+                    <td><input type="text" name="mat_lote_1" id="mat_lote_1" class="form-control input " value="@Model.mat_lote_1" /></td>
+                    <td><input type="text" name="mat_validade_1" id="mat_validade_1" class="form-control input " value="@Model.mat_validade_1.ToString("dd/MM/yyyy")" /></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="mat_prima_2" id="mat_prima_2" class="form-control input" value="@Model.mat_prima_2" /></td>
+                    <td><input type="text" name="mat_lote_2" id="mat_lote_2" class="form-control input " value="@Model.mat_lote_2" /></td>
+                    <td><input type="text" name="mat_validade_2" id="mat_validade_2" class="form-control input " value="@Model.mat_validade_2.ToString("dd/MM/yyyy")" /></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="mat_prima_3" id="mat_prima_3" class="form-control input" value="@Model.mat_prima_3" /></td>
+                    <td><input type="text" name="mat_lote_3" id="mat_lote_3" class="form-control input " value="@Model.mat_lote_3" /></td>
+                    <td><input type="text" name="mat_validade_3" id="mat_validade_3" class="form-control input " value="@Model.mat_validade_3.ToString("dd/MM/yyyy")" /></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="mat_prima_4" id="mat_prima_4" class="form-control input" value="@Model.mat_prima_4" /></td>
+                    <td><input type="text" name="mat_lote_4" id="mat_lote_4" class="form-control input " value="@Model.mat_lote_4" /></td>
+                    <td><input type="text" name="mat_validade_4" id="mat_validade_4" class="form-control input " value="@Model.mat_validade_4.ToString("dd/MM/yyyy")" /></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="mat_prima_5" id="mat_prima_5" class="form-control input" value="@Model.mat_prima_5" /></td>
+                    <td><input type="text" name="mat_lote_5" id="mat_lote_5" class="form-control input " value="@Model.mat_lote_5" /></td>
+                    <td><input type="text" name="mat_validade_5" id="mat_validade_5" class="form-control input " value="@Model.mat_validade_5.ToString("dd/MM/yyyy")" /></td>
+                </tr>
+            </table>
+            <br />
+            <table class="table table-bordered border-secondary  table-sm">
+                <tr class="tabela texto-central ">
+                    <td colspan="6">Código de Instrumento Utilizados</td>
+                </tr>
+                <tr class="tabela texto-central">
+                    <td>Descrição</td>
+                    <td>Código</td>
+                    <td>Validade</td>
+                    <td>Descrição</td>
+                    <td>Código</td>
+                    <td>Validade</td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="inst_desc1" class="form-control input " value="@Model.inst_desc1" /></td>
+                    <td><input type="text" name="inst_codigo1" class="form-control input " value="@Model.inst_codigo1" /></td>
+                    <td><input type="text" name="inst_data1" class="form-control input " value="@Model.inst_data1.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="text" name="inst_desc1_1" class="form-control input " value="@Model.inst_desc1_1" /></td>
+                    <td><input type="text" name="inst_codigo1_1" class="form-control input " value="@Model.inst_codigo1_1" /></td>
+                    <td><input type="text" name="inst_data1_1" class="form-control input " value="@Model.inst_data1_1.ToString("dd/MM/yyyy")" /></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="insta_desc2" class="form-control input " value="@Model.insta_desc2" /></td>
+                    <td><input type="text" name="inst_codigo2" class="form-control input " value="@Model.inst_codigo2" /></td>
+                    <td><input type="text" name="inst_data2" class="form-control input " value="@Model.inst_data1.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="text" name="inst_desc2_2" class="form-control input " value="@Model.inst_desc2_2" /></td>
+                    <td><input type="text" name="inst_codigo2_2" class="form-control input " value="@Model.inst_codigo2_2" /></td>
+                    <td><input type="text" name="inst_data2_2" class="form-control input " value="@Model.inst_data2_2.ToString("dd/MM/yyyy")" /></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="inst_desc3" class="form-control input " value="@Model.inst_desc3" /></td>
+                    <td><input type="text" name="inst_codigo3" class="form-control input " value="@Model.inst_codigo3" /></td>
+                    <td><input type="text" name="inst_data3" class="form-control input " value="@Model.inst_data3.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="text" name="inst_desc3_3" class="form-control input " value="@Model.inst_desc3_3" /></td>
+                    <td><input type="text" name="inst_codigo3_3" class="form-control input " value="@Model.inst_codigo3_3" /></td>
+                    <td><input type="text" name="inst_data3_3" class="form-control input " value="@Model.inst_data3_3.ToString("dd/MM/yyyy")" /></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="inst_desc4" class="form-control input " value="@Model.inst_desc4" /></td>
+                    <td><input type="text" name="inst_codigo4" class="form-control input " value="@Model.inst_codigo4" /></td>
+                    <td><input type="text" name="inst_data4" class="form-control input " value="@Model.inst_data4.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="text" name="inst_desc4_4" class="form-control input " value="@Model.inst_desc4_4" /></td>
+                    <td><input type="text" name="inst_codigo4_4" class="form-control input " value="@Model.inst_codigo4_4" /></td>
+                    <td><input type="text" name="inst_data4_4" class="form-control input " value="@Model.inst_data4_4.ToString("dd/MM/yyyy")" /></td>
+                </tr>
+            </table>
+            <br />
+            <table class="table table-bordered border-secondary  table-sm">
+                <tr class="tabela  texto-central">
+                    <td colspan="4">Equipamento e Dispositivos:</td>
+                </tr>
+                <tr>
+                    <td>DE:</td>
+                    <td><input type="text" name="equip_de" id="equip_de" class="form-control input " value="@Model.equip_de" /></td>
+                </tr>
+                <tr>
+                    <td>EE:</td>
+                    <td><input type="text" name="equip_ee" id="equip_ee" class="form-control input " value="@Model.equip_ee" /></td>
+                </tr>
+            </table>
+            <br />
+            <table class="table table-bordered border-secondary  table-sm">
+                <tr class="tabela">
+                    <td colspan="4">Observações</td>
+                </tr>
+                <tr>
+                    <td><textarea name="obs" id="obs" class="form-control input">@Model.obs</textarea></td>
+                </tr>
+            </table>
+            <Br />
+            <table class="table table-bordered border-secondary  table-sm">
+                <tr class="tabela">
+                    <td colspan="1">Executado Por:</td>
+                    <td colspan="2">Auxiliado Por:</td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="executado_por" id="executado_por" class="form-control input " value="@Model.executado_por" /></td>
+                    <td><input type="text" name="auxiliado_por" id="auxiliado_por" class="form-control input " value="@Model.auxiliado_por" /></td>
+                </tr>
+            </table>
+            <br />
+            <div class="d-grid gap-2 d-flex justify-content-center">
+                <button type="submit" value="SalvarBirueto" class="btn btn-success btn btn-primary btn-md">Editar Coleta</button>
+            </div>
+        }
     </form>
     @section Scripts {
         @if (TempData.ContainsKey("Mensagem"))
