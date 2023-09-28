@@ -65,12 +65,13 @@
                     <tr>
                         @if (@ViewBag.IsOsSalva)
                         {
-                         
+
                         }
-                        else{
+                        else
+                        {
                             <td colspan="5"> <button type="submit" class="btn btn-primary  w-100  btn-block" id="salvarColetaButton">Começar Ensaio</button> </td>
-                            }
-                        </tr>
+                        }
+                    </tr>
                 </table>
                 @*  Campos para passar as outras informações, esses campos ficarão escondidos, é apenas para passar o valor para o insert da table do quimico *@
                 <input type="hidden" class="form-control" id="revisao_os" name="revisao_os" value="@item.Rev" style=" border:none;" readonly>
@@ -94,13 +95,13 @@
                         <td colspan="3">@resultado.Descricao</td>
                         @if (resultado.codigo == "QUIARL001000001")
                         {
-                            @if(@ViewBag.IsOsSalva)
+                            @if (@ViewBag.IsOsSalva)
                             {
                                 <td> <a target="_blank" role="button" id="anexoLink1" asp-controller="Coleta" asp-action="EnsaioConcentracao" asp-route-os="@($"{resultado.OS}")" asp-route-orcamento="@($"{resultado.Orcamento}")" class="btn btn-primary  w-100  btn-block"> Anexo</a></td>
                             }
                             else
                             {
-                                <td><button type="button" class="btn btn-secondary" >Anexo </button></td>
+                                <td><button type="button" class="btn btn-secondary">Anexo </button></td>
                             }
 
                         }
@@ -110,7 +111,8 @@
                             {
                                 <td>  <a target="_blank" role="button" id="anexoLink2" asp-controller="Coleta" asp-action="EnsaioAlcalinidade" asp-route-os="@($"{resultado.OS}")" asp-route-orcamento="@($"{resultado.Orcamento}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
                             }
-                            else{
+                            else
+                            {
                                 <td><button type="button" class="btn btn-secondary">Anexo </button></td>
                             }
                         }
@@ -120,7 +122,8 @@
                             {
                                 <td>  <a target="_blank" role="button" id="anexoLink3" asp-controller="Coleta" asp-action="EnsaioBiureto" asp-route-os="@($"{resultado.OS}")" asp-route-orcamento="@($"{resultado.Orcamento}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
                             }
-                            else{
+                            else
+                            {
                                 <td><button type="button" class="btn btn-secondary">Anexo </button></td>
                             }
                         }
@@ -128,9 +131,11 @@
                         {
                             @if (@ViewBag.IsOsSalva)
                             {
-                                <td>  <a target="_blank"  role="button" id="anexoLink4" asp-controller="Coleta" asp-action="EnsaioAldeidos" asp-route-os="@($"{resultado.OS}")" asp-route-orcamento="@($"{resultado.Orcamento}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
-                            }else{
-                                    <td><button type="button" class="btn btn-secondary">Anexo </button></td>  
+                                <td>  <a target="_blank" role="button" id="anexoLink4" asp-controller="Coleta" asp-action="EnsaioAldeidos" asp-route-os="@($"{resultado.OS}")" asp-route-orcamento="@($"{resultado.Orcamento}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
+                            }
+                            else
+                            {
+                                <td><button type="button" class="btn btn-secondary">Anexo </button></td>
                             }
                         }
                         else if (resultado.codigo == "QUIARL005000001")
@@ -138,7 +143,8 @@
                             @if (@ViewBag.IsOsSalva)
                             {
                                 <td>  <a target="_blank" role="button" id="anexoLink5" asp-controller="Coleta" asp-action="EnsaioInsoluveis" asp-route-os="@($"{resultado.OS}")" asp-route-orcamento="@($"{resultado.Orcamento}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
-                            }else
+                            }
+                            else
                             {
                                 <td><button type="button" class="btn btn-secondary">Anexo </button></td>
                             }
@@ -160,7 +166,8 @@
                             {
                                 <td>  <a target="_blank" role="button" id="anexoLink7" asp-controller="Coleta" asp-action="EnsaioMetais" asp-route-os="@($"{resultado.OS}")" asp-route-orcamento="@($"{resultado.Orcamento}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
                             }
-                            else{
+                            else
+                            {
                                 <td><button type="button" class="btn btn-secondary">Anexo </button></td>
                             }
                         }
@@ -170,7 +177,8 @@
                             {
                                 <td>  <a target="_blank" role="button" id="anexoLink8" asp-controller="Coleta" asp-action="EnsaioIdentidade" asp-route-os="@($"{resultado.OS}")" asp-route-orcamento="@($"{resultado.Orcamento}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
                             }
-                            else{
+                            else
+                            {
                                 <td><button type="button" class="btn btn-secondary">Anexo </button></td>
 
                             }
@@ -181,9 +189,10 @@
                             {
                                 <td>  <a target="_blank" role="button" id="anexoLink" asp-controller="Coleta" asp-action="EnsaioDensidade" asp-route-os="@($"{resultado.OS}")" asp-route-orcamento="@($"{resultado.Orcamento}")" class="btn btn-primary  w-100  btn-block">Anexo</a></td>
                             }
-                            else{
+                            else
+                            {
                                 <td><button type="button" class="btn btn-secondary">Anexo </button></td>
-                                }
+                            }
                         }
                     </tr>
                 }
