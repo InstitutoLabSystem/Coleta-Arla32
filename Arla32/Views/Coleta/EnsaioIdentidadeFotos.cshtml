@@ -1,62 +1,134 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="utf-8" />
-    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        .input {
+            border: none;
+        }
+
+        .table {
+            margin: 0 auto;
+            border: 1px solid black;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        .texto-central {
+            text-align: center;
+        }
+
+        .tabela {
+            background-color: #800000;
+            color: white;
+        }
+
+        .imagem {
+            max-width: 200px;
+            height: 100px;
+            display: block;
+            margin: 0 auto;
+            vertical-align: middle;
+        }
+
+        .image-container {
+            position: relative;
+            display: inline-block;
+        }
+
+            .image-container img {
+                display: block;
+                max-width: 100%;
+            }
+
+        .fechar-imagem {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            border: none;
+            border-radius: 50%;
+            color: black;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            display: none;
+        }
+    </style>
 </head>
 <body>
+    <table class="table table-bordered border-secondary  table-sm">
+        <tr>
+            <td rowspan="3" class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                <img src="https://www.labsystem-nuvem.com.br/imagens_arq/imagens/img/LabSystem.png" class="imagem" />
+            </td>
+            <td colspan="5" class="texto-central" style="background-color: #800000; color:white;">COLETA DE DADOS</td>
+        </tr>
+        <tr class="tabela">
+            <td colspan="5" class="texto-central "> ENSAIO DE ARLA 32 </td>
+        </tr>
+        <tr>
+            <td style="background-color: #800000; color:white;">Data Inicio:</td>
+        </tr>
+    </table>
+    <br />
 
-    <form method="post" asp-controller="Coleta" asp-action="UploadImage" enctype="multipart/form-data">
-        <div style="height:500px; width:100%; border:solid 1px;border-radius:0px 20px 0px 20px; position:center">
-            <input type="file" id="fileInput" name="file" accept="image/*" required>
-            <button type="submit">Enviar Imagem</button>
+    <form method="post" asp-controller="Coleta" asp-action="UploadImage" enctype="multipart/form-data" asp-route-os="@ViewData["OS"]" asp-route-orcamento="@ViewData["orcamento"]">
+        <div class="image-container">
+            <img src="" alt="" id="preview-image"/>
+            <button id="fechar-imagem" type="button" class="btn btn-sm fechar-imagem" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <br />
 
+        <br />
+        <div class="mb-3">
+            <input type="file" id="fileinput" name="file" class="form-control form-control-mb" /> <br />
+            <button type="submit" class="btn btn-secondary">Enviar Imagem</button>
         </div>
     </form>
+
+  
 
     @section Scripts {
         @if (TempData.ContainsKey("Mensagem"))
         {
             <script>
-
                 alert('@Html.Raw(TempData["Mensagem"])');
             </script>
-
         }
+
         <script>
-            function uploadImage() {
-                const fileInput = document.getElementById('fileInput');
-                const file = fileInput.files[0];
-                console.log(fileInput);
+            const input = document.querySelector("#fileinput");
+            const previewImage = document.querySelector("#preview-image");
+            const closeButton = document.querySelector("#fechar-imagem");
 
-                if (file) {
-                    const formData = new FormData();
-                    formData.append('file', file);
+            input.addEventListener("change", function (e) {
+                const tgt = e.target || window.event.srcElement;
+                const files = tgt.files;
 
-                    $.ajax({
-                        url: '/Coleta/UploadImage',  // Endpoint for your backend
-                        type: 'POST',
-                        data: formData,
-                        contentType: false,
-                        processData: false,
-                        success: function (response) {
-                            console.log('Imagem enviada com sucesso:', response);
-                        },
-                        error: function (error) {
-                            console.error('Erro ao enviar a imagem:', error);
-                        }
-                    });
-                    console.log(file);
+                if (files && files.length > 0) {
+                    const fr = new FileReader();
+                    fr.onload = function () {
+                        previewImage.src = fr.result;
+                        closeButton.style.display = "block"; // Mostra o botão "x"
+                    };
+                    fr.readAsDataURL(files[0]);
                 } else {
-                    console.log("null");
-
-                    alert('Selecione uma imagem para fazer upload.');
+                    previewImage.src = "";
+                    closeButton.style.display = "none"; // Esconde o botão "x" se não houver imagem
                 }
-            }
+            });
 
+            closeButton.addEventListener("click", function () {
+                previewImage.src = ""; // Limpa a imagem
+                closeButton.style.display = "none"; // Oculta o botão "x"
+            });
         </script>
-
-
     }
 </body>
 </html>

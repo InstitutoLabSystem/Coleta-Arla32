@@ -3,13 +3,15 @@ using Arla32.Models;
 using Arla32.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Build.ObjectModelRemoting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.WebEncoders.Testing;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.SqlServer.Server;
 using NuGet.Versioning;
 using System.Data.Entity;
-using System.Security.Cryptography;
+using System.Reflection.Metadata;
 using System.Security.Cryptography.Xml;
 using static Arla32.Models.ColetaModel;
 
@@ -54,6 +56,7 @@ namespace Arla32.Controllers
             ViewBag.orcamento = orcamento;
 
             return View();
+
         }
         public IActionResult EnsaioAldeidos(string OS, string orcamento)
         {
@@ -123,10 +126,22 @@ namespace Arla32.Controllers
         }
         public IActionResult EnsaioIdentidade(string OS, string orcamento)
         {
-            ViewBag.OS = OS;
-            ViewBag.orcamento = orcamento;
+            var dados = _qcontext.arla_identidade.Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
+            if (dados == null)
+            {
+                ViewBag.OS = OS;
+                ViewBag.orcamento = orcamento;
+            
 
-            return View();
+                return View();
+            }
+            else
+            {
+                ViewBag.OS = OS;
+                ViewBag.orcamento = orcamento;
+                
+                return View(dados);
+            }
         }
         public IActionResult EnsaioBiureto(string OS, string orcamento)
         {
@@ -152,33 +167,107 @@ namespace Arla32.Controllers
             return View();
         }
 
+
+        [HttpPost]
+
+        public async Task<IActionResult> SalvarIdentidade(string OS, string orcamento, [Bind("data_ini,data_term,np,descricao,avaliacao,mat_prima,mat_lote,mat_validade,cod_prima,cod_lote,cod_validade,observacoes,executado,auxiliado")] ColetaModel.ArlaIdentidade identidade)
+        {
+            if (!ModelState.IsValid)
+            {
+                DateTime data_ini = identidade.data_ini;
+                DateTime data_term = identidade.data_term;
+                string np = identidade.np;
+                string descricao = identidade.descricao;
+                string avaliacao = identidade.avaliacao;
+                string mat_prima = identidade.mat_prima;
+                string mat_lote = identidade.mat_lote;
+                DateTime mat_validade = identidade.mat_validade;
+                string cod_prima = identidade.cod_prima;
+                string cod_lote = identidade.cod_lote;
+                DateTime cod_validade = identidade.cod_validade;
+                string observacoes = identidade.observacoes;
+                string executado = identidade.executado;
+                string auxiliado = identidade.auxiliado;
+               
+
+                var salvardados = new ColetaModel.ArlaIdentidade
+                {
+                    os = OS,
+                    orcamento = orcamento,
+                    data_ini = data_ini,
+                    data_term = data_term,
+                    np = np,
+                    descricao = descricao,
+                    avaliacao = avaliacao,
+                    mat_prima = mat_prima,
+                    mat_lote = mat_lote,
+                    mat_validade = mat_validade,
+                    cod_prima = cod_prima,
+                    cod_lote = cod_lote,
+                    cod_validade= cod_validade,
+                    observacoes = observacoes,
+                    executado = executado,
+                    auxiliado = auxiliado,
+
+                };
+                _qcontext.Add(salvardados);
+                await _qcontext.SaveChangesAsync();
+                TempData["Mensagem"] = "salvo com Sucesso.";
+
+                return RedirectToAction(nameof(EnsaioIdentidade), new { OS, orcamento });
+            }
+            else
+            {
+                TempData["Mensagem"] = "Desculpe, verifique a os e orcamento estão corretas.";
+                return RedirectToAction(nameof(EnsaioIdentidade), new { OS, orcamento });
+            }
+
+        }
+
         [HttpPost("upload-image")]
-        public async Task<IActionResult> UploadImage(IFormFile file)
+        public async Task<IActionResult> UploadImage(IFormFile file, string os, string orcamento)
         {
             if (file == null || file.Length == 0)
             {
-                //return BadRequest("Arquivo inválido ou ausente.");
                 return RedirectToAction(nameof(EnsaioIdentidadeFotos));
-            }
-                
-            // Salve a imagem em algum lugar (neste exemplo, estamos salvando na pasta temporária)
-            var filePath = Path.GetTempFileName();
-            using (var stream = new FileStream(filePath, FileMode.Create))
-            {
-                await file.CopyToAsync(stream);
             }
 
             try
             {
                 // Chame a função do serviço GoogleDrive para fazer o upload da imagem
-                var fileId = await _googleDriveService.UploadImageToFolderAsync(filePath);
-                return Ok(fileId);
+                var imageUrl = await _googleDriveService.UploadImageToFolderAsync(file);
+
+                // Verifique se já existe uma imagem associada a essa OS e orcamento
+                var arlaImagem = _qcontext.arla_identidade.Where(a => a.os == os && a.orcamento == orcamento).FirstOrDefault();
+
+                if (arlaImagem != null)
+                {
+                    // Chame a função do serviço GoogleDrive para fazer o upload da imagem
+                    var uploadResult = await _googleDriveService.UploadImageToFolderAsync(file);
+                    arlaImagem.img = uploadResult.WebViewLink;
+                    arlaImagem.imgId = uploadResult.ImgId;
+                    _qcontext.arla_identidade.Update(arlaImagem);
+                }
+                else
+                {
+                    // Se o registro não existe, retorne um erro ou trate conforme sua necessidade
+                    return NotFound("Registro não encontrado para a OS e orcamento fornecidos.");
+                }
+
+                // Salve as mudanças
+                await _qcontext.SaveChangesAsync();
+                return RedirectToAction(nameof(EnsaioIdentidade), new { os, orcamento });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao fazer upload da imagem: {ex.Message}");
+                string innerExceptionMessage = ex.InnerException != null ? ex.InnerException.Message : "N/A";
+
+                return StatusCode(500, $"Erro ao fazer upload da imagem. Exceção: {ex.Message}. Exceção Interna: {innerExceptionMessage}");
             }
         }
+
+
+
 
 
         [HttpPost]
