@@ -10,7 +10,7 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-
+using static Arla32.Models.ColetaModel;
 
 namespace Arla32.Services
 {
@@ -30,29 +30,37 @@ namespace Arla32.Services
             });
         }
 
-    
-        public async Task<string> UploadImageToFolderAsync(string filePath)
+        public async Task<UploadResult> UploadImageToFolderAsync(IFormFile file)
         {
             string folderId = "1tGyDNdL30GMNUaLjxlhimgzWq9JwUgF3"; // ID da pasta de destino
 
             var fileMetadata = new Google.Apis.Drive.v3.Data.File
             {
-                Name = Path.GetFileName(filePath),
+                Name = file.FileName,
                 Parents = new List<string> { folderId } // Adiciona o ID da pasta de destino
             };
 
             FilesResource.CreateMediaUpload request;
 
-            using (var stream = new FileStream(filePath, FileMode.Open))
+            using (var stream = file.OpenReadStream())
             {
-                request = _driveService.Files.Create(fileMetadata, stream, "image/jpg");
-                request.Fields = "id";
+                request = _driveService.Files.Create(fileMetadata, stream, file.ContentType);
+                request.Fields = "id, webViewLink"; // Solicita o webViewLink além do ID
                 await request.UploadAsync();
             }
 
-            var file = request.ResponseBody;
-            return file.Id;
+            var uploadedFile = request.ResponseBody;
+
+            // Criar e retornar o objeto UploadResult com os dados necessários
+            var uploadResult = new UploadResult
+            {
+                WebViewLink = uploadedFile.WebViewLink,
+                ImgId = uploadedFile.Id  // Obtém o ID da imagem no Google Drive
+            };
+
+            return uploadResult;
         }
+
 
     }
 }

@@ -9,6 +9,38 @@ namespace Arla32.Models
 {
     public class ColetaModel
     {
+        public class UploadResult
+        {
+            public string WebViewLink { get; set; }
+            public string ImgId { get; set; }
+        }
+
+        public class ArlaIdentidade {
+
+            [Key]
+            public int Id { get; set; }
+            public string os { get; set; }
+            public string orcamento { get; set; }
+            public DateTime data_ini { get; set; }
+            public DateTime data_term { get; set; }
+            public string np { get; set; }
+            public string descricao { get; set; } 
+            public string avaliacao { get; set; }
+            public string mat_prima { get; set; }
+            public string mat_lote { get; set; }
+            public DateTime mat_validade { get; set; }
+            public string cod_prima { get; set; }
+            public string cod_lote { get; set; }
+            public DateTime cod_validade { get; set; }
+            public string observacoes { get; set; }
+            public string executado { get; set; }
+            public string auxiliado { get; set; }
+            public string? img { get; set; }
+            public string? imgId { get; set; }
+
+        }
+
+
         public class ArlaConcentracao
         {
             [key]
