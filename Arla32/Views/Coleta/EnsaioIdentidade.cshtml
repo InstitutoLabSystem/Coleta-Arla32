@@ -59,6 +59,134 @@
 </head>
 <body>
     <form method="post" asp-controller="Coleta" asp-action="SalvarIdentidade" asp-route-os="@ViewData["OS"]" asp-route-orcamento="@ViewData["orcamento"]">
+
+        @if (Model == null)
+        {
+         <table class="table table-bordered border-secondary  table-sm">
+                <tr>
+                    <td rowspan="3" class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <img src="https://www.labsystem-nuvem.com.br/imagens_arq/imagens/img/LabSystem.png" class="imagem" />
+                    </td>
+                    <td colspan="4" class="texto-central" style="background-color: #800000; color:white;">COLETA DE DADOS</td>
+                    <td rowspan="2" class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="background-color: #800000; color:white;"> N° da OS :</td>
+                </tr>
+                <tr class="tabela">
+                    <td colspan="5" class="texto-central "> ENSAIO DE ARLA 32 </td>
+                </tr>
+                <tr>
+                    <td style="background-color: #800000; color:white;">Data Inicio:</td>
+                    <td><input class="form-control input " type="date" name="data_ini" /></td>
+                    <td style="background-color: #800000; color:white;">Data Término:</td>
+                    <td><input class="form-control input " type="date" name="data_term"/></td>
+                    <td colspan="2"> <input class="form-control input " style="height:50px; border:none;" name="os" value="@ViewBag.OS" /></td>
+                </tr>
+                <tr class="texto-central">
+                    <td colspan="6">
+                        <b>Ensaio a ser realizado:</b> Determinação da identificação pelo método espectrométrico FTIR-ATR Anexo J - IT.124-Q
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6">
+                        Norma: ABNT NBR ISO 22241-2
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="1"> Np:</td>
+                    <td colspan="5"><input class="form-control input " name="np" /></td>
+                </tr>
+                <tr>
+                    <td colspan="1">Descrição:</td>
+                    <td colspan="5"><input class="form-control input " name="descricao" /></td>
+                </tr>
+                <tr class="tabela">
+                    <td colspan="6"></td>
+                </tr>
+                </table>
+                <Br />
+
+                <!--  Segudna tabela.  -->
+                <table class="table table-bordered border-secondary table-sm">
+                    <tr class="tabela">
+                        <td class="texto-central"> Avaliação dos Resultados</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2"><textarea class="form-control" name="avaliacao" rows="3" style="border:none"></textarea></td>
+                    </tr>
+
+                </table>
+                <br />
+
+
+                <!--  Terceira tabela.  -->
+                <table class="table table-bordered border-secondary table-sm">
+                    <tr class="tabela">
+                        <td colspan="5" class="texto-central">Materiais Utilizados</td>
+                    </tr>
+                    <tr class="tabela">
+                        <td colspan="3" class="texto-central">Matéria prima</td>
+                        <td colspan="1" class="texto-central">Lote</td>
+                        <td colspan="1" class="texto-central">Validade</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><input class="form-control input " name="mat_prima" /></td>
+                        <td colspan="1"><input class="form-control input " name="mat_lote"/></td>
+                        <td colspan="1"><input type="date" class="form-control input " name="mat_validade" /></td>
+                    </tr>
+                </table>
+                <br />
+
+                <!--  Quarta tabela.  -->
+                <table class="table table-bordered border-secondary table-sm">
+                    <tr class="tabela">
+                        <td colspan="5" class="texto-central">Código dos instrumentos / Equipamentos utilizados /td>
+                    </tr>
+                    <tr class="tabela">
+                        <td colspan="3" class="texto-central">Matéria prima</td>
+                        <td colspan="1" class="texto-central">Lote</td>
+                        <td colspan="1" class="texto-central">Validade</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><input class="form-control input " name="cod_prima"/></td>
+                        <td colspan="1"><input class="form-control input " name="cod_lote"/></td>
+                        <td colspan="1"><input type="date" class="form-control input " name="cod_validade"/></td>
+                    </tr>
+                </table>
+                <br />
+
+
+                <!--Quinta Tabela-->
+                <table class="table table-bordered border-secondary table-sm">
+                    <tr class="tabela">
+                        <td class="texto-central">Observações</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2"><textarea class="form-control" name="observacoes" rows="3" style="border:none"></textarea></td>
+                    </tr>
+                </table>
+                <br />
+
+
+                <!--Sexta Tabela-->
+
+                <table class="table table-bordered border-secondary table-sm">
+                    <tr class="tabela">
+                        <td colspan="2" class="texto-central" >Executado por:</td>
+                        <td colspan="2" class="texto-central">Auxiliado por:</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><input class="form-control input " name="executado"/></td>
+                        <td colspan="2"><input class="form-control input " name="auxiliado" /></td>
+                    </tr>
+                </table>
+                
+                <br/>
+                <div class="d-grid gap-2 d-flex justify-content-center">
+                <button type="submit" class="btn btn-success btn btn-primary btn-md">Salvar Coleta</button>
+                <button type="button" class="btn btn-secondary">Adicionar Imagem </button>
+                </div>
+            }
+            else
+            {
         <table class="table table-bordered border-secondary  table-sm">
             <tr>
                 <td rowspan="3" class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
@@ -70,13 +198,13 @@
             <tr class="tabela">
                 <td colspan="5" class="texto-central "> ENSAIO DE ARLA 32 </td>
             </tr>
-            <tr>
-                <td style="background-color: #800000; color:white;">Data Inicio:</td>
-                <td><input class="form-control input " type="date" name="data_ini" /></td>
-                <td style="background-color: #800000; color:white;">Data Término:</td>
-                <td><input class="form-control input " type="date" name="data_term"/></td>
-                <td colspan="2"> <input class="form-control input " style="height:50px; border:none;" name="os" value="@ViewBag.OS" /></td>
-            </tr>
+                <tr>
+                    <td style="background-color: #800000; color:white;">Data Inicio:</td>
+                    <td><input type="text" class="form-control input " name="data_ini" value="@Model.data_ini.ToString("dd/MM/yyyy")" /></td>
+                    <td style="background-color: #800000; color:white;">Data Término:</td>
+                    <td><input type="text" class="form-control input " name="data_term" value="@Model.data_term.ToString("dd/MM/yyyy")" /></td>
+                    <td colspan="2"> <input class="form-control input " style="height:50px; border:none;" name="os" value="@ViewBag.OS" /></td>
+                </tr>
             <tr class="texto-central">
                 <td colspan="6">
                     <b>Ensaio a ser realizado:</b> Determinação da identificação pelo método espectrométrico FTIR-ATR Anexo J - IT.124-Q
@@ -89,11 +217,11 @@
             </tr>
             <tr>
                 <td colspan="1"> Np:</td>
-                <td colspan="5"><input class="form-control input " name="np" /></td>
+                <td colspan="5"><input class="form-control input " value="@Model.np" name="np" /></td>
             </tr>
             <tr>
                 <td colspan="1">Descrição:</td>
-                <td colspan="5"><input class="form-control input " name="descricao" /></td>
+                <td colspan="5"><input class="form-control input " value="@Model.descricao" name="descricao" /></td>
             </tr>
             <tr class="tabela">
                 <td colspan="6"></td>
@@ -101,110 +229,102 @@
         </table>
         <Br />
 
-        <!-- Imagem aqui -->
-        @if (Model != null)
-        {
-            <table class="table table-bordered border-secondary table-sm">
+                <!-- Imagem aqui -->
+                @if (Model.img != null)
+                {
+                    <table class="table table-bordered border-secondary table-sm">
+                        <tr>
+                            <td style="text-align: center;">
+                                <img src="https://drive.google.com/uc?id=@Model.imgId&export=download"/>
+                            </td>
+                        </tr>
+                    </table>
+
+                }
+
+                <!--  Segudna tabela.  -->
+                <table class="table table-bordered border-secondary table-sm">
+                    <tr class="tabela">
+                        <td class="texto-central"> Avaliação dos Resultados</td>
+                    </tr>
                 <tr>
-                    <td style="text-align: center;">
-                        <img src="https://drive.google.com/uc?id=@Model.imgId&export=download" alt="Erro" />
-                    </td>
+                    <td><textarea type="text" name="avaliacao" class="form-control input">@Model.avaliacao</textarea></td>
                 </tr>
-            </table>
 
-        }
-
-        
-        
-        <!--  Segudna tabela.  -->
-        <table class="table table-bordered border-secondary table-sm">
-            <tr class="tabela">
-                <td class="texto-central"> Avaliação dos Resultados</td>
-            </tr>
-            <tr>
-                <td rowspan="2"><textarea class="form-control" name="avaliacao" rows="3" style="border:none"></textarea></td>
-            </tr>
-            
-        </table>
-        <br />
+                </table>
+                <br />
 
 
-        <!--  Terceira tabela.  -->
-        <table class="table table-bordered border-secondary table-sm">
-            <tr class="tabela">
-                <td colspan="5" class="texto-central">Materiais Utilizados</td>
-            </tr>
-            <tr class="tabela">
-                <td colspan="3" class="texto-central">Matéria prima</td>
-                <td colspan="1" class="texto-central">Lote</td>
-                <td colspan="1" class="texto-central">Validade</td>
-            </tr>
-            <tr>
-                <td colspan="3"><input class="form-control input " name="mat_prima" /></td>
-                <td colspan="1"><input class="form-control input " name="mat_lote"/></td>
-                <td colspan="1"><input type="date" class="form-control input " name="mat_validade" /></td>
-            </tr>
-        </table>
-        <br />
+                <!--  Terceira tabela.  -->
+                <table class="table table-bordered border-secondary table-sm">
+                    <tr class="tabela">
+                        <td colspan="5" class="texto-central">Materiais Utilizados</td>
+                    </tr>
+                    <tr class="tabela">
+                        <td colspan="3" class="texto-central">Matéria prima</td>
+                        <td colspan="1" class="texto-central">Lote</td>
+                        <td colspan="1" class="texto-central">Validade</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><input class="form-control input " value="@Model.mat_prima" name="mat_prima" /></td>
+                        <td colspan="1"><input class="form-control input " value="@Model.mat_lote" name="mat_lote" /></td>
+                    <td><input type="text" name="mat_validade" class="form-control input " value="@Model.mat_validade.ToString("dd/MM/yyyy")" /></td>
 
-        <!--  Quarta tabela.  -->
-        <table class="table table-bordered border-secondary table-sm">
-            <tr class="tabela">
-                <td colspan="5" class="texto-central">Código dos instrumentos / Equipamentos utilizados /td>
-            </tr>
-            <tr class="tabela">
-                <td colspan="3" class="texto-central">Matéria prima</td>
-                <td colspan="1" class="texto-central">Lote</td>
-                <td colspan="1" class="texto-central">Validade</td>
-            </tr>
-            <tr>
-                <td colspan="3"><input class="form-control input " name="cod_prima"/></td>
-                <td colspan="1"><input class="form-control input " name="cod_lote"/></td>
-                <td colspan="1"><input type="date" class="form-control input " name="cod_validade"/></td>
-            </tr>
-        </table>
-        <br />
+                    </tr>
+                </table>
+                <br />
 
-
-        <!--Quinta Tabela-->
-        <table class="table table-bordered border-secondary table-sm">
-            <tr class="tabela">
-                <td class="texto-central">Observações</td>
-            </tr>
-            <tr>
-                <td rowspan="2"><textarea class="form-control" name="observacoes" rows="3" style="border:none"></textarea></td>
-            </tr>
-        </table>
-        <br />
+                <!--  Quarta tabela.  -->
+                <table class="table table-bordered border-secondary table-sm">
+                    <tr class="tabela">
+                        <td colspan="5" class="texto-central">Código dos instrumentos / Equipamentos utilizados /td>
+                    </tr>
+                    <tr class="tabela">
+                        <td colspan="3" class="texto-central">Matéria prima</td>
+                        <td colspan="1" class="texto-central">Lote</td>
+                        <td colspan="1" class="texto-central">Validade</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><input class="form-control input " value="@Model.cod_prima" name="cod_prima" /></td>
+                        <td colspan="1"><input class="form-control input " value="@Model.cod_lote" name="cod_lote" /></td>
+                    <td><input type="text" name="cod_validade" class="form-control input " value="@Model.cod_validade.ToString("dd/MM/yyyy")" /></td>
+                </tr>
+                </table>
+                <br />
 
 
-        <!--Sexta Tabela-->
+                <!--Quinta Tabela-->
+                <table class="table table-bordered border-secondary table-sm">
+                    <tr class="tabela">
+                        <td class="texto-central">Observações</td>
+                    </tr>
+                <tr>
+                    <td><textarea type="text" name="observacoes" class="form-control input">@Model.observacoes</textarea></td>
+                </tr>
+                </table>
+                <br />
 
-        <table class="table table-bordered border-secondary table-sm">
-            <tr class="tabela">
-                <td colspan="2" class="texto-central" >Executado por:</td>
-                <td colspan="2" class="texto-central">Auxiliado por:</td>
-            </tr>
-            <tr>
-                <td colspan="2"><input class="form-control input " name="executado"/></td>
-                <td colspan="2"><input class="form-control input " name="auxiliado" /></td>
-            </tr>
-        </table>
-        <br />
 
-        <div class="d-grid gap-2 d-flex justify-content-center">
-            @if(Model != null)
-            {
-                <button type="submit" class="btn btn-success btn btn-primary btn-md">Salvar Coleta</button>
-                <a class="btn btn-primary" asp-controller="Coleta" asp-action="EnsaioIdentidadeFotos" asp-route-os="@ViewBag.OS" asp-route-orcamento="@ViewBag.orcamento">Adicionar Imagem</a>
+                <!--Sexta Tabela-->
+
+                <table class="table table-bordered border-secondary table-sm">
+                    <tr class="tabela">
+                        <td colspan="2" class="texto-central">Executado por:</td>
+                        <td colspan="2" class="texto-central">Auxiliado por:</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><input class="form-control input " value="@Model.executado" name="executado" /></td>
+                        <td colspan="2"><input class="form-control input " value="@Model.auxiliado" name="auxiliado" /></td>
+                    </tr>
+                </table>
+                <br/>
+
+             <div class="d-grid gap-2 d-flex justify-content-center">
+            <button type="submit" class="btn btn-success btn btn-primary btn-md">Editar Coleta</button>
+            <a class="btn btn-primary" asp-controller="Coleta" asp-action="EnsaioIdentidadeFotos" asp-route-os="@ViewBag.OS" asp-route-orcamento="@ViewBag.orcamento">Adicionar Imagem</a>
+            </div>
             }
-            else
-            {
-                <button type="submit" class="btn btn-success btn btn-primary btn-md">Salvar Coleta</button>
-                <button type="button" class="btn btn-secondary">Adicionar Imagem </button>
-            }
-          
-        </div>
+      
     </form>
 
 

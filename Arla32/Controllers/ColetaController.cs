@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.SqlServer.Server;
 using NuGet.Versioning;
 using System.Data.Entity;
+using System.Net.WebSockets;
 using System.Reflection.Metadata;
 using System.Security.Cryptography.Xml;
 using static Arla32.Models.ColetaModel;
@@ -152,8 +153,14 @@ namespace Arla32.Controllers
 
         public async Task<IActionResult> SalvarIdentidade(string OS, string orcamento, [Bind("data_ini,data_term,np,descricao,avaliacao,mat_prima,mat_lote,mat_validade,cod_prima,cod_lote,cod_validade,observacoes,executado,auxiliado")] ColetaModel.ArlaIdentidade identidade)
         {
-            if (!ModelState.IsValid)
+            try {
+                //verificando se existe dados com essa os.
+                var editardados = _qcontext.arla_identidade.Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
+
+                if (editardados == null)
             {
+                 if (OS != null && OS != "0" && orcamento != "0")
+                {
                 DateTime data_ini = identidade.data_ini;
                 DateTime data_term = identidade.data_term;
                 string np = identidade.np;
@@ -202,9 +209,49 @@ namespace Arla32.Controllers
                 return RedirectToAction(nameof(EnsaioIdentidade), new { OS, orcamento });
             }
 
-        }
+                }
+                else
+                {
+                    if (OS != null && OS != "0" && orcamento != "0")
+                    {
+                        //pegando valores dos dados inseridos na pagina
+                        editardados.data_ini = identidade.data_ini;
+                        editardados.data_term = identidade.data_term;
+                        editardados.np = identidade.np;
+                        editardados.descricao = identidade.descricao;
+                        editardados.avaliacao = identidade.avaliacao;
+                        editardados.mat_prima = identidade.mat_prima;
+                        editardados.mat_lote = identidade.mat_lote;
+                        editardados.mat_validade = identidade.mat_validade;
+                        editardados.cod_prima = identidade.cod_prima;
+                        editardados.cod_lote = identidade.cod_lote;
+                        editardados.cod_validade = identidade.cod_validade;
+                        editardados.observacoes = identidade.observacoes;
+                        editardados.executado = identidade.executado;
+                        editardados.auxiliado = identidade.auxiliado;
+                        //EDITANDO NO BANCO.
+                        await _qcontext.SaveChangesAsync();
 
-        [HttpPost("upload-image")]
+                        TempData["Mensagem"] = "Dados Editado com Sucesso.";
+                        return RedirectToAction(nameof(EnsaioIdentidade), new { OS, orcamento });
+
+                    }
+                    else
+                    {
+                        TempData["Mensagem"] = "Desculpe, verifique a os e orcamento estão corretas.";
+                        return RedirectToAction(nameof(EnsaioIdentidade), new { OS, orcamento });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error", ex.Message);
+                throw;
+            }
+        }
+   
+
+    [HttpPost("upload-image")]
         public async Task<IActionResult> UploadImage(IFormFile file, string os, string orcamento)
         {
             if (file == null || file.Length == 0)

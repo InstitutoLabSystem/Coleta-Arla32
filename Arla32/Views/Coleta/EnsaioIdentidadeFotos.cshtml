@@ -71,7 +71,7 @@
             <td colspan="5" class="texto-central "> ENSAIO DE ARLA 32 </td>
         </tr>
         <tr>
-            <td style="background-color: #800000; color:white;">Data Inicio:</td>
+            <td style="background-color: #800000; color:white;">Insira a imagem</td>
         </tr>
     </table>
     <br />
@@ -89,6 +89,7 @@
         <div class="mb-3">
             <input type="file" id="fileinput" name="file" class="form-control form-control-mb" /> <br />
             <button type="submit" class="btn btn-secondary">Enviar Imagem</button>
+            <a class="btn btn-primary" asp-controller="Coleta" asp-action="EnsaioIdentidade" asp-route-os="@ViewBag.OS" asp-route-orcamento="@ViewBag.orcamento">Voltar</a>
         </div>
     </form>
 
