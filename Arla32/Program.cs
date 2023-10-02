@@ -35,7 +35,7 @@ namespace Arla32
                 CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>
                 {
                     option.LoginPath = "/Acess/Login";
-                    option.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+                    option.ExpireTimeSpan = TimeSpan.FromMinutes(60);
                 });
             builder.Services.AddScoped<GoogleDriveService>();
 

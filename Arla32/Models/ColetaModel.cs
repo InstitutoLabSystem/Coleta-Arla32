@@ -243,44 +243,44 @@ namespace Arla32.Models
             public float pesagem_filtro2 { get; set; }
             public float pesagem_resultado2 { get; set; }
             public string pesagem_media { get; set; }
-            public string pesagem_resultfinal { get; set; }
+            public float pesagem_resultfinal { get; set; }
             public string mat_prima1 { get; set; }
             public string mat_lote1 { get; set; }
-            public string mat_validade1 { get; set; }
+            public DateTime mat_validade1 { get; set; }
             public string mat_prima2 { get; set; }
             public string mat_lote2 { get; set; }
-            public string mat_validade2 { get; set; }
+            public DateTime mat_validade2 { get; set; }
 
             public string inst_desc1 { get; set; }
             public string inst_cod1 { get; set; }
-            public string inst_validade1 { get; set; }
+            public DateTime inst_validade1 { get; set; }
             public string inst_desc2 { get; set; }
             public string inst_cod2 { get; set; }
-            public string inst_validade2 { get; set; }
+            public DateTime inst_validade2 { get; set; }
             public string inst_desc3 { get; set; }
             public string inst_cod3 { get; set; }
-            public string inst_validade3 { get; set; }
+            public DateTime inst_validade3 { get; set; }
             public string inst_desc4 { get; set; }
             public string inst_cod4 { get; set; }
-            public string inst_validade4 { get; set; }
+            public DateTime inst_validade4 { get; set; }
             public string inst_desc5 { get; set; }
             public string inst_cod5 { get; set; }
-            public string inst_validade5 { get; set; }
+            public DateTime inst_validade5 { get; set; }
             public string inst_desc1_1 { get; set; }
             public string inst_cod1_1 { get; set; }
-            public string inst_validade1_1 { get; set; }
+            public DateTime inst_validade1_1 { get; set; }
             public string inst_desc2_2 { get; set; }
             public string inst_cod2_2 { get; set; }
-            public string inst_validade2_2 { get; set; }
+            public DateTime inst_validade2_2 { get; set; }
             public string inst_desc3_3 { get; set; }
             public string inst_cod3_3 { get; set; }
-            public string inst_validade3_3 { get; set; }
+            public DateTime inst_validade3_3 { get; set; }
             public string inst_desc4_4 { get; set; }
             public string inst_cod4_4 { get; set; }
-            public string inst_validade4_4 { get; set; }
+            public DateTime inst_validade4_4 { get; set; }
             public string inst_desc5_5 { get; set; }
             public string inst_cod5_5 { get; set; }
-            public string inst_validade5_5 { get; set; }
+            public DateTime inst_validade5_5 { get; set; }
             public string equi_ee { get; set; }
             public string equi_de { get; set; }
             public string observacoes { get; set; }
@@ -295,13 +295,13 @@ namespace Arla32.Models
             [Key]
             public int id { get; set; }
             public string os { get; set; }
+            public string?  rev { get; set; }
             public string orcamento { get; set; }
-            public string rev { get; set; }
             public DateTime data_ini { get; set; }
             public DateTime data_term { get; set; }
-            public string norma { get; set; }
-            public string np { get; set; }
-            public string descricao { get; set; }
+            public string? norma { get; set; }
+            public string? np { get; set; }
+            public string? descricao { get; set; }
             public float ex_lq_al { get; set; }
             public float ex_lq_ca { get; set; }
             public float ex_lq_cr { get; set; }
@@ -438,25 +438,20 @@ namespace Arla32.Models
             public string inst_dec12 { get; set; }
             public string inst_cod12 { get; set; }
             public DateTime inst_val12 { get; set; }
+            public string inst_desc13 { get; set; }
+            public string inst_cod13 { get; set; }
+            public DateTime inst_val13 { get; set; }
             public string inst_desc14 { get; set; }
             public string inst_cod14 { get; set; }
             public DateTime inst_val14 { get; set; }
+            public string inst_desc15 { get; set; }
+            public string inst_cod15 { get; set; }
+            public DateTime inst_val15 { get; set; }
             public string equi_ee { get; set; }
             public string equi_de { get; set; }
             public string observacoes { get; set; }
             public string executado { get; set; }
             public string auxiliado { get; set; }
-            public string media_al { get; set; }
-            public string media_ca { get; set; }
-            public string media_cr { get; set; }
-            public string media_cu { get; set; }
-            public string media_fe { get; set; }
-            public string media_k { get; set; }
-            public string media_mg { get; set; }
-            public string media_na { get; set; }
-            public string media_ni { get; set; }
-            public string media_zn { get; set; }
-
         }
 
         public class MetaisTratamento
@@ -465,7 +460,7 @@ namespace Arla32.Models
             public int id { get; set; }
             public string os { get; set; }
             public string orcamento { get; set; }
-            public string rev { get; set; }
+            public string? rev { get; set; }
             public float branco_al { get; set; }
             public float branco_ca { get; set; }
             public float branco_cr { get; set; }
@@ -536,9 +531,9 @@ namespace Arla32.Models
             public float resul_con_na3 { get; set; }
             public float resul_con_ni3 { get; set; }
             public float resul_con_zn3 { get; set; }
-            public string observacoes { get; set; }
-            public string executado { get; set; }
-            public string auxiliado { get; set; }
+            public string? observacoes { get; set; }
+            public string? executado { get; set; }
+            public string? auxiliado { get; set; }
         }
 
         public class ArlaFosfato
