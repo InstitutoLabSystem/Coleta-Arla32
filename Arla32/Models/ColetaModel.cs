@@ -193,12 +193,11 @@ namespace Arla32.Models
             [Key]
             public int id { get; set; }
             public string os { get; set; }
-
             public string norma { get; set; }
             public string np { get; set; }
             public string descricao { get; set; }
             public string orcamento { get; set; }
-            public string rev { get; set; }
+            public string? rev { get; set; }
             public DateTime data_ini { get; set; }
             public DateTime data_term { get; set; }
             public string lote_sol { get; set; }
@@ -215,31 +214,31 @@ namespace Arla32.Models
             public float carta_concentracao { get; set; }
             public string mat_prima1 { get; set; }
             public string mat_lote1 { get; set; }
-            public string mat_validade1 { get; set; }
+            public DateTime mat_validade1 { get; set; }
             public string mat_prima2 { get; set; }
             public string mat_lote2 { get; set; }
-            public string mat_validade2 { get; set; }
+            public DateTime mat_validade2 { get; set; }
             public string mat_prima3 { get; set; }
             public string mat_lote3 { get; set; }
-            public string mat_validade3 { get; set; }
+            public DateTime mat_validade3 { get; set; }
             public string mat_prima4 { get; set; }
             public string mat_lote4 { get; set; }
-            public string mat_validade4 { get; set; }
+            public DateTime mat_validade4 { get; set; }
             public string mat_prima5 { get; set; }
             public string mat_lote5 { get; set; }
-            public string mat_validade5 { get; set; }
+            public DateTime mat_validade5 { get; set; }
             public string inst_desc1 { get; set; }
             public string inst_cod1 { get; set; }
-            public string inst_validade1 { get; set; }
+            public DateTime inst_validade1 { get; set; }
             public string inst_desc2 { get; set; }
             public string inst_cod2 { get; set; }
-            public string inst_validade2 { get; set; }
+            public DateTime inst_validade2 { get; set; }
             public string inst_desc1_1 { get; set; }
             public string inst_cod1_1 { get; set; }
-            public string inst_validade1_1 { get; set; }
+            public DateTime inst_validade1_1 { get; set; }
             public string inst_desc2_2 { get; set; }
             public string inst_cod2_2 { get; set; }
-            public string inst_validade2_2 { get; set; }
+            public DateTime inst_validade2_2 { get; set; }
             public string equi_de { get; set; }
             public string equi_ee { get; set; }
             public string observacoes { get; set; }

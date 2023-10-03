@@ -10,25 +10,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .input {
-            border: none;
+        body {
+            backgound: #f0f0f0;
         }
 
         .table {
-            margin: 0 auto;
-            border: 1px solid black;
-            border-collapse: collapse;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 5px auto;
             width: 80%;
+            font-size: 1.10em;
+            border-radius: 15px;
+            overflow: hidden;
+            width: 80%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adiciona uma leve sombra */
         }
 
-        .texto-central {
-            text-align: center;
-        }
+            .table th, .table td {
+                padding: 8px;
+                text-align: center;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+            }
+
+                .table th td {
+                    background-color: #800000;
+                    color: white;
+                }
 
         .tabela {
             background-color: #800000;
             color: white;
         }
+
+        .table tr:last-child td {
+            border-bottom: 2px solid #800000;
+        }
+
+        .form-control {
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+            box-sizing: border-box;
+            height: 40px;
+        }
+
+            .form-control:focus {
+                outline: none;
+            }
 
         .imagem {
             max-width: 200px;

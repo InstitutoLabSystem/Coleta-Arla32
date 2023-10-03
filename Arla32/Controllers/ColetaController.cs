@@ -61,10 +61,22 @@ namespace Arla32.Controllers
         }
         public IActionResult EnsaioAldeidos(string OS, string orcamento)
         {
-            ViewBag.OS = OS;
-            ViewBag.orcamento = orcamento;
+            var dados = _qcontext.arla_aldeidos.Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
+            if(dados == null)
+            {
+                ViewBag.OS = OS;
+                ViewBag.orcamento = orcamento;
 
-            return View();
+                return View();
+            }
+            else
+            {
+                ViewBag.OS = OS;
+                ViewBag.orcamento = orcamento;
+
+                return View(dados);
+            }
+           
         }
         public IActionResult EnsaioDensidade(string OS, string orcamento)
         {
@@ -144,7 +156,7 @@ namespace Arla32.Controllers
             {
                 ViewBag.OS = OS;
                 ViewBag.orcamento = orcamento;
-            
+
 
                 return View();
             }
@@ -152,7 +164,7 @@ namespace Arla32.Controllers
             {
                 ViewBag.OS = OS;
                 ViewBag.orcamento = orcamento;
-                
+
                 return View(dados);
             }
         }
@@ -215,61 +227,62 @@ namespace Arla32.Controllers
 
         public async Task<IActionResult> SalvarIdentidade(string OS, string orcamento, [Bind("data_ini,data_term,np,descricao,avaliacao,mat_prima,mat_lote,mat_validade,cod_prima,cod_lote,cod_validade,observacoes,executado,auxiliado")] ColetaModel.ArlaIdentidade identidade)
         {
-            try {
+            try
+            {
                 //verificando se existe dados com essa os.
                 var editardados = _qcontext.arla_identidade.Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
 
                 if (editardados == null)
-            {
-                 if (OS != null && OS != "0" && orcamento != "0")
                 {
-                DateTime data_ini = identidade.data_ini;
-                DateTime data_term = identidade.data_term;
-                string np = identidade.np;
-                string descricao = identidade.descricao;
-                string avaliacao = identidade.avaliacao;
-                string mat_prima = identidade.mat_prima;
-                string mat_lote = identidade.mat_lote;
-                DateTime mat_validade = identidade.mat_validade;
-                string cod_prima = identidade.cod_prima;
-                string cod_lote = identidade.cod_lote;
-                DateTime cod_validade = identidade.cod_validade;
-                string observacoes = identidade.observacoes;
-                string executado = identidade.executado;
-                string auxiliado = identidade.auxiliado;
-               
+                    if (OS != null && OS != "0" && orcamento != "0")
+                    {
+                        DateTime data_ini = identidade.data_ini;
+                        DateTime data_term = identidade.data_term;
+                        string np = identidade.np;
+                        string descricao = identidade.descricao;
+                        string avaliacao = identidade.avaliacao;
+                        string mat_prima = identidade.mat_prima;
+                        string mat_lote = identidade.mat_lote;
+                        DateTime mat_validade = identidade.mat_validade;
+                        string cod_prima = identidade.cod_prima;
+                        string cod_lote = identidade.cod_lote;
+                        DateTime cod_validade = identidade.cod_validade;
+                        string observacoes = identidade.observacoes;
+                        string executado = identidade.executado;
+                        string auxiliado = identidade.auxiliado;
 
-                var salvardados = new ColetaModel.ArlaIdentidade
-                {
-                    os = OS,
-                    orcamento = orcamento,
-                    data_ini = data_ini,
-                    data_term = data_term,
-                    np = np,
-                    descricao = descricao,
-                    avaliacao = avaliacao,
-                    mat_prima = mat_prima,
-                    mat_lote = mat_lote,
-                    mat_validade = mat_validade,
-                    cod_prima = cod_prima,
-                    cod_lote = cod_lote,
-                    cod_validade= cod_validade,
-                    observacoes = observacoes,
-                    executado = executado,
-                    auxiliado = auxiliado,
 
-                };
-                _qcontext.Add(salvardados);
-                await _qcontext.SaveChangesAsync();
-                TempData["Mensagem"] = "salvo com Sucesso.";
+                        var salvardados = new ColetaModel.ArlaIdentidade
+                        {
+                            os = OS,
+                            orcamento = orcamento,
+                            data_ini = data_ini,
+                            data_term = data_term,
+                            np = np,
+                            descricao = descricao,
+                            avaliacao = avaliacao,
+                            mat_prima = mat_prima,
+                            mat_lote = mat_lote,
+                            mat_validade = mat_validade,
+                            cod_prima = cod_prima,
+                            cod_lote = cod_lote,
+                            cod_validade = cod_validade,
+                            observacoes = observacoes,
+                            executado = executado,
+                            auxiliado = auxiliado,
 
-                return RedirectToAction(nameof(EnsaioIdentidade), new { OS, orcamento });
-            }
-            else
-            {
-                TempData["Mensagem"] = "Desculpe, verifique a os e orcamento estão corretas.";
-                return RedirectToAction(nameof(EnsaioIdentidade), new { OS, orcamento });
-            }
+                        };
+                        _qcontext.Add(salvardados);
+                        await _qcontext.SaveChangesAsync();
+                        TempData["Mensagem"] = "salvo com Sucesso.";
+
+                        return RedirectToAction(nameof(EnsaioIdentidade), new { OS, orcamento });
+                    }
+                    else
+                    {
+                        TempData["Mensagem"] = "Desculpe, verifique a os e orcamento estão corretas.";
+                        return RedirectToAction(nameof(EnsaioIdentidade), new { OS, orcamento });
+                    }
 
                 }
                 else
@@ -311,9 +324,9 @@ namespace Arla32.Controllers
                 throw;
             }
         }
-   
 
-    [HttpPost("upload-image")]
+
+        [HttpPost("upload-image")]
         public async Task<IActionResult> UploadImage(IFormFile file, string os, string orcamento)
         {
             if (file == null || file.Length == 0)
@@ -987,171 +1000,248 @@ namespace Arla32.Controllers
         {
             try
             {
-                //pegando os valores dos inputs no html.
-                DateTime data_ini = aldeidos.data_ini;
-                DateTime data_term = aldeidos.data_term;
-                string rev = aldeidos.rev;
-                string lote_sol = aldeidos.lote_sol;
-                string codigo_curva = aldeidos.codigo_curva;
-                float fator_calibracao = aldeidos.fator_calibracao;
-                float massa_branco = aldeidos.massa_branco;
-                float absorbancia_branco = aldeidos.absorbancia_branco;
-                float massa_amostra = aldeidos.massa_amostra;
-                float absorbancia_amostra = aldeidos.absorbancia_amostra;
-                float carta_absorbancia = aldeidos.carta_absorbancia;
-                string mat_prima1 = aldeidos.mat_prima1;
-                string mat_lote1 = aldeidos.mat_lote1;
-                string mat_validade1 = aldeidos.mat_validade1;
-                string mat_prima2 = aldeidos.mat_prima2;
-                string mat_lote2 = aldeidos.mat_lote2;
-                string mat_validade2 = aldeidos.mat_validade2;
-                string mat_prima3 = aldeidos.mat_prima3;
-                string mat_lote3 = aldeidos.mat_lote3;
-                string mat_validade3 = aldeidos.mat_validade3;
-                string mat_prima4 = aldeidos.mat_prima4;
-                string mat_lote4 = aldeidos.mat_lote4;
-                string mat_validade4 = aldeidos.mat_validade4;
-                string mat_prima5 = aldeidos.mat_prima5;
-                string mat_lote5 = aldeidos.mat_lote5;
-                string mat_validade5 = aldeidos.mat_validade5;
-                string inst_desc1 = aldeidos.inst_desc1;
-                string inst_cod1 = aldeidos.inst_cod1;
-                string inst_validade1 = aldeidos.inst_validade1;
-                string inst_desc2 = aldeidos.inst_desc2;
-                string inst_cod2 = aldeidos.inst_cod2;
-                string inst_validade2 = aldeidos.inst_validade2;
-                string inst_desc1_1 = aldeidos.inst_desc1_1;
-                string inst_cod1_1 = aldeidos.inst_cod1_1;
-                string inst_validade1_1 = aldeidos.inst_validade1_1;
-                string inst_desc2_2 = aldeidos.inst_desc2_2;
-                string inst_cod2_2 = aldeidos.inst_cod2_2;
-                string inst_validade2_2 = aldeidos.inst_validade2_2;
-                string equi_de = aldeidos.equi_de;
-                string equi_ee = aldeidos.equi_ee;
-                string observacoes = aldeidos.observacoes;
-                string executado = aldeidos.executado;
-                string auxiliado = aldeidos.auxiliado;
-                string norma = aldeidos.norma;
-                string np = aldeidos.np;
-                string descricao = aldeidos.descricao;
-
-
-                if ( /*string.IsNullOrEmpty(data_ini.ToString()) ||*/
-                    /* string.IsNullOrEmpty(data_term.ToString()) |*/
-                    //string.IsNullOrEmpty(codigo_curva) ||
-                    //string.IsNullOrEmpty(lote_sol) ||
-                    //fator_calibracao == 0 ||
-                    //massa_branco == 0 ||
-                    //absorbancia_branco == 0 ||
-                    //massa_amostra == 0 ||
-                    //absorbancia_amostra == 0 ||
-                    //carta_absorbancia == 0 ||
-                    string.IsNullOrEmpty(mat_prima1) ||
-                    string.IsNullOrEmpty(mat_prima2) ||
-                    string.IsNullOrEmpty(mat_prima3) ||
-                    string.IsNullOrEmpty(mat_prima4) ||
-                    string.IsNullOrEmpty(mat_prima5) ||
-                    string.IsNullOrEmpty(mat_lote1) ||
-                    string.IsNullOrEmpty(mat_lote2) ||
-                    string.IsNullOrEmpty(mat_lote3)
-                    || string.IsNullOrEmpty(mat_lote4)
-                    || string.IsNullOrEmpty(mat_lote5)
-                    || string.IsNullOrEmpty(mat_validade1)
-                    || string.IsNullOrEmpty(mat_validade2)
-                    || string.IsNullOrEmpty(mat_validade3)
-                    || string.IsNullOrEmpty(mat_validade4)
-                    || string.IsNullOrEmpty(mat_validade5)
-                    || string.IsNullOrEmpty(inst_cod1)
-                    || string.IsNullOrEmpty(inst_cod2)
-                    || string.IsNullOrEmpty(inst_desc1)
-                    || string.IsNullOrEmpty(inst_desc2)
-                    || string.IsNullOrEmpty(inst_validade1)
-                    || string.IsNullOrEmpty(inst_validade2)
-                    || string.IsNullOrEmpty(inst_desc1_1)
-                    || string.IsNullOrEmpty(inst_desc2_2)
-                    || string.IsNullOrEmpty(inst_validade1_1)
-                    || string.IsNullOrEmpty(inst_validade2_2)
-                    || string.IsNullOrEmpty(equi_ee)
-                    || string.IsNullOrEmpty(equi_de)
-                    || string.IsNullOrEmpty(observacoes)
-                    || string.IsNullOrEmpty(executado)
-                    || string.IsNullOrEmpty(auxiliado))
-
+                var editarDados = _qcontext.arla_aldeidos.Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
+                if (editarDados == null)
                 {
-                    TempData["Mensagem"] = "Preencha Todos Os Campos.";
-                    return RedirectToAction(nameof(EnsaioAldeidos), new { OS, orcamento });
+                    if (OS != null && OS != "0" && orcamento != "0")
+                    {
+
+
+                        //pegando os valores dos inputs no html.
+                        DateTime data_ini = aldeidos.data_ini;
+                        DateTime data_term = aldeidos.data_term;
+                        string rev = aldeidos.rev;
+                        string lote_sol = aldeidos.lote_sol;
+                        string codigo_curva = aldeidos.codigo_curva;
+                        float fator_calibracao = aldeidos.fator_calibracao;
+                        float massa_branco = aldeidos.massa_branco;
+                        float absorbancia_branco = aldeidos.absorbancia_branco;
+                        float massa_amostra = aldeidos.massa_amostra;
+                        float absorbancia_amostra = aldeidos.absorbancia_amostra;
+                        float carta_absorbancia = aldeidos.carta_absorbancia;
+                        string mat_prima1 = aldeidos.mat_prima1;
+                        string mat_lote1 = aldeidos.mat_lote1;
+                        DateTime mat_validade1 = aldeidos.mat_validade1;
+                        string mat_prima2 = aldeidos.mat_prima2;
+                        string mat_lote2 = aldeidos.mat_lote2;
+                        DateTime mat_validade2 = aldeidos.mat_validade2;
+                        string mat_prima3 = aldeidos.mat_prima3;
+                        string mat_lote3 = aldeidos.mat_lote3;
+                        DateTime mat_validade3 = aldeidos.mat_validade3;
+                        string mat_prima4 = aldeidos.mat_prima4;
+                        string mat_lote4 = aldeidos.mat_lote4;
+                        DateTime mat_validade4 = aldeidos.mat_validade4;
+                        string mat_prima5 = aldeidos.mat_prima5;
+                        string mat_lote5 = aldeidos.mat_lote5;
+                        DateTime mat_validade5 = aldeidos.mat_validade5;
+                        string inst_desc1 = aldeidos.inst_desc1;
+                        string inst_cod1 = aldeidos.inst_cod1;
+                        DateTime inst_validade1 = aldeidos.inst_validade1;
+                        string inst_desc2 = aldeidos.inst_desc2;
+                        string inst_cod2 = aldeidos.inst_cod2;
+                        DateTime inst_validade2 = aldeidos.inst_validade2;
+                        string inst_desc1_1 = aldeidos.inst_desc1_1;
+                        string inst_cod1_1 = aldeidos.inst_cod1_1;
+                        DateTime inst_validade1_1 = aldeidos.inst_validade1_1;
+                        string inst_desc2_2 = aldeidos.inst_desc2_2;
+                        string inst_cod2_2 = aldeidos.inst_cod2_2;
+                        DateTime inst_validade2_2 = aldeidos.inst_validade2_2;
+                        string equi_de = aldeidos.equi_de;
+                        string equi_ee = aldeidos.equi_ee;
+                        string observacoes = aldeidos.observacoes;
+                        string executado = aldeidos.executado;
+                        string auxiliado = aldeidos.auxiliado;
+                        string norma = aldeidos.norma;
+                        string np = aldeidos.np;
+                        string descricao = aldeidos.descricao;
+
+
+                        if ( /*string.IsNullOrEmpty(data_ini.ToString()) ||*/
+                            /* string.IsNullOrEmpty(data_term.ToString()) |*/
+                            //string.IsNullOrEmpty(codigo_curva) ||
+                            //string.IsNullOrEmpty(lote_sol) ||
+                            //fator_calibracao == 0 ||
+                            //massa_branco == 0 ||
+                            //absorbancia_branco == 0 ||
+                            //massa_amostra == 0 ||
+                            //absorbancia_amostra == 0 ||
+                            //carta_absorbancia == 0 ||
+                            string.IsNullOrEmpty(mat_prima1) ||
+                            string.IsNullOrEmpty(mat_prima2) ||
+                            string.IsNullOrEmpty(mat_prima3) ||
+                            string.IsNullOrEmpty(mat_prima4) ||
+                            string.IsNullOrEmpty(mat_prima5) ||
+                            string.IsNullOrEmpty(mat_lote1) ||
+                            string.IsNullOrEmpty(mat_lote2) ||
+                            string.IsNullOrEmpty(mat_lote3)
+                            || string.IsNullOrEmpty(mat_lote4)
+                            || string.IsNullOrEmpty(mat_lote5)
+                            || string.IsNullOrEmpty(inst_cod1)
+                            || string.IsNullOrEmpty(inst_cod2)
+                            || string.IsNullOrEmpty(inst_desc1)
+                            || string.IsNullOrEmpty(inst_desc2)
+                            || string.IsNullOrEmpty(inst_desc1_1)
+                            || string.IsNullOrEmpty(inst_desc2_2)
+                            || string.IsNullOrEmpty(equi_ee)
+                            || string.IsNullOrEmpty(equi_de)
+                            || string.IsNullOrEmpty(observacoes)
+                            || string.IsNullOrEmpty(executado)
+                            || string.IsNullOrEmpty(auxiliado))
+
+                        {
+                            TempData["Mensagem"] = "Preencha Todos Os Campos.";
+                            return RedirectToAction(nameof(EnsaioAldeidos), new { OS, orcamento });
+                        }
+                        else
+                        {
+
+                            //CONTA MÁXIMO PERMITIDO
+                            var conta_max = (((absorbancia_amostra - absorbancia_branco) * fator_calibracao) / massa_amostra);
+                            double conta_max_arre = Math.Round(conta_max);
+
+                            //CONTA CONCENTRACAO QC
+
+                            float carta_concentracao = (((carta_absorbancia - absorbancia_branco) * fator_calibracao) / massa_amostra);
+
+
+                            var salvardados = new ColetaModel.ArlaAldeidos
+                            {
+                                os = OS,
+                                orcamento = orcamento,
+                                data_ini = data_ini,
+                                data_term = data_term,
+                                norma = norma,
+                                np = np,
+                                descricao = descricao,
+                                rev = rev,
+                                lote_sol = lote_sol,
+                                codigo_curva = codigo_curva,
+                                fator_calibracao = fator_calibracao,
+                                massa_branco = massa_branco,
+                                absorbancia_branco = absorbancia_branco,
+                                massa_amostra = massa_amostra,
+                                absorbancia_amostra = absorbancia_amostra,
+                                maximo_permitido = conta_max_arre.ToString(),
+                                carta_absorbancia = carta_absorbancia,
+                                carta_concentracao = carta_concentracao,
+                                mat_prima1 = mat_prima1,
+                                mat_lote1 = mat_lote1,
+                                mat_validade1 = mat_validade1,
+                                mat_prima2 = mat_prima2,
+                                mat_lote2 = mat_lote2,
+                                mat_validade2 = mat_validade2,
+                                mat_prima3 = mat_prima3,
+                                mat_lote3 = mat_lote3,
+                                mat_validade3 = mat_validade3,
+                                mat_prima4 = mat_prima4,
+                                mat_lote4 = mat_lote4,
+                                mat_validade4 = mat_validade4,
+                                mat_prima5 = mat_prima5,
+                                mat_lote5 = mat_lote5,
+                                mat_validade5 = mat_validade5,
+                                inst_desc1 = inst_desc1,
+                                inst_cod1 = inst_cod1,
+                                inst_validade1 = inst_validade1,
+                                inst_desc2 = inst_desc2,
+                                inst_cod2 = inst_cod2,
+                                inst_validade2 = inst_validade2,
+                                inst_desc1_1 = inst_desc1_1,
+                                inst_cod1_1 = inst_cod1_1,
+                                inst_validade1_1 = inst_validade1_1,
+                                inst_desc2_2 = inst_desc2_2,
+                                inst_cod2_2 = inst_cod2_2,
+                                inst_validade2_2 = inst_validade2_2,
+                                equi_de = equi_de,
+                                equi_ee = equi_ee,
+                                observacoes = observacoes,
+                                executado = executado,
+                                auxiliado = auxiliado,
+                            };
+
+                            //salvando no banco.
+                            _qcontext.Add(salvardados);
+                            await _qcontext.SaveChangesAsync();
+                            TempData["Mensagem"] = "Salvo Com Sucesso";
+                            return RedirectToAction(nameof(EnsaioAldeidos), new { OS, orcamento });
+                        }
+                    }
+                    else
+                    {
+                        TempData["Mensagem"] = "Não foi possivel salvar os dados.";
+                        return RedirectToAction(nameof(EnsaioAldeidos), new { OS, orcamento });
+                    }
                 }
                 else
                 {
+                    //recebendo os valores dos dados caso o usuario edite o valor.
+                    editarDados.data_ini = aldeidos.data_ini;
+                    editarDados.data_term = aldeidos.data_term;
+                    editarDados.rev = aldeidos.rev;
+                    editarDados.codigo_curva = aldeidos.codigo_curva;
+                    editarDados.lote_sol = aldeidos.lote_sol;
+                    editarDados.mat_prima1 = aldeidos.mat_prima1;
+                    editarDados.mat_lote1 = aldeidos.mat_lote1;
+                    editarDados.mat_validade1 = aldeidos.mat_validade1;
+                    editarDados.mat_prima2 = aldeidos.mat_prima2;
+                    editarDados.mat_lote2 = aldeidos.mat_lote2;
+                    editarDados.mat_validade2 = aldeidos.mat_validade2;
+                    editarDados.mat_prima3 = aldeidos.mat_prima3;
+                    editarDados.mat_lote3 = aldeidos.mat_lote3;
+                    editarDados.mat_validade3 = aldeidos.mat_validade3;
+                    editarDados.mat_prima4 = aldeidos.mat_prima4;
+                    editarDados.mat_lote4 = aldeidos.mat_lote4;
+                    editarDados.mat_validade4 = aldeidos.mat_validade4;
+                    editarDados.mat_prima5 = aldeidos.mat_prima5;
+                    editarDados.mat_lote5 = aldeidos.mat_lote5;
+                    editarDados.mat_validade5 = aldeidos.mat_validade5;
+                    editarDados.inst_desc1 = aldeidos.inst_desc1;
+                    editarDados.inst_cod1 = aldeidos.inst_cod1;
+                    editarDados.inst_validade1 = aldeidos.inst_validade1;
+                    editarDados.inst_desc2 = aldeidos.inst_desc2;
+                    editarDados.inst_cod2 = aldeidos.inst_cod2;
+                    editarDados.inst_validade2 = aldeidos.inst_validade2;
+                    editarDados.inst_desc1_1 = aldeidos.inst_desc1_1;
+                    editarDados.inst_cod1_1 = aldeidos.inst_cod1_1;
+                    editarDados.inst_validade1_1 = aldeidos.inst_validade1_1;
+                    editarDados.inst_desc2_2 = aldeidos.inst_desc2_2;
+                    editarDados.inst_cod2_2 = aldeidos.inst_cod2_2;
+                    editarDados.inst_validade2_2 = aldeidos.inst_validade2_2;
+                    editarDados.equi_de = aldeidos.equi_de;
+                    editarDados.equi_ee = aldeidos.equi_ee;
+                    editarDados.observacoes = aldeidos.observacoes;
+                    editarDados.executado = aldeidos.executado;
+                    editarDados.auxiliado = aldeidos.auxiliado;
+                    editarDados.norma = aldeidos.norma;
+                    editarDados.np = aldeidos.np;
+                    editarDados.descricao = aldeidos.descricao;
+
+                    //criando as variaveis para realizar as contas .
+                    float fator_calibracao = aldeidos.fator_calibracao;
+                    float massa_branco = aldeidos.massa_branco;
+                    float absorbancia_branco = aldeidos.absorbancia_branco;
+                    float massa_amostra = aldeidos.massa_amostra;
+                    float absorbancia_amostra = aldeidos.absorbancia_amostra;
+                    float carta_absorbancia = aldeidos.carta_absorbancia;
 
                     //CONTA MÁXIMO PERMITIDO
                     var conta_max = (((absorbancia_amostra - absorbancia_branco) * fator_calibracao) / massa_amostra);
                     double conta_max_arre = Math.Round(conta_max);
 
                     //CONTA CONCENTRACAO QC
-
                     float carta_concentracao = (((carta_absorbancia - absorbancia_branco) * fator_calibracao) / massa_amostra);
 
+                    //salvando no banco os dados depois da conta.
+                    editarDados.fator_calibracao = fator_calibracao;
+                    editarDados.massa_branco = massa_branco;
+                    editarDados.absorbancia_branco = absorbancia_branco;
+                    editarDados.massa_amostra = massa_amostra;
+                    editarDados.absorbancia_amostra = absorbancia_amostra;
+                    editarDados.carta_absorbancia = carta_absorbancia;
+                    editarDados.maximo_permitido = conta_max_arre.ToString();
+                    editarDados.carta_concentracao = carta_concentracao;
 
-                    var salvardados = new ColetaModel.ArlaAldeidos
-                    {
-                        os = OS,
-                        orcamento = orcamento,
-                        data_ini = data_ini,
-                        data_term = data_term,
-                        norma = norma,
-                        np = np,
-                        descricao = descricao,
-                        rev = rev,
-                        lote_sol = lote_sol,
-                        codigo_curva = codigo_curva,
-                        fator_calibracao = fator_calibracao,
-                        massa_branco = massa_branco,
-                        absorbancia_branco = absorbancia_branco,
-                        massa_amostra = massa_amostra,
-                        absorbancia_amostra = absorbancia_amostra,
-                        maximo_permitido = conta_max_arre.ToString() + " mg/kg",
-                        carta_absorbancia = carta_absorbancia,
-                        carta_concentracao = carta_concentracao,
-                        mat_prima1 = mat_prima1,
-                        mat_lote1 = mat_lote1,
-                        mat_validade1 = mat_validade1,
-                        mat_prima2 = mat_prima2,
-                        mat_lote2 = mat_lote2,
-                        mat_validade2 = mat_validade2,
-                        mat_prima3 = mat_prima3,
-                        mat_lote3 = mat_lote3,
-                        mat_validade3 = mat_validade3,
-                        mat_prima4 = mat_prima4,
-                        mat_lote4 = mat_lote4,
-                        mat_validade4 = mat_validade4,
-                        mat_prima5 = mat_prima5,
-                        mat_lote5 = mat_lote5,
-                        mat_validade5 = mat_validade5,
-                        inst_desc1 = inst_desc1,
-                        inst_cod1 = inst_cod1,
-                        inst_validade1 = inst_validade1,
-                        inst_desc2 = inst_desc2,
-                        inst_cod2 = inst_cod2,
-                        inst_validade2 = inst_validade2,
-                        inst_desc1_1 = inst_desc1_1,
-                        inst_cod1_1 = inst_cod1_1,
-                        inst_validade1_1 = inst_validade1_1,
-                        inst_desc2_2 = inst_desc2_2,
-                        inst_cod2_2 = inst_cod2_2,
-                        inst_validade2_2 = inst_validade2_2,
-                        equi_de = equi_de,
-                        equi_ee = equi_ee,
-                        observacoes = observacoes,
-                        executado = executado,
-                        auxiliado = auxiliado,
-
-                    };
-
-                    //salvando no banco.
-                    //_qcontext.Add(salvardados);
-                    //await _qcontext.SaveChangesAsync();
-                    TempData["Mensagem"] = "Salvo Com Sucesso";
+                    await _qcontext.SaveChangesAsync();
+                    TempData["Mensagem"] = "Dados Editado Com Sucesso.";
                     return RedirectToAction(nameof(EnsaioAldeidos), new { OS, orcamento });
 
                 }
@@ -3735,6 +3825,3 @@ namespace Arla32.Controllers
         }
     }
 }
-
-
-

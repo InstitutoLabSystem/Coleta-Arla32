@@ -6,7 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
     <style>
+
+        body {
+            overflow-y: auto;
+        }
+
         .input {
             border: none;
         }
@@ -15,8 +21,9 @@
             margin: 0 auto;
             border: 1px solid black;
             border-collapse: collapse;
-            width: 80%;
+            width: 100%;
         }
+
 
         .texto-central {
             text-align: center;
@@ -37,12 +44,14 @@
 
         .image-container {
             position: relative;
-            display: inline-block;
+            display: flex;
+            justify-content: center;
         }
 
             .image-container img {
                 display: block;
                 max-width: 100%;
+                text-align: center;
             }
 
         .fechar-imagem {
@@ -57,43 +66,53 @@
             padding: 0;
             display: none;
         }
+
+        #preview-image {
+            max-height: 300px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .table-container {
+        }
+
     </style>
 </head>
 <body>
-    <table class="table table-bordered border-secondary  table-sm">
-        <tr>
-            <td rowspan="3" class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                <img src="https://www.labsystem-nuvem.com.br/imagens_arq/imagens/img/LabSystem.png" class="imagem" />
-            </td>
-            <td colspan="5" class="texto-central" style="background-color: #800000; color:white;">COLETA DE DADOS</td>
-        </tr>
-        <tr class="tabela">
-            <td colspan="5" class="texto-central "> ENSAIO DE ARLA 32 </td>
-        </tr>
-        <tr>
-            <td style="background-color: #800000; color:white;">Insira a imagem</td>
-        </tr>
-    </table>
-    <br />
-
-    <form method="post" asp-controller="Coleta" asp-action="UploadImage" enctype="multipart/form-data" asp-route-os="@ViewData["OS"]" asp-route-orcamento="@ViewData["orcamento"]">
-        <div class="image-container">
-            <img src="" alt="" id="preview-image"/>
-            <button id="fechar-imagem" type="button" class="btn btn-sm fechar-imagem" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+    <div class="table-container">
+        <table class="table table-bordered border-secondary  table-sm">
+            <tr>
+                <td rowspan="3" class="col-xs-2 col-sm-2 col-md-2 col-lg-2 ">
+                    <img src="https://www.labsystem-nuvem.com.br/imagens_arq/imagens/img/LabSystem.png" class="imagem" />
+                </td>
+                <td colspan="5" class="texto-central" style="background-color: #800000; color:white;">COLETA DE DADOS</td>
+            </tr>
+            <tr class="tabela">
+                <td colspan="5" class="texto-central "> ENSAIO DE ARLA 32 </td>
+            </tr>
+            <tr class="tabela texto-central">
+                <td style="background-color: #800000; color:white;">Insira a imagem</td>
+            </tr>
+        </table>
         <br />
 
-        <br />
-        <div class="mb-3">
-            <input type="file" id="fileinput" name="file" class="form-control form-control-mb" /> <br />
-            <button type="submit" class="btn btn-secondary">Enviar Imagem</button>
-            <a class="btn btn-primary" asp-controller="Coleta" asp-action="EnsaioIdentidade" asp-route-os="@ViewBag.OS" asp-route-orcamento="@ViewBag.orcamento">Voltar</a>
-        </div>
-    </form>
+        <form method="post" asp-controller="Coleta" asp-action="UploadImage" enctype="multipart/form-data" asp-route-os="@ViewData["OS"]" asp-route-orcamento="@ViewData["orcamento"]">
+            <div class="image-container">
+                <img src="" alt="" id="preview-image" />
+                <button id="fechar-imagem" type="button" class="btn btn-sm fechar-imagem" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <br />
+            <div>
+                <input type="file" id="fileinput" name="file" class="form-control form-control-mb" /> <br />
+                <button type="submit" class="btn btn-secondary">Enviar Imagem</button>
+                <a class="btn btn-primary" asp-controller="Coleta" asp-action="EnsaioIdentidade" asp-route-os="@ViewBag.OS" asp-route-orcamento="@ViewBag.orcamento">Voltar</a>
+            </div>
+            <br />
+        </form>
+    </div>
 
-  
 
     @section Scripts {
         @if (TempData.ContainsKey("Mensagem"))
