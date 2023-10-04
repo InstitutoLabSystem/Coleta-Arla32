@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Nw/ZYDIdkOmOZFWEUjS1MWPASIfHct69wtSnjqtJrgA=",
+  "Hash": "K0AMo3/NfBzj8aibMuj5FCp5qXo/GF390QYB0JQGrpY=",
   "Source": "Arla32",
   "BasePath": "_content/Arla32",
   "Mode": "Default",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\Molina\\source\\repos\\InstitutoLabSystem\\Coleta-Arla32\\Arla32\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\Arla32.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\Molina\\source\\repos\\InstitutoLabSystem\\Coleta-Arla32\\Arla32\\wwwroot\\css\\coleta.css",
+      "SourceId": "Arla32",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Molina\\source\\repos\\InstitutoLabSystem\\Coleta-Arla32\\Arla32\\wwwroot\\",
+      "BasePath": "_content/Arla32",
+      "RelativePath": "css/coleta.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\coleta.css"
     },
     {
       "Identity": "C:\\Users\\Molina\\source\\repos\\InstitutoLabSystem\\Coleta-Arla32\\Arla32\\wwwroot\\css\\site.css",

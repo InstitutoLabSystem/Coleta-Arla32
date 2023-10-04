@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\Arla32.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\Molina\\source\\repos\\InstitutoLabSystem\\Coleta-Arla32\\Arla32\\wwwroot\\css\\coleta.css",
+      "PackagePath": "staticwebassets\\css\\coleta.css"
+    },
+    {
       "Id": "C:\\Users\\Molina\\source\\repos\\InstitutoLabSystem\\Coleta-Arla32\\Arla32\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
