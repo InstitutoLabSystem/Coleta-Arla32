@@ -10,10 +10,8 @@
     font-size: 1.10em;
     border-radius: 15px;
     overflow: hidden;
-    width: 80%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adiciona uma leve sombra */
 }
-
     .table th, .table td {
         padding: 8px;
         text-align: center;
@@ -24,7 +22,6 @@
             background-color: #800000;
             color: white;
         }
-
 .tabela {
     background-color: #800000;
     color: white;
@@ -57,3 +54,64 @@ input {
     margin: 0 auto;
     vertical-align: middle;
 }
+
+.image-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+    .image-container img {
+        display: block;
+        max-width: 80%;
+        text-align: center;
+    }
+
+.fechar-imagem {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    border: none;
+    border-radius: 50%;
+    color: black;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    display: none;
+}
+
+#preview-image {
+    max-height: 300px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+
+/* Table do EnsaioIdentidadeFotos*/
+
+.tables {
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 5px auto;
+    width: 100%;
+    font-size: 1.10em;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adiciona uma leve sombra */
+}
+
+    .tables th, .tables td {
+        padding: 8px;
+        text-align: center;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+        .tables th td {
+            background-color: #800000;
+            color: white;
+        }
+
+.tables tr:last-child td {
+    border-bottom: 2px solid #800000;
+}
+
