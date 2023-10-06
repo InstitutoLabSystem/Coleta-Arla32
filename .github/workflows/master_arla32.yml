@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'arla32'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A47D28111ABC492DBD2BF1C5F4129125 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EB769E50D3774F93AF017DA45067282F }}
           package: .
