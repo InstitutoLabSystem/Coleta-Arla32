@@ -8,6 +8,6 @@
     "\\Arla32\\Views\\Coleta",
     "\\Arla32\\Views\\Home"
   ],
-  "SelectedNode": "\\Arla32\\Views\\Coleta\\EnsaioIdentidadeFotos.cshtml",
+  "SelectedNode": "\\Arla32\\Controllers\\HomeController.cs",
   "PreviewInSolutionExplorer": false
 }
