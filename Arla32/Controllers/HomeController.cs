@@ -12,6 +12,7 @@ using static Arla32.Models.HomeModel;
 using System.Security.Policy;
 using Microsoft.CodeAnalysis.Elfie.Diagnostics;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using Humanizer.DateTimeHumanizeStrategy;
 
 namespace Arla32.Controllers
 {
@@ -59,8 +60,6 @@ namespace Arla32.Controllers
         {
             try
             {
-
-
                 var resultado = (from p in _context.programacao_lab_ensaios
                                  where p.OS == OS
                                  join o in _context.ordemservicocotacaoitem_hc_copylab
@@ -78,21 +77,24 @@ namespace Arla32.Controllers
                                      CodigoEnsaio = o.CodigoEnsaio,
                                      Descricao = w.descricao,
                                      NormaOS = o.NormaOS,
-                                     CodCli = x.CodCli, 
+                                     CodCli = x.CodCli,
                                      CodSol = x.CodSol,
-                                     qtdAmostra = o.qtdAmostra, 
+                                     qtdAmostra = o.qtdAmostra,
                                      Ano = o.Ano,
                                      Rev = o.Rev,
                                      codigo = w.codigo,
                                  }).Distinct().ToList();
 
-                
+
                 var isOsSalva = _qcontext.regtro_amostra_painel_copy.Any(ic => ic.OS == OS);
-                if(isOsSalva != null)
+                if (isOsSalva != null)
                 {
                     ViewBag.IsOsSalva = isOsSalva;
                 }
-            
+                else
+                {
+                    ViewBag.IsOsSalva = false;
+                }
 
                 // Verificar se listagem não é nula e se há resultados
                 if (resultado != null)
@@ -105,75 +107,72 @@ namespace Arla32.Controllers
                     TempData["Mensagem"] = "Orçamento não encontrado.";
                     return View("Index");
                 }
-
-
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Erro ao buscar orçamento: {}", ex.Message);
                 throw;
             }
-
-
         }
 
-       
+
         public async Task<IActionResult> IniciarColeta(string OS, [Bind("OS,orcamento,Qtd_Recebida,norma,revisao_os," +
             "CodCli, CodSol, Item")] HomeModel.IniciarColeta salvar)
         {
             try
             {
                 // pegando os dados do html para salva-los
+                var orcamento = salvar.orcamento;
+                var Qtd_Recebida = salvar.Qtd_Recebida;
+                var norma = salvar.norma;
+                var revisao_os = salvar.revisao_os;
+                var CodCli = salvar.CodCli;
+                var CodSol = salvar.CodSol;
+                var Item = salvar.Item_orcamento;
 
-                    
-                    var orcamento = salvar.orcamento;
-                    var Qtd_Recebida = salvar.Qtd_Recebida;
-                    var norma = salvar.norma;
-                    var revisao_os = salvar.revisao_os;
-                    var CodCli = salvar.CodCli;
-                    var CodSol = salvar.CodSol;
-                    var Item = salvar.Item_orcamento;
-
+                //pegando os 2 ultimos digitos do ano.
+                int Ano = Int32.Parse(DateTime.Now.Year.ToString().Substring(2));
 
                 var IniciarColeta = new IniciarColeta
                 {
-                        OS = OS,
-                        data_entrada = DateTime.Now.Date, // Obtém apenas a parte da data
-                        revisao_os = revisao_os,
-                        orcamento = orcamento,
-                        ensaio = "ARLA 32",
-                        Qtd_Recebida = Qtd_Recebida,
-                        laboratorio = "Quimico",
-                        CodCli = CodCli,
-                        CodSol = CodSol,
-                        status = "Coleta",
-                        norma = norma,
-                        Item_orcamento = Item,
-            
-
-                    };
+                    OS = OS,
+                    ano = Ano,
+                    data_entrada = DateTime.Now.Date,
+                    revisao_os = revisao_os,
+                    orcamento = orcamento,
+                    ensaio = "ARLA 32",
+                    Qtd_Recebida = Qtd_Recebida,
+                    laboratorio = "Quimico",
+                    CodCli = CodCli,
+                    CodSol = CodSol,
+                    status = "Coleta",
+                    norma = norma,
+                    Item_orcamento = Item,
+                   
+                };
+               
+                // salvando os valores recebidos.
                 _qcontext.Add(IniciarColeta);
                 await _qcontext.SaveChangesAsync();
-                return RedirectToAction("BuscarOS", new { OS });
 
+                //recebendo o id do banco de dados p/ salvar amostra_id
+                int idGerado = IniciarColeta.id;
+                string convert_amostra_id = idGerado.ToString() + Ano.ToString();
+                IniciarColeta.amostra_id = Int32.Parse(convert_amostra_id);
+
+                //atualizando o campo de amostra_id
+                _qcontext.Update(IniciarColeta);
+                await _qcontext.SaveChangesAsync();
+
+                TempData["Mensagem"] = "Pronto! Agora o Ensaido esta pronto para começar.";
+                return RedirectToAction("BuscarOS", new { OS });
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error", ex.Message);
                 throw;
-
-
             }
-
-
-
         }
-
-
-
-
     }
-
-
 }
 

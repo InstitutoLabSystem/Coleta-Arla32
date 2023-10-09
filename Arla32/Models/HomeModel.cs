@@ -15,7 +15,7 @@ namespace Arla32.Models
             public int NA { get; set; }
             public string Orcamento { get; set; }
             public string Item { get; set; }
-           
+
         }
 
 
@@ -59,7 +59,7 @@ namespace Arla32.Models
             public int Rev { get; set; }
         }
 
-                                    
+
         public class Resposta
         {
             public string OS { get; set; }
@@ -79,12 +79,15 @@ namespace Arla32.Models
 
         }
 
-        public class IniciarColeta {
+        public class IniciarColeta
+        {
 
             [Key]
             public int id { get; set; }
+            public int amostra_id { get; set; }
+            public int ano { get; set; }
             public DateTime data_entrada { get; set; }
-            public string? OS { get ; set; }
+            public string? OS { get; set; }
             public int? revisao_os { get; set; }
             public string? orcamento { get; set; }
             public string? norma { get; set; }
