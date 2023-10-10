@@ -61,7 +61,7 @@ namespace Arla32.Controllers
                     {
                         if (pegarValores.Nome_Usuario == Nome_Usuario && pegarValores.Senha_Usuario == Senha_Usuario)
                         {
-                            if ( pegarValores.setor == "TI" && pegarValores.cargo == "TI")
+                            if ( pegarValores.setor == "TI" && pegarValores.cargo == "TI" || pegarValores.setor == "Químico" && pegarValores.cargo == "Químico")
                             {
                                 List<Claim> claims = new List<Claim>()
                                 {
