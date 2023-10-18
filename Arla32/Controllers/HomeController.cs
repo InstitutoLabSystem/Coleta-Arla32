@@ -148,9 +148,9 @@ namespace Arla32.Controllers
                     status = "Coleta",
                     norma = norma,
                     Item_orcamento = Item,
-                   
+
                 };
-               
+
                 // salvando os valores recebidos.
                 _qcontext.Add(IniciarColeta);
                 await _qcontext.SaveChangesAsync();
