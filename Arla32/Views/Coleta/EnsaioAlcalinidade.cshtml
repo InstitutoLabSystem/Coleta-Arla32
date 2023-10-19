@@ -197,9 +197,9 @@
                 </tr>
                 <tr>
                     <td style="background-color: #800000; color:white;">Data Inicio:</td>
-                    <td><input type="text" class="form-control input " name="data_ini" value="@Model.data_ini.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" class="form-control input " name="data_ini" value="@Model.data_ini.ToString("dd/MM/yyyy")" /></td>
                     <td style="background-color: #800000; color:white;">Data Término:</td>
-                    <td><input type="text" class="form-control input " name="data_term" value="@Model.data_term.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" class="form-control input " name="data_term" value="@Model.data_term.ToString("dd/MM/yyyy")"  /></td>
                 </tr>
                 <tr class="texto-central">
                     <td style="text-align:left;" colspan="5">
@@ -279,7 +279,7 @@
                 <tr>
                     <td><input type="text" name="inst_desc1" class="form-control input " value="@Model.inst_desc1" /></td>
                     <td><input type="text" name="inst_cod1" class="form-control input " value="@Model.inst_cod1" /></td>
-                    <td><input type="text" name="inst_data1" class="form-control input " value="@Model.inst_data1.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="date" name="inst_data1" class="form-control input " value="@Model.inst_data1.ToString("dd/MM/yyyy")" /></td>
                     <td><input type="text" name="inst_desc1_1" class="form-control input " value="@Model.inst_desc1_1" /></td>
                     <td><input type="text" name="inst_cod1_1" class="form-control input " value="@Model.inst_cod1_1" /></td>
                     <td><input type="text" name="inst_data1_1" class="form-control input " value="@Model.inst_data1_1.ToString("dd/MM/yyyy")" /></td>
