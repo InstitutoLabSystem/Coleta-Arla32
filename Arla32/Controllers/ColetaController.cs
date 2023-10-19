@@ -717,9 +717,10 @@ namespace Arla32.Controllers
                         editarDados.det_vol_titulado2 = det_vol_titulado2;
                         editarDados.det_res_final = det_res_arredondado.ToString();
 
+                        _qcontext.SaveChanges();
                         await _qcontext.SaveChangesAsync();
-                        TempData["Mensagem"] = "Dados Editado Com Sucesso.";
                         //_qcontext.arla_alcalinidade.Update(editarDados);
+                        TempData["Mensagem"] = "Dados Editado Com Sucesso.";
                         return RedirectToAction(nameof(EnsaioAlcalinidade), new { OS, orcamento });
                     }
                     else
@@ -899,16 +900,29 @@ namespace Arla32.Controllers
                 {
                     if ((OS != null && OS != "0") || (orcamento != null && orcamento != "0"))
                     {
-                        editarDados.data_ini = salvarDados.data_ini;
-                        editarDados.data_term = salvarDados.data_term;
-                        editarDados.codigo_curva = salvarDados.codigo_curva;
-                        editarDados.fator_calibracao = salvarDados.fator_calibracao;
+                       
                         float fator_dia = salvarDados.fator_dia;
                         float amostra1 = salvarDados.amostra1;
                         float amostra2 = salvarDados.amostra2;
                         float absorbancia_1 = salvarDados.absorbancia_1;
                         float absorbancia_2 = salvarDados.absorbancia_2;
                         float absorbancia_3 = salvarDados.absorbancia_3;
+                        
+
+                        //Relizando os calculos necessairos para coleta.
+                        var result_ind_1 = ((((absorbancia_2 - absorbancia_1) * fator_dia * 250) / (amostra1 * 10 * 1000)) * 100);
+                        var result_ind_2 = ((((absorbancia_3 - absorbancia_1) * fator_dia * 250) / (amostra2 * 10 * 1000)) * 100);
+                        var result_media = ((result_ind_1 + result_ind_2) / 2);
+
+                        double result_ind_1_arredondado = Math.Round(result_ind_1, 2);
+                        double result_ind_2_arredondado = Math.Round(result_ind_2, 2);
+                        double result_media_2_arredondado = Math.Round(result_media, 2);
+
+                        // guardando os valores das contas editados.
+                        editarDados.data_ini = salvarDados.data_ini;
+                        editarDados.data_term = salvarDados.data_term;
+                        editarDados.codigo_curva = salvarDados.codigo_curva;
+                        editarDados.fator_calibracao = salvarDados.fator_calibracao;
                         editarDados.mat_prima_1 = salvarDados.mat_prima_1;
                         editarDados.mat_lote_1 = salvarDados.mat_lote_1;
                         editarDados.mat_validade_1 = salvarDados.mat_validade_1;
@@ -953,17 +967,6 @@ namespace Arla32.Controllers
                         editarDados.obs = salvarDados.obs;
                         editarDados.auxiliado_por = salvarDados.auxiliado_por;
                         editarDados.executado_por = salvarDados.executado_por;
-
-                        //Relizando os calculos necessairos para coleta.
-                        var result_ind_1 = ((((absorbancia_2 - absorbancia_1) * fator_dia * 250) / (amostra1 * 10 * 1000)) * 100);
-                        var result_ind_2 = ((((absorbancia_3 - absorbancia_1) * fator_dia * 250) / (amostra2 * 10 * 1000)) * 100);
-                        var result_media = ((result_ind_1 + result_ind_2) / 2);
-
-                        double result_ind_1_arredondado = Math.Round(result_ind_1, 2);
-                        double result_ind_2_arredondado = Math.Round(result_ind_2, 2);
-                        double result_media_2_arredondado = Math.Round(result_media, 2);
-
-                        // guardando os valores das contas editados.
                         editarDados.amostra1 = amostra1;
                         editarDados.amostra2 = amostra2;
                         editarDados.absorbancia_1 = absorbancia_1;
