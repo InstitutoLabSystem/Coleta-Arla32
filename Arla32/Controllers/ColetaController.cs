@@ -535,8 +535,8 @@ namespace Arla32.Controllers
                     if (OS != null && OS != "0" && orcamento != "0")
                     {
                         //pegando os valores vindo dos inputs no html.
-                        DateOnly data_ini = (DateOnly)salvarDados.data_ini;
-                        DateTime data_term = salvarDados.data_term;
+                        DateOnly data_ini = salvarDados.data_ini;
+                        DateOnly data_term = salvarDados.data_term;
                         string pre_massa_amostra = salvarDados.pre_massa_amostra;
                         string pre_vol_titulado = salvarDados.pre_vol_titulado;
                         string det_massa_amostra1 = salvarDados.det_massa_amostra1;
@@ -545,31 +545,31 @@ namespace Arla32.Controllers
                         string det_vol_titulado2 = salvarDados.det_vol_titulado2;
                         string mat_prima = salvarDados.mat_prima;
                         string mat_lote = salvarDados.mat_lote;
-                        DateTime mat_validade = salvarDados.mat_validade;
+                        DateOnly mat_validade = salvarDados.mat_validade;
                         string inst_desc1 = salvarDados.inst_desc1;
                         string inst_cod1 = salvarDados.inst_cod1;
-                        DateTime inst_data1 = salvarDados.inst_data1;
+                        DateOnly inst_data1 = salvarDados.inst_data1;
                         string inst_desc1_1 = salvarDados.inst_desc1_1;
                         string inst_cod1_1 = salvarDados.inst_cod1_1;
-                        DateTime inst_data1_1 = salvarDados.inst_data1_1;
+                        DateOnly inst_data1_1 = salvarDados.inst_data1_1;
                         string inst_desc2 = salvarDados.inst_desc2;
                         string inst_cod2 = salvarDados.inst_cod2;
-                        DateTime inst_data2 = salvarDados.inst_data2;
+                        DateOnly inst_data2 = salvarDados.inst_data2;
                         string inst_desc2_2 = salvarDados.inst_desc2_2;
                         string inst_cod2_2 = salvarDados.inst_cod2_2;
-                        DateTime inst_data2_2 = salvarDados.inst_data2_2;
+                        DateOnly inst_data2_2 = salvarDados.inst_data2_2;
                         string inst_desc3 = salvarDados.inst_desc3;
                         string inst_cod3 = salvarDados.inst_cod3;
-                        DateTime inst_data3 = salvarDados.inst_data3;
+                        DateOnly inst_data3 = salvarDados.inst_data3;
                         string inst_desc3_3 = salvarDados.inst_desc3_3;
                         string inst_cod3_3 = salvarDados.inst_cod3_3;
-                        DateTime inst_data3_3 = salvarDados.inst_data3_3;
+                        DateOnly inst_data3_3 = salvarDados.inst_data3_3;
                         string inst_desc4 = salvarDados.inst_desc4;
                         string inst_cod4 = salvarDados.inst_cod4;
-                        DateTime inst_data4 = salvarDados.inst_data4;
+                        DateOnly inst_data4 = salvarDados.inst_data4;
                         string inst_desc4_4 = salvarDados.inst_desc4_4;
                         string inst_cod4_4 = salvarDados.inst_cod4_4;
-                        DateTime inst_data4_4 = salvarDados.inst_data4_4;
+                        DateOnly inst_data4_4 = salvarDados.inst_data4_4;
                         string equip_de = salvarDados.equip_de;
                         string equip_ee = salvarDados.equip_ee;
                         string obs = salvarDados.obs;
@@ -654,7 +654,7 @@ namespace Arla32.Controllers
                     if (OS != null && OS != "0" && orcamento != "0")
                     {
                         //pegando os valores vindo dos inputs no html.
-                        editarDados.data_ini = (DateOnly)salvarDados.data_ini;
+                        editarDados.data_ini = salvarDados.data_ini;
                         editarDados.data_term = salvarDados.data_term;
                         string pre_massa_amostra = salvarDados.pre_massa_amostra;
                         string pre_vol_titulado = salvarDados.pre_vol_titulado;
@@ -667,7 +667,7 @@ namespace Arla32.Controllers
                         editarDados.mat_validade = salvarDados.mat_validade;
                         editarDados.inst_desc1 = salvarDados.inst_desc1;
                         editarDados.inst_cod1 = salvarDados.inst_cod1;
-                        editarDados.inst_data1 = (DateTime)salvarDados.inst_data1;
+                        editarDados.inst_data1 = salvarDados.inst_data1;
                         editarDados.inst_desc1_1 = salvarDados.inst_desc1_1;
                         editarDados.inst_cod1_1 = salvarDados.inst_cod1_1;
                         editarDados.inst_data1_1 = salvarDados.inst_data1_1;
@@ -718,9 +718,7 @@ namespace Arla32.Controllers
                         editarDados.det_vol_titulado2 = det_vol_titulado2;
                         editarDados.det_res_final = det_res_arredondado.ToString();
 
-                        _qcontext.SaveChanges();
                         await _qcontext.SaveChangesAsync();
-                        //_qcontext.arla_alcalinidade.Update(editarDados);
                         TempData["Mensagem"] = "Dados Editado Com Sucesso.";
                         return RedirectToAction(nameof(EnsaioAlcalinidade), new { OS, orcamento });
                     }
