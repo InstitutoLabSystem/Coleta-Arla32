@@ -535,7 +535,7 @@ namespace Arla32.Controllers
                     if (OS != null && OS != "0" && orcamento != "0")
                     {
                         //pegando os valores vindo dos inputs no html.
-                        DateOnly data_ini = salvarDados.data_ini;
+                        DateOnly data_ini = (DateOnly)salvarDados.data_ini;
                         DateTime data_term = salvarDados.data_term;
                         string pre_massa_amostra = salvarDados.pre_massa_amostra;
                         string pre_vol_titulado = salvarDados.pre_vol_titulado;
@@ -654,7 +654,7 @@ namespace Arla32.Controllers
                     if (OS != null && OS != "0" && orcamento != "0")
                     {
                         //pegando os valores vindo dos inputs no html.
-                        editarDados.data_ini = salvarDados.data_ini;
+                        editarDados.data_ini = (DateOnly)salvarDados.data_ini;
                         editarDados.data_term = salvarDados.data_term;
                         string pre_massa_amostra = salvarDados.pre_massa_amostra;
                         string pre_vol_titulado = salvarDados.pre_vol_titulado;
@@ -667,7 +667,7 @@ namespace Arla32.Controllers
                         editarDados.mat_validade = salvarDados.mat_validade;
                         editarDados.inst_desc1 = salvarDados.inst_desc1;
                         editarDados.inst_cod1 = salvarDados.inst_cod1;
-                        editarDados.inst_data1 = salvarDados.inst_data1;
+                        editarDados.inst_data1 = (DateTime)salvarDados.inst_data1;
                         editarDados.inst_desc1_1 = salvarDados.inst_desc1_1;
                         editarDados.inst_cod1_1 = salvarDados.inst_cod1_1;
                         editarDados.inst_data1_1 = salvarDados.inst_data1_1;
