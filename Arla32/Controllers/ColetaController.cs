@@ -654,8 +654,8 @@ namespace Arla32.Controllers
                     if (OS != null && OS != "0" && orcamento != "0")
                     {
                         //pegando os valores vindo dos inputs no html.
-                        editarDados.data_ini = salvarDados.data_ini;
-                        editarDados.data_term = salvarDados.data_term;
+                        DateTime data_ini = salvarDados.data_ini;
+                        DateTime data_term = salvarDados.data_term;
                         string pre_massa_amostra = salvarDados.pre_massa_amostra;
                         string pre_vol_titulado = salvarDados.pre_vol_titulado;
                         string det_massa_amostra1 = salvarDados.det_massa_amostra1;
@@ -708,6 +708,8 @@ namespace Arla32.Controllers
                         double det_res_arredondado = Math.Round(det_res_final, 2);
 
                         //editando os valores das contas.
+                        editarDados.data_ini = data_ini;
+                        editarDados.data_term = data_term;
                         editarDados.pre_massa_amostra = pre_massa_amostra;
                         editarDados.pre_vol_titulado = pre_vol_titulado;
                         editarDados.pre_resultado_final = pre_resultado_arredondado.ToString();
