@@ -62,7 +62,7 @@ namespace Arla32.Controllers
         public IActionResult EnsaioAldeidos(string OS, string orcamento)
         {
             var dados = _qcontext.arla_aldeidos.Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
-            if(dados == null)
+            if (dados == null)
             {
                 ViewBag.OS = OS;
                 ViewBag.orcamento = orcamento;
@@ -76,7 +76,7 @@ namespace Arla32.Controllers
 
                 return View(dados);
             }
-           
+
         }
         public IActionResult EnsaioDensidade(string OS, string orcamento)
         {
@@ -654,8 +654,8 @@ namespace Arla32.Controllers
                     if (OS != null && OS != "0" && orcamento != "0")
                     {
                         //pegando os valores vindo dos inputs no html.
-                        DateTime data_ini = salvarDados.data_ini;
-                        DateTime data_term = salvarDados.data_term;
+                        editarDados.data_ini = DateTime.Parse(Request.Form["data_ini"]);
+                        editarDados.data_term = DateTime.Parse(Request.Form["data_term"]);
                         string pre_massa_amostra = salvarDados.pre_massa_amostra;
                         string pre_vol_titulado = salvarDados.pre_vol_titulado;
                         string det_massa_amostra1 = salvarDados.det_massa_amostra1;
@@ -667,28 +667,28 @@ namespace Arla32.Controllers
                         editarDados.mat_validade = salvarDados.mat_validade;
                         editarDados.inst_desc1 = salvarDados.inst_desc1;
                         editarDados.inst_cod1 = salvarDados.inst_cod1;
-                        editarDados.inst_data1 = salvarDados.inst_data1;
+                        editarDados.inst_data1 = DateTime.Parse(Request.Form["inst_data1"]);
                         editarDados.inst_desc1_1 = salvarDados.inst_desc1_1;
                         editarDados.inst_cod1_1 = salvarDados.inst_cod1_1;
-                        editarDados.inst_data1_1 = salvarDados.inst_data1_1;
+                        editarDados.inst_data1_1 = DateTime.Parse(Request.Form["inst_data1_1"]);
                         editarDados.inst_desc2 = salvarDados.inst_desc2;
                         editarDados.inst_cod2 = salvarDados.inst_cod2;
-                        editarDados.inst_data2 = salvarDados.inst_data2;
+                        editarDados.inst_data2 = DateTime.Parse(Request.Form["inst_data2"]);
                         editarDados.inst_desc2_2 = salvarDados.inst_desc2_2;
                         editarDados.inst_cod2_2 = salvarDados.inst_cod2_2;
-                        editarDados.inst_data2_2 = salvarDados.inst_data2_2;
+                        editarDados.inst_data2_2 = DateTime.Parse(Request.Form["inst_data2"]);
                         editarDados.inst_desc3 = salvarDados.inst_desc3;
                         editarDados.inst_cod3 = salvarDados.inst_cod3;
-                        editarDados.inst_data3 = salvarDados.inst_data3;
+                        editarDados.inst_data3 = DateTime.Parse(Request.Form["inst_data3"]);
                         editarDados.inst_desc3_3 = salvarDados.inst_desc3_3;
                         editarDados.inst_cod3_3 = salvarDados.inst_cod3_3;
-                        editarDados.inst_data3_3 = salvarDados.inst_data3_3;
+                        editarDados.inst_data3_3 = DateTime.Parse(Request.Form["inst_data3_3"]);
                         editarDados.inst_desc4 = salvarDados.inst_desc4;
                         editarDados.inst_cod4 = salvarDados.inst_cod4;
-                        editarDados.inst_data4 = salvarDados.inst_data4;
+                        editarDados.inst_data4 = DateTime.Parse(Request.Form["inst_data4"]);
                         editarDados.inst_desc4_4 = salvarDados.inst_desc4_4;
                         editarDados.inst_cod4_4 = salvarDados.inst_cod4_4;
-                        editarDados.inst_data4_4 = salvarDados.inst_data4_4;
+                        editarDados.inst_data4_4 = DateTime.Parse(Request.Form["inst_data4_4"]);
                         editarDados.equip_de = salvarDados.equip_de;
                         editarDados.equip_ee = salvarDados.equip_ee;
                         editarDados.obs = salvarDados.obs;
@@ -708,8 +708,7 @@ namespace Arla32.Controllers
                         double det_res_arredondado = Math.Round(det_res_final, 2);
 
                         //editando os valores das contas.
-                        editarDados.data_ini = data_ini;
-                        editarDados.data_term = data_term;
+
                         editarDados.pre_massa_amostra = pre_massa_amostra;
                         editarDados.pre_vol_titulado = pre_vol_titulado;
                         editarDados.pre_resultado_final = pre_resultado_arredondado.ToString();
@@ -902,14 +901,14 @@ namespace Arla32.Controllers
                 {
                     if ((OS != null && OS != "0") || (orcamento != null && orcamento != "0"))
                     {
-                       
+
                         float fator_dia = salvarDados.fator_dia;
                         float amostra1 = salvarDados.amostra1;
                         float amostra2 = salvarDados.amostra2;
                         float absorbancia_1 = salvarDados.absorbancia_1;
                         float absorbancia_2 = salvarDados.absorbancia_2;
                         float absorbancia_3 = salvarDados.absorbancia_3;
-                        
+
 
                         //Relizando os calculos necessairos para coleta.
                         var result_ind_1 = ((((absorbancia_2 - absorbancia_1) * fator_dia * 250) / (amostra1 * 10 * 1000)) * 100);
