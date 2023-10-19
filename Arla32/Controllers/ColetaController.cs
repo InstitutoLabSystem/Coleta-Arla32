@@ -535,8 +535,8 @@ namespace Arla32.Controllers
                     if (OS != null && OS != "0" && orcamento != "0")
                     {
                         //pegando os valores vindo dos inputs no html.
-                        var data_ini = salvarDados.data_ini;
-                        var data_term = salvarDados.data_term;
+                        DateTime data_ini = salvarDados.data_ini;
+                        DateTime data_term = salvarDados.data_term;
                         string pre_massa_amostra = salvarDados.pre_massa_amostra;
                         string pre_vol_titulado = salvarDados.pre_vol_titulado;
                         string det_massa_amostra1 = salvarDados.det_massa_amostra1;
@@ -717,9 +717,9 @@ namespace Arla32.Controllers
                         editarDados.det_vol_titulado2 = det_vol_titulado2;
                         editarDados.det_res_final = det_res_arredondado.ToString();
 
-
-                        TempData["Mensagem"] = "Dados Editado Com Sucesso.";
                         await _qcontext.SaveChangesAsync();
+                        TempData["Mensagem"] = "Dados Editado Com Sucesso.";
+                        //_qcontext.arla_alcalinidade.Update(editarDados);
                         return RedirectToAction(nameof(EnsaioAlcalinidade), new { OS, orcamento });
                     }
                     else
