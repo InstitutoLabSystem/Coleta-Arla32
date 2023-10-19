@@ -535,7 +535,7 @@ namespace Arla32.Controllers
                     if (OS != null && OS != "0" && orcamento != "0")
                     {
                         //pegando os valores vindo dos inputs no html.
-                        DateTime data_ini = salvarDados.data_ini;
+                        DateOnly data_ini = salvarDados.data_ini;
                         DateTime data_term = salvarDados.data_term;
                         string pre_massa_amostra = salvarDados.pre_massa_amostra;
                         string pre_vol_titulado = salvarDados.pre_vol_titulado;

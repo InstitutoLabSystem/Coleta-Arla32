@@ -79,7 +79,7 @@ namespace Arla32.Models
             public string os { get; set; }
             public string orcamento { get; set; }
             public string? rev { get; set; }
-            public DateTime data_ini { get; set; }
+            public DateOnly data_ini { get; set; }
             public DateTime data_term { get; set; }
             public string? pre_massa_amostra { get; set; }
             public string? pre_vol_titulado { get; set; }
