@@ -236,17 +236,17 @@ namespace Arla32.Controllers
                 {
                     if (OS != null && OS != "0" && orcamento != "0")
                     {
-                        DateTime data_ini = identidade.data_ini;
-                        DateTime data_term = identidade.data_term;
+                        DateOnly data_ini = identidade.data_ini;
+                        DateOnly data_term = identidade.data_term;
                         string np = identidade.np;
                         string descricao = identidade.descricao;
                         string avaliacao = identidade.avaliacao;
                         string mat_prima = identidade.mat_prima;
                         string mat_lote = identidade.mat_lote;
-                        DateTime mat_validade = identidade.mat_validade;
+                        DateOnly mat_validade = identidade.mat_validade;
                         string cod_prima = identidade.cod_prima;
                         string cod_lote = identidade.cod_lote;
-                        DateTime cod_validade = identidade.cod_validade;
+                        DateOnly cod_validade = identidade.cod_validade;
                         string observacoes = identidade.observacoes;
                         string executado = identidade.executado;
                         string auxiliado = identidade.auxiliado;
@@ -393,10 +393,10 @@ namespace Arla32.Controllers
                     float refracao_amostra2 = salvarDados.refracao_amostra2;
                     string desc1_instrumento = salvarDados.desc1_instrumento;
                     string codigo1_instrumento = salvarDados.codigo1_instrumento;
-                    DateTime validade1_instrumento = salvarDados.validade1_instrumento;
+                    DateOnly validade1_instrumento = salvarDados.validade1_instrumento;
                     string desc2_instrumento = salvarDados.desc2_instrumento;
                     string codigo2_instrumento = salvarDados.codigo2_instrumento;
-                    DateTime validade2_instrumento = salvarDados.validade2_instrumento;
+                    DateOnly validade2_instrumento = salvarDados.validade2_instrumento;
                     string ee_equipamento = salvarDados.ee_equipamento;
                     string de_equipamento = salvarDados.de_equipamento;
                     string obs = salvarDados.obs;
@@ -748,8 +748,8 @@ namespace Arla32.Controllers
                     if ((OS != null && OS != "0") || (orcamento != null && orcamento != "0"))
                     {
                         //pegando os valores que recebe nos inputs do html.
-                        DateTime data_ini = salvarDados.data_ini;
-                        DateTime data_term = salvarDados.data_term;
+                        DateOnly data_ini = salvarDados.data_ini;
+                        DateOnly data_term = salvarDados.data_term;
                         string codigo_curva = salvarDados.codigo_curva;
                         float fator_calibracao = salvarDados.fator_calibracao;
                         float fator_dia = salvarDados.fator_dia;
@@ -760,43 +760,43 @@ namespace Arla32.Controllers
                         float absorbancia_3 = salvarDados.absorbancia_3;
                         string mat_prima_1 = salvarDados.mat_prima_1;
                         string mat_lote_1 = salvarDados.mat_lote_1;
-                        DateTime mat_validade_1 = salvarDados.mat_validade_1;
+                        DateOnly mat_validade_1 = salvarDados.mat_validade_1;
                         string mat_prima_2 = salvarDados.mat_prima_2;
                         string mat_lote_2 = salvarDados.mat_lote_2;
-                        DateTime mat_validade_2 = salvarDados.mat_validade_2;
+                        DateOnly mat_validade_2 = salvarDados.mat_validade_2;
                         string mat_prima_3 = salvarDados.mat_prima_3;
                         string mat_lote_3 = salvarDados.mat_lote_3;
-                        DateTime mat_validade_3 = salvarDados.mat_validade_3;
+                        DateOnly mat_validade_3 = salvarDados.mat_validade_3;
                         string mat_prima_4 = salvarDados.mat_prima_4;
                         string mat_lote_4 = salvarDados.mat_lote_4;
-                        DateTime mat_validade_4 = salvarDados.mat_validade_4;
+                        DateOnly mat_validade_4 = salvarDados.mat_validade_4;
                         string mat_prima_5 = salvarDados.mat_prima_5;
                         string mat_lote_5 = salvarDados.mat_lote_5;
-                        DateTime mat_validade_5 = salvarDados.mat_validade_5;
+                        DateOnly mat_validade_5 = salvarDados.mat_validade_5;
                         string inst_desc1 = salvarDados.inst_desc1;
                         string inst_codigo1 = salvarDados.inst_codigo1;
-                        DateTime inst_data1 = salvarDados.inst_data1;
+                        DateOnly inst_data1 = salvarDados.inst_data1;
                         string inst_desc1_1 = salvarDados.inst_desc1_1;
                         string inst_codigo1_1 = salvarDados.inst_codigo1_1;
-                        DateTime inst_data1_1 = salvarDados.inst_data1_1;
+                        DateOnly inst_data1_1 = salvarDados.inst_data1_1;
                         string insta_desc2 = salvarDados.insta_desc2;
                         string inst_codigo2 = salvarDados.inst_codigo2;
-                        DateTime inst_data2 = salvarDados.inst_data2;
+                        DateOnly inst_data2 = salvarDados.inst_data2;
                         string inst_desc2_2 = salvarDados.inst_desc2_2;
                         string inst_codigo2_2 = salvarDados.inst_codigo2_2;
-                        DateTime inst_data2_2 = salvarDados.inst_data2_2;
+                        DateOnly inst_data2_2 = salvarDados.inst_data2_2;
                         string inst_desc3 = salvarDados.inst_desc3;
                         string inst_codigo3 = salvarDados.inst_codigo3;
-                        DateTime inst_data3 = salvarDados.inst_data3;
+                        DateOnly inst_data3 = salvarDados.inst_data3;
                         string inst_desc3_3 = salvarDados.inst_desc3_3;
                         string inst_codigo3_3 = salvarDados.inst_codigo3_3;
-                        DateTime inst_data3_3 = salvarDados.inst_data3_3;
+                        DateOnly inst_data3_3 = salvarDados.inst_data3_3;
                         string inst_desc4 = salvarDados.inst_desc4;
                         string inst_codigo4 = salvarDados.inst_codigo4;
-                        DateTime inst_data4 = salvarDados.inst_data4;
+                        DateOnly inst_data4 = salvarDados.inst_data4;
                         string inst_desc4_4 = salvarDados.inst_desc4_4;
                         string inst_codigo4_4 = salvarDados.inst_codigo4_4;
-                        DateTime inst_data4_4 = salvarDados.inst_data4_4;
+                        DateOnly inst_data4_4 = salvarDados.inst_data4_4;
                         string equip_de = salvarDados.equip_de;
                         string equip_ee = salvarDados.equip_ee;
                         string obs = salvarDados.obs;
@@ -1010,8 +1010,8 @@ namespace Arla32.Controllers
 
 
                         //pegando os valores dos inputs no html.
-                        DateTime data_ini = aldeidos.data_ini;
-                        DateTime data_term = aldeidos.data_term;
+                        DateOnly data_ini = aldeidos.data_ini;
+                        DateOnly data_term = aldeidos.data_term;
                         string rev = aldeidos.rev;
                         string lote_sol = aldeidos.lote_sol;
                         string codigo_curva = aldeidos.codigo_curva;
@@ -1023,31 +1023,31 @@ namespace Arla32.Controllers
                         float carta_absorbancia = aldeidos.carta_absorbancia;
                         string mat_prima1 = aldeidos.mat_prima1;
                         string mat_lote1 = aldeidos.mat_lote1;
-                        DateTime mat_validade1 = aldeidos.mat_validade1;
+                        DateOnly mat_validade1 = aldeidos.mat_validade1;
                         string mat_prima2 = aldeidos.mat_prima2;
                         string mat_lote2 = aldeidos.mat_lote2;
-                        DateTime mat_validade2 = aldeidos.mat_validade2;
+                        DateOnly mat_validade2 = aldeidos.mat_validade2;
                         string mat_prima3 = aldeidos.mat_prima3;
                         string mat_lote3 = aldeidos.mat_lote3;
-                        DateTime mat_validade3 = aldeidos.mat_validade3;
+                        DateOnly mat_validade3 = aldeidos.mat_validade3;
                         string mat_prima4 = aldeidos.mat_prima4;
                         string mat_lote4 = aldeidos.mat_lote4;
-                        DateTime mat_validade4 = aldeidos.mat_validade4;
+                        DateOnly mat_validade4 = aldeidos.mat_validade4;
                         string mat_prima5 = aldeidos.mat_prima5;
                         string mat_lote5 = aldeidos.mat_lote5;
-                        DateTime mat_validade5 = aldeidos.mat_validade5;
+                        DateOnly mat_validade5 = aldeidos.mat_validade5;
                         string inst_desc1 = aldeidos.inst_desc1;
                         string inst_cod1 = aldeidos.inst_cod1;
-                        DateTime inst_validade1 = aldeidos.inst_validade1;
+                        DateOnly inst_validade1 = aldeidos.inst_validade1;
                         string inst_desc2 = aldeidos.inst_desc2;
                         string inst_cod2 = aldeidos.inst_cod2;
-                        DateTime inst_validade2 = aldeidos.inst_validade2;
+                        DateOnly inst_validade2 = aldeidos.inst_validade2;
                         string inst_desc1_1 = aldeidos.inst_desc1_1;
                         string inst_cod1_1 = aldeidos.inst_cod1_1;
-                        DateTime inst_validade1_1 = aldeidos.inst_validade1_1;
+                        DateOnly inst_validade1_1 = aldeidos.inst_validade1_1;
                         string inst_desc2_2 = aldeidos.inst_desc2_2;
                         string inst_cod2_2 = aldeidos.inst_cod2_2;
-                        DateTime inst_validade2_2 = aldeidos.inst_validade2_2;
+                        DateOnly inst_validade2_2 = aldeidos.inst_validade2_2;
                         string equi_de = aldeidos.equi_de;
                         string equi_ee = aldeidos.equi_ee;
                         string observacoes = aldeidos.observacoes;
@@ -1275,8 +1275,8 @@ namespace Arla32.Controllers
                     if (OS != null && OS != "0" && orcamento != "0")
                     {
                         //pegando dados do html
-                        DateTime data_ini = insoluveis.data_ini;
-                        DateTime data_term = insoluveis.data_term;
+                        DateOnly data_ini = insoluveis.data_ini;
+                        DateOnly data_term = insoluveis.data_term;
                         string norma = insoluveis.norma;
                         string np = insoluveis.np;
                         string descricao = insoluveis.descricao;
@@ -1292,40 +1292,40 @@ namespace Arla32.Controllers
                         float pesagem_resultado2 = insoluveis.pesagem_resultado2;
                         string mat_prima1 = insoluveis.mat_prima1;
                         string mat_lote1 = insoluveis.mat_lote1;
-                        DateTime mat_validade1 = insoluveis.mat_validade1;
+                        DateOnly mat_validade1 = insoluveis.mat_validade1;
                         string mat_prima2 = insoluveis.mat_prima2;
                         string mat_lote2 = insoluveis.mat_lote2;
-                        DateTime mat_validade2 = insoluveis.mat_validade2;
+                        DateOnly mat_validade2 = insoluveis.mat_validade2;
                         string inst_desc1 = insoluveis.inst_desc1;
                         string inst_cod1 = insoluveis.inst_cod1;
-                        DateTime inst_validade1 = insoluveis.inst_validade1;
+                        DateOnly inst_validade1 = insoluveis.inst_validade1;
                         string inst_desc2 = insoluveis.inst_desc2;
                         string inst_cod2 = insoluveis.inst_cod2;
-                        DateTime inst_validade2 = insoluveis.inst_validade2;
+                        DateOnly inst_validade2 = insoluveis.inst_validade2;
                         string inst_desc3 = insoluveis.inst_desc3;
                         string inst_cod3 = insoluveis.inst_cod3;
-                        DateTime inst_validade3 = insoluveis.inst_validade3;
+                        DateOnly inst_validade3 = insoluveis.inst_validade3;
                         string inst_desc4 = insoluveis.inst_desc4;
                         string inst_cod4 = insoluveis.inst_cod4;
-                        DateTime inst_validade4 = insoluveis.inst_validade4;
+                        DateOnly inst_validade4 = insoluveis.inst_validade4;
                         string inst_desc5 = insoluveis.inst_desc5;
                         string inst_cod5 = insoluveis.inst_cod5;
-                        DateTime inst_validade5 = insoluveis.inst_validade5;
+                        DateOnly inst_validade5 = insoluveis.inst_validade5;
                         string inst_desc1_1 = insoluveis.inst_desc1_1;
                         string inst_cod1_1 = insoluveis.inst_cod1_1;
-                        DateTime inst_validade1_1 = insoluveis.inst_validade1_1;
+                        DateOnly inst_validade1_1 = insoluveis.inst_validade1_1;
                         string inst_desc2_2 = insoluveis.inst_desc2_2;
                         string inst_cod2_2 = insoluveis.inst_cod2_2;
-                        DateTime inst_validade2_2 = insoluveis.inst_validade2_2;
+                        DateOnly inst_validade2_2 = insoluveis.inst_validade2_2;
                         string inst_desc3_3 = insoluveis.inst_desc3_3;
                         string inst_cod3_3 = insoluveis.inst_cod3_3;
-                        DateTime inst_validade3_3 = insoluveis.inst_validade3_3;
+                        DateOnly inst_validade3_3 = insoluveis.inst_validade3_3;
                         string inst_desc4_4 = insoluveis.inst_desc4_4;
                         string inst_cod4_4 = insoluveis.inst_cod4_4;
-                        DateTime inst_validade4_4 = insoluveis.inst_validade4_4;
+                        DateOnly inst_validade4_4 = insoluveis.inst_validade4_4;
                         string inst_desc5_5 = insoluveis.inst_desc5_5;
                         string inst_cod5_5 = insoluveis.inst_desc5_5;
-                        DateTime inst_validade5_5 = insoluveis.inst_validade5_5;
+                        DateOnly inst_validade5_5 = insoluveis.inst_validade5_5;
                         string equi_ee = insoluveis.equi_ee;
                         string equi_de = insoluveis.equi_de;
                         string observacoes = insoluveis.observacoes;
@@ -1807,8 +1807,8 @@ namespace Arla32.Controllers
 
 
                         //pegando do html Arla Metais
-                        DateTime data_ini = metais.data_ini;
-                        DateTime data_term = metais.data_term;
+                        DateOnly data_ini = metais.data_ini;
+                        DateOnly data_term = metais.data_term;
                         string norma = metais.norma;
                         string np = metais.np;
                         string descricao = metais.descricao;
@@ -1834,88 +1834,88 @@ namespace Arla32.Controllers
                         float ex_lim_zn = metais.ex_lim_zn;
                         string mat_prima1 = metais.mat_prima1;
                         string mat_lote1 = metais.mat_lote1;
-                        DateTime mat_val1 = metais.mat_val1;
+                        DateOnly mat_val1 = metais.mat_val1;
                         string mat_prima2 = metais.mat_prima2;
                         string matt_lote2 = metais.matt_lote2;
-                        DateTime mat_val2 = metais.mat_val2;
+                        DateOnly mat_val2 = metais.mat_val2;
                         string mat_prima3 = metais.mat_prima3;
                         string mat_lote3 = metais.mat_lote3;
-                        DateTime mat_val3 = metais.mat_val3;
+                        DateOnly mat_val3 = metais.mat_val3;
                         string mat_prima4 = metais.mat_prima4;
                         string mat_lote4 = metais.mat_lote4;
-                        DateTime mat_val4 = metais.mat_val4;
+                        DateOnly mat_val4 = metais.mat_val4;
                         string mat_prima5 = metais.mat_prima5;
                         string mat_lote5 = metais.mat_lote5;
-                        DateTime mat_val5 = metais.mat_val5;
+                        DateOnly mat_val5 = metais.mat_val5;
                         string mat_prima6 = metais.mat_prima6;
                         string mat_lote6 = metais.mat_lote6;
-                        DateTime mat_val6 = metais.mat_val6;
+                        DateOnly mat_val6 = metais.mat_val6;
                         string mat_prima7 = metais.mat_prima7;
                         string mat_lote7 = metais.mat_lote7;
-                        DateTime mat_val7 = metais.mat_val7;
+                        DateOnly mat_val7 = metais.mat_val7;
                         string mat_prima8 = metais.mat_prima8;
                         string mat_lote8 = metais.mat_lote8;
-                        DateTime mat_val8 = metais.mat_val8;
+                        DateOnly mat_val8 = metais.mat_val8;
                         string mat_prima9 = metais.mat_prima9;
                         string mat_lote9 = metais.mat_lote9;
-                        DateTime mat_val9 = metais.mat_val9;
+                        DateOnly mat_val9 = metais.mat_val9;
                         string mat_prima10 = metais.mat_prima10;
                         string mat_lote10 = metais.mat_lote10;
-                        DateTime mat_val10 = metais.mat_val10;
+                        DateOnly mat_val10 = metais.mat_val10;
                         string mat_prima11 = metais.mat_prima11;
                         string mat_lote11 = metais.mat_lote11;
-                        DateTime mat_val11 = metais.mat_val11;
+                        DateOnly mat_val11 = metais.mat_val11;
                         string mat_prima12 = metais.mat_prima12;
                         string mat_lote12 = metais.mat_lote12;
-                        DateTime mat_val12 = metais.mat_val12;
+                        DateOnly mat_val12 = metais.mat_val12;
                         string mat_prima13 = metais.mat_prima13;
                         string mat_lote13 = metais.mat_lote13;
-                        DateTime mat_val13 = metais.mat_val13;
+                        DateOnly mat_val13 = metais.mat_val13;
                         string inst_desc1 = metais.inst_desc1;
                         string inst_cod1 = metais.inst_cod1;
-                        DateTime inst_val1 = metais.inst_val1;
+                        DateOnly inst_val1 = metais.inst_val1;
                         string inst_desc2 = metais.inst_desc2;
                         string inst_cod2 = metais.inst_cod2;
-                        DateTime inst_val2 = metais.inst_val2;
+                        DateOnly inst_val2 = metais.inst_val2;
                         string inst_desc3 = metais.inst_desc3;
                         string inst_cod3 = metais.inst_cod3;
-                        DateTime inst_val3 = metais.inst_val3;
+                        DateOnly inst_val3 = metais.inst_val3;
                         string inst_desc4 = metais.inst_desc4;
                         string inst_cod4 = metais.inst_cod4;
-                        DateTime inst_val4 = metais.inst_val4;
+                        DateOnly inst_val4 = metais.inst_val4;
                         string inst_desc5 = metais.inst_desc5;
                         string inst_cod5 = metais.inst_cod5;
-                        DateTime inst_val5 = metais.inst_val5;
+                        DateOnly inst_val5 = metais.inst_val5;
                         string inst_desc6 = metais.inst_desc6;
                         string inst_cod6 = metais.inst_cod6;
-                        DateTime inst_val6 = metais.inst_val6;
+                        DateOnly inst_val6 = metais.inst_val6;
                         string inst_desc7 = metais.inst_desc7;
                         string inst_cod7 = metais.inst_cod7;
-                        DateTime inst_val7 = metais.inst_val7;
+                        DateOnly inst_val7 = metais.inst_val7;
                         string inst_desc8 = metais.inst_desc8;
                         string inst_cod8 = metais.inst_cod8;
-                        DateTime inst_val8 = metais.inst_val8;
+                        DateOnly inst_val8 = metais.inst_val8;
                         string inst_desc9 = metais.inst_desc9;
                         string inst_cod9 = metais.inst_cod9;
-                        DateTime inst_val9 = metais.inst_val9;
+                        DateOnly inst_val9 = metais.inst_val9;
                         string inst_desc10 = metais.inst_desc10;
                         string inst_cod10 = metais.inst_cod10;
-                        DateTime inst_val10 = metais.inst_val10;
+                        DateOnly inst_val10 = metais.inst_val10;
                         string inst_desc11 = metais.inst_desc11;
                         string inst_cod11 = metais.inst_cod11;
-                        DateTime inst_val11 = metais.inst_val11;
+                        DateOnly inst_val11 = metais.inst_val11;
                         string inst_dec12 = metais.inst_dec12;
                         string inst_cod12 = metais.inst_cod12;
-                        DateTime inst_val12 = metais.inst_val12;
+                        DateOnly inst_val12 = metais.inst_val12;
                         string inst_desc13 = metais.inst_desc13;
                         string inst_cod13 = metais.inst_cod13;
-                        DateTime inst_val13 = metais.inst_val13;
+                        DateOnly inst_val13 = metais.inst_val13;
                         string inst_desc14 = metais.inst_desc14;
                         string inst_cod14 = metais.inst_cod14;
-                        DateTime inst_val14 = metais.inst_val14;
+                        DateOnly inst_val14 = metais.inst_val14;
                         string inst_desc15 = metais.inst_desc15;
                         string inst_cod15 = metais.inst_cod15;
-                        DateTime inst_val15 = metais.inst_val15;
+                        DateOnly inst_val15 = metais.inst_val15;
                         string equi_ee = metais.equi_ee;
                         string equi_de = metais.equi_de;
 
@@ -2064,7 +2064,7 @@ namespace Arla32.Controllers
 
                         if (resul_con_cr2 < ex_lq_cr)
                         {
-                            ex_quant_cr2 = "LQ";
+                            ex_quant_cr2 = "<LQ";
                         }
                         else
                         {
@@ -2155,7 +2155,7 @@ namespace Arla32.Controllers
 
                         if (resul_con_cr3 < ex_lq_cr)
                         {
-                            ex_quant_cr3 = "LQ";
+                            ex_quant_cr3 = "<LQ";
                         }
                         else
                         {
@@ -2990,7 +2990,7 @@ namespace Arla32.Controllers
 
                         if (resul_con_cr2 < ex_lq_cr)
                         {
-                            ex_quant_cr2 = "LQ";
+                            ex_quant_cr2 = "<LQ";
                         }
                         else
                         {
@@ -3081,7 +3081,7 @@ namespace Arla32.Controllers
 
                         if (resul_con_cr3 < ex_lq_cr)
                         {
-                            ex_quant_cr3 = "LQ";
+                            ex_quant_cr3 = "<LQ";
                         }
                         else
                         {
@@ -3367,8 +3367,8 @@ namespace Arla32.Controllers
                     if (OS != null && OS != "0" && orcamento != "0")
                     {
                         //pegando valores na web.
-                        DateTime data_ini = salvarDados.data_ini;
-                        DateTime data_term = salvarDados.data_term;
+                        DateOnly data_ini = salvarDados.data_ini;
+                        DateOnly data_term = salvarDados.data_term;
                         string cod_curva = salvarDados.cod_curva;
                         float fator_calibracao = salvarDados.fator_calibracao;
                         float massa = salvarDados.massa;
@@ -3378,52 +3378,52 @@ namespace Arla32.Controllers
                         float abs_qc = salvarDados.abs_qc;
                         string mat_prima_1 = salvarDados.mat_prima_1;
                         string mat_lote_1 = salvarDados.mat_lote_1;
-                        DateTime mat_validade_1 = salvarDados.mat_validade_1;
+                        DateOnly mat_validade_1 = salvarDados.mat_validade_1;
                         string mat_prima_2 = salvarDados.mat_prima_2;
                         string mat_lote_2 = salvarDados.mat_lote_2;
-                        DateTime mat_validade_2 = salvarDados.mat_validade_2;
+                        DateOnly mat_validade_2 = salvarDados.mat_validade_2;
                         string mat_prima_3 = salvarDados.mat_prima_3;
                         string mat_lote_3 = salvarDados.mat_lote_3;
-                        DateTime mat_validade_3 = salvarDados.mat_validade_3;
+                        DateOnly mat_validade_3 = salvarDados.mat_validade_3;
                         string mat_prima_4 = salvarDados.mat_prima_4;
                         string mat_lote_4 = salvarDados.mat_lote_4;
-                        DateTime mat_validade_4 = salvarDados.mat_validade_4;
+                        DateOnly mat_validade_4 = salvarDados.mat_validade_4;
                         string mat_prima_5 = salvarDados.mat_prima_5;
                         string mat_lote_5 = salvarDados.mat_lote_5;
-                        DateTime mat_validade_5 = salvarDados.mat_validade_5;
+                        DateOnly mat_validade_5 = salvarDados.mat_validade_5;
                         string mat_prima_6 = salvarDados.mat_prima_6;
                         string mat_lote_6 = salvarDados.mat_lote_6;
-                        DateTime mat_validade_6 = salvarDados.mat_validade_6;
+                        DateOnly mat_validade_6 = salvarDados.mat_validade_6;
                         string mat_prima_7 = salvarDados.mat_prima_7;
                         string mat_lote_7 = salvarDados.mat_lote_7;
-                        DateTime mat_validade_7 = salvarDados.mat_validade_7;
+                        DateOnly mat_validade_7 = salvarDados.mat_validade_7;
                         string mat_prima_8 = salvarDados.mat_prima_8;
                         string mat_lote_8 = salvarDados.mat_lote_8;
-                        DateTime mat_validade_8 = salvarDados.mat_validade_8;
+                        DateOnly mat_validade_8 = salvarDados.mat_validade_8;
                         string inst_desc1 = salvarDados.inst_desc1;
                         string inst_cod1 = salvarDados.inst_cod1;
-                        DateTime inst_data1 = salvarDados.inst_data1;
+                        DateOnly inst_data1 = salvarDados.inst_data1;
                         string inst_desc1_1 = salvarDados.inst_desc1_1;
                         string inst_cod1_1 = salvarDados.inst_cod1_1;
-                        DateTime inst_data1_1 = salvarDados.inst_data1_1;
+                        DateOnly inst_data1_1 = salvarDados.inst_data1_1;
                         string inst_desc2 = salvarDados.inst_desc2;
                         string inst_cod2 = salvarDados.inst_cod2;
-                        DateTime inst_data2 = salvarDados.inst_data2;
+                        DateOnly inst_data2 = salvarDados.inst_data2;
                         string inst_desc2_2 = salvarDados.inst_desc2_2;
                         string inst_cod2_2 = salvarDados.inst_cod2_2;
-                        DateTime inst_data2_2 = salvarDados.inst_data2_2;
+                        DateOnly inst_data2_2 = salvarDados.inst_data2_2;
                         string inst_desc3 = salvarDados.inst_desc3;
                         string inst_cod3 = salvarDados.inst_cod3;
-                        DateTime inst_data3 = salvarDados.inst_data3;
+                        DateOnly inst_data3 = salvarDados.inst_data3;
                         string inst_desc3_3 = salvarDados.inst_desc3_3;
                         string inst_cod3_3 = salvarDados.inst_cod3_3;
-                        DateTime inst_data3_3 = salvarDados.inst_data3_3;
+                        DateOnly inst_data3_3 = salvarDados.inst_data3_3;
                         string inst_desc4 = salvarDados.inst_desc4;
                         string inst_cod4 = salvarDados.inst_cod4;
-                        DateTime inst_data4 = salvarDados.inst_data4;
+                        DateOnly inst_data4 = salvarDados.inst_data4;
                         string inst_desc4_4 = salvarDados.inst_desc4_4;
                         string inst_cod4_4 = salvarDados.inst_cod4_4;
-                        DateTime inst_data4_4 = salvarDados.inst_data4_4;
+                        DateOnly inst_data4_4 = salvarDados.inst_data4_4;
                         string equi_ee = salvarDados.equi_ee;
                         string equi_de = salvarDados.equi_de;
                         string obs = salvarDados.obs;
@@ -3643,8 +3643,8 @@ namespace Arla32.Controllers
                     if (OS != null && OS != "0" && orcamento != "0")
                     {
                         //pegando valores dos dados inseridos na pagina.
-                        DateTime data_ini = salvarDados.data_ini;
-                        DateTime data_term = salvarDados.data_term;
+                        DateOnly data_ini = salvarDados.data_ini;
+                        DateOnly data_term = salvarDados.data_term;
                         string temp_inicial = salvarDados.temp_inicial;
                         string densidade_enc = salvarDados.densidade_enc.ToUpper();
                         string temp_final = salvarDados.temp_final;
@@ -3652,19 +3652,19 @@ namespace Arla32.Controllers
                         string conc_ensaio = salvarDados.conc_ensaio;
                         string mat_prima = salvarDados.mat_prima;
                         string mat_lote = salvarDados.mat_lote;
-                        DateTime mat_validade = salvarDados.mat_validade;
+                        DateOnly mat_validade = salvarDados.mat_validade;
                         string inst_desc1 = salvarDados.inst_desc1;
                         string inst_cod1 = salvarDados.inst_cod1;
-                        DateTime inst_data1 = salvarDados.inst_data1;
+                        DateOnly inst_data1 = salvarDados.inst_data1;
                         string inst_desc2 = salvarDados.inst_desc2;
                         string inst_cod2 = salvarDados.inst_cod2;
-                        DateTime inst_data2 = salvarDados.inst_data2;
+                        DateOnly inst_data2 = salvarDados.inst_data2;
                         string inst_desc3 = salvarDados.inst_desc3;
                         string inst_cod3 = salvarDados.inst_cod3;
-                        DateTime inst_data3 = salvarDados.inst_data3;
+                        DateOnly inst_data3 = salvarDados.inst_data3;
                         string inst_desc4 = salvarDados.inst_desc4;
                         string inst_cod4 = salvarDados.inst_cod4;
-                        DateTime inst_data4 = salvarDados.inst_data4;
+                        DateOnly inst_data4 = salvarDados.inst_data4;
                         string equi_de = salvarDados.equi_de;
                         string equi_ee = salvarDados.equi_ee;
                         string obs = salvarDados.obs;

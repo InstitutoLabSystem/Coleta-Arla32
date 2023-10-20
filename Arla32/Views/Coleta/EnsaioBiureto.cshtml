@@ -229,11 +229,11 @@
                 </tr>
                 <tr>
                     <td style="background-color: #800000; color:white;">Data Inicio:</td>
-                    <td><input type="text" name="data_ini" id="data_ini" class="form-control input " value="@Model.data_ini.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" name="data_ini" id="data_ini" class="form-control input " value="@Model.data_ini" /></td>
                     <td style="background-color: #800000; color:white;">Data Término:</td>
-                    <td><input type="text" name="data_term" id="data_term" class="form-control input " value="@Model.data_term.ToString("dd/MM/yyyy")" /></td>
-            </tr>
-            <tr class="texto-central">
+                    <td><input type="datetime" name="data_term" id="data_term" class="form-control input " value="@Model.data_term" /></td>
+                </tr>
+                <tr class="texto-central">
                     <td colspan="5">
                         <b>Ensaio a ser realizado:</b> Determinação da concentração de biureto - Anexo E - IT.120/Q
                     </td>
@@ -307,27 +307,27 @@
                 <tr>
                     <td><input type="text" name="mat_prima_1" id="mat_prima_1" class="form-control input" value="@Model.mat_prima_1" /></td>
                     <td><input type="text" name="mat_lote_1" id="mat_lote_1" class="form-control input " value="@Model.mat_lote_1" /></td>
-                    <td><input type="text" name="mat_validade_1" id="mat_validade_1" class="form-control input " value="@Model.mat_validade_1.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" name="mat_validade_1" id="mat_validade_1" class="form-control input " value="@Model.mat_validade_1" /></td>
                 </tr>
                 <tr>
                     <td><input type="text" name="mat_prima_2" id="mat_prima_2" class="form-control input" value="@Model.mat_prima_2" /></td>
                     <td><input type="text" name="mat_lote_2" id="mat_lote_2" class="form-control input " value="@Model.mat_lote_2" /></td>
-                    <td><input type="text" name="mat_validade_2" id="mat_validade_2" class="form-control input " value="@Model.mat_validade_2.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" name="mat_validade_2" id="mat_validade_2" class="form-control input " value="@Model.mat_validade_2" /></td>
                 </tr>
                 <tr>
                     <td><input type="text" name="mat_prima_3" id="mat_prima_3" class="form-control input" value="@Model.mat_prima_3" /></td>
                     <td><input type="text" name="mat_lote_3" id="mat_lote_3" class="form-control input " value="@Model.mat_lote_3" /></td>
-                    <td><input type="text" name="mat_validade_3" id="mat_validade_3" class="form-control input " value="@Model.mat_validade_3.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" name="mat_validade_3" id="mat_validade_3" class="form-control input " value="@Model.mat_validade_3" /></td>
                 </tr>
                 <tr>
                     <td><input type="text" name="mat_prima_4" id="mat_prima_4" class="form-control input" value="@Model.mat_prima_4" /></td>
                     <td><input type="text" name="mat_lote_4" id="mat_lote_4" class="form-control input " value="@Model.mat_lote_4" /></td>
-                    <td><input type="text" name="mat_validade_4" id="mat_validade_4" class="form-control input " value="@Model.mat_validade_4.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" name="mat_validade_4" id="mat_validade_4" class="form-control input " value="@Model.mat_validade_4" /></td>
                 </tr>
                 <tr>
                     <td><input type="text" name="mat_prima_5" id="mat_prima_5" class="form-control input" value="@Model.mat_prima_5" /></td>
                     <td><input type="text" name="mat_lote_5" id="mat_lote_5" class="form-control input " value="@Model.mat_lote_5" /></td>
-                    <td><input type="text" name="mat_validade_5" id="mat_validade_5" class="form-control input " value="@Model.mat_validade_5.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" name="mat_validade_5" id="mat_validade_5" class="form-control input " value="@Model.mat_validade_5" /></td>
                 </tr>
             </table>
             <br />
@@ -346,34 +346,34 @@
                 <tr>
                     <td><input type="text" name="inst_desc1" class="form-control input " value="@Model.inst_desc1" /></td>
                     <td><input type="text" name="inst_codigo1" class="form-control input " value="@Model.inst_codigo1" /></td>
-                    <td><input type="text" name="inst_data1" class="form-control input " value="@Model.inst_data1.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" name="inst_data1" class="form-control input " value="@Model.inst_data1" /></td>
                     <td><input type="text" name="inst_desc1_1" class="form-control input " value="@Model.inst_desc1_1" /></td>
                     <td><input type="text" name="inst_codigo1_1" class="form-control input " value="@Model.inst_codigo1_1" /></td>
-                    <td><input type="text" name="inst_data1_1" class="form-control input " value="@Model.inst_data1_1.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" name="inst_data1_1" class="form-control input " value="@Model.inst_data1_1" /></td>
                 </tr>
                 <tr>
                     <td><input type="text" name="insta_desc2" class="form-control input " value="@Model.insta_desc2" /></td>
                     <td><input type="text" name="inst_codigo2" class="form-control input " value="@Model.inst_codigo2" /></td>
-                    <td><input type="text" name="inst_data2" class="form-control input " value="@Model.inst_data1.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" name="inst_data2" class="form-control input " value="@Model.inst_data1" /></td>
                     <td><input type="text" name="inst_desc2_2" class="form-control input " value="@Model.inst_desc2_2" /></td>
                     <td><input type="text" name="inst_codigo2_2" class="form-control input " value="@Model.inst_codigo2_2" /></td>
-                    <td><input type="text" name="inst_data2_2" class="form-control input " value="@Model.inst_data2_2.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" name="inst_data2_2" class="form-control input " value="@Model.inst_data2_2" /></td>
                 </tr>
                 <tr>
                     <td><input type="text" name="inst_desc3" class="form-control input " value="@Model.inst_desc3" /></td>
                     <td><input type="text" name="inst_codigo3" class="form-control input " value="@Model.inst_codigo3" /></td>
-                    <td><input type="text" name="inst_data3" class="form-control input " value="@Model.inst_data3.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" name="inst_data3" class="form-control input " value="@Model.inst_data3" /></td>
                     <td><input type="text" name="inst_desc3_3" class="form-control input " value="@Model.inst_desc3_3" /></td>
                     <td><input type="text" name="inst_codigo3_3" class="form-control input " value="@Model.inst_codigo3_3" /></td>
-                    <td><input type="text" name="inst_data3_3" class="form-control input " value="@Model.inst_data3_3.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" name="inst_data3_3" class="form-control input " value="@Model.inst_data3_3" /></td>
                 </tr>
                 <tr>
                     <td><input type="text" name="inst_desc4" class="form-control input " value="@Model.inst_desc4" /></td>
                     <td><input type="text" name="inst_codigo4" class="form-control input " value="@Model.inst_codigo4" /></td>
-                    <td><input type="text" name="inst_data4" class="form-control input " value="@Model.inst_data4.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" name="inst_data4" class="form-control input " value="@Model.inst_data4" /></td>
                     <td><input type="text" name="inst_desc4_4" class="form-control input " value="@Model.inst_desc4_4" /></td>
                     <td><input type="text" name="inst_codigo4_4" class="form-control input " value="@Model.inst_codigo4_4" /></td>
-                    <td><input type="text" name="inst_data4_4" class="form-control input " value="@Model.inst_data4_4.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" name="inst_data4_4" class="form-control input " value="@Model.inst_data4_4" /></td>
                 </tr>
             </table>
             <br />

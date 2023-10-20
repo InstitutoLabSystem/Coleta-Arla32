@@ -22,7 +22,7 @@
                         <img src="https://www.labsystem-nuvem.com.br/imagens_arq/imagens/img/LabSystem.png" class="imagem" />
                     </td>
                     <td colspan="7" class="texto-central" style="background-color: #800000; color:white;">COLETA DE DADOS</td>
-                    <td rowspan="2" class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="background-color: #800000; color:white;"> N° da OS :</td>
+                    <td rowspan="2" class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="background-color: #800000; color:white;"> N° da OS : @ViewBag.OS</td>
                 </tr>
                 <tr class="tabela">
                     <td colspan="7" class="texto-central "> ENSAIO DE ARLA 32</td>
@@ -30,10 +30,9 @@
                 </tr>
                 <tr>
                     <td style="background-color: #800000; color:white;" colspan="2">Data Inicio:</td>
-                    <td colspan="1"><input class="form-control input " type="date" style="height:50px; border:none;" name="data_ini" /></td>
+                    <td colspan="2"><input class="form-control input " type="date" style="height:50px; border:none;" name="data_ini" /></td>
                     <td colspan="2" style="background-color: #800000; color:white;">Data Término:</td>
                     <td colspan="2"><input class="form-control input " type="date" style="height:50px; border:none;" name="data_term" /></td>
-                    <td colspan="2"> <input class="form-control input " style="height:50px; border:none;" name="os" value="@ViewBag.OS" /></td>
                 </tr>
                 <tr class="texto-central">
                     <td colspan="9">
@@ -502,7 +501,7 @@
                         <img src="https://www.labsystem-nuvem.com.br/imagens_arq/imagens/img/LabSystem.png" class="imagem" />
                     </td>
                     <td colspan="7" class="texto-central" style="background-color: #800000; color:white;">COLETA DE DADOS</td>
-                    <td rowspan="2" class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="background-color: #800000; color:white;"> N° da OS :</td>
+                    <td rowspan="2" class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="background-color: #800000; color:white;"> N° da OS : @ViewBag.OS</td>
                 </tr>
                 <tr class="tabela">
                     <td colspan="7" class="texto-central "> ENSAIO DE ARLA 32</td>
@@ -510,9 +509,9 @@
                 </tr>
                 <tr>
                     <td style="background-color: #800000; color:white;" colspan="2">Data Inicio:</td>
-                    <td colspan="1"><input class="form-control input " type="text" style="height:50px; border:none;" name="data_ini" value="@Model.arlaMetais.data_ini.ToString("dd/MM/yyyy")" /></td>
+                    <td colspan="1"><input class="form-control input " type="datetime" style="height:50px; border:none;" name="data_ini" value="@Model.arlaMetais.data_ini" /></td>
                     <td colspan="2" style="background-color: #800000; color:white;">Data Término:</td>
-                    <td colspan="2"><input class="form-control input " type="text" style="height:50px; border:none;" name="data_term" value="@Model.arlaMetais.data_term.ToString("dd/MM/yyyy")" /></td>
+                    <td colspan="2"><input class="form-control input " type="datetime" style="height:50px; border:none;" name="data_term" value="@Model.arlaMetais.data_term" /></td>
                     <td colspan="2"> <input class="form-control input " style="height:50px; border:none;" name="os" value="@ViewBag.OS" /></td>
                 </tr>
                 <tr class="texto-central">
@@ -781,67 +780,67 @@
                 <tr>
                     <td><input type="text" class="form-control input " name="mat_prima1" value="@Model.arlaMetais.mat_prima1" /></td>
                     <td><input type="text" class="form-control input " name="mat_lote1" value="@Model.arlaMetais.mat_lote1" /></td>
-                    <td><input type="text" class="form-control input " name="mat_val1" value="@Model.arlaMetais.mat_val1.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" class="form-control input " name="mat_val1" value="@Model.arlaMetais.mat_val1" /></td>
                 </tr>
                 <tr>
                     <td><input type="text" class="form-control input " name="mat_prima2" value="@Model.arlaMetais.mat_prima2" /></td>
                     <td><input type="text" class="form-control input " name="matt_lote2" value="@Model.arlaMetais.matt_lote2" /></td>
-                    <td><input type="text" class="form-control input " name="mat_val2" value="@Model.arlaMetais.mat_val1.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" class="form-control input " name="mat_val2" value="@Model.arlaMetais.mat_val1" /></td>
                 </tr>
                 <tr>
                     <td><input type="text" class="form-control input " name="mat_prima3" value="@Model.arlaMetais.mat_prima3" /></td>
                     <td><input type="text" class="form-control input " name="mat_lote3" value="@Model.arlaMetais.mat_lote3" /></td>
-                    <td><input type="text" class="form-control input " name="mat_val3" value="@Model.arlaMetais.mat_val3.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" class="form-control input " name="mat_val3" value="@Model.arlaMetais.mat_val3" /></td>
                 </tr>
                 <tr>
                     <td><input type="text" class="form-control input " name="mat_prima4" value="@Model.arlaMetais.mat_prima4" /></td>
                     <td><input type="text" class="form-control input " name="mat_lote4" value="@Model.arlaMetais.mat_lote4" /></td>
-                    <td><input type="text" class="form-control input " name="mat_val4" value="@Model.arlaMetais.mat_val4.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" class="form-control input " name="mat_val4" value="@Model.arlaMetais.mat_val4" /></td>
                 </tr>
                 <tr>
                     <td><input type="text" class="form-control input " name="mat_prima5" value="@Model.arlaMetais.mat_prima5" /></td>
                     <td><input type="text" class="form-control input " name="mat_lote5" value="@Model.arlaMetais.mat_lote5" /></td>
-                    <td><input type="text" class="form-control input " name="mat_val5" value="@Model.arlaMetais.mat_val5.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" class="form-control input " name="mat_val5" value="@Model.arlaMetais.mat_val5" /></td>
                 </tr>
                 <tr>
                     <td><input type="text"class="form-control input " name="mat_prima6" value="@Model.arlaMetais.mat_prima6" /></td>
                     <td><input type="text" class="form-control input " name="mat_lote6" value="@Model.arlaMetais.mat_lote6" /></td>
-                    <td><input type="text" class="form-control input " name="mat_val6" value="@Model.arlaMetais.mat_val6.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" class="form-control input " name="mat_val6" value="@Model.arlaMetais.mat_val6" /></td>
                 </tr>
                 <tr>
                     <td><input type="text" class="form-control input " name="mat_prima7" value="@Model.arlaMetais.mat_prima7" /></td>
                     <td><input type="text" class="form-control input " name="mat_lote7" value="@Model.arlaMetais.mat_lote7" /></td>
-                    <td><input type="text" class="form-control input " name="mat_val7" value="@Model.arlaMetais.mat_val7.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" class="form-control input " name="mat_val7" value="@Model.arlaMetais.mat_val7" /></td>
                 </tr>
                 <tr>
                     <td><input type="text" class="form-control input " name="mat_prima8" value="@Model.arlaMetais.mat_prima8" /></td>
                     <td><input type="text" class="form-control input " name="mat_lote8" value="@Model.arlaMetais.mat_lote8" /></td>
-                    <td><input type="text" class="form-control input " name="mat_val8" value="@Model.arlaMetais.mat_val8.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" class="form-control input " name="mat_val8" value="@Model.arlaMetais.mat_val8" /></td>
                 </tr>
                 <tr>
                     <td><input type="text" class="form-control input " name="mat_prima9" value="@Model.arlaMetais.mat_prima9" /></td>
                     <td><input type="text" class="form-control input " name="mat_lote9" value="@Model.arlaMetais.mat_lote9" /></td>
-                    <td><input type="text" class="form-control input " name="mat_val9" value="@Model.arlaMetais.mat_val9.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" class="form-control input " name="mat_val9" value="@Model.arlaMetais.mat_val9" /></td>
                 </tr>
                 <tr>
                     <td><input type="text" class="form-control input " name="mat_prima10" value="@Model.arlaMetais.mat_prima10" /></td>
                     <td><input type="text" class="form-control input " name="mat_lote10" value="@Model.arlaMetais.mat_lote10" /></td>
-                    <td><input type="text" class="form-control input " name="mat_val10" value="@Model.arlaMetais.mat_val10.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" class="form-control input " name="mat_val10" value="@Model.arlaMetais.mat_val10" /></td>
                 </tr>
                 <tr>
                     <td><input type="text" class="form-control input " name="mat_prima11" value="@Model.arlaMetais.mat_prima11"/></td>
                     <td><input type="text" class="form-control input " name="mat_lote11" value="@Model.arlaMetais.mat_lote11" /></td>
-                    <td><input type="text" class="form-control input " name="mat_val11" value="@Model.arlaMetais.mat_val11.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" class="form-control input " name="mat_val11" value="@Model.arlaMetais.mat_val11" /></td>
                 </tr>
                 <tr>
                     <td><input type="text" class="form-control input " name="mat_prima12" value="@Model.arlaMetais.mat_prima12" /></td>
                     <td><input type="text" class="form-control input " name="mat_lote12" value="@Model.arlaMetais.mat_lote12" /></td>
-                    <td><input type="text" class="form-control input " name="mat_val12" value="@Model.arlaMetais.mat_val12.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" class="form-control input " name="mat_val12" value="@Model.arlaMetais.mat_val12" /></td>
                 </tr>
                 <tr>
                     <td><input type="text" class="form-control input " name="mat_prima13" value="@Model.arlaMetais.mat_prima13" /></td>
                     <td><input type="text" class="form-control input " name="mat_lote13" value="@Model.arlaMetais.mat_lote13" /></td>
-                    <td><input type="text" class="form-control input " name="mat_val13" value="@Model.arlaMetais.mat_val13.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" class="form-control input " name="mat_val13" value="@Model.arlaMetais.mat_val13" /></td>
                 </tr>
             </table>
             <br />
@@ -859,77 +858,77 @@
                 <tr>
                     <td><input type="text" class="form-control input " name="inst_desc1" value="@Model.arlaMetais.inst_desc1" /></td>
                     <td><input type="text" class="form-control input " name="inst_cod1" value="@Model.arlaMetais.inst_cod1" /></td>
-                    <td><input type="text" class="form-control input " name="inst_val1" value="@Model.arlaMetais.inst_val1.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" class="form-control input " name="inst_val1" value="@Model.arlaMetais.inst_val1" /></td>
                 </tr>
                 <tr>
                     <td><input type="text" class="form-control input " name="inst_desc2" value="@Model.arlaMetais.inst_desc2" /></td>
                     <td><input type="text" class="form-control input " name="inst_cod2" value="@Model.arlaMetais.inst_cod2" /></td>
-                    <td><input type="text" class="form-control input " name="inst_val2" value="@Model.arlaMetais.inst_val2.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" class="form-control input " name="inst_val2" value="@Model.arlaMetais.inst_val2" /></td>
                 </tr>
                 <tr>
                     <td><input type="text" class="form-control input " name="inst_desc3" value="@Model.arlaMetais.inst_desc3" /></td>
                     <td><input type="text" class="form-control input " name="inst_cod3" value="@Model.arlaMetais.inst_cod3" /></td>
-                    <td><input type="text" class="form-control input " name="inst_val3" value="@Model.arlaMetais.inst_val3.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="text" class="form-control input " name="inst_val3" value="@Model.arlaMetais.inst_val3" /></td>
                 </tr>
                 <tr>
                     <td><input type="text" class="form-control input " name="inst_desc4" value="@Model.arlaMetais.inst_desc4" /></td>
                     <td><input type="text" class="form-control input " name="inst_cod4" value="@Model.arlaMetais.inst_cod4" /></td>
-                    <td><input type="text" class="form-control input " name="inst_val4" value="@Model.arlaMetais.inst_val4.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" class="form-control input " name="inst_val4" value="@Model.arlaMetais.inst_val4" /></td>
                 </tr>
                 <tr>
                     <td><input type="text" class="form-control input " name="inst_desc5" value="@Model.arlaMetais.inst_desc5" /></td>
                     <td><input type="text" class="form-control input " name="inst_cod5" value="@Model.arlaMetais.inst_cod5" /></td>
-                    <td><input type="text" class="form-control input " name="inst_val5" value="@Model.arlaMetais.inst_val5.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" class="form-control input " name="inst_val5" value="@Model.arlaMetais.inst_val5" /></td>
                 </tr>
                 <tr>
                     <td><input type="text" class="form-control input " name="inst_desc6" value="@Model.arlaMetais.inst_desc6" /></td>
                     <td><input type="text" class="form-control input " name="inst_cod6" value="@Model.arlaMetais.inst_cod6" /></td>
-                    <td><input type="text" class="form-control input " name="inst_val6" value="@Model.arlaMetais.inst_val6.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" class="form-control input " name="inst_val6" value="@Model.arlaMetais.inst_val6" /></td>
                 </tr>
                 <tr>
                     <td><input type="text" class="form-control input " name="inst_desc7" value="@Model.arlaMetais.inst_desc7" /></td>
                     <td><input type="text" class="form-control input " name="inst_cod7" value="@Model.arlaMetais.inst_cod7" /></td>
-                    <td><input type="text" class="form-control input " name="inst_val7" value="@Model.arlaMetais.inst_val7.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" class="form-control input " name="inst_val7" value="@Model.arlaMetais.inst_val7" /></td>
                 </tr>
                 <tr>
                     <td><input type="text"  class="form-control input " name="inst_desc8" value="@Model.arlaMetais.inst_desc8"/></td>
                     <td><input type="text"  class="form-control input " name="inst_cod8" value="@Model.arlaMetais.inst_cod8" /></td>
-                    <td><input type="text" class="form-control input " name="inst_val8" value="@Model.arlaMetais.inst_val8.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" class="form-control input " name="inst_val8" value="@Model.arlaMetais.inst_val8" /></td>
                 </tr>
                 <tr>
                     <td><input type="text" class="form-control input " name="inst_desc9" value="@Model.arlaMetais.inst_desc9" /></td>
                     <td><input type="text" class="form-control input " name="inst_cod9" value="@Model.arlaMetais.inst_cod9" /></td>
-                    <td><input type="text" class="form-control input " name="inst_val9" value="@Model.arlaMetais.inst_val9.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" class="form-control input " name="inst_val9" value="@Model.arlaMetais.inst_val9" /></td>
                 </tr>
                 <tr>
                     <td><input type="text" class="form-control input " name="inst_desc10" value="@Model.arlaMetais.inst_desc10"/></td>
                     <td><input type="text" class="form-control input " name="inst_cod10" value="@Model.arlaMetais.inst_cod10" /></td>
-                    <td><input type="text" class="form-control input " name="inst_val10" value="@Model.arlaMetais.inst_val10.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" class="form-control input " name="inst_val10" value="@Model.arlaMetais.inst_val10" /></td>
                 </tr>
                 <tr>
                     <td><input type="text" class="form-control input " name="inst_desc11" value="@Model.arlaMetais.inst_desc11" /></td>
                     <td><input type="text" class="form-control input " name="inst_cod11" value="@Model.arlaMetais.inst_cod11" /></td>
-                    <td><input type="text" class="form-control input " name="inst_val11" value="@Model.arlaMetais.inst_val11.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" class="form-control input " name="inst_val11" value="@Model.arlaMetais.inst_val11" /></td>
                 </tr>
                 <tr>
                     <td><input type="text" class="form-control input " name="inst_dec12" value="@Model.arlaMetais.inst_dec12" /></td>
                     <td><input type="text" class="form-control input " name="inst_cod12" value="@Model.arlaMetais.inst_cod12" /></td>
-                    <td><input type="text" class="form-control input " name="inst_val12" value="@Model.arlaMetais.inst_val12.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" class="form-control input " name="inst_val12" value="@Model.arlaMetais.inst_val12" /></td>
                 </tr>
                 <tr>
                     <td><input type="text" class="form-control input " name="inst_desc13" value="@Model.arlaMetais.inst_desc13" /></td>
                     <td><input type="text" class="form-control input " name="inst_cod13" value="@Model.arlaMetais.inst_cod13" /></td>
-                    <td><input type="text" class="form-control input " name="inst_val13" value="@Model.arlaMetais.inst_val13.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" class="form-control input " name="inst_val13" value="@Model.arlaMetais.inst_val13" /></td>
                 </tr>
                 <tr>
                     <td><input type="text" class="form-control input " name="inst_desc14" value="@Model.arlaMetais.inst_desc14" /></td>
                     <td><input type="text" class="form-control input " name="inst_cod14" value="@Model.arlaMetais.inst_cod14" /></td>
-                    <td><input type="text" class="form-control input " name="inst_val14" value="@Model.arlaMetais.inst_val14.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" class="form-control input " name="inst_val14" value="@Model.arlaMetais.inst_val14" /></td>
                 </tr>
                 <tr>
                     <td><input type="text" class="form-control input " name="inst_desc14" value="@Model.arlaMetais.inst_desc15" /></td>
                     <td><input type="text" class="form-control input " name="inst_cod14" value="@Model.arlaMetais.inst_cod15" /></td>
-                    <td><input type="text" class="form-control input " name="inst_val14" value="@Model.arlaMetais.inst_val15.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" class="form-control input " name="inst_val14" value="@Model.arlaMetais.inst_val15" /></td>
                 </tr>
             </table>
             <br />

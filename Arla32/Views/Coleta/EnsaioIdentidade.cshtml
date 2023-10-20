@@ -22,17 +22,16 @@
                         <img src="https://www.labsystem-nuvem.com.br/imagens_arq/imagens/img/LabSystem.png" class="imagem" />
                     </td>
                     <td colspan="4" class="texto-central" style="background-color: #800000; color:white;">COLETA DE DADOS</td>
-                    <td rowspan="2" class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="background-color: #800000; color:white;"> N° da OS :</td>
+                    <td rowspan="2" class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="background-color: #800000; color:white;"> N° da OS : @ViewBag.OS</td>
                 </tr>
                 <tr class="tabela">
-                    <td colspan="5" class="texto-central "> ENSAIO DE ARLA 32 </td>
+                    <td colspan="4" class="texto-central "> ENSAIO DE ARLA 32 </td>
                 </tr>
                 <tr>
-                    <td style="background-color: #800000; color:white;">Data Inicio:</td>
+                    <td colspan="2" style="background-color: #800000; color:white;">Data Inicio:</td>
                     <td><input class="form-control input " type="date" name="data_ini" /></td>
                     <td style="background-color: #800000; color:white;">Data Término:</td>
                     <td><input class="form-control input " type="date" name="data_term" /></td>
-                    <td colspan="2"> <input class="form-control input " style="height:50px; border:none;" name="os" value="@ViewBag.OS" /></td>
                 </tr>
                 <tr class="texto-central">
                     <td style="text-align:left; " colspan="6">
@@ -147,17 +146,16 @@
                         <img src="https://www.labsystem-nuvem.com.br/imagens_arq/imagens/img/LabSystem.png" class="imagem" />
                     </td>
                     <td colspan="4" class="texto-central" style="background-color: #800000; color:white;">COLETA DE DADOS</td>
-                    <td rowspan="2" class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="background-color: #800000; color:white;"> N° da OS :</td>
+                    <td rowspan="2" class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="background-color: #800000; color:white;"> N° da OS : @ViewBag.OS</td>
                 </tr>
                 <tr class="tabela">
-                    <td colspan="5" class="texto-central "> ENSAIO DE ARLA 32 </td>
+                    <td colspan="4" class="texto-central "> ENSAIO DE ARLA 32 </td>
                 </tr>
                 <tr>
                     <td style="background-color: #800000; color:white;">Data Inicio:</td>
-                    <td><input type="text" class="form-control input " name="data_ini" value="@Model.data_ini.ToString("dd/MM/yyyy")" /></td>
+                    <td colspan="2" ><input type="datetime" class="form-control input " name="data_ini" value="@Model.data_ini" /></td>
                     <td style="background-color: #800000; color:white;">Data Término:</td>
-                    <td><input type="text" class="form-control input " name="data_term" value="@Model.data_term.ToString("dd/MM/yyyy")" /></td>
-                    <td colspan="2"> <input class="form-control input " style="height:50px; border:none;" name="os" value="@ViewBag.OS" /></td>
+                    <td><input type="datetime" class="form-control input " name="data_term" value="@Model.data_term" /></td>
                 </tr>
                 <tr class="texto-central">
                     <td style="text-align:left; " colspan="6">
@@ -228,7 +226,7 @@
                 <tr>
                     <td colspan="3"><input class="form-control input " value="@Model.mat_prima" name="mat_prima" /></td>
                     <td colspan="1"><input class="form-control input " value="@Model.mat_lote" name="mat_lote" /></td>
-                    <td><input type="text" name="mat_validade" class="form-control input " value="@Model.mat_validade.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" name="mat_validade" class="form-control input " value="@Model.mat_validade" /></td>
 
                 </tr>
             </table>
@@ -247,7 +245,7 @@
                 <tr>
                     <td colspan="3"><input class="form-control input " value="@Model.cod_prima" name="cod_prima" /></td>
                     <td colspan="1"><input class="form-control input " value="@Model.cod_lote" name="cod_lote" /></td>
-                    <td><input type="text" name="cod_validade" class="form-control input " value="@Model.cod_validade.ToString("dd/MM/yyyy")" /></td>
+                    <td><input type="datetime" name="cod_validade" class="form-control input " value="@Model.cod_validade" /></td>
                 </tr>
             </table>
             <br />
