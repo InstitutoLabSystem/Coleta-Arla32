@@ -1,6 +1,7 @@
 ﻿using Arla32.Models;
 using Microsoft.Identity.Client;
 using Microsoft.SqlServer.Server;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 using System.Reflection.Metadata;
@@ -131,7 +132,7 @@ namespace Arla32.Models
             public string? rev { get; set; }
             public DateOnly data_ini { get; set; }
             public DateOnly data_term { get; set; }
-            public string codigo_curva { get; set; }
+            public string? codigo_curva { get; set; }
             public float fator_calibracao { get; set; }
             public float fator_dia { get; set; }
             public float amostra1 { get; set; }
@@ -139,53 +140,53 @@ namespace Arla32.Models
             public float absorbancia_1 { get; set; }
             public float absorbancia_2 { get; set; }
             public float absorbancia_3 { get; set; }
-            public string result_ind_1 { get; set; }
-            public string result_ind_2 { get; set; }
-            public string result_media { get; set; }
-            public string mat_prima_1 { get; set; }
-            public string mat_lote_1 { get; set; }
+            public string? result_ind_1 { get; set; }
+            public string? result_ind_2 { get; set; }
+            public string? result_media { get; set; }
+            public string? mat_prima_1 { get; set; }
+            public string? mat_lote_1 { get; set; }
             public DateOnly mat_validade_1 { get; set; }
-            public string mat_prima_2 { get; set; }
-            public string mat_lote_2 { get; set; }
+            public string? mat_prima_2 { get; set; }
+            public string? mat_lote_2 { get; set; }
             public DateOnly mat_validade_2 { get; set; }
-            public string mat_prima_3 { get; set; }
-            public string mat_lote_3 { get; set; }
+            public string? mat_prima_3 { get; set; }
+            public string? mat_lote_3 { get; set; }
             public DateOnly mat_validade_3 { get; set; }
-            public string mat_prima_4 { get; set; }
-            public string mat_lote_4 { get; set; }
+            public string? mat_prima_4 { get; set; }
+            public string? mat_lote_4 { get; set; }
             public DateOnly mat_validade_4 { get; set; }
-            public string mat_prima_5 { get; set; }
-            public string mat_lote_5 { get; set; }
+            public string? mat_prima_5 { get; set; }
+            public string? mat_lote_5 { get; set; }
             public DateOnly mat_validade_5 { get; set; }
-            public string inst_desc1 { get; set; }
-            public string inst_codigo1 { get; set; }
+            public string? inst_desc1 { get; set; }
+            public string? inst_codigo1 { get; set; }
             public DateOnly inst_data1 { get; set; }
-            public string inst_desc1_1 { get; set; }
-            public string inst_codigo1_1 { get; set; }
+            public string? inst_desc1_1 { get; set; }
+            public string? inst_codigo1_1 { get; set; }
             public DateOnly inst_data1_1 { get; set; }
-            public string insta_desc2 { get; set; }
-            public string inst_codigo2 { get; set; }
+            public string? insta_desc2 { get; set; }
+            public string? inst_codigo2 { get; set; }
             public DateOnly inst_data2 { get; set; }
-            public string inst_desc2_2 { get; set; }
-            public string inst_codigo2_2 { get; set; }
+            public string? inst_desc2_2 { get; set; }
+            public string? inst_codigo2_2 { get; set; }
             public DateOnly inst_data2_2 { get; set; }
-            public string inst_desc3 { get; set; }
-            public string inst_codigo3 { get; set; }
+            public string? inst_desc3 { get; set; }
+            public string? inst_codigo3 { get; set; }
             public DateOnly inst_data3 { get; set; }
-            public string inst_desc3_3 { get; set; }
-            public string inst_codigo3_3 { get; set; }
+            public string?  inst_desc3_3 { get; set; }
+            public string? inst_codigo3_3 { get; set; }
             public DateOnly inst_data3_3 { get; set; }
-            public string inst_desc4 { get; set; }
-            public string inst_codigo4 { get; set; }
+            public string? inst_desc4 { get; set; }
+            public string? inst_codigo4 { get; set; }
             public DateOnly inst_data4 { get; set; }
-            public string inst_desc4_4 { get; set; }
-            public string inst_codigo4_4 { get; set; }
-            public DateOnly inst_data4_4 { get; set; }
-            public string equip_de { get; set; }
-            public string equip_ee { get; set; }
-            public string obs { get; set; }
-            public string executado_por { get; set; }
-            public string auxiliado_por { get; set; }
+            public string? inst_desc4_4 { get; set; }
+            public string? inst_codigo4_4 { get; set; }
+            public  DateOnly inst_data4_4 { get; set; }
+            public string? equip_de { get; set; }
+            public string? equip_ee { get; set; }
+            public string? obs { get; set; }
+            public string? executado_por { get; set; }
+            public string? auxiliado_por { get; set; }
         }
 
         public class ArlaAldeidos
