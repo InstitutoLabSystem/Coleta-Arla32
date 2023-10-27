@@ -9,6 +9,6 @@
     "\\Arla32\\Views\\Coleta",
     "\\Arla32\\Views\\Home"
   ],
-  "SelectedNode": "\\Arla32\\Views\\Coleta\\EnsaioAlcalinidade.cshtml",
+  "SelectedNode": "\\Arla32\\Controllers\\ColetaController.cs",
   "PreviewInSolutionExplorer": false
 }
