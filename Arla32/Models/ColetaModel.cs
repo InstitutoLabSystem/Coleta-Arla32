@@ -173,7 +173,7 @@ namespace Arla32.Models
             public string? inst_desc3 { get; set; }
             public string? inst_codigo3 { get; set; }
             public DateOnly inst_data3 { get; set; }
-            public string?  inst_desc3_3 { get; set; }
+            public string? inst_desc3_3 { get; set; }
             public string? inst_codigo3_3 { get; set; }
             public DateOnly inst_data3_3 { get; set; }
             public string? inst_desc4 { get; set; }
@@ -181,7 +181,7 @@ namespace Arla32.Models
             public DateOnly inst_data4 { get; set; }
             public string? inst_desc4_4 { get; set; }
             public string? inst_codigo4_4 { get; set; }
-            public  DateOnly inst_data4_4 { get; set; }
+            public DateOnly inst_data4_4 { get; set; }
             public string? equip_de { get; set; }
             public string? equip_ee { get; set; }
             public string? obs { get; set; }

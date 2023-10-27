@@ -6,6 +6,7 @@ using System.Security.Claims;
 using Microsoft.Identity.Client;
 using System.Security.Policy;
 using Arla32.Services;
+using System.Globalization;
 
 namespace Arla32
 {
@@ -38,6 +39,20 @@ namespace Arla32
                     option.ExpireTimeSpan = TimeSpan.FromMinutes(60);
                 });
             builder.Services.AddScoped<GoogleDriveService>();
+
+            //passando de ponto para virgula no sistema, forma padrao.
+            var cultureInfo = new CultureInfo("pt-BR");
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
+            builder.Services.AddControllersWithViews()
+            .AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.PropertyNamingPolicy = null;
+                options.JsonSerializerOptions.WriteIndented = true;
+
+            });
+            //termina aqui.
 
 
             var app = builder.Build();
