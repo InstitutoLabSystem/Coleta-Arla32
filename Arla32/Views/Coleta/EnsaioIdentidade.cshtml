@@ -226,7 +226,14 @@
                 <tr>
                     <td colspan="3"><input class="form-control input " value="@Model.mat_prima" name="mat_prima" /></td>
                     <td colspan="1"><input class="form-control input " value="@Model.mat_lote" name="mat_lote" /></td>
-                    <td><input type="datetime" name="mat_validade" class="form-control input " value="@Model.mat_validade" /></td>
+                    @if (Model.mat_validade != DateOnly.MinValue)
+                    {
+                        <td><input type="datetime" name="mat_validade" class="form-control input " value="@Model.mat_validade" /></td>
+                    }
+                    else
+                    {
+                        <td><input type="datetime" name="mat_validade" class="form-control input " value="---" /></td>
+                    }
 
                 </tr>
             </table>
@@ -245,7 +252,14 @@
                 <tr>
                     <td colspan="3"><input class="form-control input " value="@Model.cod_prima" name="cod_prima" /></td>
                     <td colspan="1"><input class="form-control input " value="@Model.cod_lote" name="cod_lote" /></td>
-                    <td><input type="datetime" name="cod_validade" class="form-control input " value="@Model.cod_validade" /></td>
+                    @if (Model.cod_validade != DateOnly.MinValue)
+                    {
+                        <td><input type="datetime" name="cod_validade" class="form-control input " value="@Model.cod_validade" /></td>
+                    }
+                    else
+                    {
+                        <td><input type="datetime" name="cod_validade" class="form-control input " value="---" /></td>
+                    }
                 </tr>
             </table>
             <br />
@@ -325,7 +339,13 @@
             }
 
         </script>
-
+        <script>
+            document.addEventListener("keydown", function (e) {
+                if (e.keyCode === 13) {
+                    e.preventDefault();
+                }
+            });
+        </script>
 
     }
 </body>

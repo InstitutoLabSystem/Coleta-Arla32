@@ -1058,45 +1058,6 @@ namespace Arla32.Controllers
                         string descricao = aldeidos.descricao;
 
 
-                        if ( /*string.IsNullOrEmpty(data_ini.ToString()) ||*/
-                            /* string.IsNullOrEmpty(data_term.ToString()) |*/
-                            //string.IsNullOrEmpty(codigo_curva) ||
-                            //string.IsNullOrEmpty(lote_sol) ||
-                            //fator_calibracao == 0 ||
-                            //massa_branco == 0 ||
-                            //absorbancia_branco == 0 ||
-                            //massa_amostra == 0 ||
-                            //absorbancia_amostra == 0 ||
-                            //carta_absorbancia == 0 ||
-                            string.IsNullOrEmpty(mat_prima1) ||
-                            string.IsNullOrEmpty(mat_prima2) ||
-                            string.IsNullOrEmpty(mat_prima3) ||
-                            string.IsNullOrEmpty(mat_prima4) ||
-                            string.IsNullOrEmpty(mat_prima5) ||
-                            string.IsNullOrEmpty(mat_lote1) ||
-                            string.IsNullOrEmpty(mat_lote2) ||
-                            string.IsNullOrEmpty(mat_lote3)
-                            || string.IsNullOrEmpty(mat_lote4)
-                            || string.IsNullOrEmpty(mat_lote5)
-                            || string.IsNullOrEmpty(inst_cod1)
-                            || string.IsNullOrEmpty(inst_cod2)
-                            || string.IsNullOrEmpty(inst_desc1)
-                            || string.IsNullOrEmpty(inst_desc2)
-                            || string.IsNullOrEmpty(inst_desc1_1)
-                            || string.IsNullOrEmpty(inst_desc2_2)
-                            || string.IsNullOrEmpty(equi_ee)
-                            || string.IsNullOrEmpty(equi_de)
-                            || string.IsNullOrEmpty(observacoes)
-                            || string.IsNullOrEmpty(executado)
-                            || string.IsNullOrEmpty(auxiliado))
-
-                        {
-                            TempData["Mensagem"] = "Preencha Todos Os Campos.";
-                            return RedirectToAction(nameof(EnsaioAldeidos), new { OS, orcamento });
-                        }
-                        else
-                        {
-
                             //CONTA MÁXIMO PERMITIDO
                             var conta_max = (((absorbancia_amostra - absorbancia_branco) * fator_calibracao) / massa_amostra);
                             double conta_max_arre = Math.Round(conta_max);
@@ -1165,7 +1126,6 @@ namespace Arla32.Controllers
                             await _qcontext.SaveChangesAsync();
                             TempData["Mensagem"] = "Salvo Com Sucesso";
                             return RedirectToAction(nameof(EnsaioAldeidos), new { OS, orcamento });
-                        }
                     }
                     else
                     {

@@ -12,7 +12,7 @@
 
     <title>Coleta</title>
     <style>
-        
+
 
     </style>
 </head>
@@ -259,7 +259,16 @@
                 <tr>
                     <td><input type="text" name="mat_prima" class="form-control input " value="@Model.mat_prima" /></td>
                     <td><input type="text" name="mat_lote" class="form-control input " value="@Model.mat_lote" /></td>
-                    <td><input type="datetime" name="mat_validade" class="form-control input " value="@Model.mat_validade" /></td>
+                    @if (Model.mat_validade != DateOnly.MinValue)
+                    {
+                        <td><input type="datetime" name="mat_validade" class="form-control input " value="@Model.mat_validade" /></td>
+
+                    }
+                    else
+                    {
+                        <td><input type="datetime" name="mat_validade" class="form-control input " value="---" /></td>
+
+                    }
                 </tr>
             </table>
             <br />
@@ -279,34 +288,94 @@
                 <tr>
                     <td><input type="text" name="inst_desc1" class="form-control input " value="@Model.inst_desc1" /></td>
                     <td><input type="text" name="inst_cod1" class="form-control input " value="@Model.inst_cod1" /></td>
-                    <td><input type="datetime" name="inst_data1" class="form-control input " value="@Model.inst_data1" /></td>
+                    @if (Model.inst_data1 != DateOnly.MinValue)
+                    {
+                        <td><input type="datetime" name="inst_data1" class="form-control input " value="@Model.inst_data1" /></td>
+
+                    }
+                    else
+                    {
+                        <td><input type="datetime" name="inst_data1" class="form-control input " value="---" /></td>
+
+                    }
                     <td><input type="text" name="inst_desc1_1" class="form-control input " value="@Model.inst_desc1_1" /></td>
                     <td><input type="text" name="inst_cod1_1" class="form-control input " value="@Model.inst_cod1_1" /></td>
-                    <td><input type="datetime" name="inst_data1_1" class="form-control input " value="@Model.inst_data1_1" /></td>
+                    @if (Model.inst_data1_1 != DateOnly.MinValue)
+                    {
+                        <td><input type="datetime" name="inst_data1_1" class="form-control input " value="@Model.inst_data1_1" /></td>
+                    }
+                    else
+                    {
+                        <td><input type="datetime" name="inst_data1_1" class="form-control input " value="---" /></td>
+                    }
                 </tr>
                 <tr>
                     <td><input type="text" name="inst_desc2" class="form-control input " value="@Model.inst_desc2" /></td>
                     <td><input type="text" name="inst_cod2" class="form-control input " value="@Model.inst_cod2" /></td>
-                    <td><input type="datetime" name="inst_data2" class="form-control input " value="@Model.inst_data2" /></td>
+                    @if (Model.inst_data2 != DateOnly.MinValue)
+                    {
+                        <td><input type="datetime" name="inst_data2" class="form-control input " value="@Model.inst_data2" /></td>
+                    }
+                    else
+                    {
+                        <td><input type="datetime" name="inst_data2" class="form-control input " value="---" /></td>
+                    }
                     <td><input type="text" name="inst_desc2_2" class="form-control input " value="@Model.inst_desc2_2" /></td>
                     <td><input type="text" name="inst_cod2_2" class="form-control input " value="@Model.inst_cod2_2" /></td>
-                    <td><input type="datetime" name="inst_data2_2" class="form-control input " value="@Model.inst_data2_2" /></td>
+                    @if (Model.inst_data2_2 != DateOnly.MinValue)
+                    {
+                        <td><input type="datetime" name="inst_data2_2" class="form-control input " value="@Model.inst_data2_2" /></td>
+                    }
+                    else
+                    {
+                        <td><input type="datetime" name="inst_data2_2" class="form-control input " value="---" /></td>
+                    }
                 </tr>
                 <tr>
                     <td><input type="text" name="inst_desc3" class="form-control input " value="@Model.inst_desc3" /></td>
                     <td><input type="text" name="inst_cod3" class="form-control input " value="@Model.inst_cod3" /></td>
-                    <td><input type="datetime" name="inst_data3" class="form-control input " value="@Model.inst_data3" /></td>
+                    @if (Model.inst_data3 != DateOnly.MinValue)
+                    {
+                        <td><input type="datetime" name="inst_data3" class="form-control input " value="@Model.inst_data3" /></td>
+                    }
+                    else
+                    {
+                        <td><input type="datetime" name="inst_data3" class="form-control input " value="---" /></td>
+                    }
+
                     <td><input type="text" name="inst_desc3_3" class="form-control input " value="@Model.inst_desc3_3" /></td>
                     <td><input type="text" name="inst_cod3_3" class="form-control input " value="@Model.inst_cod3_3" /></td>
-                    <td><input type="datetime" name="inst_data3_3" class="form-control input " value="@Model.inst_data3_3" /></td>
+                    @if (Model.inst_data3_3 != DateOnly.MinValue)
+                    {
+                        <td><input type="datetime" name="inst_data3_3" class="form-control input " value="@Model.inst_data3_3" /></td>
+                    }
+                    else
+                    {
+                        <td><input type="datetime" name="inst_data3_3" class="form-control input " value="---" /></td>
+                    }
                 </tr>
                 <tr>
                     <td><input type="text" name="inst_desc4" class="form-control input " value="@Model.inst_desc4" /></td>
                     <td><input type="text" name="inst_cod4" class="form-control input " value="@Model.inst_cod4" /></td>
-                    <td><input type="datetime" name="inst_data4" class="form-control input " value="@Model.inst_data4" /></td>
+                    @if (Model.inst_data4 != DateOnly.MinValue)
+                    {
+                        <td><input type="datetime" name="inst_data4" class="form-control input " value="@Model.inst_data4" /></td>
+                    }
+                    else
+                    {
+                        <td><input type="datetime" name="inst_data4" class="form-control input " value="---" /></td>
+                    }
+
                     <td><input type="text" name="inst_desc4_4" class="form-control input " value="@Model.inst_desc4_4" /></td>
                     <td><input type="text" name="inst_cod4_4" class="form-control input " value="@Model.inst_cod4_4" /></td>
-                    <td><input type="datetime" name="inst_data4_4" class="form-control input " value="@Model.inst_data4_4" /></td>
+                    @if (Model.inst_data4_4 != DateOnly.MinValue)
+                    {
+                        <td><input type="datetime" name="inst_data4_4" class="form-control input " value="@Model.inst_data4_4" /></td>
+                    }
+                    else
+                    {
+                        <td><input type="datetime" name="inst_data4_4" class="form-control input " value="---" /></td>
+                    }
                 </tr>
             </table>
             <br />
@@ -355,6 +424,14 @@
                 alert('@Html.Raw(TempData["Mensagem"])');
             </script>
         }
+
+        <script>
+            document.addEventListener("keydown", function (e) {
+                if (e.keyCode === 13) {
+                    e.preventDefault();
+                }
+            });
+        </script>
     }
 </body>
 </html>
