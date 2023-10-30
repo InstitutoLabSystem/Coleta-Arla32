@@ -61,13 +61,13 @@ namespace Arla32.Controllers
             try
             {
                 var resultado = (from p in _context.programacao_lab_ensaios
-                                 where p.OS == OS
                                  join o in _context.ordemservicocotacaoitem_hc_copylab
                                  on p.Orcamento equals o.orcamento
                                  join w in _context.wmoddetprod
                                  on o.CodigoEnsaio equals w.codmaster
                                  join x in _context.ordemservicocotacao_hc_copylab
-                                on (p.Orcamento) equals (x.codigo + x.mes + x.ano)
+                                 on (p.Orcamento) equals (x.codigo + x.mes + x.ano)
+                                 where p.OS == OS
                                  select new HomeModel.Resposta
                                  {
                                      OS = p.OS,
@@ -79,7 +79,6 @@ namespace Arla32.Controllers
                                      NormaOS = o.NormaOS,
                                      CodCli = x.CodCli,
                                      CodSol = x.CodSol,
-                                     qtdAmostra = o.qtdAmostra,
                                      Ano = o.Ano,
                                      Rev = o.Rev,
                                      codigo = w.codigo,
