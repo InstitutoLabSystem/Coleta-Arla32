@@ -1,4 +1,4 @@
-﻿@model List<HomeModel.Resposta>
+﻿@model (List<HomeModel.Resposta>, List<HomeModel.Resposta>)
 
 @{
     ViewData["Title"] = "Pagina Inicial";
@@ -33,15 +33,15 @@
 </head>
 <body>
 
-    @if (Model != null)
+    @if (Model.Item1 != null)
     {
         <h1 style="text-align:center"> Coleta Arla32 </h1>
         <br />
         <form class="form-inline" asp-controller="Home" asp-action="IniciarColeta" method="post" asp-route-os="@ViewData["OS"]">
 
-            @if (Model.Count > 0)
+            @if (Model.Item1.Count > 0)
             {
-                var item = Model[0];
+                var item = Model.Item1[0];
 
                 <table class="table table-bordered border-secondary  table-sm">
                     <tr class="tabela">
@@ -54,7 +54,7 @@
                     </tr>
                     <tr class="table-active">
                         <th scope="col" colspan="3"><input type="text" class="form-control" name="OS" value="@item.OS" style=" border:none;" readonly> </th>
-                        <th scope="col" colspan="3"><input type="text" class="form-control" id="orcamento" name="orcamento" value=" @item.Orcamento" style=" border:none;" readonly> </th>
+                        <th scope="col" colspan="3"><input type="text" class="form-control" id="orcamento" name="orcamento" value="@item.Orcamento" style=" border:none;" readonly> </th>
                     </tr>
                     <tr class="table-active">
                         <td scope="col" colspan="6"> <strong> Norma Os: </strong> </td>
@@ -75,10 +75,21 @@
                 </table>
                 @*  Campos para passar as outras informações, esses campos ficarão escondidos, é apenas para passar o valor para o insert da table do quimico *@
                 <input type="hidden" class="form-control" id="revisao_os" name="revisao_os" value="@item.Rev" style=" border:none;" readonly>
-                <input type="hidden" class="form-control" id="CodCli" name="CodCli" value="@item.CodCli" style=" border:none;" readonly>
-                <input type="hidden" class="form-control" id="CodSol" name="CodSol" value="@item.CodSol" style=" border:none;" readonly>
+
+                @if (Model.Item2 != null)
+                {
+                    foreach (var item2 in Model.Item2)
+                    {
+                <input type="hidden" class="form-control" id="CodCli" name="CodCli" value="@item2.CodCli" style=" border:none;" readonly>
+                <input type="hidden" class="form-control" id="CodSol" name="CodSol" value="@item2.CodSol" style=" border:none;" readonly>
+                    }
+                }
+
                 <input type="hidden" class=" form-control" id="Qtd_Recebida" name="Qtd_Recebida" value="@item.qtdAmostra" style=" border:none;" readonly>
                 <input type="hidden" class=" form-control" id="Item" name="Item" value="@item.Item" style=" border:none;" readonly>
+                <input type="hidden" class=" form-control" id="descricao_doc" name="descricao_doc" value="@item.ProdEnsaiado" style=" border:none;" readonly>
+                <input type="hidden" class=" form-control" id="Familia" name="Familia" value="@item.Classificacao" style=" border:none;" readonly>
+                <input type="hidden" class=" form-control" id="referencia" name="referencia" value="@item.CodRef" style=" border:none;" readonly>
 
             }
 
@@ -87,9 +98,9 @@
                 <tr class="tabela">
                     <td colspan="6">  Anexos : </td>
                 </tr>
-                @for (var j = 0; j < Model.Count; j++)
+                @for (var j = 0; j < Model.Item1.Count; j++)
                 {
-                    var resultado = Model[j];
+                    var resultado = Model.Item1[j];
 
                     <tr>
                         <td colspan="3">@resultado.Descricao</td>

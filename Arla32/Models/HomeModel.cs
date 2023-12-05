@@ -31,6 +31,9 @@ namespace Arla32.Models
             public int Ano { get; set; }
             public int Rev { get; set; }
             public int qtdAmostra { get; set; }
+            public string Classificacao { get; set; }
+            public string CodRef { get; set; }
+            public string ProdEnsaiado { get; set; }
         }
 
 
@@ -71,13 +74,17 @@ namespace Arla32.Models
             public string Descricao { get; set; }
             public string CodigoEnsaio { get; set; }
             public string NormaOS { get; set; }
-            public string CodCli { get; set; }
-            public string CodSol { get; set; }
             public int qtdAmostra { get; set; }
             public int Ano { get; set; }
             public int Rev { get; set; }
+            public string ProdEnsaiado { get; set; }
+            public string CodCli { get; set; }
+            public string CodSol { get; set; }
+            public string Classificacao {  get; set; }
+            public string CodRef {  get; set; }
 
         }
+
 
         public class IniciarColeta
         {
@@ -99,6 +106,10 @@ namespace Arla32.Models
             public string status { get; set; }
             public string Item_orcamento { get; set; }
 
+            public string descricao_doc { get; set; }
+
+            public string referencia { get; set; }
+            public string Familia { get; set; }
 
         }
 

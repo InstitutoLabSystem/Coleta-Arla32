@@ -35,12 +35,8 @@ namespace Arla32.Controllers
         {
             var nomeUsuarioClaim = User.FindFirstValue(ClaimTypes.Name);
             ViewBag.NomeUsuario = nomeUsuarioClaim;
-
             ViewBag.OS = OS;
-
-
             return View();
-
         }
 
         public IActionResult Privacy()
@@ -65,8 +61,6 @@ namespace Arla32.Controllers
                                  on p.Orcamento equals o.orcamento
                                  join w in _context.wmoddetprod
                                  on o.CodigoEnsaio equals w.codmaster
-                                 join x in _context.ordemservicocotacao_hc_copylab
-                                 on (p.Orcamento) equals (x.codigo + x.mes + x.ano)
                                  where p.OS == OS
                                  select new HomeModel.Resposta
                                  {
@@ -77,13 +71,24 @@ namespace Arla32.Controllers
                                      CodigoEnsaio = o.CodigoEnsaio,
                                      Descricao = w.descricao,
                                      NormaOS = o.NormaOS,
-                                     CodCli = x.CodCli,
-                                     CodSol = x.CodSol,
                                      Ano = o.Ano,
                                      Rev = o.Rev,
                                      codigo = w.codigo,
+                                     ProdEnsaiado = o.ProdEnsaiado,
+                                     Classificacao = o.Classificacao,
+                                     CodRef = o.CodRef,
                                  }).Distinct().ToList();
 
+
+                var resultado_2 = (from p in _context.programacao_lab_ensaios
+                                   join x in _context.ordemservicocotacao_hc_copylab
+                                     on (p.Orcamento) equals (x.codigo + x.mes + x.ano)
+                                   where p.OS == OS
+                                   select new HomeModel.Resposta
+                                   {
+                                       CodCli = x.CodCli,
+                                       CodSol = x.CodSol,
+                                   }).Distinct().ToList();
 
                 var isOsSalva = _qcontext.regtro_amostra_painel_copy.Any(ic => ic.OS == OS);
                 if (isOsSalva != null)
@@ -98,8 +103,7 @@ namespace Arla32.Controllers
                 // Verificar se listagem não é nula e se há resultados
                 if (resultado != null)
                 {
-                    // Faça algo com os resultados
-                    return View("Index", resultado);
+                    return View("Index", (resultado, resultado_2));
                 }
                 else
                 {
@@ -116,7 +120,7 @@ namespace Arla32.Controllers
 
 
         public async Task<IActionResult> IniciarColeta(string OS, [Bind("OS,orcamento,Qtd_Recebida,norma,revisao_os," +
-            "CodCli, CodSol, Item")] HomeModel.IniciarColeta salvar)
+            "CodCli, CodSol, Item, descricao_doc, referencia, familia")] HomeModel.IniciarColeta salvar)
         {
             try
             {
@@ -128,6 +132,9 @@ namespace Arla32.Controllers
                 var CodCli = salvar.CodCli;
                 var CodSol = salvar.CodSol;
                 var Item = salvar.Item_orcamento;
+                var descricao_doc = salvar.descricao_doc;
+                var referencia = salvar.referencia;
+                var Familia = salvar.Familia;
 
                 //pegando os 2 ultimos digitos do ano.
                 int Ano = Int32.Parse(DateTime.Now.Year.ToString().Substring(2));
@@ -147,6 +154,10 @@ namespace Arla32.Controllers
                     status = "Coleta",
                     norma = norma,
                     Item_orcamento = Item,
+                    descricao_doc = descricao_doc,
+                    referencia = referencia,
+                    Familia = Familia,
+
 
                 };
 

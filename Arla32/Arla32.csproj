@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Compile Remove="Controllers\_qcontext.cs" />
+    <Compile Remove="Models\MinhaViewModel.cs" />
   </ItemGroup>
 
   <ItemGroup>
