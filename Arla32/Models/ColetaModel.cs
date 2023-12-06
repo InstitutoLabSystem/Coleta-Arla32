@@ -10,6 +10,17 @@ namespace Arla32.Models
 {
     public class ColetaModel
     {
+
+        public class Instrumentos
+        {
+            [Key]
+            public string? codigo { get; set; }
+            public string? descricao { get; set; }
+            public DateOnly? validade { get; set; }
+            public string? anexo { get; set; }
+            public int? ativo { get; set; }
+
+        }
         public class UploadResult
         {
             public string WebViewLink { get; set; }

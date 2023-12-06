@@ -39,7 +39,7 @@ namespace Arla32.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Instrumentos()
         {
             return View();
         }
@@ -117,7 +117,40 @@ namespace Arla32.Controllers
             }
         }
 
+        public async Task<IActionResult> ListarInstrumentos (string escolha)
+        {
+            try
+            {
+                var resultado = (from p in _qcontext.arla_instrumentos
+                                 where p.anexo == escolha
+                                 select new ColetaModel.Instrumentos
+                                 {
+                                    codigo = p.codigo,
+                                    descricao =p.descricao,
+                                    validade = p.validade,
+                                    anexo = p.anexo,
+                                 }).Distinct().ToList(); ;
 
+
+                // Verificar se listagem não é nula e se há resultados
+                if (resultado != null)
+                {
+                    return View("Instrumentos", (resultado));
+                }
+                else
+                {
+                    TempData["Mensagem"] = "Erro.";
+                    return View("Instrumentos");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error", ex.Message);
+                throw;
+            }
+
+        }
         public async Task<IActionResult> IniciarColeta(string OS, [Bind("OS,orcamento,Qtd_Recebida,norma,revisao_os," +
             "CodCli, CodSol, Item, descricao_doc, referencia")] HomeModel.IniciarColeta salvar)
         {

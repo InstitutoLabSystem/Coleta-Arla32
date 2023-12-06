@@ -20,6 +20,8 @@ namespace Arla32.Data
         public DbSet<HomeModel.WModDetProd> wmoddetprod { get; set; }
         public DbSet<HomeModel.OrdemServico> ordemservicocotacao_hc_copylab { get; set; }
 
+ 
+
 
     }
 

@@ -1,0 +1,67 @@
+﻿@model List<ColetaModel.Instrumentos>;
+
+@{
+    ViewData["Title"] = "Instrumentos";
+}
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<form class="form-inline" asp-controller="Home" asp-action="ListarInstrumentos" method="post" asp-route-os="@ViewData["OS"]">
+    <div class="container mt-4">
+        <div class="row">
+            <label class="form-label"> <strong> Selecionar Anexo </strong></label>
+            <div class="col-md-9">
+
+                <select class="form-select" name="escolha" aria-label="Default select example">
+                    <option selected></option>
+                    <option value="ANEXO D">Anexo D</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary  w-100  btn-block">Pesquisar</button>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+@if(Model != null)
+{
+
+   <form class="form-inline" asp-controller="Home" asp-action="" method="post" asp-route-os="@ViewData["OS"]">
+        <table style="width: 100%;">
+      <tr>
+         <th>Código</th>
+         <th>Descrição</th>
+         <th>Validade</th>
+         <th>Anexo</th>
+      </tr>
+
+    @for (var j = 0; j < Model.Count; j++)
+    {
+        <tr>
+            <td> <input type='text' name='codigo' value='@Model[j].codigo' /></td>
+            <td> <input type='text' name='descricao' value='@Model[j].descricao' /></td>
+                    @if (Model[j].validade == null)
+                    {
+                        <td> <input type='text' name='validade' value='Não Requer' /></td>
+                    }else{
+                        <td> <input type='text' name='validade' value='@Model[j].validade' /></td>
+                    }
+            <td> <input type='text' name='anexo' value='@Model[j].anexo' /></td>
+                    <td><button type='submit' class='btn-floating black' name='btnalterar'> Edit </button></td>
+            <td><button type='submit' class='btn-floating black' name='btnexcluir'><i class='material-icons'>delete</i></button></td>
+        </tr>
+    }
+    </table>
+
+    </form>
+
+}

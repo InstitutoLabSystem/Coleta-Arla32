@@ -22,6 +22,7 @@ namespace Arla32.Data
         public DbSet<ColetaModel.ArlaDensidade> arla_densidade { get; set; }
         public DbSet<ColetaModel.ArlaIdentidade> arla_identidade { get; set; }
 
+        public DbSet<ColetaModel.Instrumentos> arla_instrumentos { get;set; }
 
         // Outros conjuntos de entidades relacionados ao banco de dados "quimico"
     }
