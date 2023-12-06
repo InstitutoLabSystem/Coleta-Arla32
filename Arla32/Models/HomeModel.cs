@@ -110,6 +110,8 @@ namespace Arla32.Models
 
             public string referencia { get; set; }
             public string Familia { get; set; }
+            
+            public string categoria { get; set; }
 
         }
 
