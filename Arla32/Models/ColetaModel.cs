@@ -11,7 +11,7 @@ namespace Arla32.Models
     public class ColetaModel
     {
 
-        public class Instrumentos
+        public class ArlaInstrumentos
         {
             [Key]
             public string? codigo { get; set; }

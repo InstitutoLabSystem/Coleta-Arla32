@@ -1,4 +1,4 @@
-﻿@model List<ColetaModel.Instrumentos>;
+﻿@model List<ColetaModel.ArlaInstrumentos>;
 
 @{
     ViewData["Title"] = "Instrumentos";
@@ -29,13 +29,13 @@
             </div>
         </div>
     </div>
-
 </form>
 
 @if(Model != null)
 {
 
-   <form class="form-inline" asp-controller="Home" asp-action="" method="post" asp-route-os="@ViewData["OS"]">
+    <form class="form-inline" asp-controller="Home" asp-action="ListarInstrumentos" method="post" asp-route-os="@ViewData["OS"]">
+        
         <table style="width: 100%;">
       <tr>
          <th>Código</th>
@@ -44,22 +44,25 @@
          <th>Anexo</th>
       </tr>
 
-    @for (var j = 0; j < Model.Count; j++)
-    {
-        <tr>
-            <td> <input type='text' name='codigo' value='@Model[j].codigo' /></td>
-            <td> <input type='text' name='descricao' value='@Model[j].descricao' /></td>
-                    @if (Model[j].validade == null)
-                    {
-                        <td> <input type='text' name='validade' value='Não Requer' /></td>
-                    }else{
-                        <td> <input type='text' name='validade' value='@Model[j].validade' /></td>
-                    }
-            <td> <input type='text' name='anexo' value='@Model[j].anexo' /></td>
-                    <td><button type='submit' class='btn-floating black' name='btnalterar'> Edit </button></td>
-            <td><button type='submit' class='btn-floating black' name='btnexcluir'><i class='material-icons'>delete</i></button></td>
-        </tr>
-    }
+
+                @for (var j = 0; j < Model.Count; j++)
+                {
+                    <tr>
+                        <td> <input type='text' name='codigo' value='@Model[j].codigo' readonly /></td>
+                        <td> <input type='text' name='descricao_@Model[j].codigo' value='@Model[j].descricao' /></td>
+                        @if (Model[j].validade == null)
+                        {
+                            <td> <input type='text' name='validade_@Model[j]' value='Não Requer' /></td>
+                        }
+                        else
+                        {
+                            <td> <input type='text' name='validade' value='@Model[j].validade' /></td>
+                        }
+                        <td> <input type='text' name='anexo_@Model[j].codigo' value='@Model[j].anexo' /></td>
+                        <td><button type='submit' class='btn-floating black' name='btnalterar' formaction='@Url.Action("EditarInstrumento", "Home", new { codigo = Model[j].codigo })'> Edit </button></td>
+                        <td><button type='submit' class='btn-floating black' name='btnexcluir'><i class='material-icons'>delete</i></button></td>
+                    </tr>
+                }
     </table>
 
     </form>

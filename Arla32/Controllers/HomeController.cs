@@ -13,6 +13,7 @@ using System.Security.Policy;
 using Microsoft.CodeAnalysis.Elfie.Diagnostics;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using Humanizer.DateTimeHumanizeStrategy;
+using static Arla32.Models.ColetaModel;
 
 namespace Arla32.Controllers
 {
@@ -123,7 +124,7 @@ namespace Arla32.Controllers
             {
                 var resultado = (from p in _qcontext.arla_instrumentos
                                  where p.anexo == escolha
-                                 select new ColetaModel.Instrumentos
+                                 select new ColetaModel.ArlaInstrumentos
                                  {
                                     codigo = p.codigo,
                                     descricao =p.descricao,
@@ -151,6 +152,42 @@ namespace Arla32.Controllers
             }
 
         }
+
+
+
+        [HttpPost]
+        public IActionResult EditarInstrumento()
+        {
+            try
+            {
+                List<ArlaInstrumentos> valores = new List<ArlaInstrumentos>();
+
+                for(int i = 0; i < valores.Count; i++)
+                {
+                    var novo = new ColetaModel.ArlaInstrumentos
+                    {
+                        codigo = valores[i].codigo,
+                        descricao = valores[i].descricao,
+                        validade = valores[i].validade,
+                        anexo = valores[i].anexo,
+                        ativo = valores[i].ativo,
+                    };
+
+                    _qcontext.Add(novo);
+                    
+                }
+
+                TempData["Mensagem"] = "Instrumento editado com sucesso.";
+                return RedirectToAction("ListarInstrumentos");
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error", ex.Message);
+                throw;
+            }
+        }
+
         public async Task<IActionResult> IniciarColeta(string OS, [Bind("OS,orcamento,Qtd_Recebida,norma,revisao_os," +
             "CodCli, CodSol, Item, descricao_doc, referencia")] HomeModel.IniciarColeta salvar)
         {
