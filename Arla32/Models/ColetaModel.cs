@@ -14,6 +14,7 @@ namespace Arla32.Models
         public class ArlaInstrumentos
         {
             [Key]
+            public int Id { get; set; }
             public string? codigo { get; set; }
             public string? descricao { get; set; }
             public DateOnly? validade { get; set; }

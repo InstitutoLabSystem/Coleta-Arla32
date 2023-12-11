@@ -1,0 +1,47 @@
+﻿@model ColetaModel.ArlaInstrumentos;
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<form class="form-inline" asp-controller="Home" asp-action="EditarInstrumentos" method="post">
+    @if (Model != null)
+    {
+    <table style="width: 100%;">
+            <tr>
+                <td> Código </td>
+                <td> <input type='text' name='codigo' value='@Model.codigo' /></td>
+            </tr>
+            <tr>
+                <td> Descrição </td>
+                <td> <input type='text' name='descricao' value='@Model.descricao' /></td>
+            </tr>
+            <tr>
+                <td> Validade</td>
+                <td> <input type='text' name='validade' value='@Model.validade' /></td>
+            </tr>
+            <tr>
+                <td> Anexo </td>
+                <td> <input type='text' name='anexo' value='@Model.anexo' /></td>
+            </tr>
+
+
+
+            </table>
+            <input type='hidden' name='Id' value='@Model.Id' />
+
+        }
+    <br />
+    <div class="col-md-3">
+        <button type="submit" class="btn btn-primary  w-100  btn-block">Editar</button>
+    </div>
+
+
+</form>

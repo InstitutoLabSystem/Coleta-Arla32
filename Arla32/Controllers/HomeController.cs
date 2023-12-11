@@ -14,6 +14,7 @@ using Microsoft.CodeAnalysis.Elfie.Diagnostics;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using Humanizer.DateTimeHumanizeStrategy;
 using static Arla32.Models.ColetaModel;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 namespace Arla32.Controllers
 {
@@ -45,7 +46,18 @@ namespace Arla32.Controllers
             return View();
         }
 
+        public IActionResult InstrumentosEditar(int Id)
+        {
+            var dados = _qcontext.arla_instrumentos.Where(x => x.Id == Id).FirstOrDefault();
 
+            return View(dados);
+        }
+        public IActionResult InstrumentosDeletar(int Id)
+        {
+            var dados = _qcontext.arla_instrumentos.Where(x => x.Id == Id).FirstOrDefault();
+
+            return View(dados);
+        }
         public async Task<IActionResult> LogOut()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
@@ -123,13 +135,15 @@ namespace Arla32.Controllers
             try
             {
                 var resultado = (from p in _qcontext.arla_instrumentos
-                                 where p.anexo == escolha
+                                 where p.anexo == escolha 
                                  select new ColetaModel.ArlaInstrumentos
                                  {
+                                    Id = p.Id,
                                     codigo = p.codigo,
                                     descricao =p.descricao,
                                     validade = p.validade,
                                     anexo = p.anexo,
+                                    ativo = p.ativo,
                                  }).Distinct().ToList(); ;
 
 
@@ -153,32 +167,21 @@ namespace Arla32.Controllers
 
         }
 
-
-
-        [HttpPost]
-        public IActionResult EditarInstrumento()
+        public async Task<IActionResult> EditarInstrumentos(int Id, ColetaModel.ArlaInstrumentos dados)
         {
             try
             {
-                List<ArlaInstrumentos> valores = new List<ArlaInstrumentos>();
+                var editar = _qcontext.arla_instrumentos.Where(x => x.Id == Id).FirstOrDefault();
 
-                for(int i = 0; i < valores.Count; i++)
-                {
-                    var novo = new ColetaModel.ArlaInstrumentos
-                    {
-                        codigo = valores[i].codigo,
-                        descricao = valores[i].descricao,
-                        validade = valores[i].validade,
-                        anexo = valores[i].anexo,
-                        ativo = valores[i].ativo,
-                    };
+                editar.codigo = dados.codigo;
+                editar.descricao = dados.descricao;
+                editar.validade = dados.validade;
+                editar.anexo = dados.anexo;
 
-                    _qcontext.Add(novo);
-                    
-                }
+                _qcontext.Update(editar);
+                await _qcontext.SaveChangesAsync();
 
-                TempData["Mensagem"] = "Instrumento editado com sucesso.";
-                return RedirectToAction("ListarInstrumentos");
+                return View("InstrumentosEditar", dados);
 
             }
             catch (Exception ex)
@@ -186,7 +189,34 @@ namespace Arla32.Controllers
                 _logger.LogError(ex, "Error", ex.Message);
                 throw;
             }
+
+
         }
+        public async Task<IActionResult> DeletarInstrumentos(int Id, ColetaModel.ArlaInstrumentos dados)
+        {
+            try
+            {
+                var editar = _qcontext.arla_instrumentos.Where(x => x.Id == Id).FirstOrDefault();
+
+                editar.codigo = dados.codigo;
+                editar.ativo = 0;
+
+                _qcontext.Update(editar);
+                await _qcontext.SaveChangesAsync();
+
+                return View("Instrumentos", dados);
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error", ex.Message);
+                throw;
+            }
+
+
+        }
+
+
 
         public async Task<IActionResult> IniciarColeta(string OS, [Bind("OS,orcamento,Qtd_Recebida,norma,revisao_os," +
             "CodCli, CodSol, Item, descricao_doc, referencia")] HomeModel.IniciarColeta salvar)

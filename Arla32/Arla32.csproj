@@ -9,6 +9,7 @@
   <ItemGroup>
     <Compile Remove="Controllers\_qcontext.cs" />
     <Compile Remove="Models\MinhaViewModel.cs" />
+    <Compile Remove="Views\Home\InstrumenrtosDeletar.cs" />
   </ItemGroup>
 
   <ItemGroup>
