@@ -1,4 +1,4 @@
-﻿@model ColetaModel.ArlaAlcalinidade
+﻿@model Arla32.Models.InstrumentosModel;
 @{
     ViewData["Title"] = "Ensaio De Alcalinidade ";
 }
@@ -18,7 +18,7 @@
 </head>
 <body>
     <form method="post" asp-controller="Coleta" asp-action="SalvarAlcalinidade" asp-route-os="@ViewData["os"]" asp-route-orcamento="@ViewData["orcamento"]">
-        @if (Model == null)
+        @if (Model.alcalinidade == null)
         {
             <table class="table table-bordered border-secondary  table-sm">
                 <tr>
@@ -108,42 +108,18 @@
                     <td>Descrição</td>
                     <td>Código</td>
                     <td>Validade</td>
-                    <td>Descrição</td>
-                    <td>Código</td>
-                    <td>Validade</td>
                 </tr>
-                <tr>
-                    <td><input type="text" name="inst_desc1" class="form-control input " /></td>
-                    <td><input type="text" name="inst_cod1" class="form-control input " /></td>
-                    <td><input type="date" name="inst_data1" class="form-control input " /></td>
-                    <td><input type="text" name="inst_desc1_1" class="form-control input " /></td>
-                    <td><input type="text" name="inst_cod1_1" class="form-control input " /></td>
-                    <td><input type="date" name="inst_data1_1" class="form-control input " /></td>
-                </tr>
-                <tr>
-                    <td><input type="text" name="inst_desc2" class="form-control input " /></td>
-                    <td><input type="text" name="inst_cod2" class="form-control input " /></td>
-                    <td><input type="date" name="inst_data2" class="form-control input " /></td>
-                    <td><input type="text" name="inst_desc2_2" class="form-control input " /></td>
-                    <td><input type="text" name="inst_cod2_2" class="form-control input " /></td>
-                    <td><input type="date" name="inst_data2_2" class="form-control input " /></td>
-                </tr>
-                <tr>
-                    <td><input type="text" name="inst_desc3" class="form-control input " /></td>
-                    <td><input type="text" name="inst_cod3" class="form-control input " /></td>
-                    <td><input type="date" name="inst_data3" class="form-control input " /></td>
-                    <td><input type="text" name="inst_desc3_3" class="form-control input " /></td>
-                    <td><input type="text" name="inst_cod3_3" class="form-control input " /></td>
-                    <td><input type="date" name="inst_data3_3" class="form-control input " /></td>
-                </tr>
-                <tr>
-                    <td><input type="text" name="inst_desc4" class="form-control input " /></td>
-                    <td><input type="text" name="inst_cod4" class="form-control input " /></td>
-                    <td><input type="date" name="inst_data4" class="form-control input " /></td>
-                    <td><input type="text" name="inst_desc4_4" class="form-control input " /></td>
-                    <td><input type="text" name="inst_cod4_4" class="form-control input " /></td>
-                    <td><input type="date" name="inst_data4_4" class="form-control input " /></td>
-                </tr>
+                @for (var j = 0; j < Model.instrumentos.Count; j++)
+                {
+                    @if (Model.instrumentos[j].ativo == 1)
+                    {
+                        <tr>
+                            <td><input type="text" readonly class="form-control input " value="@Model.instrumentos[j].descricao" /></td>
+                            <td><input type="text" readonly  class="form-control input " value="@Model.instrumentos[j].codigo" /></td>
+                            <td><input type="text" readonly  class="form-control input " value="@Model.instrumentos[j].validade" /></td>
+                        </tr>
+                    }
+                }
             </table>
             <br />
             <table class="table table-bordered border-secondary  table-sm">
@@ -197,9 +173,9 @@
                 </tr>
                 <tr>
                     <td style="background-color: #800000; color:white;">Data Inicio:</td>
-                    <td><input type="datetime" class="form-control input " name="data_ini" value="@Model.data_ini" /></td>
+                    <td><input type="datetime" class="form-control input " name="data_ini" value="@Model.alcalinidade.data_ini" /></td>
                     <td style="background-color: #800000; color:white;">Data Término:</td>
-                    <td><input type="datetime" class="form-control input " name="data_term" value="@Model.data_term" /></td>
+                    <td><input type="datetime" class="form-control input " name="data_term" value="@Model.alcalinidade.data_term" /></td>
                 </tr>
                 <tr class="texto-central">
                     <td style="text-align:left;" colspan="5">
@@ -233,17 +209,17 @@
                     <td>Resultado Final Limete ate 0,2%</td>
                 </tr>
                 <tr>
-                    <td rowspan="2"><input type="text" name="pre_massa_amostra" class="form-control input" style=" height:80px;" value="@Model.pre_massa_amostra" /></td>
-                    <td rowspan="2"><input type="text" name="pre_vol_titulado" class="form-control input" style=" height:80px;" value="@Model.pre_vol_titulado" /></td>
-                    <td rowspan="2"><input class="form-control input" name="pre_resultado_final" style="height:80px;" readonly value="@Model.pre_resultado_final" /></td>
-                    <td><input type="text" name="det_massa_amostra1" class="form-control input " value="@Model.det_massa_amostra1" /></td>
-                    <td><input type="text" name="det_vol_titulado1" class="form-control input " value="@Model.det_vol_titulado1" /></td>
-                    <td rowspan="2"><input class="form-control input" name="det_res_final" style=" height:80px;" readonly value="@Model.det_res_final" /></td>
+                    <td rowspan="2"><input type="text" name="pre_massa_amostra" class="form-control input" style=" height:80px;" value="@Model.alcalinidade.pre_massa_amostra" /></td>
+                    <td rowspan="2"><input type="text" name="pre_vol_titulado" class="form-control input" style=" height:80px;" value="@Model.alcalinidade.pre_vol_titulado" /></td>
+                    <td rowspan="2"><input class="form-control input" name="pre_resultado_final" style="height:80px;" readonly value="@Model.alcalinidade.pre_resultado_final" /></td>
+                    <td><input type="text" name="det_massa_amostra1" class="form-control input " value="@Model.alcalinidade.det_massa_amostra1" /></td>
+                    <td><input type="text" name="det_vol_titulado1" class="form-control input " value="@Model.alcalinidade.det_vol_titulado1" /></td>
+                    <td rowspan="2"><input class="form-control input" name="det_res_final" style=" height:80px;" readonly value="@Model.alcalinidade.det_res_final" /></td>
                 </tr>
 
                 <tr>
-                    <td><input type="text" name="det_massa_amostra2" class="form-control input " value="@Model.det_massa_amostra2" /></td>
-                    <td><input type="text" name="det_vol_titulado2" class="form-control input " value="@Model.det_vol_titulado2" /></td>
+                    <td><input type="text" name="det_massa_amostra2" class="form-control input " value="@Model.alcalinidade.det_massa_amostra2" /></td>
+                    <td><input type="text" name="det_vol_titulado2" class="form-control input " value="@Model.alcalinidade.det_vol_titulado2" /></td>
                 </tr>
             </table>
             <br />
@@ -257,11 +233,11 @@
                     <td>Validade</td>
                 </tr>
                 <tr>
-                    <td><input type="text" name="mat_prima" class="form-control input " value="@Model.mat_prima" /></td>
-                    <td><input type="text" name="mat_lote" class="form-control input " value="@Model.mat_lote" /></td>
-                    @if (Model.mat_validade != DateOnly.MinValue)
+                    <td><input type="text" name="mat_prima" class="form-control input " value="@Model.alcalinidade.mat_prima" /></td>
+                    <td><input type="text" name="mat_lote" class="form-control input " value="@Model.alcalinidade.mat_lote" /></td>
+                    @if (Model.alcalinidade.mat_validade != DateOnly.MinValue)
                     {
-                        <td><input type="datetime" name="mat_validade" class="form-control input " value="@Model.mat_validade" /></td>
+                        <td><input type="datetime" name="mat_validade" class="form-control input " value="@Model.alcalinidade.mat_validade" /></td>
 
                     }
                     else
@@ -281,102 +257,22 @@
                     <td>Descrição</td>
                     <td>Código</td>
                     <td>Validade</td>
-                    <td>Descrição</td>
-                    <td>Código</td>
-                    <td>Validade</td>
                 </tr>
-                <tr>
-                    <td><input type="text" name="inst_desc1" class="form-control input " value="@Model.inst_desc1" /></td>
-                    <td><input type="text" name="inst_cod1" class="form-control input " value="@Model.inst_cod1" /></td>
-                    @if (Model.inst_data1 != DateOnly.MinValue)
-                    {
-                        <td><input type="datetime" name="inst_data1" class="form-control input " value="@Model.inst_data1" /></td>
 
-                    }
-                    else
+                
+                   @for (var j = 0; j < Model.instrumentos.Count; j++)
+                   {
+                    @if (Model.instrumentos[j].ativo == 1)
                     {
-                        <td><input type="datetime" name="inst_data1" class="form-control input " value="---" /></td>
+                 <tr>
+                            <td><input type="text" readonly  class="form-control input " value="@Model.instrumentos[j].descricao" /></td>
+                            <td><input type="text" readonly  class="form-control input " value="@Model.instrumentos[j].codigo" /></td>
+                            <td><input type="text" readonly  class="form-control input " value="@Model.instrumentos[j].validade" /></td>
+                </tr>
+                    }
+                   }
+                
 
-                    }
-                    <td><input type="text" name="inst_desc1_1" class="form-control input " value="@Model.inst_desc1_1" /></td>
-                    <td><input type="text" name="inst_cod1_1" class="form-control input " value="@Model.inst_cod1_1" /></td>
-                    @if (Model.inst_data1_1 != DateOnly.MinValue)
-                    {
-                        <td><input type="datetime" name="inst_data1_1" class="form-control input " value="@Model.inst_data1_1" /></td>
-                    }
-                    else
-                    {
-                        <td><input type="datetime" name="inst_data1_1" class="form-control input " value="---" /></td>
-                    }
-                </tr>
-                <tr>
-                    <td><input type="text" name="inst_desc2" class="form-control input " value="@Model.inst_desc2" /></td>
-                    <td><input type="text" name="inst_cod2" class="form-control input " value="@Model.inst_cod2" /></td>
-                    @if (Model.inst_data2 != DateOnly.MinValue)
-                    {
-                        <td><input type="datetime" name="inst_data2" class="form-control input " value="@Model.inst_data2" /></td>
-                    }
-                    else
-                    {
-                        <td><input type="datetime" name="inst_data2" class="form-control input " value="---" /></td>
-                    }
-                    <td><input type="text" name="inst_desc2_2" class="form-control input " value="@Model.inst_desc2_2" /></td>
-                    <td><input type="text" name="inst_cod2_2" class="form-control input " value="@Model.inst_cod2_2" /></td>
-                    @if (Model.inst_data2_2 != DateOnly.MinValue)
-                    {
-                        <td><input type="datetime" name="inst_data2_2" class="form-control input " value="@Model.inst_data2_2" /></td>
-                    }
-                    else
-                    {
-                        <td><input type="datetime" name="inst_data2_2" class="form-control input " value="---" /></td>
-                    }
-                </tr>
-                <tr>
-                    <td><input type="text" name="inst_desc3" class="form-control input " value="@Model.inst_desc3" /></td>
-                    <td><input type="text" name="inst_cod3" class="form-control input " value="@Model.inst_cod3" /></td>
-                    @if (Model.inst_data3 != DateOnly.MinValue)
-                    {
-                        <td><input type="datetime" name="inst_data3" class="form-control input " value="@Model.inst_data3" /></td>
-                    }
-                    else
-                    {
-                        <td><input type="datetime" name="inst_data3" class="form-control input " value="---" /></td>
-                    }
-
-                    <td><input type="text" name="inst_desc3_3" class="form-control input " value="@Model.inst_desc3_3" /></td>
-                    <td><input type="text" name="inst_cod3_3" class="form-control input " value="@Model.inst_cod3_3" /></td>
-                    @if (Model.inst_data3_3 != DateOnly.MinValue)
-                    {
-                        <td><input type="datetime" name="inst_data3_3" class="form-control input " value="@Model.inst_data3_3" /></td>
-                    }
-                    else
-                    {
-                        <td><input type="datetime" name="inst_data3_3" class="form-control input " value="---" /></td>
-                    }
-                </tr>
-                <tr>
-                    <td><input type="text" name="inst_desc4" class="form-control input " value="@Model.inst_desc4" /></td>
-                    <td><input type="text" name="inst_cod4" class="form-control input " value="@Model.inst_cod4" /></td>
-                    @if (Model.inst_data4 != DateOnly.MinValue)
-                    {
-                        <td><input type="datetime" name="inst_data4" class="form-control input " value="@Model.inst_data4" /></td>
-                    }
-                    else
-                    {
-                        <td><input type="datetime" name="inst_data4" class="form-control input " value="---" /></td>
-                    }
-
-                    <td><input type="text" name="inst_desc4_4" class="form-control input " value="@Model.inst_desc4_4" /></td>
-                    <td><input type="text" name="inst_cod4_4" class="form-control input " value="@Model.inst_cod4_4" /></td>
-                    @if (Model.inst_data4_4 != DateOnly.MinValue)
-                    {
-                        <td><input type="datetime" name="inst_data4_4" class="form-control input " value="@Model.inst_data4_4" /></td>
-                    }
-                    else
-                    {
-                        <td><input type="datetime" name="inst_data4_4" class="form-control input " value="---" /></td>
-                    }
-                </tr>
             </table>
             <br />
             <table class="table table-bordered border-secondary  table-sm">
@@ -385,9 +281,9 @@
                 </tr>
                 <tr>
                     <td>De:</td>
-                    <td><input type="text" name="equip_de" class="form-control input " value="@Model.equip_de" /></td>
+                    <td><input type="text" name="equip_de" class="form-control input " value="@Model.alcalinidade.equip_de" /></td>
                     <td>EE:</td>
-                    <td><input type="text" name="equip_ee" class="form-control input " value="@Model.equip_ee" /></td>
+                    <td><input type="text" name="equip_ee" class="form-control input " value="@Model.alcalinidade.equip_ee" /></td>
                 </tr>
             </table>
             <br />
@@ -396,7 +292,7 @@
                     <td colspan="4">Observações</td>
                 </tr>
                 <tr>
-                    <td><textarea type="text" name="obs" class="form-control input">@Model.obs</textarea></td>
+                    <td><textarea type="text" name="obs" class="form-control input">@Model.alcalinidade.obs</textarea></td>
                 </tr>
             </table>
             <Br />
@@ -406,8 +302,8 @@
                     <td colspan="2">Auxiliado Por:</td>
                 </tr>
                 <tr>
-                    <td><input type="text" name="executado_por" class="form-control input " value="@Model.executado_por" /></td>
-                    <td><input type="text" name="auxiliado_por" class="form-control input " value="@Model.auxiliado_por" /></td>
+                    <td><input type="text" name="executado_por" class="form-control input " value="@Model.alcalinidade.executado_por" /></td>
+                    <td><input type="text" name="auxiliado_por" class="form-control input " value="@Model.alcalinidade.auxiliado_por" /></td>
                 </tr>
             </table>
             <br />

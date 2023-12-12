@@ -105,30 +105,6 @@ namespace Arla32.Models
             public string? mat_prima { get; set; }
             public string? mat_lote { get; set; }
             public DateOnly mat_validade { get; set; }
-            public string? inst_desc1 { get; set; }
-            public string? inst_cod1 { get; set; }
-            public DateOnly inst_data1 { get; set; }
-            public string? inst_desc1_1 { get; set; }
-            public string? inst_cod1_1 { get; set; }
-            public DateOnly inst_data1_1 { get; set; }
-            public string? inst_desc2 { get; set; }
-            public string? inst_cod2 { get; set; }
-            public DateOnly inst_data2 { get; set; }
-            public string? inst_desc2_2 { get; set; }
-            public string? inst_cod2_2 { get; set; }
-            public DateOnly inst_data2_2 { get; set; }
-            public string? inst_desc3 { get; set; }
-            public string? inst_cod3 { get; set; }
-            public DateOnly inst_data3 { get; set; }
-            public string? inst_desc3_3 { get; set; }
-            public string? inst_cod3_3 { get; set; }
-            public DateOnly inst_data3_3 { get; set; }
-            public string? inst_desc4 { get; set; }
-            public string? inst_cod4 { get; set; }
-            public DateOnly inst_data4 { get; set; }
-            public string? inst_desc4_4 { get; set; }
-            public string? inst_cod4_4 { get; set; }
-            public DateOnly inst_data4_4 { get; set; }
             public string? equip_de { get; set; }
             public string? equip_ee { get; set; }
             public string? obs { get; set; }
@@ -170,30 +146,6 @@ namespace Arla32.Models
             public string? mat_prima_5 { get; set; }
             public string? mat_lote_5 { get; set; }
             public DateOnly mat_validade_5 { get; set; }
-            public string? inst_desc1 { get; set; }
-            public string? inst_codigo1 { get; set; }
-            public DateOnly inst_data1 { get; set; }
-            public string? inst_desc1_1 { get; set; }
-            public string? inst_codigo1_1 { get; set; }
-            public DateOnly inst_data1_1 { get; set; }
-            public string? insta_desc2 { get; set; }
-            public string? inst_codigo2 { get; set; }
-            public DateOnly inst_data2 { get; set; }
-            public string? inst_desc2_2 { get; set; }
-            public string? inst_codigo2_2 { get; set; }
-            public DateOnly inst_data2_2 { get; set; }
-            public string? inst_desc3 { get; set; }
-            public string? inst_codigo3 { get; set; }
-            public DateOnly inst_data3 { get; set; }
-            public string? inst_desc3_3 { get; set; }
-            public string? inst_codigo3_3 { get; set; }
-            public DateOnly inst_data3_3 { get; set; }
-            public string? inst_desc4 { get; set; }
-            public string? inst_codigo4 { get; set; }
-            public DateOnly inst_data4 { get; set; }
-            public string? inst_desc4_4 { get; set; }
-            public string? inst_codigo4_4 { get; set; }
-            public DateOnly inst_data4_4 { get; set; }
             public string? equip_de { get; set; }
             public string? equip_ee { get; set; }
             public string? obs { get; set; }
@@ -241,18 +193,6 @@ namespace Arla32.Models
             public string? mat_prima5 { get; set; }
             public string? mat_lote5 { get; set; }
             public DateOnly mat_validade5 { get; set; }
-            public string? inst_desc1 { get; set; }
-            public string? inst_cod1 { get; set; }
-            public DateOnly inst_validade1 { get; set; }
-            public string? inst_desc2 { get; set; }
-            public string? inst_cod2 { get; set; }
-            public DateOnly inst_validade2 { get; set; }
-            public string? inst_desc1_1 { get; set; }
-            public string? inst_cod1_1 { get; set; }
-            public DateOnly inst_validade1_1 { get; set; }
-            public string? inst_desc2_2 { get; set; }
-            public string? inst_cod2_2 { get; set; }
-            public DateOnly inst_validade2_2 { get; set; }
             public string? equi_de { get; set; }
             public string? equi_ee { get; set; }
             public string? observacoes { get; set; }
@@ -295,37 +235,6 @@ namespace Arla32.Models
             public string? mat_prima2 { get; set; }
             public string? mat_lote2 { get; set; }
             public DateOnly mat_validade2 { get; set; }
-
-            public string? inst_desc1 { get; set; }
-            public string? inst_cod1 { get; set; }
-            public DateOnly inst_validade1 { get; set; }
-            public string? inst_desc2 { get; set; }
-            public string? inst_cod2 { get; set; }
-            public DateOnly inst_validade2 { get; set; }
-            public string? inst_desc3 { get; set; }
-            public string? inst_cod3 { get; set; }
-            public DateOnly inst_validade3 { get; set; }
-            public string? inst_desc4 { get; set; }
-            public string? inst_cod4 { get; set; }
-            public DateOnly inst_validade4 { get; set; }
-            public string? inst_desc5 { get; set; }
-            public string? inst_cod5 { get; set; }
-            public DateOnly inst_validade5 { get; set; }
-            public string? inst_desc1_1 { get; set; }
-            public string? inst_cod1_1 { get; set; }
-            public DateOnly inst_validade1_1 { get; set; }
-            public string? inst_desc2_2 { get; set; }
-            public string? inst_cod2_2 { get; set; }
-            public DateOnly inst_validade2_2 { get; set; }
-            public string? inst_desc3_3 { get; set; }
-            public string? inst_cod3_3 { get; set; }
-            public DateOnly inst_validade3_3 { get; set; }
-            public string? inst_desc4_4 { get; set; }
-            public string? inst_cod4_4 { get; set; }
-            public DateOnly inst_validade4_4 { get; set; }
-            public string? inst_desc5_5 { get; set; }
-            public string? inst_cod5_5 { get; set; }
-            public DateOnly inst_validade5_5 { get; set; }
             public string? equi_ee { get; set; }
             public string? equi_de { get; set; }
             public string? observacoes { get; set; }
@@ -623,30 +532,6 @@ namespace Arla32.Models
             public string? mat_prima_8 { get; set; }
             public string? mat_lote_8 { get; set; }
             public DateOnly mat_validade_8 { get; set; }
-            public string? inst_desc1 { get; set; }
-            public string? inst_cod1 { get; set; }
-            public DateOnly inst_data1 { get; set; }
-            public string? inst_desc1_1 { get; set; }
-            public string? inst_cod1_1 { get; set; }
-            public DateOnly inst_data1_1 { get; set; }
-            public string? inst_desc2 { get; set; }
-            public string? inst_cod2 { get; set; }
-            public DateOnly inst_data2 { get; set; }
-            public string? inst_desc2_2 { get; set; }
-            public string? inst_cod2_2 { get; set; }
-            public DateOnly inst_data2_2 { get; set; }
-            public string? inst_desc3 { get; set; }
-            public string? inst_cod3 { get; set; }
-            public DateOnly inst_data3 { get; set; }
-            public string? inst_desc3_3 { get; set; }
-            public string? inst_cod3_3 { get; set; }
-            public DateOnly inst_data3_3 { get; set; }
-            public string? inst_desc4 { get; set; }
-            public string? inst_cod4 { get; set; }
-            public DateOnly inst_data4 { get; set; }
-            public string? inst_desc4_4 { get; set; }
-            public string? inst_cod4_4 { get; set; }
-            public DateOnly inst_data4_4 { get; set; }
             public string? equi_ee { get; set; }
             public string? equi_de { get; set; }
             public string? obs { get; set; }

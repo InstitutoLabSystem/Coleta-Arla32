@@ -61,23 +61,33 @@ namespace Arla32.Controllers
         }
         public IActionResult EnsaioAldeidos(string OS, string orcamento)
         {
-            var dados = _qcontext.arla_aldeidos.Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
-            if (dados == null)
-            {
-                ViewBag.OS = OS;
-                ViewBag.orcamento = orcamento;
-
-                return View();
-            }
-            else
-            {
-                ViewBag.OS = OS;
-                ViewBag.orcamento = orcamento;
-
-                return View(dados);
-            }
+            var model = new InstrumentosModel();
+            model.aldeidos = ObterAldeidos(OS, orcamento);
+            model.instrumentos = ObterInstrumentosAldeidos(OS, orcamento);
+            ViewBag.OS = OS;
+            ViewBag.orcamento = orcamento;
+            return View(model);
 
         }
+
+        private ArlaAldeidos ObterAldeidos(string OS, string orcamento)
+        {
+            var dados = _qcontext.arla_aldeidos.
+                Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
+            return dados;
+        }
+        private List<ArlaInstrumentos> ObterInstrumentosAldeidos(string OS, string orcamento)
+        {
+            var instrumentos = _qcontext.arla_instrumentos.Where(x => x.anexo == "ANEXO F").ToList();
+            return instrumentos;
+        }
+
+
+
+
+
+
+
         public IActionResult EnsaioDensidade(string OS, string orcamento)
         {
             var dados = _qcontext.arla_densidade.Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
@@ -98,57 +108,77 @@ namespace Arla32.Controllers
         }
         public IActionResult EnsaioAlcalinidade(string OS, string orcamento)
         {
-            var dados = _qcontext.arla_alcalinidade.Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
-            if (dados == null)
-            {
+                var model = new InstrumentosModel();
+                model.alcalinidade = ObterAlcalinidade(OS, orcamento);
+                model.instrumentos = ObterInstrumentos(OS, orcamento); 
                 ViewBag.OS = OS;
                 ViewBag.orcamento = orcamento;
-                return View();
-            }
-            else
-            {
-                ViewBag.OS = OS;
-                ViewBag.orcamento = orcamento;
-                return View(dados);
-            }
-
+                return View(model);
         }
+
+        private ArlaAlcalinidade ObterAlcalinidade( string OS, string orcamento)
+        {
+            var dados = _qcontext.arla_alcalinidade.
+                Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
+            return dados;
+        }
+        private List<ArlaInstrumentos> ObterInstrumentos(string OS, string orcamento)
+        {
+              var instrumentos = _qcontext.arla_instrumentos.Where(x => x.anexo == "ANEXO D").ToList();
+            return instrumentos;
+        }
+
+
+
         public IActionResult EnsaioInsoluveis(string OS, string orcamento)
         {
-            var dados = _qcontext.arla_insoluveis.Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
-            if (dados == null)
-            {
-                ViewBag.OS = OS;
-                ViewBag.orcamento = orcamento;
-
-                return View();
-            }
-            else
-            {
-                ViewBag.OS = OS;
-                ViewBag.orcamento = orcamento;
-
-                return View(dados);
-            }
+            var model = new InstrumentosModel();
+            model.insoluveis = ObterInsoluveis(OS, orcamento);
+            model.instrumentos = ObterInstrumentosInsoluveis(OS, orcamento);
+            ViewBag.OS = OS;
+            ViewBag.orcamento = orcamento;
+            return View(model);
 
         }
+        private ArlaInsoluveis ObterInsoluveis(string OS, string orcamento)
+        {
+            var dados = _qcontext.arla_insoluveis.
+                Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
+            return dados;
+        }
+        private List<ArlaInstrumentos> ObterInstrumentosInsoluveis(string OS, string orcamento)
+        {
+            var instrumentos = _qcontext.arla_instrumentos.Where(x => x.anexo == "ANEXO G").ToList();
+            return instrumentos;
+        }
+
+
+
         public IActionResult EnsaioFosfato(string OS, string orcamento)
         {
-            var dados = _qcontext.arla_fosfato.Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
-            if (dados == null)
-            {
-                ViewBag.OS = OS;
-                ViewBag.orcamento = orcamento;
-                return View();
-            }
-            else
-            {
-                ViewBag.OS = OS;
-                ViewBag.orcamento = orcamento;
-                return View(dados);
-            }
+            var model = new InstrumentosModel();
+            model.fosfato = ObterFosfato(OS, orcamento);
+            model.instrumentos = ObterInstrumentosFosfato(OS, orcamento);
+            ViewBag.OS = OS;
+            ViewBag.orcamento = orcamento;
+            return View(model);
 
         }
+
+        private ArlaFosfato ObterFosfato(string OS, string orcamento)
+        {
+            var dados = _qcontext.arla_fosfato.
+                Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
+            return dados;
+        }
+        private List<ArlaInstrumentos> ObterInstrumentosFosfato(string OS, string orcamento)
+        {
+            var instrumentos = _qcontext.arla_instrumentos.Where(x => x.anexo == "ANEXO H").ToList();
+            return instrumentos;
+        }
+
+
+
         public IActionResult EnsaioIdentidade(string OS, string orcamento)
         {
             var dados = _qcontext.arla_identidade.Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
@@ -168,47 +198,53 @@ namespace Arla32.Controllers
                 return View(dados);
             }
         }
-        public IActionResult EnsaioBiureto(string OS, string orcamento)
-        {
-            var dados = _qcontext.arla_biureto.Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
-            if (dados == null)
-            {
-                ViewBag.OS = OS;
-                ViewBag.orcamento = orcamento;
-                return View();
-            }
-            else
-            {
-                ViewBag.OS = OS;
-                ViewBag.orcamento = orcamento;
-                return View(dados);
-            }
-        }
-        public IActionResult EnsaioMetais(string OS, string orcamento)
-        {
-            var dados = new ColetaViewModelMetais();
-            dados.arlaMetais = OberterArlaMetais(OS, orcamento);
-            dados.metaisTratamento = ObertermetaisTratamento(OS, orcamento);
 
+
+        public IActionResult EnsaioBiureto(string OS, string orcamento)
+        { 
+            var model = new InstrumentosModel();
+            model.biureto = ObterBiureto(OS, orcamento);
+            model.instrumentos = ObterInstrumentosBiureto(OS, orcamento);
             ViewBag.OS = OS;
             ViewBag.orcamento = orcamento;
-
-            return View(dados);
-
+            return View(model);
         }
 
-        private ArlaMetais OberterArlaMetais(string OS, string orcamento)
+        private ArlaBiureto ObterBiureto(string OS, string orcamento)
         {
-            var metais = _qcontext.arla_metais.Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
-            if (metais == null)
-            {
-                return null;
-            }
-            else
-            {
-                return metais;
-            }
+            var dados = _qcontext.arla_biureto.
+                Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
+            return dados;
         }
+        private List<ArlaInstrumentos> ObterInstrumentosBiureto(string OS, string orcamento)
+        {
+            var instrumentos = _qcontext.arla_instrumentos.Where(x => x.anexo == "ANEXO E").ToList();
+            return instrumentos;
+        }
+
+
+        public IActionResult EnsaioMetais(string OS, string orcamento)
+        {
+            var model = new InstrumentosModel();
+            model.metais = ObterMetais(OS, orcamento);
+            model.instrumentos = ObterInstrumentosMetais(OS, orcamento);
+            ViewBag.OS = OS;
+            ViewBag.orcamento = orcamento;
+            return View(model);
+        }
+        private ArlaMetais ObterMetais(string OS, string orcamento)
+        {
+            var dados = _qcontext.arla_metais.
+                Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
+            return dados;
+        }
+        private List<ArlaInstrumentos> ObterInstrumentosMetais(string OS, string orcamento)
+        {
+            var instrumentos = _qcontext.arla_instrumentos.Where(x => x.anexo == "ANEXO I").ToList();
+            return instrumentos;
+        }
+
+
         private MetaisTratamento ObertermetaisTratamento(string OS, string orcamento)
         {
             var arlaTratamento = _qcontext.arla_metais_tratamento.Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
@@ -523,7 +559,7 @@ namespace Arla32.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SalvarAlcalinidade(string OS, string orcamento, [Bind("data_ini,data_term,pre_massa_amostra,pre_vol_titulado,det_massa_amostra1,det_massa_amostra2,det_vol_titulado1,det_vol_titulado2,mat_prima,mat_lote,mat_validade,inst_desc1,inst_cod1,inst_data1,inst_desc1_1,inst_cod1_1,inst_data1_1,inst_desc2,inst_cod2,inst_data2,inst_desc2_2,inst_cod2_2,inst_data2_2,inst_desc3,inst_cod3,inst_data3,inst_desc3_3,inst_cod3_3,inst_data3_3,inst_desc4,inst_cod4,inst_data4,inst_desc4_4,inst_cod4_4,inst_data4_4,equip_de,equip_ee,obs,executado_por,auxiliado_por")] ColetaModel.ArlaAlcalinidade salvarDados)
+        public async Task<IActionResult> SalvarAlcalinidade(string OS, string orcamento, [Bind("data_ini,data_term,pre_massa_amostra,pre_vol_titulado,det_massa_amostra1,det_massa_amostra2,det_vol_titulado1,det_vol_titulado2,mat_prima,mat_lote,mat_validade,equip_de,equip_ee,obs,executado_por,auxiliado_por")] ColetaModel.ArlaAlcalinidade salvarDados)
         {
             try
             {
@@ -546,30 +582,6 @@ namespace Arla32.Controllers
                         string mat_prima = salvarDados.mat_prima;
                         string mat_lote = salvarDados.mat_lote;
                         DateOnly mat_validade = salvarDados.mat_validade;
-                        string inst_desc1 = salvarDados.inst_desc1;
-                        string inst_cod1 = salvarDados.inst_cod1;
-                        DateOnly inst_data1 = salvarDados.inst_data1;
-                        string inst_desc1_1 = salvarDados.inst_desc1_1;
-                        string inst_cod1_1 = salvarDados.inst_cod1_1;
-                        DateOnly inst_data1_1 = salvarDados.inst_data1_1;
-                        string inst_desc2 = salvarDados.inst_desc2;
-                        string inst_cod2 = salvarDados.inst_cod2;
-                        DateOnly inst_data2 = salvarDados.inst_data2;
-                        string inst_desc2_2 = salvarDados.inst_desc2_2;
-                        string inst_cod2_2 = salvarDados.inst_cod2_2;
-                        DateOnly inst_data2_2 = salvarDados.inst_data2_2;
-                        string inst_desc3 = salvarDados.inst_desc3;
-                        string inst_cod3 = salvarDados.inst_cod3;
-                        DateOnly inst_data3 = salvarDados.inst_data3;
-                        string inst_desc3_3 = salvarDados.inst_desc3_3;
-                        string inst_cod3_3 = salvarDados.inst_cod3_3;
-                        DateOnly inst_data3_3 = salvarDados.inst_data3_3;
-                        string inst_desc4 = salvarDados.inst_desc4;
-                        string inst_cod4 = salvarDados.inst_cod4;
-                        DateOnly inst_data4 = salvarDados.inst_data4;
-                        string inst_desc4_4 = salvarDados.inst_desc4_4;
-                        string inst_cod4_4 = salvarDados.inst_cod4_4;
-                        DateOnly inst_data4_4 = salvarDados.inst_data4_4;
                         string equip_de = salvarDados.equip_de;
                         string equip_ee = salvarDados.equip_ee;
                         string obs = salvarDados.obs;
@@ -607,30 +619,6 @@ namespace Arla32.Controllers
                             mat_prima = mat_prima,
                             mat_lote = mat_lote,
                             mat_validade = mat_validade,
-                            inst_desc1 = inst_desc1,
-                            inst_cod1 = inst_cod1,
-                            inst_data1 = inst_data1,
-                            inst_desc1_1 = inst_desc1_1,
-                            inst_cod1_1 = inst_cod1_1,
-                            inst_data1_1 = inst_data1_1,
-                            inst_desc2 = inst_desc2,
-                            inst_cod2 = inst_cod2,
-                            inst_data2 = inst_data2,
-                            inst_desc2_2 = inst_desc2_2,
-                            inst_cod2_2 = inst_cod2_2,
-                            inst_data2_2 = inst_data2_2,
-                            inst_desc3 = inst_desc3,
-                            inst_cod3 = inst_cod3,
-                            inst_data3 = inst_data3,
-                            inst_desc3_3 = inst_desc3_3,
-                            inst_cod3_3 = inst_cod3_3,
-                            inst_data3_3 = inst_data3_3,
-                            inst_desc4 = inst_desc4,
-                            inst_cod4 = inst_cod4,
-                            inst_data4 = inst_data4,
-                            inst_desc4_4 = inst_desc4_4,
-                            inst_cod4_4 = inst_cod4_4,
-                            inst_data4_4 = inst_data4_4,
                             equip_de = equip_de,
                             equip_ee = equip_ee,
                             obs = obs,
@@ -665,30 +653,6 @@ namespace Arla32.Controllers
                         editarDados.mat_prima = salvarDados.mat_prima;
                         editarDados.mat_lote = salvarDados.mat_lote;
                         editarDados.mat_validade = salvarDados.mat_validade;
-                        editarDados.inst_desc1 = salvarDados.inst_desc1;
-                        editarDados.inst_cod1 = salvarDados.inst_cod1;
-                        editarDados.inst_data1 = salvarDados.inst_data1;
-                        editarDados.inst_desc1_1 = salvarDados.inst_desc1_1;
-                        editarDados.inst_cod1_1 = salvarDados.inst_cod1_1;
-                        editarDados.inst_data1_1 = salvarDados.inst_data1_1;
-                        editarDados.inst_desc2 = salvarDados.inst_desc2;
-                        editarDados.inst_cod2 = salvarDados.inst_cod2;
-                        editarDados.inst_data2 = salvarDados.inst_data2;
-                        editarDados.inst_desc2_2 = salvarDados.inst_desc2_2;
-                        editarDados.inst_cod2_2 = salvarDados.inst_cod2_2;
-                        editarDados.inst_data2_2 = salvarDados.inst_data2_2;
-                        editarDados.inst_desc3 = salvarDados.inst_desc3;
-                        editarDados.inst_cod3 = salvarDados.inst_cod3;
-                        editarDados.inst_data3 = salvarDados.inst_data3;
-                        editarDados.inst_desc3_3 = salvarDados.inst_desc3_3;
-                        editarDados.inst_cod3_3 = salvarDados.inst_cod3_3;
-                        editarDados.inst_data3_3 = salvarDados.inst_data3_3;
-                        editarDados.inst_desc4 = salvarDados.inst_desc4;
-                        editarDados.inst_cod4 = salvarDados.inst_cod4;
-                        editarDados.inst_data4 = salvarDados.inst_data4;
-                        editarDados.inst_desc4_4 = salvarDados.inst_desc4_4;
-                        editarDados.inst_cod4_4 = salvarDados.inst_cod4_4;
-                        editarDados.inst_data4_4 = salvarDados.inst_data4_4;
                         editarDados.equip_de = salvarDados.equip_de;
                         editarDados.equip_ee = salvarDados.equip_ee;
                         editarDados.obs = salvarDados.obs;
@@ -737,7 +701,7 @@ namespace Arla32.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SalvarBirueto(string OS, string orcamento, [Bind("data_ini,data_term,codigo_curva,fator_calibracao,fator_dia,amostra1,amostra2,absorbancia_1,absorbancia_2,absorbancia_3,mat_prima_1,mat_lote_1,mat_validade_1,mat_prima_2,mat_lote_2,mat_validade_2,mat_prima_3,mat_lote_3,mat_validade_3,mat_prima_4,mat_lote_4,mat_validade_4,mat_prima_5,mat_lote_5,mat_validade_5,inst_desc1,inst_codigo1,inst_data1,inst_desc1_1,inst_codigo1_1,inst_data1_1,insta_desc2,inst_codigo2,inst_data2,inst_desc2_2,inst_codigo2_2,inst_data2_2,inst_desc3,inst_codigo3,inst_data3,inst_desc3_3,inst_codigo3_3,inst_data3_3,inst_desc4,inst_codigo4,inst_data4,inst_desc4_4,inst_codigo4_4,inst_data4_4,equip_de,equip_ee,obs,executado_por,auxiliado_por")] ColetaModel.ArlaBiureto salvarDados)
+        public async Task<IActionResult> SalvarBirueto(string OS, string orcamento, [Bind("data_ini,data_term,codigo_curva,fator_calibracao,fator_dia,amostra1,amostra2,absorbancia_1,absorbancia_2,absorbancia_3,mat_prima_1,mat_lote_1,mat_validade_1,mat_prima_2,mat_lote_2,mat_validade_2,mat_prima_3,mat_lote_3,mat_validade_3,mat_prima_4,mat_lote_4,mat_validade_4,mat_prima_5,mat_lote_5,mat_validade_5,equip_de,equip_ee,obs,executado_por,auxiliado_por")] ColetaModel.ArlaBiureto salvarDados)
         {
             try
             {
@@ -773,30 +737,6 @@ namespace Arla32.Controllers
                         string mat_prima_5 = salvarDados.mat_prima_5;
                         string mat_lote_5 = salvarDados.mat_lote_5;
                         DateOnly mat_validade_5 = salvarDados.mat_validade_5;
-                        string inst_desc1 = salvarDados.inst_desc1;
-                        string inst_codigo1 = salvarDados.inst_codigo1;
-                        DateOnly inst_data1 = salvarDados.inst_data1;
-                        string inst_desc1_1 = salvarDados.inst_desc1_1;
-                        string inst_codigo1_1 = salvarDados.inst_codigo1_1;
-                        DateOnly inst_data1_1 = salvarDados.inst_data1_1;
-                        string insta_desc2 = salvarDados.insta_desc2;
-                        string inst_codigo2 = salvarDados.inst_codigo2;
-                        DateOnly inst_data2 = salvarDados.inst_data2;
-                        string inst_desc2_2 = salvarDados.inst_desc2_2;
-                        string inst_codigo2_2 = salvarDados.inst_codigo2_2;
-                        DateOnly inst_data2_2 = salvarDados.inst_data2_2;
-                        string inst_desc3 = salvarDados.inst_desc3;
-                        string inst_codigo3 = salvarDados.inst_codigo3;
-                        DateOnly inst_data3 = salvarDados.inst_data3;
-                        string inst_desc3_3 = salvarDados.inst_desc3_3;
-                        string inst_codigo3_3 = salvarDados.inst_codigo3_3;
-                        DateOnly inst_data3_3 = salvarDados.inst_data3_3;
-                        string inst_desc4 = salvarDados.inst_desc4;
-                        string inst_codigo4 = salvarDados.inst_codigo4;
-                        DateOnly inst_data4 = salvarDados.inst_data4;
-                        string inst_desc4_4 = salvarDados.inst_desc4_4;
-                        string inst_codigo4_4 = salvarDados.inst_codigo4_4;
-                        DateOnly inst_data4_4 = salvarDados.inst_data4_4;
                         string equip_de = salvarDados.equip_de;
                         string equip_ee = salvarDados.equip_ee;
                         string obs = salvarDados.obs;
@@ -852,30 +792,6 @@ namespace Arla32.Controllers
                             mat_prima_5 = mat_prima_5,
                             mat_lote_5 = mat_lote_5,
                             mat_validade_5 = mat_validade_5,
-                            inst_desc1 = inst_desc1,
-                            inst_codigo1 = inst_codigo1,
-                            inst_data1 = inst_data1,
-                            inst_desc1_1 = inst_desc1_1,
-                            inst_codigo1_1 = inst_codigo1_1,
-                            inst_data1_1 = inst_data1_1,
-                            insta_desc2 = insta_desc2,
-                            inst_codigo2 = inst_codigo2,
-                            inst_data2 = inst_data2,
-                            inst_desc2_2 = inst_desc2_2,
-                            inst_codigo2_2 = inst_codigo2_2,
-                            inst_data2_2 = inst_data2_2,
-                            inst_desc3 = inst_desc3,
-                            inst_codigo3 = inst_codigo3,
-                            inst_data3 = inst_data3,
-                            inst_desc3_3 = inst_desc3_3,
-                            inst_codigo3_3 = inst_codigo3_3,
-                            inst_data3_3 = inst_data3_3,
-                            inst_desc4 = inst_desc4,
-                            inst_codigo4 = inst_codigo4,
-                            inst_data4 = inst_data4,
-                            inst_desc4_4 = inst_desc4_4,
-                            inst_codigo4_4 = inst_codigo4_4,
-                            inst_data4_4 = inst_data4_4,
                             equip_de = equip_de,
                             equip_ee = equip_ee,
                             obs = obs,
@@ -937,30 +853,7 @@ namespace Arla32.Controllers
                         editarDados.mat_prima_5 = salvarDados.mat_prima_5;
                         editarDados.mat_lote_5 = salvarDados.mat_lote_5;
                         editarDados.mat_validade_5 = salvarDados.mat_validade_5;
-                        editarDados.inst_desc1 = salvarDados.inst_desc1;
-                        editarDados.inst_codigo1 = salvarDados.inst_codigo1;
-                        editarDados.inst_data1 = salvarDados.inst_data1;
-                        editarDados.inst_desc1_1 = salvarDados.inst_desc1_1;
-                        editarDados.inst_codigo1_1 = salvarDados.inst_codigo1_1;
-                        editarDados.inst_data1_1 = salvarDados.inst_data1_1;
-                        editarDados.insta_desc2 = salvarDados.insta_desc2;
-                        editarDados.inst_codigo2 = salvarDados.inst_codigo2;
-                        editarDados.inst_data2 = salvarDados.inst_data2;
-                        editarDados.inst_desc2_2 = salvarDados.inst_desc2_2;
-                        editarDados.inst_codigo2_2 = salvarDados.inst_codigo2_2;
-                        editarDados.inst_data2_2 = salvarDados.inst_data2_2;
-                        editarDados.inst_desc3 = salvarDados.inst_desc3;
-                        editarDados.inst_codigo3 = salvarDados.inst_codigo3;
-                        editarDados.inst_data3 = salvarDados.inst_data3;
-                        editarDados.inst_desc3_3 = salvarDados.inst_desc3_3;
-                        editarDados.inst_codigo3_3 = salvarDados.inst_codigo3_3;
-                        editarDados.inst_data3_3 = salvarDados.inst_data3_3;
-                        editarDados.inst_desc4 = salvarDados.inst_desc4;
-                        editarDados.inst_codigo4 = salvarDados.inst_codigo4;
-                        editarDados.inst_data4 = salvarDados.inst_data4;
-                        editarDados.inst_desc4_4 = salvarDados.inst_desc4_4;
-                        editarDados.inst_codigo4_4 = salvarDados.inst_codigo4_4;
-                        editarDados.inst_data4_4 = salvarDados.inst_data4_4;
+   
                         editarDados.equip_de = salvarDados.equip_de;
                         editarDados.equip_ee = salvarDados.equip_ee;
                         editarDados.obs = salvarDados.obs;
@@ -997,7 +890,7 @@ namespace Arla32.Controllers
         [HttpPost]
         public async Task<IActionResult> SalvarAldeidos(string OS, string orcamento, [Bind("data_ini,data_term,os, norma, np, descricao,col_norma,col_np,col_desc,lote_sol," +
             "codigo_curva,fator_calibracao,massa_branco,absorbancia_branco,maximo_permitido,massa_amostra, absorbancia_amostra, carta_absorbancia ,carta_concentracao,mat_prima1,mat_lote1,mat_validade1,mat_prima2, mat_lote2,mat_validade2,mat_prima3,mat_lote3,mat_validade3,mat_prima4,mat_lote4,mat_validade4," +
-            "mat_prima5, mat_lote5,mat_validade5, inst_desc1,inst_validade1,inst_cod1, inst_desc2,inst_cod2,inst_validade2,inst_desc1_1,inst_cod1_1,inst_validade1_1,inst_desc2_2,inst_cod2_2,inst_validade2_2, equi_de, equi_ee, observacoes, executado, auxiliado "
+            "mat_prima5, mat_lote5,mat_validade5, equi_de, equi_ee, observacoes, executado, auxiliado "
               )] ColetaModel.ArlaAldeidos aldeidos)
         {
             try
@@ -1036,18 +929,6 @@ namespace Arla32.Controllers
                         string mat_prima5 = aldeidos.mat_prima5;
                         string mat_lote5 = aldeidos.mat_lote5;
                         DateOnly mat_validade5 = aldeidos.mat_validade5;
-                        string inst_desc1 = aldeidos.inst_desc1;
-                        string inst_cod1 = aldeidos.inst_cod1;
-                        DateOnly inst_validade1 = aldeidos.inst_validade1;
-                        string inst_desc2 = aldeidos.inst_desc2;
-                        string inst_cod2 = aldeidos.inst_cod2;
-                        DateOnly inst_validade2 = aldeidos.inst_validade2;
-                        string inst_desc1_1 = aldeidos.inst_desc1_1;
-                        string inst_cod1_1 = aldeidos.inst_cod1_1;
-                        DateOnly inst_validade1_1 = aldeidos.inst_validade1_1;
-                        string inst_desc2_2 = aldeidos.inst_desc2_2;
-                        string inst_cod2_2 = aldeidos.inst_cod2_2;
-                        DateOnly inst_validade2_2 = aldeidos.inst_validade2_2;
                         string equi_de = aldeidos.equi_de;
                         string equi_ee = aldeidos.equi_ee;
                         string observacoes = aldeidos.observacoes;
@@ -1102,18 +983,6 @@ namespace Arla32.Controllers
                                 mat_prima5 = mat_prima5,
                                 mat_lote5 = mat_lote5,
                                 mat_validade5 = mat_validade5,
-                                inst_desc1 = inst_desc1,
-                                inst_cod1 = inst_cod1,
-                                inst_validade1 = inst_validade1,
-                                inst_desc2 = inst_desc2,
-                                inst_cod2 = inst_cod2,
-                                inst_validade2 = inst_validade2,
-                                inst_desc1_1 = inst_desc1_1,
-                                inst_cod1_1 = inst_cod1_1,
-                                inst_validade1_1 = inst_validade1_1,
-                                inst_desc2_2 = inst_desc2_2,
-                                inst_cod2_2 = inst_cod2_2,
-                                inst_validade2_2 = inst_validade2_2,
                                 equi_de = equi_de,
                                 equi_ee = equi_ee,
                                 observacoes = observacoes,
@@ -1156,18 +1025,6 @@ namespace Arla32.Controllers
                     editarDados.mat_prima5 = aldeidos.mat_prima5;
                     editarDados.mat_lote5 = aldeidos.mat_lote5;
                     editarDados.mat_validade5 = aldeidos.mat_validade5;
-                    editarDados.inst_desc1 = aldeidos.inst_desc1;
-                    editarDados.inst_cod1 = aldeidos.inst_cod1;
-                    editarDados.inst_validade1 = aldeidos.inst_validade1;
-                    editarDados.inst_desc2 = aldeidos.inst_desc2;
-                    editarDados.inst_cod2 = aldeidos.inst_cod2;
-                    editarDados.inst_validade2 = aldeidos.inst_validade2;
-                    editarDados.inst_desc1_1 = aldeidos.inst_desc1_1;
-                    editarDados.inst_cod1_1 = aldeidos.inst_cod1_1;
-                    editarDados.inst_validade1_1 = aldeidos.inst_validade1_1;
-                    editarDados.inst_desc2_2 = aldeidos.inst_desc2_2;
-                    editarDados.inst_cod2_2 = aldeidos.inst_cod2_2;
-                    editarDados.inst_validade2_2 = aldeidos.inst_validade2_2;
                     editarDados.equi_de = aldeidos.equi_de;
                     editarDados.equi_ee = aldeidos.equi_ee;
                     editarDados.observacoes = aldeidos.observacoes;
@@ -1219,11 +1076,7 @@ namespace Arla32.Controllers
         public async Task<IActionResult> SalvarInsoluveis(string OS, string orcamento, [Bind("data_ini, data_term, norma, np, descricao, preparacao_placa1,preparacao_filtro1,preparacao_massa1," +
             "preparacao_placa2,preparacao_filtro2, preparacao_massa2, pesagem_amostra1, pesagem_placa1,pesagem_filtro1, pesagem_resultado1," +
             "pesagem_amostra2,pesagem_placa2,pesagem_filtro2, pesagem_resultado2, pesagem_media,pesagem_resultfinal," +
-            "mat_prima1,mat_lote1,mat_validade1,mat_prima2,mat_lote2,mat_validade2,inst_desc1,inst_cod1,inst_validade1," +
-            "inst_desc2,inst_cod2,inst_validade2,inst_desc3,inst_cod3,inst_validade3,inst_desc4,inst_cod4,inst_validade4,inst_desc5," +
-            "inst_cod5,inst_validade5,inst_desc1_1,inst_cod1_1,inst_validade1_1,inst_desc2_2,inst_cod2_2,inst_validade2_2," +
-            "inst_desc3_3,inst_cod3_3,inst_validade3_3,inst_desc4_4,inst_cod4_4,inst_validade4_4,inst_desc5_5," +
-            "inst_cod5_5,inst_validade5_5,equi_ee,equi_de,observacoes,executado,auxiliado ")] ColetaModel.ArlaInsoluveis insoluveis)
+            "mat_prima1,mat_lote1,mat_validade1,mat_prima2,mat_lote2,mat_validade2,equi_ee,equi_de,observacoes,executado,auxiliado ")] ColetaModel.ArlaInsoluveis insoluveis)
         {
             try
             {
@@ -1256,36 +1109,6 @@ namespace Arla32.Controllers
                         string mat_prima2 = insoluveis.mat_prima2;
                         string mat_lote2 = insoluveis.mat_lote2;
                         DateOnly mat_validade2 = insoluveis.mat_validade2;
-                        string inst_desc1 = insoluveis.inst_desc1;
-                        string inst_cod1 = insoluveis.inst_cod1;
-                        DateOnly inst_validade1 = insoluveis.inst_validade1;
-                        string inst_desc2 = insoluveis.inst_desc2;
-                        string inst_cod2 = insoluveis.inst_cod2;
-                        DateOnly inst_validade2 = insoluveis.inst_validade2;
-                        string inst_desc3 = insoluveis.inst_desc3;
-                        string inst_cod3 = insoluveis.inst_cod3;
-                        DateOnly inst_validade3 = insoluveis.inst_validade3;
-                        string inst_desc4 = insoluveis.inst_desc4;
-                        string inst_cod4 = insoluveis.inst_cod4;
-                        DateOnly inst_validade4 = insoluveis.inst_validade4;
-                        string inst_desc5 = insoluveis.inst_desc5;
-                        string inst_cod5 = insoluveis.inst_cod5;
-                        DateOnly inst_validade5 = insoluveis.inst_validade5;
-                        string inst_desc1_1 = insoluveis.inst_desc1_1;
-                        string inst_cod1_1 = insoluveis.inst_cod1_1;
-                        DateOnly inst_validade1_1 = insoluveis.inst_validade1_1;
-                        string inst_desc2_2 = insoluveis.inst_desc2_2;
-                        string inst_cod2_2 = insoluveis.inst_cod2_2;
-                        DateOnly inst_validade2_2 = insoluveis.inst_validade2_2;
-                        string inst_desc3_3 = insoluveis.inst_desc3_3;
-                        string inst_cod3_3 = insoluveis.inst_cod3_3;
-                        DateOnly inst_validade3_3 = insoluveis.inst_validade3_3;
-                        string inst_desc4_4 = insoluveis.inst_desc4_4;
-                        string inst_cod4_4 = insoluveis.inst_cod4_4;
-                        DateOnly inst_validade4_4 = insoluveis.inst_validade4_4;
-                        string inst_desc5_5 = insoluveis.inst_desc5_5;
-                        string inst_cod5_5 = insoluveis.inst_desc5_5;
-                        DateOnly inst_validade5_5 = insoluveis.inst_validade5_5;
                         string equi_ee = insoluveis.equi_ee;
                         string equi_de = insoluveis.equi_de;
                         string observacoes = insoluveis.observacoes;
@@ -1350,36 +1173,6 @@ namespace Arla32.Controllers
                             mat_prima2 = mat_prima2,
                             mat_lote2 = mat_lote2,
                             mat_validade2 = mat_validade2,
-                            inst_desc1 = inst_desc1,
-                            inst_cod1 = inst_cod1,
-                            inst_validade1 = inst_validade1,
-                            inst_desc2 = inst_desc2,
-                            inst_cod2 = inst_cod2,
-                            inst_validade2 = inst_validade2,
-                            inst_desc3 = inst_desc3,
-                            inst_cod3 = inst_cod3,
-                            inst_validade3 = inst_validade3,
-                            inst_desc4 = inst_desc4,
-                            inst_cod4 = inst_cod4,
-                            inst_validade4 = inst_validade4,
-                            inst_desc5 = inst_desc5,
-                            inst_cod5 = inst_cod5,
-                            inst_validade5 = inst_validade5,
-                            inst_desc1_1 = inst_desc1_1,
-                            inst_cod1_1 = inst_cod1_1,
-                            inst_validade1_1 = inst_validade1_1,
-                            inst_desc2_2 = inst_desc2_2,
-                            inst_cod2_2 = inst_cod2_2,
-                            inst_validade2_2 = inst_validade2_2,
-                            inst_desc3_3 = inst_desc3_3,
-                            inst_cod3_3 = inst_cod3_3,
-                            inst_validade3_3 = inst_validade3_3,
-                            inst_desc4_4 = inst_desc4_4,
-                            inst_cod4_4 = inst_cod4_4,
-                            inst_validade4_4 = inst_validade4_4,
-                            inst_desc5_5 = inst_desc5_5,
-                            inst_cod5_5 = inst_cod5_5,
-                            inst_validade5_5 = inst_validade5_5,
                             equi_ee = equi_ee,
                             equi_de = equi_de,
                             observacoes = observacoes,
@@ -1414,36 +1207,6 @@ namespace Arla32.Controllers
                         editarDados.mat_prima2 = insoluveis.mat_prima2;
                         editarDados.mat_lote2 = insoluveis.mat_lote2;
                         editarDados.mat_validade2 = insoluveis.mat_validade2;
-                        editarDados.inst_desc1 = insoluveis.inst_desc1;
-                        editarDados.inst_cod1 = insoluveis.inst_cod1;
-                        editarDados.inst_validade1 = insoluveis.inst_validade1;
-                        editarDados.inst_desc2 = insoluveis.inst_desc2;
-                        editarDados.inst_cod2 = insoluveis.inst_cod2;
-                        editarDados.inst_validade2 = insoluveis.inst_validade2;
-                        editarDados.inst_desc3 = insoluveis.inst_desc3;
-                        editarDados.inst_cod3 = insoluveis.inst_cod3;
-                        editarDados.inst_validade3 = insoluveis.inst_validade3;
-                        editarDados.inst_desc4 = insoluveis.inst_desc4;
-                        editarDados.inst_cod4 = insoluveis.inst_cod4;
-                        editarDados.inst_validade4 = insoluveis.inst_validade4;
-                        editarDados.inst_desc5 = insoluveis.inst_desc5;
-                        editarDados.inst_cod5 = insoluveis.inst_cod5;
-                        editarDados.inst_validade5 = insoluveis.inst_validade5;
-                        editarDados.inst_desc1_1 = insoluveis.inst_desc1_1;
-                        editarDados.inst_cod1_1 = insoluveis.inst_cod1_1;
-                        editarDados.inst_validade1_1 = insoluveis.inst_validade1_1;
-                        editarDados.inst_desc2_2 = insoluveis.inst_desc2_2;
-                        editarDados.inst_cod2_2 = insoluveis.inst_cod2_2;
-                        editarDados.inst_validade2_2 = insoluveis.inst_validade2_2;
-                        editarDados.inst_desc3_3 = insoluveis.inst_desc3_3;
-                        editarDados.inst_cod3_3 = insoluveis.inst_cod3_3;
-                        editarDados.inst_validade3_3 = insoluveis.inst_validade3_3;
-                        editarDados.inst_desc4_4 = insoluveis.inst_desc4_4;
-                        editarDados.inst_cod4_4 = insoluveis.inst_cod4_4;
-                        editarDados.inst_validade4_4 = insoluveis.inst_validade4_4;
-                        editarDados.inst_desc5_5 = insoluveis.inst_desc5_5;
-                        editarDados.inst_cod5_5 = insoluveis.inst_desc5_5;
-                        editarDados.inst_validade5_5 = insoluveis.inst_validade5_5;
                         editarDados.equi_ee = insoluveis.equi_ee;
                         editarDados.equi_de = insoluveis.equi_de;
                         editarDados.observacoes = insoluveis.observacoes;
@@ -3315,7 +3078,7 @@ namespace Arla32.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> SalvarFosfato(string OS, string orcamento, [Bind("data_ini,data_term,cod_curva,fator_calibracao,massa,absorvancia1,absorvancia2,abs_branco,abs_qc,mat_prima_1,mat_lote_1,mat_validade_1,mat_prima_2,mat_lote_2,mat_validade_2,mat_prima_3,mat_lote_3,mat_validade_3,mat_prima_4,mat_lote_4,mat_validade_4,mat_prima_5,mat_lote_5,mat_validade_5,mat_prima_6,mat_lote_6,mat_validade_6,mat_prima_7,mat_lote_7,mat_validade_7,mat_prima_8,mat_lote_8,mat_validade_8,inst_desc1,inst_cod1,inst_data1,inst_desc1_1,inst_cod1_1,inst_data1_1,inst_desc2,inst_cod2,inst_data2,inst_desc2_2,inst_cod2_2,inst_data2_2,inst_desc3,inst_cod3,inst_data3,inst_desc3_3,inst_cod3_3,inst_data3_3,inst_desc4,inst_cod4,inst_data4,inst_desc4_4,inst_cod4_4,inst_data4_4,equi_ee,equi_de,obs,executado_por,auxiliado_por")] ColetaModel.ArlaFosfato salvarDados)
+        public async Task<IActionResult> SalvarFosfato(string OS, string orcamento, [Bind("data_ini,data_term,cod_curva,fator_calibracao,massa,absorvancia1,absorvancia2,abs_branco,abs_qc,mat_prima_1,mat_lote_1,mat_validade_1,mat_prima_2,mat_lote_2,mat_validade_2,mat_prima_3,mat_lote_3,mat_validade_3,mat_prima_4,mat_lote_4,mat_validade_4,mat_prima_5,mat_lote_5,mat_validade_5,mat_prima_6,mat_lote_6,mat_validade_6,mat_prima_7,mat_lote_7,mat_validade_7,mat_prima_8,mat_lote_8,mat_validade_8,equi_ee,equi_de,obs,executado_por,auxiliado_por")] ColetaModel.ArlaFosfato salvarDados)
         {
             try
             {
@@ -3360,30 +3123,6 @@ namespace Arla32.Controllers
                         string mat_prima_8 = salvarDados.mat_prima_8;
                         string mat_lote_8 = salvarDados.mat_lote_8;
                         DateOnly mat_validade_8 = salvarDados.mat_validade_8;
-                        string inst_desc1 = salvarDados.inst_desc1;
-                        string inst_cod1 = salvarDados.inst_cod1;
-                        DateOnly inst_data1 = salvarDados.inst_data1;
-                        string inst_desc1_1 = salvarDados.inst_desc1_1;
-                        string inst_cod1_1 = salvarDados.inst_cod1_1;
-                        DateOnly inst_data1_1 = salvarDados.inst_data1_1;
-                        string inst_desc2 = salvarDados.inst_desc2;
-                        string inst_cod2 = salvarDados.inst_cod2;
-                        DateOnly inst_data2 = salvarDados.inst_data2;
-                        string inst_desc2_2 = salvarDados.inst_desc2_2;
-                        string inst_cod2_2 = salvarDados.inst_cod2_2;
-                        DateOnly inst_data2_2 = salvarDados.inst_data2_2;
-                        string inst_desc3 = salvarDados.inst_desc3;
-                        string inst_cod3 = salvarDados.inst_cod3;
-                        DateOnly inst_data3 = salvarDados.inst_data3;
-                        string inst_desc3_3 = salvarDados.inst_desc3_3;
-                        string inst_cod3_3 = salvarDados.inst_cod3_3;
-                        DateOnly inst_data3_3 = salvarDados.inst_data3_3;
-                        string inst_desc4 = salvarDados.inst_desc4;
-                        string inst_cod4 = salvarDados.inst_cod4;
-                        DateOnly inst_data4 = salvarDados.inst_data4;
-                        string inst_desc4_4 = salvarDados.inst_desc4_4;
-                        string inst_cod4_4 = salvarDados.inst_cod4_4;
-                        DateOnly inst_data4_4 = salvarDados.inst_data4_4;
                         string equi_ee = salvarDados.equi_ee;
                         string equi_de = salvarDados.equi_de;
                         string obs = salvarDados.obs;
@@ -3440,30 +3179,6 @@ namespace Arla32.Controllers
                             mat_prima_8 = mat_prima_8,
                             mat_lote_8 = mat_lote_8,
                             mat_validade_8 = mat_validade_8,
-                            inst_desc1 = inst_desc1,
-                            inst_cod1 = inst_cod1,
-                            inst_data1 = inst_data1,
-                            inst_desc1_1 = inst_desc1_1,
-                            inst_cod1_1 = inst_cod1_1,
-                            inst_data1_1 = inst_data1_1,
-                            inst_desc2 = inst_desc2,
-                            inst_cod2 = inst_cod2,
-                            inst_data2 = inst_data2,
-                            inst_desc2_2 = inst_desc2_2,
-                            inst_cod2_2 = inst_cod2_2,
-                            inst_data2_2 = inst_data2_2,
-                            inst_desc3 = inst_desc3,
-                            inst_cod3 = inst_cod3,
-                            inst_data3 = inst_data3,
-                            inst_desc3_3 = inst_desc3_3,
-                            inst_cod3_3 = inst_cod3_3,
-                            inst_data3_3 = inst_data3_3,
-                            inst_desc4 = inst_desc4,
-                            inst_cod4 = inst_cod4,
-                            inst_data4 = inst_data4,
-                            inst_desc4_4 = inst_desc4_4,
-                            inst_cod4_4 = inst_cod4_4,
-                            inst_data4_4 = inst_data4_4,
                             equi_ee = equi_ee,
                             equi_de = equi_de,
                             obs = obs,
@@ -3523,30 +3238,6 @@ namespace Arla32.Controllers
                         editarDados.mat_prima_8 = salvarDados.mat_prima_8;
                         editarDados.mat_lote_8 = salvarDados.mat_lote_8;
                         editarDados.mat_validade_8 = salvarDados.mat_validade_8;
-                        editarDados.inst_desc1 = salvarDados.inst_desc1;
-                        editarDados.inst_cod1 = salvarDados.inst_cod1;
-                        editarDados.inst_data1 = salvarDados.inst_data1;
-                        editarDados.inst_desc1_1 = salvarDados.inst_desc1_1;
-                        editarDados.inst_cod1_1 = salvarDados.inst_cod1_1;
-                        editarDados.inst_data1_1 = salvarDados.inst_data1_1;
-                        editarDados.inst_desc2 = salvarDados.inst_desc2;
-                        editarDados.inst_cod2 = salvarDados.inst_cod2;
-                        editarDados.inst_data2 = salvarDados.inst_data2;
-                        editarDados.inst_desc2_2 = salvarDados.inst_desc2_2;
-                        editarDados.inst_cod2_2 = salvarDados.inst_cod2_2;
-                        editarDados.inst_data2_2 = salvarDados.inst_data2_2;
-                        editarDados.inst_desc3 = salvarDados.inst_desc3;
-                        editarDados.inst_cod3 = salvarDados.inst_cod3;
-                        editarDados.inst_data3 = salvarDados.inst_data3;
-                        editarDados.inst_desc3_3 = salvarDados.inst_desc3_3;
-                        editarDados.inst_cod3_3 = salvarDados.inst_cod3_3;
-                        editarDados.inst_data3_3 = salvarDados.inst_data3_3;
-                        editarDados.inst_desc4 = salvarDados.inst_desc4;
-                        editarDados.inst_cod4 = salvarDados.inst_cod4;
-                        editarDados.inst_data4 = salvarDados.inst_data4;
-                        editarDados.inst_desc4_4 = salvarDados.inst_desc4_4;
-                        editarDados.inst_cod4_4 = salvarDados.inst_cod4_4;
-                        editarDados.inst_data4_4 = salvarDados.inst_data4_4;
                         editarDados.equi_ee = salvarDados.equi_ee;
                         editarDados.equi_de = salvarDados.equi_de;
                         editarDados.obs = salvarDados.obs;
