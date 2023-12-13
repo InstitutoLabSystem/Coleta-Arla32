@@ -20,6 +20,8 @@ namespace Arla32.Models
             public DateOnly? validade { get; set; }
             public string? anexo { get; set; }
             public int? ativo { get; set; }
+            public int? equipamento { get; set; }
+            public int? DE {  get; set; }
 
         }
         public class UploadResult

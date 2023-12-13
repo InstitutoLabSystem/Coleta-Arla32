@@ -144,6 +144,8 @@ namespace Arla32.Controllers
                                     validade = p.validade,
                                     anexo = p.anexo,
                                     ativo = p.ativo,
+                                    equipamento = p.equipamento,
+                                    DE = p.DE,
                                  }).Distinct().ToList(); ;
 
 

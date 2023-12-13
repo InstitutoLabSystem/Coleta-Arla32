@@ -35,22 +35,27 @@ namespace Arla32.Controllers
         }
         public IActionResult EnsaioConcentracao(string OS, string orcamento)
         {
-            var dados = _qcontext.arla_concentracao_indice.Where(x => x.os == OS).FirstOrDefault();
-            if (dados == null)
-            {
-                ViewBag.OS = OS;
-                ViewBag.orcamento = orcamento;
-
-
-                return View();
-            }
-            else
-            {
-                ViewBag.OS = OS;
-                ViewBag.orcamento = orcamento;
-                return View(dados);
-            }
+            var model = new InstrumentosModel();
+            model.concentracao = ObterConcentracao(OS, orcamento);
+            model.instrumentos = ObterInstrumentosConcentracao(OS, orcamento);
+            ViewBag.OS = OS;
+            ViewBag.orcamento = orcamento;
+            return View(model);
         }
+
+        private ArlaConcentracao ObterConcentracao(string OS, string orcamento)
+        {
+            var dados = _qcontext.arla_concentracao_indice.
+                Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
+            return dados;
+        }
+        private List<ArlaInstrumentos> ObterInstrumentosConcentracao(string OS, string orcamento)
+        {
+            var instrumentos = _qcontext.arla_instrumentos.Where(x => x.anexo == "ANEXO C").ToList();
+            return instrumentos;
+        }
+
+
         public IActionResult EnsaioIdentidadeFotos(string OS, string orcamento)
         {
             ViewBag.OS = OS;
@@ -85,27 +90,29 @@ namespace Arla32.Controllers
 
 
 
-
-
-
         public IActionResult EnsaioDensidade(string OS, string orcamento)
         {
-            var dados = _qcontext.arla_densidade.Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
-            if (dados == null)
-            {
-                ViewBag.OS = OS;
-                ViewBag.orcamento = orcamento;
-
-                return View();
-            }
-            else
-            {
-                ViewBag.OS = OS;
-                ViewBag.orcamento = orcamento;
-                return View(dados);
-            }
+            var model = new InstrumentosModel();
+            model.densidade = ObterDensidade(OS, orcamento);
+            model.instrumentos = ObterInstrumentosDensidade(OS, orcamento);
+            ViewBag.OS = OS;
+            ViewBag.orcamento = orcamento;
+            return View(model);
 
         }
+        private ArlaDensidade ObterDensidade(string OS, string orcamento)
+        {
+            var dados = _qcontext.arla_densidade.
+                Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
+            return dados;
+        }
+        private List<ArlaInstrumentos> ObterInstrumentosDensidade(string OS, string orcamento)
+        {
+            var instrumentos = _qcontext.arla_instrumentos.Where(x => x.anexo == "DENSIDADE").ToList();
+            return instrumentos;
+        }
+
+
         public IActionResult EnsaioAlcalinidade(string OS, string orcamento)
         {
                 var model = new InstrumentosModel();
@@ -181,23 +188,25 @@ namespace Arla32.Controllers
 
         public IActionResult EnsaioIdentidade(string OS, string orcamento)
         {
-            var dados = _qcontext.arla_identidade.Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
-            if (dados == null)
-            {
-                ViewBag.OS = OS;
-                ViewBag.orcamento = orcamento;
-
-
-                return View();
-            }
-            else
-            {
-                ViewBag.OS = OS;
-                ViewBag.orcamento = orcamento;
-
-                return View(dados);
-            }
+            var model = new InstrumentosModel();
+            model.identidade = ObterIdentidade(OS, orcamento);
+            model.instrumentos = ObterInstrumentosIdentidade(OS, orcamento);
+            ViewBag.OS = OS;
+            ViewBag.orcamento = orcamento;
+            return View(model);
         }
+        private ArlaIdentidade ObterIdentidade(string OS, string orcamento)
+        {
+            var dados = _qcontext.arla_identidade.
+                Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
+            return dados;
+        }
+        private List<ArlaInstrumentos> ObterInstrumentosIdentidade(string OS, string orcamento)
+        {
+            var instrumentos = _qcontext.arla_instrumentos.Where(x => x.anexo == "ANEXO J").ToList();
+            return instrumentos;
+        }
+
 
 
         public IActionResult EnsaioBiureto(string OS, string orcamento)

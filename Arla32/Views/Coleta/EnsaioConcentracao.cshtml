@@ -1,4 +1,4 @@
-﻿@model ColetaModel.ArlaConcentracao
+﻿@model Arla32.Models.InstrumentosModel;
 @{
     ViewData["Title"] = "Coleta De Concentração";
 }
@@ -14,7 +14,7 @@
 <body>
 
     <form method="post" asp-controller="Coleta" asp-action="SalvarConcentracao" asp-route-os="@ViewData["os"]" asp-route-orcamento="@ViewData["orcamento"]">
-        @if (Model == null)
+        @if (Model.concentracao == null)
         {
             <table class="table table-bordered border-secondary  table-sm">
                 <tr>
@@ -124,7 +124,13 @@
                 </tr>
                 <tr>
                     <td>EE:</td>
-                    <td><input type="text" class="form-control input" name="ee_equipamento" id="ee_equipamento" /></td>
+                    @for (var j = 0; j < Model.instrumentos.Count; j++)
+                    {
+                        @if (Model.instrumentos[j].equipamento == 1)
+                        {
+                            <td><input type="text" class="form-control input" readonly name="ee_equipamento" id="ee_equipamento" value="@Model.instrumentos[j].descricao" /></td>
+                        }
+                    }
                 </tr>
                 <tr class="tabela">
                     <td colspan="2" class="texto-central">Observações:</td>
@@ -161,9 +167,9 @@
                 </tr>
                 <tr>
                     <td class=" col-md-0 " style="background-color: #800000; color:white;">Data Inicio:</td>
-                    <td><input type="datetime" class="form-control input " name="data_ini" value="@Model.data_ini" /></td>
+                    <td><input type="datetime" class="form-control input " name="data_ini" value="@Model.concentracao.data_ini" /></td>
                     <td class=" col-md-2 " style="background-color: #800000; color:white;">Data Término:</td>
-                    <td><input type="datetime" class="form-control input " name="data_term" value="@Model.data_term" /></td>
+                    <td><input type="datetime" class="form-control input " name="data_term" value="@Model.concentracao.data_term" /></td>
                 </tr>
                 <tr class="texto-central">
                     <td colspan="5">
@@ -183,13 +189,13 @@
                 </tr>
                 <tr>
                     <td colspan="4" class=" col-md-2 " style="background-color: #800000; color:white;">Lote da solução padrão</td>
-                    <td><input class="form-control input " name="lote_solucao" id="lote_solucao" value="@Model.lote_solucao" /></td>
+                    <td><input class="form-control input " name="lote_solucao" id="lote_solucao" value="@Model.concentracao.lote_solucao" /></td>
                 </tr>
                 <tr>
                     <td style="background-color: #800000; color:white;" class=" col-md-2 ">Código da curva:</td>
-                    <td><input type="text" class="form-control input col-md-2" name="codigo_curva" id="codigo_curva" value="@Model.codigo_curva" /></td>
+                    <td><input type="text" class="form-control input col-md-2" name="codigo_curva" id="codigo_curva" value="@Model.concentracao.codigo_curva" /></td>
                     <td colspan="2" class=" col-md-2 " style="background-color: #800000; color:white;">Fator de avaliação:</td>
-                    <td><input type="text" class="form-control input " name="fator_avaliacao" id="fator_avaliacao" value="@Model.fator_avaliacao" /></td>
+                    <td><input type="text" class="form-control input " name="fator_avaliacao" id="fator_avaliacao" value="@Model.concentracao.fator_avaliacao" /></td>
                 </tr>
             </table>
             <Br />
@@ -216,11 +222,11 @@
                     <td class="texto-central">Refração Amostra 02</td>
                     <td class="texto-central">Concetração de uréia (%) </td>
                 </tr>
-                <td><input type="text" class="form-control input " disabled value="@Model.conc_biureto" /></td>
-                <td><input type="text" class="form-control input " name="indice_agua" id="indice_agua" Value="@Model.indice_agua" /></td>
-                <td><input type="text" class="form-control input " name="refracao_amostra1" id="refracao_amostra1" Value="@Model.refracao_amostra1" /></td>
-                <td><input type="text" class="form-control input " name="refracao_amostra2" id="refracao_amostra2" Value="@Model.refracao_amostra2" /></td>
-                <td><input type="text" class="form-control input " disabled value="@Model.conc_ureia" /></td>
+                <td><input type="text" class="form-control input " disabled value="@Model.concentracao.conc_biureto" /></td>
+                <td><input type="text" class="form-control input " name="indice_agua" id="indice_agua" Value="@Model.concentracao.indice_agua" /></td>
+                <td><input type="text" class="form-control input " name="refracao_amostra1" id="refracao_amostra1" Value="@Model.concentracao.refracao_amostra1" /></td>
+                <td><input type="text" class="form-control input " name="refracao_amostra2" id="refracao_amostra2" Value="@Model.concentracao.refracao_amostra2" /></td>
+                <td><input type="text" class="form-control input " disabled value="@Model.concentracao.conc_ureia" /></td>
             </table>
 
             <br />
@@ -238,11 +244,11 @@
                     <td>Validade</td>
                 </tr>
                 <tr>
-                    <td><input type="text" class="form-control input" name="desc1_instrumento" value="@Model.desc1_instrumento" /></td>
-                    <td><input type="text" class="form-control input" name="codigo1_instrumento" value="@Model.codigo1_instrumento" /></td>
-                    @if (Model.validade1_instrumento != DateOnly.MinValue)
+                    <td><input type="text" class="form-control input" name="desc1_instrumento" value="@Model.concentracao.desc1_instrumento" /></td>
+                    <td><input type="text" class="form-control input" name="codigo1_instrumento" value="@Model.concentracao.codigo1_instrumento" /></td>
+                    @if (Model.concentracao.validade1_instrumento != DateOnly.MinValue)
                     {
-                        <td><input type="datetime" class="form-control input" name="validade1_instrumento" value="@Model.validade1_instrumento" /></td>
+                        <td><input type="datetime" class="form-control input" name="validade1_instrumento" value="@Model.concentracao.validade1_instrumento" /></td>
                     }
                     else
                     {
@@ -250,12 +256,12 @@
                         <td><input type="datetime" class="form-control input" name="validade1_instrumento" value="---" /></td>
 
                     }
-                    <td><input type="text" class="form-control input" name="desc2_instrumento" value="@Model.desc2_instrumento" /></td>
-                    <td><input type="text" class="form-control input" name="codigo2_instrumento" value="@Model.codigo2_instrumento" /></td>
+                    <td><input type="text" class="form-control input" name="desc2_instrumento" value="@Model.concentracao.desc2_instrumento" /></td>
+                    <td><input type="text" class="form-control input" name="codigo2_instrumento" value="@Model.concentracao.codigo2_instrumento" /></td>
 
-                    @if (Model.validade2_instrumento != DateOnly.MinValue)
+                    @if (Model.concentracao.validade2_instrumento != DateOnly.MinValue)
                     {
-                        <td><input type="datetime" class="form-control input" name="validade2_instrumento" value="@Model.validade2_instrumento" /></td>
+                        <td><input type="datetime" class="form-control input" name="validade2_instrumento" value="@Model.concentracao.validade2_instrumento" /></td>
                     }
                     else
                     {
@@ -270,25 +276,30 @@
                 <tr class="tabela"><td colspan="2" class="texto-central">Código de Instrumentos Utilizados</td></tr>
                 <tr>
                     <td>DE:</td>
-                    <td><input type="text" class="form-control input" name="de_equipamento" id="de_equipamento" value="@Model.de_equipamento" /></td>
+                    <td><input type="text" class="form-control input" name="de_equipamento" id="de_equipamento" value="@Model.concentracao.de_equipamento" /></td>
                 </tr>
                 <tr>
                     <td>EE:</td>
-                    <td><input type="text" class="form-control input" name="ee_equipamento" id="ee_equipamento" value="@Model.ee_equipamento" /></td>
-                </tr>
+                    @for (var j = 0; j < Model.instrumentos.Count; j++)
+                    {
+                        @if (Model.instrumentos[j].equipamento == 1)
+                        {
+                            <td><input type="text" class="form-control input" readonly name="ee_equipamento" id="ee_equipamento" value="@Model.instrumentos[j].descricao" /></td>
+                        }
+                    }
                 <tr class="tabela">
                     <td colspan="2" class="texto-central">Observações:</td>
                 </tr>
                 <tr>
-                    <td colspan="2"><textarea name="obs" id="obs" class="form-control w-100 mr-2 input" style="resize: none;">@Model.obs</textarea></td>
+                    <td colspan="2"><textarea name="obs" id="obs" class="form-control w-100 mr-2 input" style="resize: none;">@Model.concentracao.obs</textarea></td>
                 </tr>
                 <tr class="tabela">
                     <td class="texto-central">Executado Por:</td>
                     <td class="texto-central">Auxiliado Por:</td>
                 </tr>
                 <tr>
-                    <td><input type="text" class="form-control input" name="executado_por" id="executado_por" value="@Model.executado_por" /></td>
-                    <td><input type="text" class="form-control input" name="auxiliado_por" id="auxiliado_por" value="@Model.auxiliado_por" /></td>
+                    <td><input type="text" class="form-control input" name="executado_por" id="executado_por" value="@Model.concentracao.executado_por" /></td>
+                    <td><input type="text" class="form-control input" name="auxiliado_por" id="auxiliado_por" value="@Model.concentracao.auxiliado_por" /></td>
                 </tr>
             </table>
             <br />

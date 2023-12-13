@@ -130,7 +130,13 @@
                     <td>De:</td>
                     <td><input type="text" name="equip_de" class="form-control input " /></td>
                     <td>EE:</td>
-                    <td><input type="text" name="equip_ee" class="form-control input " /></td>
+                    @for (var j = 0; j < Model.instrumentos.Count; j++)
+                    {
+                        @if (Model.instrumentos[j].equipamento == 1)
+                        {
+                            <td><input type="text" readonly class="form-control input" name="equip_ee" id="ee_equipamento" value="@Model.instrumentos[j].descricao" /></td>
+                        }
+                    }
                 </tr>
             </table>
             <br />
@@ -262,7 +268,7 @@
                 
                    @for (var j = 0; j < Model.instrumentos.Count; j++)
                    {
-                    @if (Model.instrumentos[j].ativo == 1)
+                    @if (Model.instrumentos[j].ativo == 1 && Model.instrumentos[j].equipamento == 0)
                     {
                  <tr>
                             <td><input type="text" readonly  class="form-control input " value="@Model.instrumentos[j].descricao" /></td>
@@ -283,7 +289,13 @@
                     <td>De:</td>
                     <td><input type="text" name="equip_de" class="form-control input " value="@Model.alcalinidade.equip_de" /></td>
                     <td>EE:</td>
-                    <td><input type="text" name="equip_ee" class="form-control input " value="@Model.alcalinidade.equip_ee" /></td>
+                    @for (var j = 0; j < Model.instrumentos.Count; j++)
+                    {
+                        @if (Model.instrumentos[j].equipamento == 1)
+                        {
+                            <td><input type="text" class="form-control input" readonly name="equip_ee" id="ee_equipamento" value="@Model.instrumentos[j].descricao" /></td>
+                        }
+                    }
                 </tr>
             </table>
             <br />

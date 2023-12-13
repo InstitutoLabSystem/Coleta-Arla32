@@ -170,7 +170,7 @@
                 </tr>
                 @for (var j = 0; j < Model.instrumentos.Count; j++)
                 {
-                    @if (Model.instrumentos[j].ativo == 1)
+                    @if (Model.instrumentos[j].ativo == 1 && Model.instrumentos[j].equipamento == 0)
                     {
                         <tr>
                             <td><input type="text" readonly class="form-control input " value="@Model.instrumentos[j].descricao" /></td>
@@ -191,10 +191,16 @@
                     <td colspan="1">DE</td>
                     <td colspan="7"><input class="form-control input " name="equi_de" /></td>
                 </tr>
-                <tr>
-                    <td colspan="1">EE</td>
-                    <td colspan="7"><input class="form-control input " name="equi_ee" /></td>
-                </tr>
+                @for (var j = 0; j < Model.instrumentos.Count; j++)
+                {
+                    @if (Model.instrumentos[j].equipamento == 1)
+                    {
+                        <tr>
+                            <td>EE:</td>
+                            <td><input type="text" readonly class="form-control input" readonly name="equip_ee" id="ee_equipamento" value="@Model.instrumentos[j].descricao" /></td>
+                        </tr>
+                    }
+                }
             </table>
             <br />
 
@@ -417,7 +423,7 @@
                 </tr>
                 @for (var j = 0; j < Model.instrumentos.Count; j++)
                 {
-                    @if (Model.instrumentos[j].ativo == 1)
+                    @if (Model.instrumentos[j].ativo == 1 && Model.instrumentos[j].equipamento == 0)
                     {
                         <tr>
                             <td><input type="text" readonly class="form-control input " value="@Model.instrumentos[j].descricao" /></td>
@@ -439,10 +445,16 @@
                     <td colspan="1">DE</td>
                     <td colspan="7"><input class="form-control input " name="equi_de" value="@Model.aldeidos.equi_de" /></td>
                 </tr>
-                <tr>
-                    <td colspan="1">EE</td>
-                    <td colspan="7"><input class="form-control input " name="equi_ee" value="@Model.aldeidos.equi_ee" /></td>
-                </tr>
+                @for (var j = 0; j < Model.instrumentos.Count; j++)
+                {
+                    @if (Model.instrumentos[j].equipamento == 1)
+                    {
+                        <tr>
+                            <td>EE:</td>
+                            <td><input type="text" readonly class="form-control input" readonly name="equip_ee" id="ee_equipamento" value="@Model.instrumentos[j].descricao" /></td>
+                        </tr>
+                    }
+                }
             </table>
             <br />
 

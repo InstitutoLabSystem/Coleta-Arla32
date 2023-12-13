@@ -12,8 +12,10 @@ namespace Arla32.Models
         public ArlaFosfato fosfato { get; set; }
         public ArlaInsoluveis insoluveis { get; set; }
         public ArlaMetais metais { get; set; }
-
         public MetaisTratamento metaisTratamento { get; set; }
+        public ArlaDensidade densidade { get; set; }
+        public ArlaConcentracao concentracao { get; set; }
+        public ArlaIdentidade identidade { get; set; }
 
     }
 }
