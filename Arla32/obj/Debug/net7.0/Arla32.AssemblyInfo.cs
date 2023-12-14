@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Arla32")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6e517d9efc995c2e892df87d7acf7c9b4b0501dd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ee6511acad5f8f59e88d896b6dbb94c2e8492fd7")]
 [assembly: System.Reflection.AssemblyProductAttribute("Arla32")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Arla32")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

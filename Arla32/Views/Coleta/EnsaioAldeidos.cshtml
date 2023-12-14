@@ -131,28 +131,28 @@
                     <td colspan="1" class="texto-central">Validade</td>
                 </tr>
                 <tr>
-                    <td colspan="3"><input class="form-control input " name="mat_prima1" /></td>
+                    <td colspan="3"><input class="form-control input " name="mat_prima1" value="Ácido sulfúrico" /></td>
                     <td colspan="1"><input class="form-control input " name="mat_lote1" /></td>
                     <td colspan="1"><input type="date" class="form-control input " name="mat_validade1" /></td>
                 </tr>
                 <tr>
-                    <td colspan="3"><input class="form-control input " name="mat_prima2" /></td>
+                    <td colspan="3"><input class="form-control input " name="mat_prima2" value="Anexo F - Ácido Cromotrópico" /></td>
                     <td colspan="1"><input class="form-control input " name="mat_lote2" /></td>
                     <td colspan="1"><input type="date" class="form-control input " name="mat_validade2" /></td>
                 </tr>
                 <tr>
-                    <td colspan="3"><input class="form-control input " name="mat_prima3" /></td>
+                    <td colspan="3"><input class="form-control input " name="mat_prima3" value="Anexo F - Branco" /></td>
                     <td colspan="1"><input class="form-control input " name="mat_lote3" /></td>
                     <td colspan="1"><input type="date" class="form-control input " name="mat_validade3" /></td>
                 </tr>
                 <tr>
-                    <td colspan="3"><input class="form-control input " name="mat_prima4" /></td>
+                    <td colspan="3"><input class="form-control input " name="mat_prima4" Value="Anexo F - QC" /></td>
                     <td colspan="1"><input class="form-control input " name="mat_lote4" /></td>
                     <td colspan="1"><input type="date" class="form-control input " name="mat_validade4" /></td>
                 </tr>
                 <tr>
-                    <td colspan="3"><input class="form-control input " name="mat_prima5" /></td>
-                    <td colspan="1"><input class="form-control input " name="mat_lote5" /></td>
+                    <td colspan="3"><input class="form-control input " name="mat_prima5" value="---"/></td>
+                    <td colspan="1"><input class="form-control input " name="mat_lote5" value="---" /></td>
                     <td colspan="1"><input type="date" class="form-control input " name="mat_validade5" /></td>
                 </tr>
             </table>
@@ -197,7 +197,7 @@
                     {
                         <tr>
                             <td>EE:</td>
-                            <td><input type="text" readonly class="form-control input" readonly name="equip_ee" id="ee_equipamento" value="@Model.instrumentos[j].descricao" /></td>
+                            <td><input type="text" readonly class="form-control input" readonly name="equip_ee" id="ee_equipamento" value="@Model.instrumentos[j].codigo" /></td>
                         </tr>
                     }
                 }
@@ -451,7 +451,7 @@
                     {
                         <tr>
                             <td>EE:</td>
-                            <td><input type="text" readonly class="form-control input" readonly name="equip_ee" id="ee_equipamento" value="@Model.instrumentos[j].descricao" /></td>
+                            <td><input type="text" readonly class="form-control input" readonly name="equip_ee" id="ee_equipamento" value="@Model.instrumentos[j].codigo" /></td>
                         </tr>
                     }
                 }

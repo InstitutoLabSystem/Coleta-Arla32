@@ -298,67 +298,67 @@
                     <td>Validade</td>
                 </tr>
                 <tr>
-                    <td><input class="form-control input " name="mat_prima1" /></td>
+                    <td><input class="form-control input " name="mat_prima1" value="Anexo I - MRC - Curva 0,5mg/L" /></td>
                     <td><input class="form-control input " name="mat_lote1" /></td>
                     <td><input type="date" class="form-control input " name="mat_val1" /></td>
                 </tr>
                 <tr>
-                    <td><input class="form-control input " name="mat_prima2" /></td>
+                    <td><input class="form-control input " name="mat_prima2" value="Anexo I - MRC - Curva 0,2mg/L"/></td>
                     <td><input class="form-control input " name="matt_lote2" /></td>
                     <td><input type="date" class="form-control input " name="mat_val2" /></td>
                 </tr>
                 <tr>
-                    <td><input class="form-control input " name="mat_prima3" /></td>
+                    <td><input class="form-control input " name="mat_prima3" value="Anexo I - MRC - Curva 0,1mg/L"/></td>
                     <td><input class="form-control input " name="mat_lote3" /></td>
                     <td><input type="date" class="form-control input " name="mat_val3" /></td>
                 </tr>
                 <tr>
-                    <td><input class="form-control input " name="mat_prima4" /></td>
+                    <td><input class="form-control input " name="mat_prima4" value="Anexo I - MRC - Curva 0,050mg/L" /></td>
                     <td><input class="form-control input " name="mat_lote4" /></td>
                     <td><input type="date" class="form-control input " name="mat_val4" /></td>
                 </tr>
                 <tr>
-                    <td><input class="form-control input " name="mat_prima5" /></td>
+                    <td><input class="form-control input " name="mat_prima5" value="Anexo I - MRC - Curva 0,040mg/L" /></td>
                     <td><input class="form-control input " name="mat_lote5" /></td>
                     <td><input type="date" class="form-control input " name="mat_val5" /></td>
                 </tr>
                 <tr>
-                    <td><input class="form-control input " name="mat_prima6" /></td>
+                    <td><input class="form-control input " name="mat_prima6" value="Anexo I - MRC - Curva 0,030mg/L" /></td>
                     <td><input class="form-control input " name="mat_lote6" /></td>
                     <td><input type="date" class="form-control input " name="mat_val6" /></td>
                 </tr>
                 <tr>
-                    <td><input class="form-control input " name="mat_prima7" /></td>
+                    <td><input class="form-control input " name="mat_prima7" value="Anexo I - MRC - Curva 0,020mg/L" /></td>
                     <td><input class="form-control input " name="mat_lote7" /></td>
                     <td><input type="date" class="form-control input " name="mat_val7" /></td>
                 </tr>
                 <tr>
-                    <td><input class="form-control input " name="mat_prima8" /></td>
+                    <td><input class="form-control input " name="mat_prima8" value="Anexo I - MRC - Curva 0,010mg/L" /></td>
                     <td><input class="form-control input " name="mat_lote8" /></td>
                     <td><input type="date" class="form-control input " name="mat_val8" /></td>
                 </tr>
                 <tr>
-                    <td><input class="form-control input " name="mat_prima9" /></td>
+                    <td><input class="form-control input " name="mat_prima9" value="Anexo I - MRC - Curva 0,005mg/L" /></td>
                     <td><input class="form-control input " name="mat_lote9" /></td>
                     <td><input type="date" class="form-control input " name="mat_val9" /></td>
                 </tr>
                 <tr>
-                    <td><input class="form-control input " name="mat_prima10" /></td>
+                    <td><input class="form-control input " name="mat_prima10" value="Ácido cloridrico P.A" /></td>
                     <td><input class="form-control input " name="mat_lote10" /></td>
                     <td><input type="date" class="form-control input " name="mat_val10" /></td>
                 </tr>
                 <tr>
-                    <td><input class="form-control input " name="mat_prima11" /></td>
+                    <td><input class="form-control input " name="mat_prima11" value="Água ultrapura" /></td>
                     <td><input class="form-control input " name="mat_lote11" /></td>
                     <td><input type="date" class="form-control input " name="mat_val11" /></td>
                 </tr>
                 <tr>
-                    <td><input class="form-control input " name="mat_prima12" /></td>
+                    <td><input class="form-control input " name="mat_prima12" value="Anexo I - MR - QC 0,1 mg/L" /></td>
                     <td><input class="form-control input " name="mat_lote12" /></td>
                     <td><input type="date" class="form-control input " name="mat_val12" /></td>
                 </tr>
                 <tr>
-                    <td><input class="form-control input " name="mat_prima13" /></td>
+                    <td><input class="form-control input " name="mat_prima13" value="Anexo I - Branco" /></td>
                     <td><input class="form-control input " name="mat_lote13" /></td>
                     <td><input type="date" class="form-control input " name="mat_val13" /></td>
                 </tr>
@@ -405,7 +405,7 @@
                     {
                         <tr>
                             <td>EE:</td>
-                            <td><input type="text" readonly class="form-control input" readonly name="equi_ee" id="ee_equipamento" value="@Model.instrumentos[j].descricao" /></td>
+                            <td><input type="text" readonly class="form-control input" readonly name="equi_ee" id="ee_equipamento" value="@Model.instrumentos[j].codigo" /></td>
                         </tr>
                     }
                 }
@@ -917,7 +917,7 @@
                     {
                         <tr>
                             <td>EE:</td>
-                            <td><input type="text" readonly class="form-control input" readonly name="equi_ee" id="ee_equipamento" value="@Model.instrumentos[j].descricao" /></td>
+                            <td><input type="text" readonly class="form-control input" readonly name="equi_ee" id="ee_equipamento" value="@Model.instrumentos[j].codigo" /></td>
                         </tr>
                     }
                 }

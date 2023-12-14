@@ -141,12 +141,12 @@
                     <td colspan="1" class="texto-central">Validade</td>
                 </tr>
                 <tr>
-                    <td colspan="3"><input class="form-control input " type="text" name="mat_prima1" /></td>
+                    <td colspan="3"><input class="form-control input " type="text" name="mat_prima1" value="Filtro de membrana poro 0,8 μm" /></td>
                     <td colspan="1"><input class="form-control input " type="text" name="mat_lote1" /></td>
                     <td colspan="1"><input type="date" class="form-control input " name="mat_validade1" /></td>
                 </tr>
                 <tr>
-                    <td colspan="3"><input class="form-control input " type="text" name="mat_prima2" /></td>
+                    <td colspan="3"><input class="form-control input " type="text" name="mat_prima2" value="Funil magnético filtrante" /></td>
                     <td colspan="1"><input class="form-control input " type="text" name="mat_lote2" /></td>
                     <td colspan="1"><input type="date" class="form-control input " name="mat_validade2" /></td>
                 </tr>
@@ -189,7 +189,7 @@
                     {
                         <tr>
                             <td>DE:</td>
-                            <td><input type="text" readonly class="form-control input" readonly name="equi_de" id="ee_equipamento" value="@Model.instrumentos[j].descricao" /></td>
+                            <td><input type="text" readonly class="form-control input" readonly name="equi_de" id="ee_equipamento" value="@Model.instrumentos[j].codigo" /></td>
                         </tr>
                     }
                 }
@@ -199,7 +199,7 @@
                     {
                         <tr>
                             <td>EE:</td>
-                            <td><input type="text" readonly class="form-control input" readonly name="equi_ee" id="ee_equipamento" value="@Model.instrumentos[j].descricao" /></td>
+                            <td><input type="text" readonly class="form-control input" readonly name="equi_ee" id="ee_equipamento" value="@Model.instrumentos[j].codigo" /></td>
                         </tr>
                     }
                 }
@@ -425,7 +425,7 @@
                     {
                         <tr>
                             <td>DE:</td>
-                            <td><input type="text" readonly class="form-control input" readonly name="equi_de" id="ee_equipamento" value="@Model.instrumentos[j].descricao" /></td>
+                            <td><input type="text" readonly class="form-control input" readonly name="equi_de" id="ee_equipamento" value="@Model.instrumentos[j].codigo" /></td>
                         </tr>
                     }
                 }
@@ -435,7 +435,7 @@
                     {
                         <tr>
                             <td>EE:</td>
-                            <td><input type="text" readonly class="form-control input" readonly name="equi_ee" id="ee_equipamento" value="@Model.instrumentos[j].descricao" /></td>
+                            <td><input type="text" readonly class="form-control input" readonly name="equi_ee" id="ee_equipamento" value="@Model.instrumentos[j].codigo" /></td>
                         </tr>
                     }
                 }

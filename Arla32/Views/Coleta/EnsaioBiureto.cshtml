@@ -104,28 +104,28 @@
                     <td>Validade</td>
                 </tr>
                 <tr>
-                    <td><input type="text" name="mat_prima_1" id="mat_prima_1" class="form-control input" /></td>
+                    <td><input type="text" name="mat_prima_1" id="mat_prima_1" class="form-control input" value="Anexo E - Alcalina de tartárato de sódio e potássio" /></td>
                     <td><input type="text" name="mat_lote_1" id="mat_lote_1" class="form-control input " /></td>
                     <td><input type="datetime" name="mat_validade_1" id="mat_validade_1" class="form-control input " /></td>
                 </tr>
                 <tr>
-                    <td><input type="text" name="mat_prima_2" id="mat_prima_2" class="form-control input" /></td>
+                    <td><input type="text" name="mat_prima_2" id="mat_prima_2" class="form-control input" value="Anexo E - Sulfato de Cobre" /></td>
                     <td><input type="text" name="mat_lote_2" id="mat_lote_2" class="form-control input " /></td>
                     <td><input type="datetime" name="mat_validade_2" id="mat_validade_2" class="form-control input " /></td>
                 </tr>
                 <tr>
-                    <td><input type="text" name="mat_prima_3" id="mat_prima_3" class="form-control input" /></td>
+                    <td><input type="text" name="mat_prima_3" id="mat_prima_3" class="form-control input" value="Anexo E - QC- 10mL" /></td>
                     <td><input type="text" name="mat_lote_3" id="mat_lote_3" class="form-control input " /></td>
                     <td><input type="datetime" name="mat_validade_3" id="mat_validade_3" class="form-control input " /></td>
                 </tr>
                 <tr>
-                    <td><input type="text" name="mat_prima_4" id="mat_prima_4" class="form-control input" /></td>
+                    <td><input type="text" name="mat_prima_4" id="mat_prima_4" class="form-control input" value="Anexo E - Branco" /></td>
                     <td><input type="text" name="mat_lote_4" id="mat_lote_4" class="form-control input " /></td>
                     <td><input type="datetime" name="mat_validade_4" id="mat_validade_4" class="form-control input " /></td>
                 </tr>
                 <tr>
-                    <td><input type="text" name="mat_prima_5" id="mat_prima_5" class="form-control input" /></td>
-                    <td><input type="text" name="mat_lote_5" id="mat_lote_5" class="form-control input " /></td>
+                    <td><input type="text" name="mat_prima_5" id="mat_prima_5" class="form-control input" value="---"/></td>
+                    <td><input type="text" name="mat_lote_5" id="mat_lote_5" class="form-control input " value="---"/></td>
                     <td><input type="datetime" name="mat_validade_5" id="mat_validade_5" class="form-control input " /></td>
                 </tr>
             </table>
@@ -166,7 +166,7 @@
                     {
                         <tr>
                             <td>EE:</td>
-                            <td><input type="text" readonly class="form-control input" readonly name="equip_ee" id="ee_equipamento" value="@Model.instrumentos[j].descricao" /></td>
+                            <td><input type="text" readonly class="form-control input" readonly name="equip_ee" id="ee_equipamento" value="@Model.instrumentos[j].codigo" /></td>
                         </tr>
                     }
                 }
@@ -390,7 +390,7 @@
                     {
                         <tr>
                             <td>EE:</td>
-                            <td><input type="text" class="form-control input" name="equip_ee" id="ee_equipamento" value="@Model.instrumentos[j].descricao" /></td>
+                            <td><input type="text" class="form-control input" name="equip_ee" id="ee_equipamento" value="@Model.instrumentos[j].codigo" /></td>
                              </tr>
                         }
                     }

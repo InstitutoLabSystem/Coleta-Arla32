@@ -116,42 +116,42 @@
                     <td colspan="1" class="texto-central">Validade</td>
                 </tr>
                 <tr>
-                    <td colspan="3"><input type="text" name="mat_prima_1" id="mat_prima_1" class="form-control input" /></td>
+                    <td colspan="3"><input type="text" name="mat_prima_1" id="mat_prima_1" class="form-control input" value="Água ultrapura" /></td>
                     <td colspan="1"><input type="text" name="mat_lote_1" id="mat_lote_1" class="form-control input" /></td>
                     <td colspan="1"><input type="date" name="mat_validade_1" id="mat_validade_1" class="form-control input" /></td>
                 </tr>
                 <tr>
-                    <td colspan="3"><input type="text" name="mat_prima_2" id="mat_prima_2" class="form-control input" /></td>
+                    <td colspan="3"><input type="text" name="mat_prima_2" id="mat_prima_2" class="form-control input" value="Carbonato de cálcio P.A" /></td>
                     <td colspan="1"><input type="text" name="mat_lote_2" id="mat_lote_2" class="form-control input" /></td>
                     <td colspan="1"><input type="date" name="mat_validade_2" id="mat_validade_2" class="form-control input" /></td>
                 </tr>
                 <tr>
-                    <td colspan="3"><input type="text" name="mat_prima_3" id="mat_prima_3" class="form-control input" /></td>
+                    <td colspan="3"><input type="text" name="mat_prima_3" id="mat_prima_3" class="form-control input" value="Anexo H - Ácido cloridrico 25%" /></td>
                     <td colspan="1"><input type="text" name="mat_lote_3" id="mat_lote_3" class="form-control input" /></td>
                     <td colspan="1"><input type="date" name="mat_validade_3" id="mat_validade_3" class="form-control input" /></td>
                 </tr>
                 <tr>
-                    <td colspan="3"><input type="text" name="mat_prima_4" id="mat_prima_5" class="form-control input" /></td>
+                    <td colspan="3"><input type="text" name="mat_prima_4" id="mat_prima_5" class="form-control input" value="Anexo H - Ácido ascórbico" /></td>
                     <td colspan="1"><input type="text" name="mat_lote_4" id="mat_lote_5" class="form-control input" /></td>
                     <td colspan="1"><input type="date" name="mat_validade_4" id="mat_validade_5" class="form-control input" /></td>
                 </tr>
                 <tr>
-                    <td colspan="3"><input type="text" name="mat_prima_5" id="mat_prima_5" class="form-control input" /></td>
+                    <td colspan="3"><input type="text" name="mat_prima_5" id="mat_prima_5" class="form-control input" value="Anexo H - Molibdato" /></td>
                     <td colspan="1"><input type="text" name="mat_lote_5" id="mat_lote_5" class="form-control input" /></td>
                     <td colspan="1"><input type="date" name="mat_validade_5" id="mat_validade_5" class="form-control input" /></td>
                 </tr>
                 <tr>
-                    <td colspan="3"><input type="text" name="mat_prima_6" id="mat_prima_6" class="form-control input" /></td>
+                    <td colspan="3"><input type="text" name="mat_prima_6" id="mat_prima_6" class="form-control input" value="Anexo H - QC - 5mL" /></td>
                     <td colspan="1"><input type="text" name="mat_lote_6" id="mat_lote_6" class="form-control input" /></td>
                     <td colspan="1"><input type="date" name="mat_validade_6" id="mat_validade_6" class="form-control input" /></td>
                 </tr>
                 <tr>
-                    <td colspan="3"><input type="text" name="mat_prima_7" id="mat_prima_7" class="form-control input" /></td>
+                    <td colspan="3"><input type="text" name="mat_prima_7" id="mat_prima_7" class="form-control input" value="Anexo H - Branco Ensaio" /></td>
                     <td colspan="1"><input type="text" name="mat_lote_7" id="mat_lote_7" class="form-control input" /></td>
                     <td colspan="1"><input type="date" name="mat_validade_7" id="mat_validade_7" class="form-control input" /></td>
                 </tr>
                 <tr>
-                    <td colspan="3"><input type="text" name="mat_prima_8" id="mat_prima_8" class="form-control input" /></td>
+                    <td colspan="3"><input type="text" name="mat_prima_8" id="mat_prima_8" class="form-control input" value="Anexo H - Branco" /></td>
                     <td colspan="1"><input type="text" name="mat_lote_8" id="mat_lote_8" class="form-control input" /></td>
                     <td colspan="1"><input type="date" name="mat_validade_8" id="mat_validade_8" class="form-control input" /></td>
                 </tr>
@@ -187,17 +187,23 @@
                 <tr class="tabela">
                     <td colspan="8" class="texto-central">Equipamentos e Dispositivos: </td>
                 </tr>
-                <tr>
-                    <td colspan="1">DE</td>
-                    <td colspan="7"><input type="text" name="equi_ee" id="equi_de" class="form-control input " /></td>
-                </tr>
+                   @for (var j = 0; j < Model.instrumentos.Count; j++)
+                {
+                    @if (Model.instrumentos[j].DE == 1)
+                    {
+                        <tr>
+                            <td>DE:</td>
+                            <td><input type="text" readonly class="form-control input" readonly name="equi_de" id="ee_equipamento" value="@Model.instrumentos[j].codigo" /></td>
+                        </tr>
+                    }
+                }
                 @for (var j = 0; j < Model.instrumentos.Count; j++)
                 {
                     @if (Model.instrumentos[j].equipamento == 1)
                     {
                         <tr>
                             <td>EE:</td>
-                            <td><input type="text" readonly class="form-control input" readonly name="equi_ee" id="ee_equipamento" value="@Model.instrumentos[j].descricao" /></td>
+                            <td><input type="text" readonly class="form-control input" readonly name="equi_ee" id="ee_equipamento" value="@Model.instrumentos[j].codigo" /></td>
                         </tr>
                     }
                 }
@@ -463,17 +469,23 @@
                 <tr class="tabela">
                     <td colspan="8" class="texto-central">Equipamentos e Dispositivos: </td>
                 </tr>
-                <tr>
-                    <td colspan="1">DE</td>
-                    <td colspan="7"><input type="text" name="equi_de" id="equi_ee" class="form-control input " value="@Model.fosfato.equi_ee" /></td>
-                </tr>
+                @for (var j = 0; j < Model.instrumentos.Count; j++)
+                {
+                    @if (Model.instrumentos[j].DE == 1)
+                    {
+                        <tr>
+                            <td>DE:</td>
+                            <td><input type="text" readonly class="form-control input" readonly name="equi_de" id="ee_equipamento" value="@Model.instrumentos[j].codigo" /></td>
+                        </tr>
+                    }
+                }
                 @for (var j = 0; j < Model.instrumentos.Count; j++)
                 {
                     @if (Model.instrumentos[j].equipamento == 1)
                     {
                         <tr>
                             <td>EE:</td>
-                            <td><input type="text" readonly class="form-control input" readonly name="equi_ee" id="ee_equipamento" value="@Model.instrumentos[j].descricao" /></td>
+                            <td><input type="text" readonly class="form-control input" readonly name="equi_ee" id="ee_equipamento" value="@Model.instrumentos[j].codigo" /></td>
                         </tr>
                     }
                 }

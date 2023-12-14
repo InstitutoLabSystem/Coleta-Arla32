@@ -358,51 +358,6 @@ namespace Arla32.Models
 
             public string? mat_lote13 { get; set; }
             public DateOnly mat_val13 { get; set; }
-            public string? inst_desc1 { get; set; }
-            public string? inst_cod1 { get; set; }
-            public DateOnly inst_val1 { get; set; }
-            public string? inst_desc2 { get; set; }
-            public string? inst_cod2 { get; set; }
-            public DateOnly inst_val2 { get; set; }
-            public string? inst_desc3 { get; set; }
-            public string? inst_cod3 { get; set; }
-            public DateOnly inst_val3 { get; set; }
-            public string? inst_desc4 { get; set; }
-            public string? inst_cod4 { get; set; }
-            public DateOnly inst_val4 { get; set; }
-            public string? inst_desc5 { get; set; }
-            public string? inst_cod5 { get; set; }
-            public DateOnly inst_val5 { get; set; }
-            public string? inst_desc6 { get; set; }
-            public string? inst_cod6 { get; set; }
-            public DateOnly inst_val6 { get; set; }
-            public string? inst_desc7 { get; set; }
-            public string? inst_cod7 { get; set; }
-            public DateOnly inst_val7 { get; set; }
-            public string? inst_desc8 { get; set; }
-            public string? inst_cod8 { get; set; }
-            public DateOnly inst_val8 { get; set; }
-            public string? inst_desc9 { get; set; }
-            public string? inst_cod9 { get; set; }
-            public DateOnly inst_val9 { get; set; }
-            public string? inst_desc10 { get; set; }
-            public string? inst_cod10 { get; set; }
-            public DateOnly inst_val10 { get; set; }
-            public string? inst_desc11 { get; set; }
-            public string? inst_cod11 { get; set; }
-            public DateOnly inst_val11 { get; set; }
-            public string? inst_dec12 { get; set; }
-            public string? inst_cod12 { get; set; }
-            public DateOnly inst_val12 { get; set; }
-            public string? inst_desc13 { get; set; }
-            public string? inst_cod13 { get; set; }
-            public DateOnly inst_val13 { get; set; }
-            public string? inst_desc14 { get; set; }
-            public string? inst_cod14 { get; set; }
-            public DateOnly inst_val14 { get; set; }
-            public string? inst_desc15 { get; set; }
-            public string? inst_cod15 { get; set; }
-            public DateOnly inst_val15 { get; set; }
             public string? equi_ee { get; set; }
             public string? equi_de { get; set; }
             public string? observacoes { get; set; }

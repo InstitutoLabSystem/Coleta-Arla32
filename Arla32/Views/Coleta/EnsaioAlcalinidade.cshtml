@@ -93,7 +93,7 @@
                     <td>Validade</td>
                 </tr>
                 <tr>
-                    <td><input type="text" name="mat_prima" class="form-control input " /></td>
+                    <td><input type="text" name="mat_prima" class="form-control input " value="Ácido Clorídrico 0,01M" /></td>
                     <td><input type="text" name="mat_lote" class="form-control input " /></td>
                     <td><input type="date" name="mat_validade" class="form-control input " /></td>
                 </tr>
@@ -134,7 +134,7 @@
                     {
                         @if (Model.instrumentos[j].equipamento == 1)
                         {
-                            <td><input type="text" readonly class="form-control input" name="equip_ee" id="ee_equipamento" value="@Model.instrumentos[j].descricao" /></td>
+                            <td><input type="text" readonly class="form-control input" name="equip_ee" id="ee_equipamento" value="@Model.instrumentos[j].codigo" /></td>
                         }
                     }
                 </tr>
@@ -293,7 +293,7 @@
                     {
                         @if (Model.instrumentos[j].equipamento == 1)
                         {
-                            <td><input type="text" class="form-control input" readonly name="equip_ee" id="ee_equipamento" value="@Model.instrumentos[j].descricao" /></td>
+                            <td><input type="text" class="form-control input" readonly name="equip_ee" id="ee_equipamento" value="@Model.instrumentos[j].codigo" /></td>
                         }
                     }
                 </tr>
