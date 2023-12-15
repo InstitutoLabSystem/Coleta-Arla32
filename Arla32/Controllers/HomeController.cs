@@ -221,7 +221,7 @@ namespace Arla32.Controllers
 
 
         public async Task<IActionResult> IniciarColeta(string OS, [Bind("OS,orcamento,Qtd_Recebida,norma,revisao_os," +
-            "CodCli, CodSol, Item, descricao_doc, referencia")] HomeModel.IniciarColeta salvar)
+            "CodCli, CodSol, Item, descricao_doc, referencia, np, descricao")] HomeModel.IniciarColeta salvar)
         {
             try
             {
@@ -235,6 +235,7 @@ namespace Arla32.Controllers
                 var Item = salvar.Item_orcamento;
                 var descricao_doc = salvar.descricao_doc;
                 var referencia = salvar.referencia;
+
 
                 //pegando os 2 ultimos digitos do ano.
                 int Ano = Int32.Parse(DateTime.Now.Year.ToString().Substring(2));

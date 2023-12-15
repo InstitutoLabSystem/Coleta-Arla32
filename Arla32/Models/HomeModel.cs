@@ -114,6 +114,8 @@ namespace Arla32.Models
             
             public string categoria { get; set; }
 
+            public string np { get; set; }
+
         }
 
 
