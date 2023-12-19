@@ -15,6 +15,7 @@ using System.Net.WebSockets;
 using System.Reflection.Metadata;
 using System.Security.Cryptography.Xml;
 using static Arla32.Models.ColetaModel;
+using static Arla32.Models.HomeModel;
 
 
 namespace Arla32.Controllers
@@ -38,16 +39,22 @@ namespace Arla32.Controllers
             var model = new InstrumentosModel();
             model.concentracao = ObterConcentracao(OS, orcamento);
             model.instrumentos = ObterInstrumentosConcentracao(OS, orcamento);
+            model.info = ObterInfoC(OS, orcamento);
             ViewBag.OS = OS;
             ViewBag.orcamento = orcamento;
             return View(model);
         }
-
         private ArlaConcentracao ObterConcentracao(string OS, string orcamento)
         {
             var dados = _qcontext.arla_concentracao_indice.
                 Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
             return dados;
+        }
+        private ArlaInfo ObterInfoC(string OS, string orcamento)
+        {
+            var info = _qcontext.arla_info.
+                Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
+            return info;
         }
         private List<ArlaInstrumentos> ObterInstrumentosConcentracao(string OS, string orcamento)
         {
@@ -69,12 +76,18 @@ namespace Arla32.Controllers
             var model = new InstrumentosModel();
             model.aldeidos = ObterAldeidos(OS, orcamento);
             model.instrumentos = ObterInstrumentosAldeidos(OS, orcamento);
+            model.info = ObterInfoA(OS, orcamento);
             ViewBag.OS = OS;
             ViewBag.orcamento = orcamento;
             return View(model);
 
         }
-
+        private ArlaInfo ObterInfoA(string OS, string orcamento)
+        {
+            var info = _qcontext.arla_info.
+                Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
+            return info;
+        }
         private ArlaAldeidos ObterAldeidos(string OS, string orcamento)
         {
             var dados = _qcontext.arla_aldeidos.
@@ -87,18 +100,22 @@ namespace Arla32.Controllers
             return instrumentos;
         }
 
-
-
-
         public IActionResult EnsaioDensidade(string OS, string orcamento)
         {
             var model = new InstrumentosModel();
             model.densidade = ObterDensidade(OS, orcamento);
             model.instrumentos = ObterInstrumentosDensidade(OS, orcamento);
+            model.info = ObterInfoD(OS, orcamento);
             ViewBag.OS = OS;
             ViewBag.orcamento = orcamento;
             return View(model);
 
+        }
+        private ArlaInfo ObterInfoD(string OS, string orcamento)
+        {
+            var info = _qcontext.arla_info.
+                Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
+            return info;
         }
         private ArlaDensidade ObterDensidade(string OS, string orcamento)
         {
@@ -117,12 +134,18 @@ namespace Arla32.Controllers
         {
                 var model = new InstrumentosModel();
                 model.alcalinidade = ObterAlcalinidade(OS, orcamento);
-                model.instrumentos = ObterInstrumentos(OS, orcamento); 
+                model.instrumentos = ObterInstrumentos(OS, orcamento);
+                model.info = ObterInfoAl(OS, orcamento);
                 ViewBag.OS = OS;
                 ViewBag.orcamento = orcamento;
                 return View(model);
         }
-
+        private ArlaInfo ObterInfoAl(string OS, string orcamento)
+        {
+            var info = _qcontext.arla_info.
+                Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
+            return info;
+        }
         private ArlaAlcalinidade ObterAlcalinidade( string OS, string orcamento)
         {
             var dados = _qcontext.arla_alcalinidade.
@@ -142,10 +165,17 @@ namespace Arla32.Controllers
             var model = new InstrumentosModel();
             model.insoluveis = ObterInsoluveis(OS, orcamento);
             model.instrumentos = ObterInstrumentosInsoluveis(OS, orcamento);
+            model.info = ObterInfoIn(OS, orcamento);
             ViewBag.OS = OS;
             ViewBag.orcamento = orcamento;
             return View(model);
 
+        }
+        private ArlaInfo ObterInfoIn(string OS, string orcamento)
+        {
+            var info = _qcontext.arla_info.
+                Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
+            return info;
         }
         private ArlaInsoluveis ObterInsoluveis(string OS, string orcamento)
         {
@@ -166,12 +196,18 @@ namespace Arla32.Controllers
             var model = new InstrumentosModel();
             model.fosfato = ObterFosfato(OS, orcamento);
             model.instrumentos = ObterInstrumentosFosfato(OS, orcamento);
+            model.info = ObterInfoFos(OS, orcamento);
             ViewBag.OS = OS;
             ViewBag.orcamento = orcamento;
             return View(model);
 
         }
-
+        private ArlaInfo ObterInfoFos(string OS, string orcamento)
+        {
+            var info = _qcontext.arla_info.
+                Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
+            return info;
+        }
         private ArlaFosfato ObterFosfato(string OS, string orcamento)
         {
             var dados = _qcontext.arla_fosfato.
@@ -191,9 +227,16 @@ namespace Arla32.Controllers
             var model = new InstrumentosModel();
             model.identidade = ObterIdentidade(OS, orcamento);
             model.instrumentos = ObterInstrumentosIdentidade(OS, orcamento);
+            model.info = ObterInfoIden(OS, orcamento);
             ViewBag.OS = OS;
             ViewBag.orcamento = orcamento;
             return View(model);
+        }
+        private ArlaInfo ObterInfoIden(string OS, string orcamento)
+        {
+            var info = _qcontext.arla_info.
+                Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
+            return info;
         }
         private ArlaIdentidade ObterIdentidade(string OS, string orcamento)
         {
@@ -214,11 +257,17 @@ namespace Arla32.Controllers
             var model = new InstrumentosModel();
             model.biureto = ObterBiureto(OS, orcamento);
             model.instrumentos = ObterInstrumentosBiureto(OS, orcamento);
+            model.info = ObterInfoB(OS, orcamento);
             ViewBag.OS = OS;
             ViewBag.orcamento = orcamento;
             return View(model);
         }
-
+        private ArlaInfo ObterInfoB(string OS, string orcamento)
+        {
+            var info = _qcontext.arla_info.
+                Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
+            return info;
+        }
         private ArlaBiureto ObterBiureto(string OS, string orcamento)
         {
             var dados = _qcontext.arla_biureto.
@@ -237,9 +286,16 @@ namespace Arla32.Controllers
             var model = new InstrumentosModel();
             model.metais = ObterMetais(OS, orcamento);
             model.instrumentos = ObterInstrumentosMetais(OS, orcamento);
+            model.info = ObterInfoM(OS, orcamento);
             ViewBag.OS = OS;
             ViewBag.orcamento = orcamento;
             return View(model);
+        }
+        private ArlaInfo ObterInfoM(string OS, string orcamento)
+        {
+            var info = _qcontext.arla_info.
+                Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
+            return info;
         }
         private ArlaMetais ObterMetais(string OS, string orcamento)
         {
@@ -418,7 +474,7 @@ namespace Arla32.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> SalvarConcentracao(string OS, string orcamento, string osConcentracao, [Bind("data_ini,data_term,lote_solucao,codigo_curva,fator_avaliacao,indice_agua,refracao_amostra1,refracao_amostra2,conc_ureia,desc1_instrumento,codigo1_instrumento,validade1_instrumento,desc2_instrumento,codigo2_instrumento,validade2_instrumento,ee_equipamento,de_equipamento,obs,executado_por,auxiliado_por")] ColetaModel.ArlaConcentracao salvarDados)
+        public async Task<IActionResult> SalvarConcentracao(string OS, string orcamento, string osConcentracao, [Bind("data_ini,data_term,np,descricao,lote_solucao,codigo_curva,fator_avaliacao,indice_agua,refracao_amostra1,refracao_amostra2,conc_ureia,desc1_instrumento,codigo1_instrumento,validade1_instrumento,desc2_instrumento,codigo2_instrumento,validade2_instrumento,ee_equipamento,de_equipamento,obs,executado_por,auxiliado_por")] ColetaModel.ArlaConcentracao salvarDados)
         {
             //verificar se existe dados gravados com essa os.
             var editarDados = _qcontext.arla_concentracao_indice.Where(x => x.os == OS && x.orcamento == orcamento).FirstOrDefault();
@@ -447,7 +503,8 @@ namespace Arla32.Controllers
                     string obs = salvarDados.obs;
                     string executado_por = salvarDados.executado_por;
                     string auxiliado_por = salvarDados.auxiliado_por;
-
+                    string np = salvarDados.np;
+                    string descricao = salvarDados.descricao;
 
                     //Contas
                     //pegar o concentracao de Birueto do anexo E
@@ -493,6 +550,8 @@ namespace Arla32.Controllers
                         obs = obs,
                         executado_por = executado_por,
                         auxiliado_por = auxiliado_por,
+                        np = np,
+                        descricao = descricao,
                     };
 
                     _qcontext.Add(guardarDadosTabela);
@@ -531,6 +590,8 @@ namespace Arla32.Controllers
                     editarDados.obs = salvarDados.obs;
                     editarDados.executado_por = salvarDados.executado_por;
                     editarDados.auxiliado_por = salvarDados.auxiliado_por;
+                    editarDados.np = salvarDados.np;
+                    editarDados.descricao = salvarDados.descricao;
 
                     //pegando o resultado que preciso para realizar a conta que  esta no anexo E
                     var pegarValoresAnexoE = _qcontext.arla_biureto
@@ -568,7 +629,7 @@ namespace Arla32.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SalvarAlcalinidade(string OS, string orcamento, [Bind("data_ini,data_term,pre_massa_amostra,pre_vol_titulado,det_massa_amostra1,det_massa_amostra2,det_vol_titulado1,det_vol_titulado2,mat_prima,mat_lote,mat_validade,equip_de,equip_ee,obs,executado_por,auxiliado_por")] ColetaModel.ArlaAlcalinidade salvarDados)
+        public async Task<IActionResult> SalvarAlcalinidade(string OS, string orcamento, [Bind("data_ini,data_term,np,descricao,pre_massa_amostra,pre_vol_titulado,det_massa_amostra1,det_massa_amostra2,det_vol_titulado1,det_vol_titulado2,mat_prima,mat_lote,mat_validade,equip_de,equip_ee,obs,executado_por,auxiliado_por")] ColetaModel.ArlaAlcalinidade salvarDados)
         {
             try
             {
@@ -596,6 +657,8 @@ namespace Arla32.Controllers
                         string obs = salvarDados.obs;
                         string executado_por = salvarDados.executado_por;
                         string auxiliado_por = salvarDados.auxiliado_por;
+                        string np = salvarDados.np;
+                        string descricao = salvarDados.descricao;
 
                         // conta do Resultado Final - Tabela Procedimento Ensaio preliminar
                         double pre_vol = double.Parse(pre_vol_titulado);
@@ -633,6 +696,8 @@ namespace Arla32.Controllers
                             obs = obs,
                             executado_por = executado_por,
                             auxiliado_por = auxiliado_por,
+                            np = np,
+                            descricao = descricao,                            
                         };
 
                         _qcontext.Add(guardarDadosTabela);
@@ -667,6 +732,8 @@ namespace Arla32.Controllers
                         editarDados.obs = salvarDados.obs;
                         editarDados.executado_por = salvarDados.executado_por;
                         editarDados.auxiliado_por = salvarDados.auxiliado_por;
+                        editarDados.np = salvarDados.np;
+                        editarDados.descricao = salvarDados.descricao;
 
                         // conta do Resultado Final - Tabela Procedimento Ensaio preliminar
                         double pre_vol = double.Parse(pre_vol_titulado);
@@ -710,7 +777,7 @@ namespace Arla32.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SalvarBirueto(string OS, string orcamento, [Bind("data_ini,data_term,codigo_curva,fator_calibracao,fator_dia,amostra1,amostra2,absorbancia_1,absorbancia_2,absorbancia_3,mat_prima_1,mat_lote_1,mat_validade_1,mat_prima_2,mat_lote_2,mat_validade_2,mat_prima_3,mat_lote_3,mat_validade_3,mat_prima_4,mat_lote_4,mat_validade_4,mat_prima_5,mat_lote_5,mat_validade_5,equip_de,equip_ee,obs,executado_por,auxiliado_por")] ColetaModel.ArlaBiureto salvarDados)
+        public async Task<IActionResult> SalvarBirueto(string OS, string orcamento, [Bind("data_ini,data_term,np,descricao,codigo_curva,fator_calibracao,fator_dia,amostra1,amostra2,absorbancia_1,absorbancia_2,absorbancia_3,mat_prima_1,mat_lote_1,mat_validade_1,mat_prima_2,mat_lote_2,mat_validade_2,mat_prima_3,mat_lote_3,mat_validade_3,mat_prima_4,mat_lote_4,mat_validade_4,mat_prima_5,mat_lote_5,mat_validade_5,equip_de,equip_ee,obs,executado_por,auxiliado_por")] ColetaModel.ArlaBiureto salvarDados)
         {
             try
             {
@@ -751,6 +818,8 @@ namespace Arla32.Controllers
                         string obs = salvarDados.obs;
                         string auxiliado_por = salvarDados.auxiliado_por;
                         string executado_por = salvarDados.executado_por;
+                        string np = salvarDados.np;
+                        string descricao = salvarDados.descricao;
 
                         //if (string.IsNullOrEmpty(data_ini.ToString()) || string.IsNullOrEmpty(data_term.ToString()) || string.IsNullOrEmpty(codigo_curva) || fator_calibracao == 0 || fator_dia == 0 || amostra1 == 0 || amostra2 == 0 || absorbancia_1 == 0 || absorbancia_2 == 0 || absorbancia_3 == 0 || string.IsNullOrEmpty(mat_prima_1) || string.IsNullOrEmpty(mat_lote_1) || string.IsNullOrEmpty(mat_validade_1.ToString()) || string.IsNullOrEmpty(mat_prima_2) || string.IsNullOrEmpty(mat_lote_2) || string.IsNullOrEmpty(mat_validade_2.ToString()) || string.IsNullOrEmpty(mat_prima_3) || string.IsNullOrEmpty(mat_prima_3) || string.IsNullOrEmpty(mat_lote_3) || string.IsNullOrEmpty(mat_validade_3.ToString()) ||
                         //    string.IsNullOrEmpty(mat_prima_4) || string.IsNullOrEmpty(mat_lote_4) || string.IsNullOrEmpty(mat_validade_4.ToString()) || string.IsNullOrEmpty(mat_prima_5) || string.IsNullOrEmpty(mat_lote_5) || string.IsNullOrEmpty(mat_validade_5.ToString()) || string.IsNullOrEmpty(inst_desc1) || string.IsNullOrEmpty(inst_codigo1) || string.IsNullOrEmpty(inst_data1.ToString()) || string.IsNullOrEmpty(inst_desc1_1) || string.IsNullOrEmpty(inst_codigo1_1) || string.IsNullOrEmpty(inst_data1_1.ToString()) || string.IsNullOrEmpty(insta_desc2) || string.IsNullOrEmpty(inst_codigo2) || string.IsNullOrEmpty(inst_data2.ToString()) || string.IsNullOrEmpty(inst_desc2_2) || string.IsNullOrEmpty(inst_codigo2_2) || string.IsNullOrEmpty(inst_data2_2.ToString()) ||
@@ -806,6 +875,8 @@ namespace Arla32.Controllers
                             obs = obs,
                             auxiliado_por = auxiliado_por,
                             executado_por = executado_por,
+                            np = np,
+                            descricao = descricao,
                         };
                         //salvando no banco.
                         _qcontext.Add(salvarDadosTabela);
@@ -845,6 +916,8 @@ namespace Arla32.Controllers
                         // guardando os valores das contas editados.
                         editarDados.data_ini = salvarDados.data_ini;
                         editarDados.data_term = salvarDados.data_term;
+                        editarDados.np = salvarDados.np;
+                        editarDados.descricao = salvarDados.descricao;
                         editarDados.codigo_curva = salvarDados.codigo_curva;
                         editarDados.fator_calibracao = salvarDados.fator_calibracao;
                         editarDados.mat_prima_1 = salvarDados.mat_prima_1;
@@ -2957,7 +3030,7 @@ namespace Arla32.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> SalvarFosfato(string OS, string orcamento, [Bind("data_ini,data_term,cod_curva,fator_calibracao,massa,absorvancia1,absorvancia2,abs_branco,abs_qc,mat_prima_1,mat_lote_1,mat_validade_1,mat_prima_2,mat_lote_2,mat_validade_2,mat_prima_3,mat_lote_3,mat_validade_3,mat_prima_4,mat_lote_4,mat_validade_4,mat_prima_5,mat_lote_5,mat_validade_5,mat_prima_6,mat_lote_6,mat_validade_6,mat_prima_7,mat_lote_7,mat_validade_7,mat_prima_8,mat_lote_8,mat_validade_8,equi_ee,equi_de,obs,executado_por,auxiliado_por")] ColetaModel.ArlaFosfato salvarDados)
+        public async Task<IActionResult> SalvarFosfato(string OS, string orcamento, [Bind("data_ini,data_term,np,descricao,cod_curva,fator_calibracao,massa,absorvancia1,absorvancia2,abs_branco,abs_qc,mat_prima_1,mat_lote_1,mat_validade_1,mat_prima_2,mat_lote_2,mat_validade_2,mat_prima_3,mat_lote_3,mat_validade_3,mat_prima_4,mat_lote_4,mat_validade_4,mat_prima_5,mat_lote_5,mat_validade_5,mat_prima_6,mat_lote_6,mat_validade_6,mat_prima_7,mat_lote_7,mat_validade_7,mat_prima_8,mat_lote_8,mat_validade_8,equi_ee,equi_de,obs,executado_por,auxiliado_por")] ColetaModel.ArlaFosfato salvarDados)
         {
             try
             {
@@ -3007,6 +3080,8 @@ namespace Arla32.Controllers
                         string obs = salvarDados.obs;
                         string executado_por = salvarDados.executado_por;
                         string auxiliado_por = salvarDados.auxiliado_por;
+                        string np = salvarDados.np;
+                        string descricao = salvarDados.descricao;
 
                         //conta do resulto final...
                         float result_final = (((absorvancia1 - absorvancia2) * fator_calibracao * 100 * 1000) / (50 * 1000 * massa) * -1);
@@ -3063,6 +3138,8 @@ namespace Arla32.Controllers
                             obs = obs,
                             executado_por = executado_por,
                             auxiliado_por = auxiliado_por,
+                            np = np,
+                            descricao = descricao,
                         };
 
                         //salvando....
@@ -3122,6 +3199,8 @@ namespace Arla32.Controllers
                         editarDados.obs = salvarDados.obs;
                         editarDados.executado_por = salvarDados.executado_por;
                         editarDados.auxiliado_por = salvarDados.auxiliado_por;
+                        editarDados.np = salvarDados.np;
+                        editarDados.descricao = salvarDados.descricao;
 
                         //conta do resulto final...
                         float result_final = (((absorvancia1 - absorvancia2) * fator_calibracao * 100 * 1000) / (50 * 1000 * massa) * -1);

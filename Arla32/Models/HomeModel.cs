@@ -115,9 +115,19 @@ namespace Arla32.Models
             public string categoria { get; set; }
 
 
+
         }
 
+        public class ArlaInfo
+        {
+            [Key]
+            public string os {  get; set; }
+            public string orcamento { get; set; }
+            public string np { get; set; }
+            public string descricao { get; set;}
 
+
+        }
 
 
 

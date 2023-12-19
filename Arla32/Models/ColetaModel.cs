@@ -53,6 +53,7 @@ namespace Arla32.Models
             public string? auxiliado { get; set; }
             public string? img { get; set; }
             public string? imgId { get; set; }
+   
 
         }
 
@@ -85,6 +86,8 @@ namespace Arla32.Models
             public string? obs { get; set; }
             public string? executado_por { get; set; }
             public string? auxiliado_por { get; set; }
+            public string? np { get; set; }
+            public string? descricao { get; set; }
 
         }
         public class ArlaAlcalinidade
@@ -112,6 +115,8 @@ namespace Arla32.Models
             public string? obs { get; set; }
             public string? executado_por { get; set; }
             public string? auxiliado_por { get; set; }
+            public string? np { get; set; }
+            public string? descricao { get; set; }
         }
         public class ArlaBiureto
         {
@@ -153,6 +158,8 @@ namespace Arla32.Models
             public string? obs { get; set; }
             public string? executado_por { get; set; }
             public string? auxiliado_por { get; set; }
+            public string? np { get; set; }
+            public string? descricao { get; set; }
         }
 
         public class ArlaAldeidos
@@ -494,6 +501,8 @@ namespace Arla32.Models
             public string? obs { get; set; }
             public string? executado_por { get; set; }
             public string? auxiliado_por { get; set; }
+            public string? np { get; set; }
+            public string? descricao { get; set; }
         }
 
         public class ArlaDensidade
@@ -536,6 +545,8 @@ namespace Arla32.Models
             public string? tem_amostra { get; set; }
             public string? exec_densi_encont { get; set; }
             public string? exec_temp_final { get; set; }
+            public string? np { get; set; }
+            public string? descricao { get; set; }
         }
     }
 }

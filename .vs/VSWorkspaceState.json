@@ -3,12 +3,13 @@
     "",
     "\\Arla32",
     "\\Arla32\\Controllers",
+    "\\Arla32\\Data",
     "\\Arla32\\Models",
     "\\Arla32\\Services",
     "\\Arla32\\Views",
     "\\Arla32\\Views\\Coleta",
     "\\Arla32\\Views\\Home"
   ],
-  "SelectedNode": "\\Arla32\\Views\\Coleta\\EnsaioAlcalinidade.cshtml",
+  "SelectedNode": "\\Arla32\\Data\\QuimicoContext.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -16,6 +16,7 @@ namespace Arla32.Models
         public ArlaDensidade densidade { get; set; }
         public ArlaConcentracao concentracao { get; set; }
         public ArlaIdentidade identidade { get; set; }
+        public ArlaInfo info { get; set; }
 
     }
 }

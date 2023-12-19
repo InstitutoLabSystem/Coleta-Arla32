@@ -15,6 +15,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 using Humanizer.DateTimeHumanizeStrategy;
 using static Arla32.Models.ColetaModel;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Arla32.Controllers
 {
@@ -35,10 +36,23 @@ namespace Arla32.Controllers
 
         public IActionResult Index(string OS)
         {
-            var nomeUsuarioClaim = User.FindFirstValue(ClaimTypes.Name);
-            ViewBag.NomeUsuario = nomeUsuarioClaim;
-            ViewBag.OS = OS;
-            return View();
+            var info = _qcontext.arla_info.Where(x => x.os == OS).FirstOrDefault();
+            if (info == null)
+            {
+                var nomeUsuarioClaim = User.FindFirstValue(ClaimTypes.Name);
+                ViewBag.NomeUsuario = nomeUsuarioClaim;
+                ViewBag.OS = OS;
+                return View();
+            }
+            else
+            {
+                var nomeUsuarioClaim = User.FindFirstValue(ClaimTypes.Name);
+                ViewBag.NomeUsuario = nomeUsuarioClaim;
+                ViewBag.OS = OS;
+                ViewBag.np = info.np;
+                ViewBag.descricao = info.descricao;
+                return View(info);
+            }
         }
 
         public IActionResult Instrumentos()
@@ -101,6 +115,8 @@ namespace Arla32.Controllers
                                        CodCli = x.CodCli,
                                        CodSol = x.CodSol,
                                    }).Distinct().ToList();
+
+               
 
                 var isOsSalva = _qcontext.regtro_amostra_painel_copy.Any(ic => ic.OS == OS);
                 if (isOsSalva != null)
@@ -221,7 +237,7 @@ namespace Arla32.Controllers
 
 
         public async Task<IActionResult> IniciarColeta(string OS, [Bind("OS,orcamento,Qtd_Recebida,norma,revisao_os," +
-            "CodCli, CodSol, Item, descricao_doc, referencia, np, descricao")] HomeModel.IniciarColeta salvar)
+            "CodCli, CodSol, Item, descricao_doc, referencia, np, descricao")] HomeModel.IniciarColeta salvar, HomeModel.ArlaInfo info)
         {
             try
             {
@@ -235,6 +251,8 @@ namespace Arla32.Controllers
                 var Item = salvar.Item_orcamento;
                 var descricao_doc = salvar.descricao_doc;
                 var referencia = salvar.referencia;
+                var np = info.np;
+                var descricao = info.descricao;
 
 
                 //pegando os 2 ultimos digitos do ano.
@@ -265,7 +283,17 @@ namespace Arla32.Controllers
 
                 // salvando os valores recebidos.
                 _qcontext.Add(IniciarColeta);
+
+                var Informacoes = new ArlaInfo
+                {
+                    os = OS,
+                    orcamento = orcamento,
+                    np = np,
+                    descricao = descricao,
+                };
+                _qcontext.Add(Informacoes);
                 await _qcontext.SaveChangesAsync();
+
 
                 //recebendo o id do banco de dados p/ salvar amostra_id
                 int idGerado = IniciarColeta.id;
