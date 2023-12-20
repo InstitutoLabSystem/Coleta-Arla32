@@ -1,5 +1,7 @@
 ﻿using static Arla32.Models.ColetaModel;
 using static Arla32.Models.HomeModel;
+using static Arla32.Models.lotesModel;
+using static Arla32.Models.FatoreCodigoModel;
 
 namespace Arla32.Models
 {
@@ -17,6 +19,8 @@ namespace Arla32.Models
         public ArlaConcentracao concentracao { get; set; }
         public ArlaIdentidade identidade { get; set; }
         public ArlaInfo info { get; set; }
+        public ArlaCodigo codigo { get; set; }
+        public List<ArlaLotes> lotes { get; set; }
 
     }
 }

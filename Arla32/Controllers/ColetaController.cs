@@ -16,6 +16,8 @@ using System.Reflection.Metadata;
 using System.Security.Cryptography.Xml;
 using static Arla32.Models.ColetaModel;
 using static Arla32.Models.HomeModel;
+using static Arla32.Models.lotesModel;
+using static Arla32.Models.FatoreCodigoModel;
 
 
 namespace Arla32.Controllers
@@ -40,9 +42,22 @@ namespace Arla32.Controllers
             model.concentracao = ObterConcentracao(OS, orcamento);
             model.instrumentos = ObterInstrumentosConcentracao(OS, orcamento);
             model.info = ObterInfoC(OS, orcamento);
+            model.codigo = ObterCodigoC();
+            model.lotes = ObterLotesC();
             ViewBag.OS = OS;
             ViewBag.orcamento = orcamento;
             return View(model);
+        }
+
+        private ArlaCodigo ObterCodigoC()
+        {
+            var codigo = _qcontext.arla_codigo.Where(x => x.anexo == "ANEXO C").FirstOrDefault();
+            return codigo;
+        }
+        private List<ArlaLotes> ObterLotesC()
+        {
+            var lotes = _qcontext.arla_lotes.Where(x => x.anexo == "ANEXO C").ToList();
+            return lotes;
         }
         private ArlaConcentracao ObterConcentracao(string OS, string orcamento)
         {
@@ -77,10 +92,22 @@ namespace Arla32.Controllers
             model.aldeidos = ObterAldeidos(OS, orcamento);
             model.instrumentos = ObterInstrumentosAldeidos(OS, orcamento);
             model.info = ObterInfoA(OS, orcamento);
+            model.codigo = ObterCodigoA();
+            model.lotes = ObterLotesA();
             ViewBag.OS = OS;
             ViewBag.orcamento = orcamento;
             return View(model);
 
+        }
+        private ArlaCodigo ObterCodigoA()
+        {
+            var codigo = _qcontext.arla_codigo.Where(x => x.anexo == "ANEXO F").FirstOrDefault();
+            return codigo;
+        }
+        private List<ArlaLotes> ObterLotesA()
+        {
+            var lotes = _qcontext.arla_lotes.Where(x => x.anexo == "ANEXO F").ToList();
+            return lotes;
         }
         private ArlaInfo ObterInfoA(string OS, string orcamento)
         {
@@ -106,10 +133,22 @@ namespace Arla32.Controllers
             model.densidade = ObterDensidade(OS, orcamento);
             model.instrumentos = ObterInstrumentosDensidade(OS, orcamento);
             model.info = ObterInfoD(OS, orcamento);
+            model.codigo = ObterCodigoD();
+            model.lotes = ObterLotesD();
             ViewBag.OS = OS;
             ViewBag.orcamento = orcamento;
             return View(model);
 
+        }
+        private ArlaCodigo ObterCodigoD()
+        {
+            var codigo = _qcontext.arla_codigo.Where(x => x.anexo == "DENSIDADE").FirstOrDefault();
+            return codigo;
+        }
+        private List<ArlaLotes> ObterLotesD()
+        {
+            var lotes = _qcontext.arla_lotes.Where(x => x.anexo == "DENSIDADE").ToList();
+            return lotes;
         }
         private ArlaInfo ObterInfoD(string OS, string orcamento)
         {
@@ -136,9 +175,21 @@ namespace Arla32.Controllers
                 model.alcalinidade = ObterAlcalinidade(OS, orcamento);
                 model.instrumentos = ObterInstrumentos(OS, orcamento);
                 model.info = ObterInfoAl(OS, orcamento);
-                ViewBag.OS = OS;
+                model.codigo = ObterCodigoAl();
+                model.lotes = ObterLotesAl();
+            ViewBag.OS = OS;
                 ViewBag.orcamento = orcamento;
                 return View(model);
+        }
+        private ArlaCodigo ObterCodigoAl()
+        {
+            var codigo = _qcontext.arla_codigo.Where(x => x.anexo == "ANEXO D").FirstOrDefault();
+            return codigo;
+        }
+        private List<ArlaLotes> ObterLotesAl()
+        {
+            var lotes = _qcontext.arla_lotes.Where(x => x.anexo == "ANEXO D").ToList();
+            return lotes;
         }
         private ArlaInfo ObterInfoAl(string OS, string orcamento)
         {
@@ -166,10 +217,22 @@ namespace Arla32.Controllers
             model.insoluveis = ObterInsoluveis(OS, orcamento);
             model.instrumentos = ObterInstrumentosInsoluveis(OS, orcamento);
             model.info = ObterInfoIn(OS, orcamento);
+            model.codigo = ObterCodigoIn();
+            model.lotes = ObterLotesIn();
             ViewBag.OS = OS;
             ViewBag.orcamento = orcamento;
             return View(model);
 
+        }
+        private ArlaCodigo ObterCodigoIn()
+        {
+            var codigo = _qcontext.arla_codigo.Where(x => x.anexo == "ANEXO G").FirstOrDefault();
+            return codigo;
+        }
+        private List<ArlaLotes> ObterLotesIn()
+        {
+            var lotes = _qcontext.arla_lotes.Where(x => x.anexo == "ANEXO G").ToList();
+            return lotes;
         }
         private ArlaInfo ObterInfoIn(string OS, string orcamento)
         {
@@ -197,10 +260,22 @@ namespace Arla32.Controllers
             model.fosfato = ObterFosfato(OS, orcamento);
             model.instrumentos = ObterInstrumentosFosfato(OS, orcamento);
             model.info = ObterInfoFos(OS, orcamento);
+            model.codigo = ObterCodigoFos();
+            model.lotes = ObterLotesFos();
             ViewBag.OS = OS;
             ViewBag.orcamento = orcamento;
             return View(model);
 
+        }
+        private ArlaCodigo ObterCodigoFos()
+        {
+            var codigo = _qcontext.arla_codigo.Where(x => x.anexo == "ANEXO H").FirstOrDefault();
+            return codigo;
+        }
+        private List<ArlaLotes> ObterLotesFos()
+        {
+            var lotes = _qcontext.arla_lotes.Where(x => x.anexo == "ANEXO H").ToList();
+            return lotes;
         }
         private ArlaInfo ObterInfoFos(string OS, string orcamento)
         {
@@ -228,9 +303,21 @@ namespace Arla32.Controllers
             model.identidade = ObterIdentidade(OS, orcamento);
             model.instrumentos = ObterInstrumentosIdentidade(OS, orcamento);
             model.info = ObterInfoIden(OS, orcamento);
+            model.codigo = ObterCodigoIden();
+            model.lotes = ObterLotesIden();
             ViewBag.OS = OS;
             ViewBag.orcamento = orcamento;
             return View(model);
+        }
+        private ArlaCodigo ObterCodigoIden()
+        {
+            var codigo = _qcontext.arla_codigo.Where(x => x.anexo == "ANEXO J").FirstOrDefault();
+            return codigo;
+        }
+        private List<ArlaLotes> ObterLotesIden()
+        {
+            var lotes = _qcontext.arla_lotes.Where(x => x.anexo == "ANEXO J").ToList();
+            return lotes;
         }
         private ArlaInfo ObterInfoIden(string OS, string orcamento)
         {
@@ -258,9 +345,21 @@ namespace Arla32.Controllers
             model.biureto = ObterBiureto(OS, orcamento);
             model.instrumentos = ObterInstrumentosBiureto(OS, orcamento);
             model.info = ObterInfoB(OS, orcamento);
+            model.codigo = ObterCodigoB();
+            model.lotes = ObterLotesB();
             ViewBag.OS = OS;
             ViewBag.orcamento = orcamento;
             return View(model);
+        }
+        private ArlaCodigo ObterCodigoB()
+        {
+            var codigo = _qcontext.arla_codigo.Where(x => x.anexo == "ANEXO E").FirstOrDefault();
+            return codigo;
+        }
+        private List<ArlaLotes> ObterLotesB()
+        {
+            var lotes = _qcontext.arla_lotes.Where(x => x.anexo == "ANEXO E").ToList();
+            return lotes;
         }
         private ArlaInfo ObterInfoB(string OS, string orcamento)
         {
@@ -287,9 +386,21 @@ namespace Arla32.Controllers
             model.metais = ObterMetais(OS, orcamento);
             model.instrumentos = ObterInstrumentosMetais(OS, orcamento);
             model.info = ObterInfoM(OS, orcamento);
+            model.codigo = ObterCodigoM();
+            model.lotes = ObterLotesM();
             ViewBag.OS = OS;
             ViewBag.orcamento = orcamento;
             return View(model);
+        }
+        private ArlaCodigo ObterCodigoM()
+        {
+            var codigo = _qcontext.arla_codigo.Where(x => x.anexo == "ANEXO I").FirstOrDefault();
+            return codigo;
+        }
+        private List<ArlaLotes> ObterLotesM()
+        {
+            var lotes = _qcontext.arla_lotes.Where(x => x.anexo == "ANEXO I").ToList();
+            return lotes;
         }
         private ArlaInfo ObterInfoM(string OS, string orcamento)
         {

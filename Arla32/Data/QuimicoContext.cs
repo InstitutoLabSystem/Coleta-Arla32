@@ -9,7 +9,6 @@ namespace Arla32.Data
         public QuimicoContext(DbContextOptions<QuimicoContext> options) : base(options)
         {
         }
-
         public DbSet<HomeModel.IniciarColeta> regtro_amostra_painel_copy { get; set; }
         public DbSet<ColetaModel.ArlaConcentracao> arla_concentracao_indice { get; set; }
         public DbSet<ColetaModel.ArlaAlcalinidade> arla_alcalinidade { get; set; }
@@ -22,7 +21,10 @@ namespace Arla32.Data
         public DbSet<ColetaModel.ArlaDensidade> arla_densidade { get; set; }
         public DbSet<ColetaModel.ArlaIdentidade> arla_identidade { get; set; }
         public DbSet<ColetaModel.ArlaInstrumentos> arla_instrumentos { get;set; }
-       public DbSet<HomeModel.ArlaInfo> arla_info { get; set;}
+        public DbSet<HomeModel.ArlaInfo> arla_info { get; set;}
+        public DbSet<FatoreCodigoModel.ArlaCodigo> arla_codigo { get; set; }
+
+        public DbSet<lotesModel.ArlaLotes> arla_lotes { get; set; }
         // Outros conjuntos de entidades relacionados ao banco de dados "quimico"
     }
 }
