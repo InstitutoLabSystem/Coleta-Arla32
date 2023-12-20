@@ -20,7 +20,6 @@ namespace Arla32.Models
         public ArlaIdentidade identidade { get; set; }
         public ArlaInfo info { get; set; }
         public ArlaCodigo codigo { get; set; }
-        public List<ArlaLotes> lotes { get; set; }
 
     }
 }
